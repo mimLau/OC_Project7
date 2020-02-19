@@ -1,4 +1,6 @@
-package com.mimi.mlibrary.model;
+package com.mimi.mlibrary.model.accounts;
+
+import com.mimi.mlibrary.model.users.User;
 
 import javax.persistence.*;
 
