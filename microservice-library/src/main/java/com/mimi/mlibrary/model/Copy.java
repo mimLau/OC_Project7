@@ -1,6 +1,7 @@
 package com.mimi.mlibrary.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name="Copies")
@@ -10,9 +11,18 @@ public class Copy {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private String barcode;
-    private Library library;
     private boolean available;
     private String returnDate;
+
+    @OneToOne
+    private Work work;
+
+    @ManyToOne
+    @JoinColumn(name = "library_fk")
+    private Library library;
+
+    @OneToMany(mappedBy = "copy")
+    private List<Borrowing> borrowings;
 
     public Integer getId() {
         return id;
@@ -30,14 +40,6 @@ public class Copy {
         this.barcode = barcode;
     }
 
-    public Library getLibrary() {
-        return library;
-    }
-
-    public void setLibrary(Library library) {
-        this.library = library;
-    }
-
     public boolean isAvailable() {
         return available;
     }
@@ -46,11 +48,35 @@ public class Copy {
         this.available = available;
     }
 
+    public Work getWork() {
+        return work;
+    }
+
+    public void setWork(Work work) {
+        this.work = work;
+    }
+
     public String getReturnDate() {
         return returnDate;
     }
 
     public void setReturnDate(String returnDate) {
         this.returnDate = returnDate;
+    }
+
+    public Library getLibrary() {
+        return library;
+    }
+
+    public void setLibrary(Library library) {
+        this.library = library;
+    }
+
+    public List<Borrowing> getBorrowings() {
+        return borrowings;
+    }
+
+    public void setBorrowings(List<Borrowing> borrowings) {
+        this.borrowings = borrowings;
     }
 }
