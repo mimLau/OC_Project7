@@ -1,6 +1,7 @@
 package com.mimi.mlibrary.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name="Libraries")
@@ -11,6 +12,9 @@ public class Library {
     private Integer id;
     private String name;
     private String address;
+
+    @OneToMany(mappedBy = "library")
+    private List<Copy> copies;
 
     public Integer getId() {
         return id;
@@ -34,5 +38,13 @@ public class Library {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public List<Copy> getCopies() {
+        return copies;
+    }
+
+    public void setCopies(List<Copy> copies) {
+        this.copies = copies;
     }
 }
