@@ -1,4 +1,4 @@
-package com.mimi.mlibrary.model;
+package com.mimi.mlibrary.model.users;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
