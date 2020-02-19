@@ -1,12 +1,13 @@
 package com.mimi.mlibrary.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name="Copies")
 public class Copy {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private String barcode;
     private Library library;
