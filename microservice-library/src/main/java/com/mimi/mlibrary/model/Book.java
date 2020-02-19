@@ -1,18 +1,17 @@
 package com.mimi.mlibrary.model;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
-@Table(name="Books")
+@DiscriminatorValue("Book")
 public class Book extends Work {
 
     private String editor;
     private String publishingDate;
     private String title;
     private String isbn;
+
+    @Enumerated(EnumType.STRING)
     private Category category;
 
 
