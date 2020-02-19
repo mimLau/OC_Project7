@@ -1,5 +1,6 @@
-package com.mimi.mlibrary.model;
+package com.mimi.mlibrary.model.borrowings;
 
+import com.mimi.mlibrary.model.works.Copy;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
