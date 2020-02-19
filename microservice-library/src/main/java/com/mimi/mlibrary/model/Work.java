@@ -1,18 +1,28 @@
 package com.mimi.mlibrary.model;
 
-import jdk.jfr.Name;
+
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import java.util.List;
 
-@MappedSuperclass
-public class Work {
+@Entity
+@Table(name="works")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name="Work_type")
+public abstract class Work {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private int nbOfAvailableCopies;
     private int nbTotalOfcopies;
+
+    @Type(type = "numeric_boolean")
     private boolean borrowable;
+
+    @OneToMany(mappedBy = "work")
+    private List<Copy> copies;
 
     public Integer getId() {
         return id;
@@ -36,6 +46,14 @@ public class Work {
 
     public void setNbTotalOfcopies(int nbTotalOfcopies) {
         this.nbTotalOfcopies = nbTotalOfcopies;
+    }
+
+    public List<Copy> getCopies() {
+        return copies;
+    }
+
+    public void setCopies(List<Copy> copies) {
+        this.copies = copies;
     }
 
     public boolean isBorrowable() {
