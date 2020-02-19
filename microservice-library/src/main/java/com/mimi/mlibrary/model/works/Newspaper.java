@@ -1,8 +1,7 @@
-package com.mimi.mlibrary.model;
+package com.mimi.mlibrary.model.works;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.Table;
 
 @Entity
 @DiscriminatorValue("Newspaper")
