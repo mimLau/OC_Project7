@@ -1,6 +1,6 @@
 package com.mimi.mlibrary.model;
 
-public class Review {
+public class Review extends Work {
 
     private String releaseDate;
     private String title;
