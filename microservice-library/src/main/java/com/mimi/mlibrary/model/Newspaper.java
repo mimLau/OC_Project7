@@ -1,5 +1,10 @@
 package com.mimi.mlibrary.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="newspapers")
 public class Newspaper extends Work {
 
     private String releaseDate;
