@@ -1,1 +1,2 @@
-# OC_Library_app
+# OC_Project_7: Système d'information d'une bibliothèque
+
