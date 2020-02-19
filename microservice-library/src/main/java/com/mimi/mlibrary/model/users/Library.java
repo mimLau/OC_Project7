@@ -1,4 +1,6 @@
-package com.mimi.mlibrary.model;
+package com.mimi.mlibrary.model.users;
+
+import com.mimi.mlibrary.model.works.Copy;
 
 import javax.persistence.*;
 import java.util.List;
