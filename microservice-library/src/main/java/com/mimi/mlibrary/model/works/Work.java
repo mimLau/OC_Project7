@@ -1,4 +1,4 @@
-package com.mimi.mlibrary.model;
+package com.mimi.mlibrary.model.works;
 
 
 import org.hibernate.annotations.Type;
