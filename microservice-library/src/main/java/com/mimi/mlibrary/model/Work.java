@@ -4,19 +4,15 @@ import jdk.jfr.Name;
 
 import javax.persistence.*;
 
-@Entity
-@Table(name = "Ouvrages")
+@MappedSuperclass
 public class Work {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String isbn;
-    @Name(value = "nbExemplairesDispo")
     private int nbOfAvailableCopies;
     private int nbTotalOfcopies;
     private boolean borrowable;
-
 
     public Integer getId() {
         return id;
@@ -24,14 +20,6 @@ public class Work {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getIsbn() {
-        return isbn;
-    }
-
-    public void setIsbn(String isbn) {
-        this.isbn = isbn;
     }
 
     public int getNbOfAvailableCopies() {
