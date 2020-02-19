@@ -1,14 +1,15 @@
 package com.mimi.mlibrary.model;
 
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="newspapers")
+@DiscriminatorValue("Newspaper")
 public class Newspaper extends Work {
 
     private String releaseDate;
-    private String type;
+    private String name;
 
     public Newspaper() {
         super();
@@ -22,11 +23,11 @@ public class Newspaper extends Work {
         this.releaseDate = releaseDate;
     }
 
-    public String getType() {
-        return type;
+    public String getName() {
+        return name;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setName(String name) {
+        this.name = name;
     }
 }
