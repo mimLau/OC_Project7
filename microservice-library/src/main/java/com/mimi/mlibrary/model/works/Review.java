@@ -1,4 +1,4 @@
-package com.mimi.mlibrary.model;
+package com.mimi.mlibrary.model.works;
 
 public class Review extends Work {
 
