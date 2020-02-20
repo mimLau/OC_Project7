@@ -3,12 +3,13 @@ package com.mimi.mlibrary.model.users;
 import com.mimi.mlibrary.model.accounts.Account;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name="Users")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="User_type")
-public abstract class User {
+public abstract class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
