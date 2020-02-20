@@ -1,7 +1,5 @@
 package com.mimi.mlibrary.model.users;
 
-import com.mimi.mlibrary.model.accounts.Account;
-
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -19,9 +17,8 @@ public abstract class User implements Serializable {
     private String password;
     private String email;
     private String phoneNumber;
-
-    @OneToOne
-    private Account account;
+    private boolean accountStatus;
+    private String registrationDate;
 
     public Integer getId() {
         return id;
@@ -71,11 +68,19 @@ public abstract class User implements Serializable {
         this.phoneNumber = phoneNumber;
     }
 
-    public Account getAccount() {
-        return account;
+    public boolean isAccountStatus() {
+        return accountStatus;
     }
 
-    public void setAccount(Account account) {
-        this.account = account;
+    public void setAccountStatus(boolean accountStatus) {
+        this.accountStatus = accountStatus;
+    }
+
+    public String getRegistrationDate() {
+        return registrationDate;
+    }
+
+    public void setRegistrationDate(String registrationDate) {
+        this.registrationDate = registrationDate;
     }
 }
