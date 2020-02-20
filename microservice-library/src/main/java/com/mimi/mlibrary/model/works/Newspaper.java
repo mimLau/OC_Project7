@@ -2,10 +2,11 @@ package com.mimi.mlibrary.model.works;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import java.io.Serializable;
 
 @Entity
 @DiscriminatorValue("Newspaper")
-public class Newspaper extends Work {
+public class Newspaper extends Work implements Serializable {
 
     private String releaseDate;
     private String name;
