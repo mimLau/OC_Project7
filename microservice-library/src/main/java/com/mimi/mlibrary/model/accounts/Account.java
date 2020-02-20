@@ -3,10 +3,11 @@ package com.mimi.mlibrary.model.accounts;
 import com.mimi.mlibrary.model.users.User;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name="Accounts")
-public class Account {
+public class Account implements Serializable {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
