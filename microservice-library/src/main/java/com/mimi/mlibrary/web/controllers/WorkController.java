@@ -36,4 +36,19 @@ public class WorkController {
     public List<Author> getAllAuthors() {
         return authorDao.findAll();
     }
+
+    @GetMapping(value= "/Works/{isbn}" )
+    public Work getWorkByIsbn( @PathVariable String isbn ) {
+       return workDao.searchWorkByIsbn( isbn );
+    }
+
+    @GetMapping( value ="/Works/getByAuthorName/{name}")
+    public List<Work> getWorkByAuthorName( @PathVariable String name ) {
+        return workDao.searchWorksByAuthorName( name );
+    }
+
+    @GetMapping( value ="/Works/getByTitle/{title}")
+    public List<Work> getWorkByTitle( @PathVariable String title ) {
+        return workDao.searchWorksByTitle( title );
+    }
 }
