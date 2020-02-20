@@ -2,10 +2,11 @@ package com.mimi.mlibrary.model.users;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import java.io.Serializable;
 
 @Entity
 @DiscriminatorValue("Member")
-public class Member extends User {
+public class Member extends User implements Serializable {
 
     private String barcode;
     private int nbOfCurrentsBorrowings;
