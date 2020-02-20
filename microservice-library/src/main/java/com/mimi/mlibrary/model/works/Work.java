@@ -18,9 +18,6 @@ public abstract class Work {
     private int nbOfAvailableCopies;
     private int nbTotalOfcopies;
 
-    @Type(type = "numeric_boolean")
-    private boolean borrowable;
-
     @OneToMany(mappedBy = "work")
     private List<Copy> copies;
 
@@ -52,15 +49,4 @@ public abstract class Work {
         return copies;
     }
 
-    public void setCopies(List<Copy> copies) {
-        this.copies = copies;
-    }
-
-    public boolean isBorrowable() {
-        return borrowable;
-    }
-
-    public void setBorrowable(boolean borrowable) {
-        this.borrowable = borrowable;
-    }
 }
