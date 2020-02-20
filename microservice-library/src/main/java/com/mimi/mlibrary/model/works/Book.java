@@ -1,10 +1,13 @@
 package com.mimi.mlibrary.model.works;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @DiscriminatorValue("Book")
-public class Book extends Work {
+public class Book extends Work implements Serializable {
 
     private String editor;
     private String publishingDate;
@@ -14,7 +17,7 @@ public class Book extends Work {
     @Enumerated(EnumType.STRING)
     private Category category;
 
-
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name="author_fk")
     private Author author;
