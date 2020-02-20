@@ -21,7 +21,7 @@ public class Copy {
     private Work work;
 
     @ManyToOne
-    @JoinColumn(name = "library_fk")
+    @JoinColumn
     private Library library;
 
     @OneToMany(mappedBy = "copy")
