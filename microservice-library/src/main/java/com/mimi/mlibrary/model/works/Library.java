@@ -1,13 +1,16 @@
-package com.mimi.mlibrary.model.users;
+package com.mimi.mlibrary.model.works;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.mimi.mlibrary.model.works.Copy;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
 @Table(name="Libraries")
-public class Library {
+public class Library implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -15,6 +18,8 @@ public class Library {
     private String name;
     private String address;
 
+
+    @JsonIgnore
     @OneToMany(mappedBy = "library")
     private List<Copy> copies;
 
