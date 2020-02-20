@@ -4,10 +4,11 @@ import com.mimi.mlibrary.model.works.Copy;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name="Borrowings")
-public class Borrowing {
+public class Borrowing implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
