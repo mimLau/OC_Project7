@@ -1,16 +1,19 @@
 package com.mimi.mlibrary.model.works;
 
 
-import org.hibernate.annotations.Type;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
 @Table(name="works")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="Work_type")
-public abstract class Work {
+public abstract class Work implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -49,4 +52,7 @@ public abstract class Work {
         return copies;
     }
 
+    public void setCopies(List<Copy> copies) {
+        this.copies = copies;
+    }
 }
