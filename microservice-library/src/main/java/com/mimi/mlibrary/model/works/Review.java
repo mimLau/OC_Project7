@@ -4,7 +4,7 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
 @Entity
-@DiscriminatorValue("Book")
+@DiscriminatorValue("Review")
 public class Review extends Work {
 
     private String releaseDate;
