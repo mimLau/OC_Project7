@@ -1,5 +1,10 @@
 package com.mimi.mlibrary.model.works;
 
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+
+@Entity
+@DiscriminatorValue("Book")
 public class Review extends Work {
 
     private String releaseDate;
