@@ -3,7 +3,7 @@ package com.mimi.mlibrary.model.works;
 public class Review extends Work {
 
     private String releaseDate;
-    private String title;
+    private String name;
 
     public Review() {
         super();
@@ -17,11 +17,11 @@ public class Review extends Work {
         this.releaseDate = releaseDate;
     }
 
-    public String getTitle() {
-        return title;
+    public String getName() {
+        return name;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setName(String name) {
+        this.name = name;
     }
 }
