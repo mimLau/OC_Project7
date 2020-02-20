@@ -1,3 +1,16 @@
+INSERT INTO users(user_type, id, account_status, date_registration, email, firstname, lastname, password, phone_number, barcode, nb_of_currents_borrowings) VALUES
+('Member', 1, 1, '10/0219', 'lam99@hotmail.fr', 'Maryam', 'Launois', 'maryam', '0388324567', 'LAUNMAR1-1', NULL);
+
+INSERT INTO users(user_type, id, account_status, date_registration, email, firstname, lastname, password, phone_number, barcode, nb_of_currents_borrowings) VALUES
+('Member', 2, 1, '10/0219', 'sofie.a@gmail.com', 'Sophie', 'Richt', 'sophie', '0388324567', 'RICHSOP1-2', NULL);
+
+INSERT INTO users(user_type, id, account_status, date_registration, email, firstname, lastname, password, phone_number, barcode, nb_of_currents_borrowings) VALUES
+('Librarian', 3, 1, '10/0219', 'est@hotmail.fr', 'Estelle', 'Velsin', 'estelle', '0388324567', 'VELSEST2-2', NULL);
+
+INSERT INTO users(user_type, id, account_status, date_registration, email, firstname, lastname, password, phone_number, barcode, nb_of_currents_borrowings) VALUES
+('Admin', 4, 1, '10/0219', 'admin@gmail.com', 'Safia', 'Chouaib', 'safia', '0388324567', 'CHOUSAF3-1', NULL);
+
+
 INSERT INTO AUTHORS (id, name) VALUES (1, 'Victor Hugo');
 INSERT INTO AUTHORS (id, name) VALUES (2, 'Guy De Maupassant');
 INSERT INTO AUTHORS (id, name) VALUES (3, 'Gustave Flaubert');
