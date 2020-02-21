@@ -6,7 +6,7 @@ import java.io.Serializable;
 @Entity
 @Table(name="Users")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="User_type")
+@DiscriminatorColumn(discriminatorType = DiscriminatorType.STRING, name="User_type")
 public abstract class User implements Serializable {
 
     @Id
