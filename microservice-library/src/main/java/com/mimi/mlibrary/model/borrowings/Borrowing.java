@@ -1,5 +1,6 @@
 package com.mimi.mlibrary.model.borrowings;
 
+import com.mimi.mlibrary.model.users.Member;
 import com.mimi.mlibrary.model.works.Copy;
 import org.hibernate.annotations.Type;
 
@@ -27,6 +28,10 @@ public class Borrowing implements Serializable {
     @ManyToOne()
     @JoinColumn(name="borrowing_fk")
     private Copy copy;
+
+    @ManyToOne
+    @JoinColumn
+    private Member member;
 
     public Integer getId() {
         return id;
@@ -82,5 +87,13 @@ public class Borrowing implements Serializable {
 
     public void setCopy(Copy copy) {
         this.copy = copy;
+    }
+
+    public Member getMember() {
+        return member;
+    }
+
+    public void setMember(Member member) {
+        this.member = member;
     }
 }
