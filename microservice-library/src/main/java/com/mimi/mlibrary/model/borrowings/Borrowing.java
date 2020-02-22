@@ -2,7 +2,7 @@ package com.mimi.mlibrary.model.borrowings;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mimi.mlibrary.model.users.Member;
-import com.mimi.mlibrary.model.works.Copy;
+import com.mimi.mlibrary.model.publications.Copy;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
