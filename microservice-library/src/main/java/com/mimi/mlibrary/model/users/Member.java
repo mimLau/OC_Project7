@@ -16,7 +16,7 @@ public class Member extends User implements Serializable {
     private String barcode;
     private int nbOfCurrentsBorrowings;
 
-    @OneToMany(mappedBy = "borrowings")
+    @OneToMany(mappedBy = "member")
     private List<Borrowing> borrowings;
 
     public String getBarcode() {
