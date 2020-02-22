@@ -1,5 +1,6 @@
 package com.mimi.mlibrary.model.borrowings;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mimi.mlibrary.model.users.Member;
 import com.mimi.mlibrary.model.works.Copy;
 import org.hibernate.annotations.Type;
@@ -25,8 +26,9 @@ public class Borrowing implements Serializable {
     @Enumerated(EnumType.STRING)
     private BorrowingStatus borrowingStatus;
 
-    @ManyToOne()
-    @JoinColumn(name="borrowing_fk")
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn
     private Copy copy;
 
     @ManyToOne
