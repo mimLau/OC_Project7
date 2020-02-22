@@ -27,7 +27,7 @@ public abstract class Publication implements Serializable {
     private int nbTotalOfcopies;
 
 
-    @OneToMany(mappedBy = "work")
+    @OneToMany(mappedBy = "publication")
     private List<Copy> copies;
 
     public Integer getId() {
