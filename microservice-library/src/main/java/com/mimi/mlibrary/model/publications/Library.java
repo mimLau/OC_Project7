@@ -1,8 +1,6 @@
-package com.mimi.mlibrary.model.works;
+package com.mimi.mlibrary.model.publications;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.mimi.mlibrary.model.works.Copy;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;

@@ -1,4 +1,4 @@
-package com.mimi.mlibrary.model.works;
+package com.mimi.mlibrary.model.publications;
 
 public enum Category {
 

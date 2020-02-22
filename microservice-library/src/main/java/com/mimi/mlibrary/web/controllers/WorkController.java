@@ -2,8 +2,8 @@ package com.mimi.mlibrary.web.controllers;
 
 import com.mimi.mlibrary.dao.AuthorDao;
 import com.mimi.mlibrary.dao.WorkDao;
-import com.mimi.mlibrary.model.works.Author;
-import com.mimi.mlibrary.model.works.Publication;
+import com.mimi.mlibrary.model.publications.Author;
+import com.mimi.mlibrary.model.publications.Publication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
