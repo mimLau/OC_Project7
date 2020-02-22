@@ -4,6 +4,7 @@ package com.mimi.mlibrary.model.works;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -16,10 +17,18 @@ import java.util.List;
 public abstract class Work implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(
+            strategy= GenerationType.AUTO,
+            generator="native"
+    )
+    @GenericGenerator(
+            name = "native",
+            strategy = "native"
+    )
     private Integer id;
     private int nbOfAvailableCopies;
     private int nbTotalOfcopies;
+
 
     @OneToMany(mappedBy = "work")
     private List<Copy> copies;
