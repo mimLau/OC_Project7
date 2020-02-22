@@ -20,7 +20,7 @@ public class UserController {
         this.userDao= userDao;
     }
 
-    @GetMapping( value = "/Users" )
+    @GetMapping( value = "/User" )
     public List<User> getAllUsers() {
         return userDao.findAll();
     }
@@ -30,7 +30,7 @@ public class UserController {
         return userDao.findById(id);
     }
 
-    @GetMapping( value = "/Members" )
+    @GetMapping( value = "/Member" )
     public List<Member> getAllMembers( ) {
         return userDao.getAllMembers();
     }
@@ -64,7 +64,6 @@ public class UserController {
     public void incrementBorrowingsNbBorrowings ( @PathVariable("barcode") String barcode ) {
          userDao.incrementNbOfCurrentsBorrowings( barcode );
     }
-
 
 }
 
