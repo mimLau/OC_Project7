@@ -6,7 +6,7 @@ import java.io.Serializable;
 
 @Entity
 @DiscriminatorValue("Review")
-public class Review extends Work implements Serializable {
+public class Review extends Publication implements Serializable {
 
     private String releaseDate;
     private String name;
