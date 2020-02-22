@@ -3,7 +3,7 @@ package com.mimi.mlibrary.web.controllers;
 import com.mimi.mlibrary.dao.AuthorDao;
 import com.mimi.mlibrary.dao.WorkDao;
 import com.mimi.mlibrary.model.works.Author;
-import com.mimi.mlibrary.model.works.Work;
+import com.mimi.mlibrary.model.works.Publication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,13 +23,13 @@ public class WorkController {
     }
 
     @GetMapping( value = "/Work" )
-    public List<Work> getAllworks(@RequestParam(value="title", required= false) String title) {
+    public List<Publication> getAllworks(@RequestParam(value="title", required= false) String title) {
         return workDao.findAll();
     }
 
 
     @GetMapping( value = "/Work/{id}" )
-    public Optional<Work> getWorkById( @PathVariable int id ) {
+    public Optional<Publication> getWorkById(@PathVariable int id ) {
         return workDao.findById( id );
     }
 
@@ -39,17 +39,17 @@ public class WorkController {
     }
 
     @GetMapping(value= "/Works/{isbn}" )
-    public Work getWorkByIsbn( @PathVariable String isbn ) {
+    public Publication getWorkByIsbn(@PathVariable String isbn ) {
        return workDao.searchWorkByIsbn( isbn );
     }
 
     @GetMapping( value ="/Works/getByAuthorName/{name}")
-    public List<Work> getWorkByAuthorName( @PathVariable String name ) {
+    public List<Publication> getWorkByAuthorName(@PathVariable String name ) {
         return workDao.searchWorksByAuthorName( name );
     }
 
     @GetMapping( value ="/Works/getByTitle/{title}")
-    public List<Work> getWorkByTitle( @PathVariable String title ) {
+    public List<Publication> getWorkByTitle(@PathVariable String title ) {
         return workDao.searchWorksByTitle( title );
     }
 }
