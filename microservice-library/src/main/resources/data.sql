@@ -1,8 +1,8 @@
 INSERT INTO users(user_type, id, account_status, registration_date, email, firstname, lastname, password, phone_number, barcode, nb_of_currents_borrowings) VALUES
-('Member', 1, 1, '10/0219', 'lam99@hotmail.fr', 'Maryam', 'Launois', 'maryam', '0388324567', 'LAUNMAR1-1', 0);
+('Member', 1, 1, '10/0219', 'lam99@hotmail.fr', 'Maryam', 'Launois', 'maryam', '0388324567', 'LAUNMAR1-1', 2);
 
 INSERT INTO users(user_type, id, account_status, registration_date, email, firstname, lastname, password, phone_number, barcode, nb_of_currents_borrowings) VALUES
-('Member', 2, 1, '10/0219', 'sofie.a@gmail.com', 'Sophie', 'Richt', 'sophie', '0388324567', 'RICHSOP1-2', 0);
+('Member', 2, 1, '10/0219', 'sofie.a@gmail.com', 'Sophie', 'Richt', 'sophie', '0388324567', 'RICHSOP1-2', 1);
 
 INSERT INTO users(user_type, id, account_status, registration_date, email, firstname, lastname, password, phone_number, barcode, nb_of_currents_borrowings) VALUES
 ('Librarian', 3, 1, '10/0219', 'est@hotmail.fr', 'Estelle', 'Velsin', 'estelle', '0388324567', 'VELSEST2-2', 0);
@@ -57,3 +57,13 @@ INSERT INTO COPIES (id, available, barcode, return_date, library_id, work_id) VA
 INSERT INTO COPIES (id, available, barcode, return_date, library_id, work_id) VALUES (18, 0, 'MOND-02-20-2-1', '12/02/20', 2, 8);
 INSERT INTO COPIES (id, available, barcode, return_date, library_id, work_id) VALUES (19, 1, 'MOND-02-20-1-1', NULL, 1, 8);
 INSERT INTO COPIES (id, available, barcode, return_date, library_id, work_id) VALUES (20, 1, 'MOND-02-20-1-3', NULL, 3, 8);
+
+
+INSERT INTO borrowings(id, borrowing_date, borrowing_status, extented, reminder_nb, return_date, copy_id, member_id)
+VALUES (1, '10/02/20', 'INPROGRESS', 0, 0, '25/02/20', 1, 1);
+
+INSERT INTO borrowings(id, borrowing_date, borrowing_status, extented, reminder_nb, return_date, copy_id, member_id)
+VALUES (2, '10/02/20', 'INPROGRESS', 0, 0, '25/02/20', 2, 1);
+
+INSERT INTO borrowings(id, borrowing_date, borrowing_status, extented, reminder_nb, return_date, copy_id, member_id)
+VALUES (3, '10/02/20', 'INPROGRESS', 0, 0, '25/02/20', 6, 2);
