@@ -6,7 +6,7 @@ import java.io.Serializable;
 
 @Entity
 @DiscriminatorValue("Newspaper")
-public class Newspaper extends Work implements Serializable {
+public class Newspaper extends Publication implements Serializable {
 
     private String releaseDate;
     private String name;
