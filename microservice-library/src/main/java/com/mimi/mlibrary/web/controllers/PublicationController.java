@@ -13,11 +13,11 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-public class WorkController {
+public class PublicationController {
     private PublicationDao publicationDao;
     private AuthorDao authorDao;
 
-    public WorkController(PublicationDao publicationDao, AuthorDao authorDao ){
+    public PublicationController(PublicationDao publicationDao, AuthorDao authorDao ){
         this.publicationDao = publicationDao;
         this.authorDao = authorDao;
     }
