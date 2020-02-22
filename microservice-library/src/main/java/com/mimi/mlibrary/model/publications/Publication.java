@@ -8,9 +8,9 @@ import java.io.Serializable;
 import java.util.List;
 
 @Entity
-@Table(name="works")
+@Table(name="Publications")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="Work_type")
+@DiscriminatorColumn(name="Publication_type")
 public abstract class Publication implements Serializable {
 
     @Id
