@@ -6,6 +6,7 @@ import com.mimi.mlibrary.model.works.Author;
 import com.mimi.mlibrary.model.works.Work;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -21,11 +22,11 @@ public class WorkController {
         this.authorDao = authorDao;
     }
 
-
-    @GetMapping( value = "/Works" )
-    public List<Work> getAllworks() {
-    return workDao.findAll();
+    @GetMapping( value = "/Work" )
+    public List<Work> getAllworks(@RequestParam(value="title", required= false) String title) {
+        return workDao.findAll();
     }
+
 
     @GetMapping( value = "/Work/{id}" )
     public Optional<Work> getWorkById( @PathVariable int id ) {
@@ -52,3 +53,4 @@ public class WorkController {
         return workDao.searchWorksByTitle( title );
     }
 }
+
