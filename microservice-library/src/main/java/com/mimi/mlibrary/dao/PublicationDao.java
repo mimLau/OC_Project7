@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface WorkDao extends JpaRepository<Publication, Integer> {
+public interface PublicationDao extends JpaRepository<Publication, Integer> {
 
    @Query("SELECT w FROM Publication w WHERE w.isbn= :isbn")
    Publication searchWorkByIsbn(@Param("isbn") String isbn );
