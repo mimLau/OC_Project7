@@ -3,6 +3,7 @@ package com.mimi.mlibrary.model.works;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mimi.mlibrary.model.borrowings.Borrowing;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.List;
@@ -12,20 +13,29 @@ import java.util.List;
 public class Copy {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(
+            strategy= GenerationType.AUTO,
+            generator="native"
+    )
+    @GenericGenerator(
+            name = "native",
+            strategy = "native"
+    )
     private Integer id;
     private String barcode;
     private boolean available;
     private String returnDate;
 
-    @JsonIgnore
+
     @OneToOne
+    @JsonIgnore
     private Work work;
 
     @ManyToOne
     @JoinColumn
     private Library library;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "copy")
     private List<Borrowing> borrowings;
 
