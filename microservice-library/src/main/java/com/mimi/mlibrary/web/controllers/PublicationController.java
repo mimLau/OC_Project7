@@ -22,14 +22,14 @@ public class PublicationController {
         this.authorDao = authorDao;
     }
 
-    @GetMapping( value = "/Work" )
-    public List<Publication> getAllworks(@RequestParam(value="title", required= false) String title) {
+    @GetMapping( value = "/Publication" )
+    public List<Publication> getAllPublications(@RequestParam(value="title", required= false) String title) {
         return publicationDao.findAll();
     }
 
 
-    @GetMapping( value = "/Work/{id}" )
-    public Optional<Publication> getWorkById(@PathVariable int id ) {
+    @GetMapping( value = "/Publication/{id}" )
+    public Optional<Publication> getPublicationById(@PathVariable int id ) {
         return publicationDao.findById( id );
     }
 
@@ -38,19 +38,19 @@ public class PublicationController {
         return authorDao.findAll();
     }
 
-    @GetMapping(value= "/Works/{isbn}" )
-    public Publication getWorkByIsbn(@PathVariable String isbn ) {
-       return publicationDao.searchWorkByIsbn( isbn );
+    @GetMapping(value= "/Publications/{isbn}" )
+    public Publication getPublicationByIsbn(@PathVariable String isbn ) {
+       return publicationDao.searchPublicationByIsbn( isbn );
     }
 
-    @GetMapping( value ="/Works/getByAuthorName/{name}")
-    public List<Publication> getWorkByAuthorName(@PathVariable String name ) {
-        return publicationDao.searchWorksByAuthorName( name );
+    @GetMapping( value ="/Publications/getByAuthorName/{name}")
+    public List<Publication> getPublicationByAuthorName(@PathVariable String name ) {
+        return publicationDao.searchPublicationsByAuthorName( name );
     }
 
     @GetMapping( value ="/Works/getByTitle/{title}")
-    public List<Publication> getWorkByTitle(@PathVariable String title ) {
-        return publicationDao.searchWorksByTitle( title );
+    public List<Publication> getPublicationByTitle(@PathVariable String title ) {
+        return publicationDao.searchPublicationsByTitle( title );
     }
 }
 
