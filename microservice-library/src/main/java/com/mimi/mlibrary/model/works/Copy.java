@@ -1,6 +1,5 @@
 package com.mimi.mlibrary.model.works;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mimi.mlibrary.model.borrowings.Borrowing;
 import org.hibernate.annotations.GenericGenerator;
@@ -29,7 +28,7 @@ public class Copy {
 
     @OneToOne
     @JsonIgnore
-    private Work work;
+    private Publication publication;
 
     @ManyToOne
     @JoinColumn
@@ -63,12 +62,12 @@ public class Copy {
         this.available = available;
     }
 
-    public Work getWork() {
-        return work;
+    public Publication getPublication() {
+        return publication;
     }
 
-    public void setWork(Work work) {
-        this.work = work;
+    public void setPublication(Publication publication) {
+        this.publication = publication;
     }
 
     public String getReturnDate() {
