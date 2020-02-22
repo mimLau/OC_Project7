@@ -33,24 +33,24 @@ public class PublicationController {
         return publicationDao.findById( id );
     }
 
-    @GetMapping( value = "/Authors" )
-    public List<Author> getAllAuthors() {
-        return authorDao.findAll();
-    }
-
-    @GetMapping(value= "/Publications/{isbn}" )
+    @GetMapping(value= "/Publication/isbn/{isbn}" )
     public Publication getPublicationByIsbn(@PathVariable String isbn ) {
        return publicationDao.searchPublicationByIsbn( isbn );
     }
 
-    @GetMapping( value ="/Publications/getByAuthorName/{name}")
+    @GetMapping( value ="/Publication/authorName/{name}")
     public List<Publication> getPublicationByAuthorName(@PathVariable String name ) {
         return publicationDao.searchPublicationsByAuthorName( name );
     }
 
-    @GetMapping( value ="/Works/getByTitle/{title}")
+    @GetMapping( value ="/Publication/title/{title}")
     public List<Publication> getPublicationByTitle(@PathVariable String title ) {
         return publicationDao.searchPublicationsByTitle( title );
+    }
+
+    @GetMapping( value = "/Author" )
+    public List<Author> getAllAuthors() {
+        return authorDao.findAll();
     }
 }
 
