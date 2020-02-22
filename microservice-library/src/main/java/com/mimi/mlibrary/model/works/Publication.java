@@ -14,7 +14,7 @@ import java.util.List;
 @Table(name="works")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="Work_type")
-public abstract class Work implements Serializable {
+public abstract class Publication implements Serializable {
 
     @Id
     @GeneratedValue(
