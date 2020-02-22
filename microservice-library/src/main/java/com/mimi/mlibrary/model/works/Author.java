@@ -1,6 +1,7 @@
 package com.mimi.mlibrary.model.works;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -11,10 +12,18 @@ import java.util.List;
 public class Author implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(
+            strategy= GenerationType.AUTO,
+            generator="native"
+    )
+    @GenericGenerator(
+            name = "native",
+            strategy = "native"
+    )
     private Integer id;
     private  String name;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "author")
     private List<Book> book;
 
