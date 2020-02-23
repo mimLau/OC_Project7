@@ -15,7 +15,7 @@ import java.util.List;
 public interface UserDao extends JpaRepository<User, Integer> {
 
     @Query( "SELECT m FROM Member m" )
-    List<Member> getAllMembers();
+    List<Member> getAllMember();
 
     @Query( "SELECT m FROM Member m WHERE m.id= :id" )
     Member getMemberById( @Param("id") Integer id);
@@ -25,13 +25,6 @@ public interface UserDao extends JpaRepository<User, Integer> {
 
     @Query( "SELECT m FROM Member m WHERE m.firstname= :firstname AND m.lastname= :lastname")
     Member getMemberByNames( @Param("firstname") String firstname, @Param("lastname") String lastname );
-
-    /*@Query ("UPDATE Member m SET m.getNbOfCurrentsBorrowings = m.getNbOfCurrentsBorrowings + :increment WHERE m.barcode= :barcode")
-    void incrementNbOfCurrentsBorrowings( @Param("increment") int increment, @Param("barcode") int barcode );*/
-
-    /*
-    * @Query ("UPDATE Member m SET m.nbOfCurrentsBorrowings = m.nbOfCurrentsBorrowings + 1 WHERE m.barcode= :barcode")
-    void incrementNbOfCurrentsBorrowings( @Param("barcode") String barcode );*/
 
     @Modifying
     @Transactional
