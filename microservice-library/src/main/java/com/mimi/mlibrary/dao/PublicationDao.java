@@ -1,6 +1,6 @@
 package com.mimi.mlibrary.dao;
 
-import com.mimi.mlibrary.model.publications.Publication;
+import com.mimi.mlibrary.model.publication.Publication;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

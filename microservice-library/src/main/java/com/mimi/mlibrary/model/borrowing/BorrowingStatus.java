@@ -1,4 +1,4 @@
-package com.mimi.mlibrary.model.borrowings;
+package com.mimi.mlibrary.model.borrowing;
 
 public enum BorrowingStatus {
 

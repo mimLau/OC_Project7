@@ -1,4 +1,4 @@
-package com.mimi.mlibrary.model.users;
+package com.mimi.mlibrary.model.user;
 
 import org.hibernate.annotations.GenericGenerator;
 

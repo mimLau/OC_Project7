@@ -1,9 +1,6 @@
-package com.mimi.mlibrary.model.publications;
+package com.mimi.mlibrary.model.publication;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.mimi.mlibrary.model.borrowings.Borrowing;
+import com.mimi.mlibrary.model.borrowing.Borrowing;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;

@@ -1,8 +1,8 @@
-package com.mimi.mlibrary.model.borrowings;
+package com.mimi.mlibrary.model.borrowing;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.mimi.mlibrary.model.users.Member;
-import com.mimi.mlibrary.model.publications.Copy;
+import com.mimi.mlibrary.model.user.Member;
+import com.mimi.mlibrary.model.publication.Copy;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;

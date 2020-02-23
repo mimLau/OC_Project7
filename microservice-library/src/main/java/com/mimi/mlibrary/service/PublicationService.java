@@ -1,6 +1,6 @@
 package com.mimi.mlibrary.service;
 
-import com.mimi.mlibrary.model.publications.Publication;
+import com.mimi.mlibrary.model.publication.Publication;
 
 import java.util.List;
 import java.util.Optional;

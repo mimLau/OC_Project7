@@ -1,8 +1,7 @@
-package com.mimi.mlibrary.model.users;
+package com.mimi.mlibrary.model.user;
 
-import com.mimi.mlibrary.model.borrowings.Borrowing;
+import com.mimi.mlibrary.model.borrowing.Borrowing;
 
-import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
