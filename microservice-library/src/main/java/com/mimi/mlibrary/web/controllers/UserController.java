@@ -1,8 +1,8 @@
 package com.mimi.mlibrary.web.controllers;
 
-import com.mimi.mlibrary.dao.UserDao;
 import com.mimi.mlibrary.model.users.Member;
 import com.mimi.mlibrary.model.users.User;
+import com.mimi.mlibrary.service.impl.UserServiceImpl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -14,45 +14,45 @@ import java.util.Optional;
 @RestController
 public class UserController {
 
-    private UserDao userDao;
+    private UserServiceImpl userService;
 
-    UserController( UserDao userDao ) {
-        this.userDao= userDao;
+    UserController(UserServiceImpl userService ) {
+        this.userService = userService;
     }
 
     @GetMapping( value = "/User" )
     public List<User> getAllUsers() {
-        return userDao.findAll();
+        return userService.findAll();
     }
 
     @GetMapping( value = "/User/{id}" )
-    public Optional<User> getUserById( @PathVariable int id ) {
-        return userDao.findById(id);
+    public Optional<User> getUserById(@PathVariable int id ) {
+        return userService.findById( id );
     }
 
     @GetMapping( value = "/Member" )
     public List<Member> getAllMembers( ) {
-        return userDao.getAllMembers();
+        return userService.getAllMember();
     }
 
     @GetMapping( value = "/Member/{id}" )
     public Member getMemberById ( @PathVariable Integer id ) {
-        return userDao.getMemberById(id);
+        return userService.getMemberById(id);
     }
 
     @GetMapping( value = "/Member/email/{email}" )
     public Member getMemberByEmail ( @PathVariable("email") String email ) {
-        return userDao.getMemberByEmail(email);
+        return userService.getMemberByEmail(email);
     }
 
     @GetMapping( value = "/Member/firstname/{firstname}/lastname/{lastname}" )
     public Member getMemberByEmail ( @PathVariable("firstname") String firstname, @PathVariable("lastname") String lastname ) {
-        return userDao.getMemberByNames( firstname, lastname );
+        return userService.getMemberByNames( firstname, lastname );
     }
 
     @PostMapping( value = "/Member/add" )
     public ResponseEntity<Void> addMember( @RequestBody Member member ) {
-        Member addedMember = userDao.save( member );
+        Member addedMember = userService.save( member );
         if( addedMember == null)
             return ResponseEntity.noContent().build();
 
@@ -62,7 +62,7 @@ public class UserController {
 
     @PostMapping( value = "/Member/nbBorr/{barcode}" )
     public void incrementBorrowingsNbBorrowings ( @PathVariable("barcode") String barcode ) {
-         userDao.incrementNbOfCurrentsBorrowings( barcode );
+        userService.incrementNbOfCurrentsBorrowings( barcode );
     }
 
 }
