@@ -1,6 +1,8 @@
 package com.mimi.mlibrary.model.publications;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.mimi.mlibrary.model.borrowings.Borrowing;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -25,16 +27,14 @@ public class Copy {
     private boolean available;
     private String returnDate;
 
-
-    @OneToOne
-    @JsonIgnore
+    @ManyToOne
+    @JoinColumn
     private Publication publication;
 
     @ManyToOne
     @JoinColumn
     private Library library;
 
-    @JsonIgnore
     @OneToMany(mappedBy = "copy")
     private List<Borrowing> borrowings;
 
