@@ -14,7 +14,7 @@ public class UserServiceImpl implements UserService {
 
     private UserDao userDao;
 
-    UserServiceImpl(UserDao userDao) {
+    UserServiceImpl( UserDao userDao ) {
         this.userDao = userDao;
     }
 
@@ -22,7 +22,7 @@ public class UserServiceImpl implements UserService {
         return userDao.findAll();
     }
 
-    public Optional<User> findById(int id) {
+    public Optional<User> findById( int id ) {
         return userDao.findById( id );
     }
 
@@ -36,22 +36,22 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Member getMemberById(Integer id) {
+    public Member getMemberById( Integer id ) {
         return userDao.getMemberById( id );
     }
 
     @Override
-    public Member getMemberByEmail(String email) {
+    public Member getMemberByEmail( String email ) {
         return userDao.getMemberByEmail( email );
     }
 
     @Override
-    public Member getMemberByNames(String firstname, String lastname) {
+    public Member getMemberByNames( String firstname, String lastname ) {
         return userDao.getMemberByNames( firstname, lastname );
     }
 
     @Override
-    public void incrementNbOfCurrentsBorrowings(String barcode) {
+    public void incrementNbOfCurrentsBorrowings( String barcode ) {
          userDao.incrementNbOfCurrentsBorrowings( barcode );
     }
 }
