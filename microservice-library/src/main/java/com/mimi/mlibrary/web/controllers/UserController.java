@@ -2,6 +2,7 @@ package com.mimi.mlibrary.web.controllers;
 
 import com.mimi.mlibrary.model.users.Member;
 import com.mimi.mlibrary.model.users.User;
+import com.mimi.mlibrary.service.UserService;
 import com.mimi.mlibrary.service.impl.UserServiceImpl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +15,7 @@ import java.util.Optional;
 @RestController
 public class UserController {
 
-    private UserServiceImpl userService;
+    private UserService userService;
 
     UserController(UserServiceImpl userService ) {
         this.userService = userService;
