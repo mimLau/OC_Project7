@@ -24,7 +24,10 @@ public class PublicationController {
 
     @GetMapping( value = "/Publication" )
     public List<Publication> getAllPublications(@RequestParam(value="title", required= false) String title) {
-        return publicationDao.findAll();
+        if( title == null )
+            return publicationDao.findAll();
+        else
+            return publicationDao.findAllByTitle(title);
     }
 
 
@@ -35,21 +38,21 @@ public class PublicationController {
 
     @GetMapping(value= "/Publication/isbn/{isbn}" )
     public Publication getPublicationByIsbn(@PathVariable String isbn ) {
-       return publicationDao.searchPublicationByIsbn( isbn );
+       return publicationDao.findByIsbn( isbn );
     }
 
     @GetMapping( value ="/Publication/authorName/{name}")
-    public List<Publication> getPublicationByAuthorName(@PathVariable String name ) {
-        return publicationDao.searchPublicationsByAuthorName( name );
+    public List<Publication> getPublicationByAuthor(@PathVariable String name ) {
+        return publicationDao.findAllByAuthor( name );
     }
 
     @GetMapping( value ="/Publication/title/{title}")
-    public List<Publication> getPublicationByTitle(@PathVariable String title ) {
-        return publicationDao.searchPublicationsByTitle( title );
+    public List<Publication> findPublicationByTitle(@PathVariable String title ) {
+        return publicationDao.findAllByTitle( title );
     }
 
     @GetMapping( value = "/Author" )
-    public List<Author> getAllAuthors() {
+    public List<Author> findAll() {
         return authorDao.findAll();
     }
 }
