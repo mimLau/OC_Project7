@@ -12,13 +12,13 @@ import java.util.List;
 public interface PublicationDao extends JpaRepository<Publication, Integer> {
 
    @Query("SELECT p FROM Publication p WHERE p.isbn= :isbn")
-   Publication searchPublicationByIsbn(@Param("isbn") String isbn );
+   Publication findByIsbn(@Param("isbn") String isbn );
 
    @Query("SELECT p FROM Publication p WHERE p.author.name LIKE %:name%")
-   List<Publication> searchPublicationsByAuthorName(@Param("name") String name );
+   List<Publication> findAllByAuthor(@Param("name") String name );
 
    @Query("SELECT p FROM Publication p WHERE p.title LIKE %:title%")
-   List<Publication> searchPublicationsByTitle(@Param("title") String title );
+   List<Publication> findAllByTitle( @Param("title") String title );
 
 
 }
