@@ -3,7 +3,7 @@ package com.mimi.mlibrary.service.impl;
 import com.mimi.mlibrary.dao.UserDao;
 import com.mimi.mlibrary.model.users.Member;
 import com.mimi.mlibrary.model.users.User;
-import com.mimi.mlibrary.service.impl.service.UserService;
+import com.mimi.mlibrary.service.UserService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
