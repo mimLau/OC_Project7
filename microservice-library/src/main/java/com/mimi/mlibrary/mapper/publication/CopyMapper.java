@@ -1,4 +1,4 @@
-package com.mimi.mlibrary.dao.mapper.publication;
+package com.mimi.mlibrary.mapper.publication;
 
 import com.mimi.mlibrary.model.source.publication.Copy;
 import com.mimi.mlibrary.model.dest.publication.CopyDto;

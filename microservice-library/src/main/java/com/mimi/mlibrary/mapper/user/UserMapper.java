@@ -1,4 +1,4 @@
-package com.mimi.mlibrary.dao.mapper.user;
+package com.mimi.mlibrary.mapper.user;
 
 import org.mapstruct.Mapper;
 
