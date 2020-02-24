@@ -3,6 +3,7 @@ package com.mimi.mlibrary.web.controllers;
 import com.mimi.mlibrary.dao.AuthorDao;
 import com.mimi.mlibrary.model.publication.Author;
 import com.mimi.mlibrary.model.publication.Publication;
+import com.mimi.mlibrary.model.publication.PublicationDto;
 import com.mimi.mlibrary.service.PublicationService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,7 +24,7 @@ public class PublicationController {
     }
 
     @GetMapping( value = "/Publication" )
-    public List<Publication> getAllPublications(@RequestParam(value="title", required= false) String title) {
+    public List<PublicationDto> getAllPublications(@RequestParam(value="title", required= false) String title) {
         if( title == null )
             return publicationService.findAll();
         else
@@ -45,10 +46,10 @@ public class PublicationController {
         return publicationService.findAllByAuthor( name );
     }
 
-    @GetMapping( value ="/Publication/title/{title}")
+    /*@GetMapping( value ="/Publication/title/{title}")
     public List<Publication> findPublicationByTitle(@PathVariable String title ) {
         return publicationService.findAllByTitle( title );
-    }
+    }*/
 
     @GetMapping( value = "/Author" )
     public List<Author> findAll() {
