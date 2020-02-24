@@ -1,7 +1,7 @@
 package com.mimi.mlibrary.service.impl;
 
 import com.mimi.mlibrary.dao.CopyDao;
-import com.mimi.mlibrary.model.mapper.publication.CopyMapper;
+import com.mimi.mlibrary.dao.mapper.publication.CopyMapper;
 import com.mimi.mlibrary.model.publication.Copy;
 import com.mimi.mlibrary.model.publication.CopyDto;
 import com.mimi.mlibrary.service.CopyService;
