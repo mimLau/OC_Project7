@@ -1,4 +1,4 @@
-package com.mimi.mlibrary.model.publication;
+package com.mimi.mlibrary.model.source.publication;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
@@ -8,8 +8,8 @@ import java.io.Serializable;
 import java.util.List;
 
 @Entity
-@Table(name="Libraries")
-public class Library implements Serializable {
+@Table(name = "Authors")
+public class Author implements Serializable {
 
     @Id
     @GeneratedValue(
@@ -21,13 +21,11 @@ public class Library implements Serializable {
             strategy = "native"
     )
     private Integer id;
-    private String name;
-    private String address;
-
+    private  String name;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "library")
-    private List<Copy> copies;
+    @OneToMany(mappedBy = "author")
+    private List<Book> book;
 
     public Integer getId() {
         return id;
@@ -45,19 +43,11 @@ public class Library implements Serializable {
         this.name = name;
     }
 
-    public String getAddress() {
-        return address;
+    public List<Book> getBook() {
+        return book;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public List<Copy> getCopies() {
-        return copies;
-    }
-
-    public void setCopies(List<Copy> copies) {
-        this.copies = copies;
+    public void setBook(List<Book> book) {
+        this.book = book;
     }
 }

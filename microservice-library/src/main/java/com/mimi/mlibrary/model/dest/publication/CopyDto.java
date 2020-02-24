@@ -1,4 +1,7 @@
-package com.mimi.mlibrary.model.publication;
+package com.mimi.mlibrary.model.dest.publication;
+
+import com.mimi.mlibrary.model.source.publication.Library;
+import com.mimi.mlibrary.model.source.publication.Publication;
 
 public class CopyDto {
 

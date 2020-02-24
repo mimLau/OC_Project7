@@ -1,6 +1,6 @@
 package com.mimi.mlibrary.service;
 
-import com.mimi.mlibrary.model.publication.CopyDto;
+import com.mimi.mlibrary.model.dest.publication.CopyDto;
 
 import java.util.List;
 

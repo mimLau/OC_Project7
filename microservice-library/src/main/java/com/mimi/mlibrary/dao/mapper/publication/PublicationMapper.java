@@ -1,7 +1,7 @@
 package com.mimi.mlibrary.dao.mapper.publication;
 
-import com.mimi.mlibrary.model.publication.Publication;
-import com.mimi.mlibrary.model.publication.PublicationDto;
+import com.mimi.mlibrary.model.source.publication.Publication;
+import com.mimi.mlibrary.model.dest.publication.PublicationDto;
 import org.mapstruct.Mapper;
 
 import java.util.List;

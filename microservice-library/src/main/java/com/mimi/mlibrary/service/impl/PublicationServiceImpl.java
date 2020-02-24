@@ -2,8 +2,8 @@ package com.mimi.mlibrary.service.impl;
 
 import com.mimi.mlibrary.dao.PublicationDao;
 import com.mimi.mlibrary.dao.mapper.publication.PublicationMapper;
-import com.mimi.mlibrary.model.publication.Publication;
-import com.mimi.mlibrary.model.publication.PublicationDto;
+import com.mimi.mlibrary.model.source.publication.Publication;
+import com.mimi.mlibrary.model.dest.publication.PublicationDto;
 import com.mimi.mlibrary.service.PublicationService;
 import org.springframework.stereotype.Service;
 

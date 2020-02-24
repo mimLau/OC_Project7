@@ -1,6 +1,6 @@
 package com.mimi.mlibrary.dao;
 
-import com.mimi.mlibrary.model.publication.Author;
+import com.mimi.mlibrary.model.source.publication.Author;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

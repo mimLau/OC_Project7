@@ -1,4 +1,4 @@
-package com.mimi.mlibrary.model.publication;
+package com.mimi.mlibrary.model.source.publication;
 
 
 import org.hibernate.annotations.GenericGenerator;

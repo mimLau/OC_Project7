@@ -1,6 +1,6 @@
-package com.mimi.mlibrary.model.publication;
+package com.mimi.mlibrary.model.source.publication;
 
-import com.mimi.mlibrary.model.borrowing.Borrowing;
+import com.mimi.mlibrary.model.source.borrowing.Borrowing;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;

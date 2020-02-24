@@ -1,8 +1,8 @@
 package com.mimi.mlibrary.service.impl;
 
 import com.mimi.mlibrary.dao.UserDao;
-import com.mimi.mlibrary.model.user.Member;
-import com.mimi.mlibrary.model.user.User;
+import com.mimi.mlibrary.model.source.user.Member;
+import com.mimi.mlibrary.model.source.user.User;
 import com.mimi.mlibrary.service.UserService;
 import org.springframework.stereotype.Service;
 

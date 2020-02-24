@@ -1,6 +1,6 @@
-package com.mimi.mlibrary.model.user;
+package com.mimi.mlibrary.model.source.user;
 
-import com.mimi.mlibrary.model.borrowing.Borrowing;
+import com.mimi.mlibrary.model.source.borrowing.Borrowing;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;

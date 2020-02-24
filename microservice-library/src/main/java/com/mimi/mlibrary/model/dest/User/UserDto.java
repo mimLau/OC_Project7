@@ -1,4 +1,4 @@
-package com.mimi.mlibrary.model.user;
+package com.mimi.mlibrary.model.dest.User;
 
 public class UserDto {
 

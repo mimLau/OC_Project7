@@ -1,6 +1,4 @@
-package com.mimi.mlibrary.model.publication;
-
-import java.util.List;
+package com.mimi.mlibrary.model.dest.publication;
 
 public class PublicationDto {
 

@@ -1,7 +1,7 @@
 package com.mimi.mlibrary.service;
 
-import com.mimi.mlibrary.model.publication.Publication;
-import com.mimi.mlibrary.model.publication.PublicationDto;
+import com.mimi.mlibrary.model.source.publication.Publication;
+import com.mimi.mlibrary.model.dest.publication.PublicationDto;
 
 import java.util.List;
 import java.util.Optional;

@@ -1,7 +1,7 @@
 package com.mimi.mlibrary.service;
 
-import com.mimi.mlibrary.model.user.Member;
-import com.mimi.mlibrary.model.user.User;
+import com.mimi.mlibrary.model.source.user.Member;
+import com.mimi.mlibrary.model.source.user.User;
 
 import java.util.List;
 import java.util.Optional;
