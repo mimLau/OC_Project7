@@ -1,4 +1,4 @@
-package com.mimi.mlibrary.dto.mapper;
+package com.mimi.mlibrary.model.mapper.user;
 
 import org.mapstruct.Mapper;
 
