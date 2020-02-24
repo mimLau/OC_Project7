@@ -1,7 +1,7 @@
 package com.mimi.mlibrary.dao;
 
-import com.mimi.mlibrary.model.users.Member;
-import com.mimi.mlibrary.model.users.User;
+import com.mimi.mlibrary.model.user.Member;
+import com.mimi.mlibrary.model.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
