@@ -31,12 +31,6 @@ public class MemberController {
     }
 
 
-
-    @GetMapping( value = "/Member/{id}" )
-    public MemberAccount getMemberById ( @PathVariable Integer id ) {
-        return MemberService.getMemberById(id);
-    }
-
     @GetMapping( value = "/Member/email/{email}" )
     public MemberAccount getMemberByEmail ( @PathVariable("email") String email ) {
         return MemberService.getMemberByEmail(email);
