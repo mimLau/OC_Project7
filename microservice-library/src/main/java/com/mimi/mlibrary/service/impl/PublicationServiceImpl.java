@@ -1,7 +1,10 @@
 package com.mimi.mlibrary.service.impl;
 
 import com.mimi.mlibrary.dao.PublicationDao;
+import com.mimi.mlibrary.mapper.publication.BookMapper;
 import com.mimi.mlibrary.mapper.publication.PublicationMapper;
+import com.mimi.mlibrary.model.dest.publication.BookDto;
+import com.mimi.mlibrary.model.source.publication.Book;
 import com.mimi.mlibrary.model.source.publication.Publication;
 import com.mimi.mlibrary.model.dest.publication.PublicationDto;
 import com.mimi.mlibrary.service.PublicationService;
@@ -15,10 +18,12 @@ public class PublicationServiceImpl implements PublicationService {
 
     private PublicationDao publicationDao;
     private PublicationMapper publicationMapper;
+    private BookMapper bookMapper;
 
-    PublicationServiceImpl( PublicationDao publicationDao, PublicationMapper publicationMapper) {
+    PublicationServiceImpl(PublicationDao publicationDao, PublicationMapper publicationMapper, BookMapper bookMapper) {
         this.publicationDao = publicationDao;
         this.publicationMapper = publicationMapper;
+        this.bookMapper = bookMapper;
     }
 
   /* public List<Publication> findAll() {
@@ -30,6 +35,14 @@ public class PublicationServiceImpl implements PublicationService {
         List <PublicationDto> publicationDtos = publicationMapper.map(publications );
 
         return publicationDtos;
+    }
+
+    @Override
+    public List<BookDto> findAllBooks() {
+        List<Book> books = publicationDao.findAllBooks();
+        List <BookDto> bookDtos = bookMapper.map( books );
+
+        return bookDtos;
     }
 
     public Optional<Publication> findById( int id) {
