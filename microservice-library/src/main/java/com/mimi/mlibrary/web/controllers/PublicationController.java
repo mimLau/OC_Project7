@@ -1,6 +1,7 @@
 package com.mimi.mlibrary.web.controllers;
 
 import com.mimi.mlibrary.dao.AuthorDao;
+import com.mimi.mlibrary.model.dest.publication.BookDto;
 import com.mimi.mlibrary.model.source.publication.Author;
 import com.mimi.mlibrary.model.source.publication.Publication;
 import com.mimi.mlibrary.model.dest.publication.PublicationDto;
@@ -21,6 +22,11 @@ public class PublicationController {
     public PublicationController(PublicationService publicationService, AuthorDao authorDao ){
         this.publicationService = publicationService;
         this.authorDao = authorDao;
+    }
+
+    @GetMapping( value = "/Book")
+    public List<BookDto> getAllBooks() {
+        return publicationService.findAllBooks();
     }
 
     @GetMapping( value = "/Publication" )
