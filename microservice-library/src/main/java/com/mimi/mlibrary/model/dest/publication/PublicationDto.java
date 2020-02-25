@@ -1,10 +1,15 @@
 package com.mimi.mlibrary.model.dest.publication;
 
+import com.mimi.mlibrary.model.source.publication.Copy;
+
+import java.util.List;
+
 public class PublicationDto {
 
     private Integer id;
     private int nbOfAvailableCopies;
     private int nbTotalOfcopies;
+    private List<Copy> copies;
 
 
     public PublicationDto() {
@@ -34,4 +39,11 @@ public class PublicationDto {
         this.nbTotalOfcopies = nbTotalOfcopies;
     }
 
+    public List<Copy> getCopies() {
+        return copies;
+    }
+
+    public void setCopies(List<Copy> copies) {
+        this.copies = copies;
+    }
 }
