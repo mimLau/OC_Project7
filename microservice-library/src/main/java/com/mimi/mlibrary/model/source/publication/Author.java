@@ -23,7 +23,7 @@ public class Author implements Serializable {
     private Integer id;
     private  String name;
 
-    @JsonIgnore
+
     @OneToMany(mappedBy = "author")
     private List<Book> book;
 
