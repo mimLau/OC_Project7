@@ -30,6 +30,7 @@ public class PublicationServiceImpl implements PublicationService {
         return publicationDao.findAll();
     }*/
 
+    @Override
     public List<PublicationDto> findAll() {
         List<Publication> publications = publicationDao.findAll();
         List <PublicationDto> publicationDtos = publicationMapper.map(publications );
@@ -41,7 +42,6 @@ public class PublicationServiceImpl implements PublicationService {
     public List<BookDto> findAllBooks() {
         List<Book> books = publicationDao.findAllBooks();
         List <BookDto> bookDtos = bookMapper.map( books );
-
         return bookDtos;
     }
 
