@@ -1,7 +1,7 @@
 package com.mimi.mlibrary.model.source.borrowing;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.mimi.mlibrary.model.source.user.Member;
+import com.mimi.mlibrary.model.source.account.MemberAccount;
 import com.mimi.mlibrary.model.source.publication.Copy;
 import org.hibernate.annotations.Type;
 
@@ -26,13 +26,14 @@ public class Borrowing implements Serializable {
     @Enumerated(EnumType.STRING)
     private BorrowingStatus borrowingStatus;
 
+    //@JsonIgnore
     @ManyToOne
     @JoinColumn
     private Copy copy;
 
     @ManyToOne
     @JoinColumn
-    private Member member;
+    private MemberAccount Member;
 
     public Integer getId() {
         return id;
@@ -90,11 +91,11 @@ public class Borrowing implements Serializable {
         this.copy = copy;
     }
 
-    public Member getMember() {
-        return member;
+    public MemberAccount getMember() {
+        return Member;
     }
 
-    public void setMember(Member member) {
-        this.member = member;
+    public void setMember(MemberAccount Member) {
+        this.Member = Member;
     }
 }
