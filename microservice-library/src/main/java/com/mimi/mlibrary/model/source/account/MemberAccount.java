@@ -1,21 +1,20 @@
-package com.mimi.mlibrary.model.source.user;
+package com.mimi.mlibrary.model.source.account;
 
 import com.mimi.mlibrary.model.source.borrowing.Borrowing;
 
-import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
-import java.io.Serializable;
+import javax.persistence.Table;
 import java.util.List;
 
 @Entity
-@DiscriminatorValue("Member")
-public class Member extends User implements Serializable {
+@Table( name = "Members")
+public class MemberAccount extends Account {
 
     private String barcode;
     private int nbOfCurrentsBorrowings;
 
-    @OneToMany(mappedBy = "member")
+    @OneToMany(mappedBy = "Member")
     private List<Borrowing> borrowings;
 
     public String getBarcode() {
