@@ -1,5 +1,6 @@
 package com.mimi.mlibrary.dao;
 
+import com.mimi.mlibrary.model.source.publication.Book;
 import com.mimi.mlibrary.model.source.publication.Publication;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -19,6 +20,9 @@ public interface PublicationDao extends JpaRepository<Publication, Integer> {
 
    @Query("SELECT p FROM Publication p WHERE p.title LIKE %:title%")
    List<Publication> findAllByTitle( @Param("title") String title );
+
+   @Query("SELECT b FROM Book b")
+   List<Book> findAllBooks();
 
 
 }
