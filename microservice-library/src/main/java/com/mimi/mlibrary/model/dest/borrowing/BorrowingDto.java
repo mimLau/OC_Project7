@@ -1,8 +1,6 @@
 package com.mimi.mlibrary.model.dest.borrowing;
 
 import com.mimi.mlibrary.model.source.borrowing.BorrowingStatus;
-import com.mimi.mlibrary.model.source.publication.Copy;
-import com.mimi.mlibrary.model.source.user.Member;
 
 
 public class BorrowingDto {
