@@ -1,10 +1,5 @@
 package com.mimi.mlibrary.model.dest.publication;
 
-import com.mimi.mlibrary.model.source.publication.Copy;
-import com.mimi.mlibrary.model.source.publication.Publication;
-
-import java.util.List;
-
 public class PublicationDto {
 
     private Integer id;
