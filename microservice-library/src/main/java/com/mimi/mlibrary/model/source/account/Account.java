@@ -18,11 +18,11 @@ public abstract class Account implements Serializable {
             strategy = "native"
     )
     private Integer id;
-    private String ownerFirstname;
-    private String ownerLastname;
-    private String ownerPass;
-    private String ownerEmail;
-    private String ownerPphoneNb;
+    private String accountOwnerFirstname;
+    private String accountOwnerLastname;
+    private String accountOwnerPass;
+    private String accountOwnerEmail;
+    private String accountOwnerPhoneNb;
     private boolean activeAccount;
     private String registrationDate;
 
@@ -35,44 +35,44 @@ public abstract class Account implements Serializable {
         this.id = id;
     }
 
-    public String getOwnerFirstname() {
-        return ownerFirstname;
+    public String getAccountOwnerFirstname() {
+        return accountOwnerFirstname;
     }
 
-    public void setOwnerFirstname(String ownerFirstname) {
-        this.ownerFirstname = ownerFirstname;
+    public void setAccountOwnerFirstname(String accountOwnerFirstname) {
+        this.accountOwnerFirstname = accountOwnerFirstname;
     }
 
-    public String getOwnerLastname() {
-        return ownerLastname;
+    public String getAccountOwnerLastname() {
+        return accountOwnerLastname;
     }
 
-    public void setOwnerLastname(String ownerLastname) {
-        this.ownerLastname = ownerLastname;
+    public void setAccountOwnerLastname(String accountOwnerLastname) {
+        this.accountOwnerLastname = accountOwnerLastname;
     }
 
-    public String getOwnerPass() {
-        return ownerPass;
+    public String getAccountOwnerPass() {
+        return accountOwnerPass;
     }
 
-    public void setOwnerPass(String ownerPass) {
-        this.ownerPass = ownerPass;
+    public void setAccountOwnerPass(String accountOwnerPass) {
+        this.accountOwnerPass = accountOwnerPass;
     }
 
-    public String getOwnerEmail() {
-        return ownerEmail;
+    public String getAccountOwnerEmail() {
+        return accountOwnerEmail;
     }
 
-    public void setOwnerEmail(String ownerEmail) {
-        this.ownerEmail = ownerEmail;
+    public void setAccountOwnerEmail(String accountOwnerEmail) {
+        this.accountOwnerEmail = accountOwnerEmail;
     }
 
-    public String getOwnerPphoneNb() {
-        return ownerPphoneNb;
+    public String getAccountOwnerPhoneNb() {
+        return accountOwnerPhoneNb;
     }
 
-    public void setOwnerPphoneNb(String ownerPphoneNb) {
-        this.ownerPphoneNb = ownerPphoneNb;
+    public void setAccountOwnerPhoneNb(String accountOwnerPhoneNb) {
+        this.accountOwnerPhoneNb = accountOwnerPhoneNb;
     }
 
     public boolean isActiveAccount() {
