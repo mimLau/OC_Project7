@@ -17,7 +17,6 @@ public class Book extends Publication implements Serializable {
     @Enumerated(EnumType.STRING)
     private Category category;
 
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(name="author_fk")
     private Author author;
