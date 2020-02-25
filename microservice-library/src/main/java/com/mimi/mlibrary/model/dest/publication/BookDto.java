@@ -1,6 +1,5 @@
 package com.mimi.mlibrary.model.dest.publication;
 
-import com.mimi.mlibrary.model.dest.publication.PublicationDto;
 import com.mimi.mlibrary.model.source.publication.Category;
 
 public class BookDto extends PublicationDto {
