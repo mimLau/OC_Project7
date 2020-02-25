@@ -26,7 +26,6 @@ public class Borrowing implements Serializable {
     @Enumerated(EnumType.STRING)
     private BorrowingStatus borrowingStatus;
 
-    @JsonIgnore
     @ManyToOne
     @JoinColumn
     private Copy copy;
