@@ -13,18 +13,18 @@ import java.util.List;
 @Repository
 public interface MemberDao extends JpaRepository<MemberAccount, Integer> {
 
-    @Query( "SELECT u FROM Member u WHERE u.id= :id" )
+    @Query( "SELECT m FROM MemberAccount m WHERE m.id= :id" )
     MemberAccount getMemberById( @Param("id") Integer id);
 
-    @Query( "SELECT u FROM Member u WHERE u.email= :email" )
+    @Query( "SELECT m FROM MemberAccount m WHERE m.accountOwnerEmail= :email" )
     MemberAccount getMemberByEmail( @Param("email") String email);
 
-    @Query( "SELECT u FROM Member u WHERE u.firstname= :firstname AND u.lastname= :lastname")
+    @Query( "SELECT m FROM MemberAccount m WHERE m.accountOwnerFirstname= :firstname AND m.accountOwnerLastname= :lastname")
     MemberAccount getMemberByNames( @Param("firstname") String firstname, @Param("lastname") String lastname );
 
     @Modifying
     @Transactional
-    @Query ("UPDATE Member u SET u.nbOfCurrentsBorrowings = u.nbOfCurrentsBorrowings + 1 WHERE u.barcode= :barcode")
+    @Query ("UPDATE MemberAccount m SET m.nbOfCurrentsBorrowings = m.nbOfCurrentsBorrowings + 1 WHERE m.barcode= :barcode")
     void incrementNbOfCurrentsBorrowings( @Param("barcode") String barcode );
 
 }
