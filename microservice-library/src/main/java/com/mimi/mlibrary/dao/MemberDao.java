@@ -13,9 +13,6 @@ import java.util.List;
 @Repository
 public interface MemberDao extends JpaRepository<MemberAccount, Integer> {
 
-    @Query( "SELECT u FROM Member u" )
-    List<MemberAccount> getAllMember();
-
     @Query( "SELECT u FROM Member u WHERE u.id= :id" )
     MemberAccount getMemberById( @Param("id") Integer id);
 
