@@ -1,5 +1,6 @@
 package com.mimi.mlibrary.model.source.publication;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mimi.mlibrary.model.source.borrowing.Borrowing;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -23,6 +24,7 @@ public class Copy {
     private String barcode;
     private boolean available;
     private String returnDate;
+
 
     @ManyToOne
     @JoinColumn
