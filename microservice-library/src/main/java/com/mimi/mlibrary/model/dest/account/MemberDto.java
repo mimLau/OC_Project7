@@ -1,6 +1,6 @@
-package com.mimi.mlibrary.model.dest.User;
+package com.mimi.mlibrary.model.dest.account;
 
-public class UserDto {
+public class MemberDto {
 
     private Integer id;
     private String firstname;
