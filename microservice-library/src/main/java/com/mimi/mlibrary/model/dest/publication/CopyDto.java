@@ -1,7 +1,7 @@
 package com.mimi.mlibrary.model.dest.publication;
 
 import com.mimi.mlibrary.model.source.publication.Library;
-import com.mimi.mlibrary.model.source.publication.Publication;
+
 
 public class CopyDto {
 
@@ -9,7 +9,6 @@ public class CopyDto {
     private String barcode;
     private boolean available;
     private String returnDate;
-    private Publication publication;
     private Library library;
 
     public Integer getId() {
@@ -42,14 +41,6 @@ public class CopyDto {
 
     public void setReturnDate(String returnDate) {
         this.returnDate = returnDate;
-    }
-
-    public Publication getPublication() {
-        return publication;
-    }
-
-    public void setPublication(Publication publication) {
-        this.publication = publication;
     }
 
     public Library getLibrary() {
