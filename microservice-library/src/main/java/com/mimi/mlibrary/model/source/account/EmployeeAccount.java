@@ -5,7 +5,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table( name = "Employees")
-public abstract class EmployeeAccount extends Account {
+public class EmployeeAccount extends Account {
 
     private Role role;
 
