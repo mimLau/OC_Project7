@@ -26,9 +26,17 @@ public class Copy {
     private String returnDate;
 
 
-    @ManyToOne
-    @JoinColumn
-    private Publication publication;
+    @JsonIgnore
+    @OneToOne
+    private Book book;
+
+    @JsonIgnore
+    @OneToOne
+    private Review review;
+
+    @JsonIgnore
+    @OneToOne
+    private Newspaper newspaper;
 
     @ManyToOne
     @JoinColumn
@@ -61,20 +69,36 @@ public class Copy {
         this.available = available;
     }
 
-    public Publication getPublication() {
-        return publication;
-    }
-
-    public void setPublication(Publication publication) {
-        this.publication = publication;
-    }
-
     public String getReturnDate() {
         return returnDate;
     }
 
     public void setReturnDate(String returnDate) {
         this.returnDate = returnDate;
+    }
+
+    public Book getBook() {
+        return book;
+    }
+
+    public void setBook(Book book) {
+        this.book = book;
+    }
+
+    public Review getReview() {
+        return review;
+    }
+
+    public void setReview(Review review) {
+        this.review = review;
+    }
+
+    public Newspaper getNewspaper() {
+        return newspaper;
+    }
+
+    public void setNewspaper(Newspaper newspaper) {
+        this.newspaper = newspaper;
     }
 
     public Library getLibrary() {
