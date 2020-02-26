@@ -26,14 +26,15 @@ public class Borrowing implements Serializable {
     @Enumerated(EnumType.STRING)
     private BorrowingStatus borrowingStatus;
 
-    //@JsonIgnore
+    @JsonIgnore
     @ManyToOne
     @JoinColumn
     private Copy copy;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn
-    private MemberAccount Member;
+    private MemberAccount member;
 
     public Integer getId() {
         return id;
@@ -92,10 +93,10 @@ public class Borrowing implements Serializable {
     }
 
     public MemberAccount getMember() {
-        return Member;
+        return member;
     }
 
-    public void setMember(MemberAccount Member) {
-        this.Member = Member;
+    public void setMember(MemberAccount member) {
+        this.member = member;
     }
 }
