@@ -17,17 +17,17 @@ public class BookController {
         this.bookService = bookService;
     }
 
-    @GetMapping( value = "/Book")
+    @GetMapping( value = "/Books")
     public List<Book> getAllBooks() {
         return bookService.findAll();
     }
 
-    @GetMapping( value = "/BookByAuthor/{name}")
+    @GetMapping( value = "/Books/{name}")
     public List<Book> findAllByAuthor(@PathVariable String name) {
         return bookService.findAllByAuthor( name );
     }
 
-    @GetMapping( value = "/BookByTitle/{title}")
+    @GetMapping( value = "/Books/{title}")
     public List<Book> findAllByTitle(@PathVariable String title) {
         return bookService.findAllByTitle( title );
     }
