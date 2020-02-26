@@ -1,8 +1,8 @@
 package com.mimi.mlibrary.web.controllers;
 
 import com.mimi.mlibrary.model.source.account.MemberAccount;
-import com.mimi.mlibrary.service.MemberService;
-import com.mimi.mlibrary.service.impl.MemberServiceImpl;
+import com.mimi.mlibrary.service.account.MemberService;
+import com.mimi.mlibrary.service.impl.account.MemberServiceImpl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
