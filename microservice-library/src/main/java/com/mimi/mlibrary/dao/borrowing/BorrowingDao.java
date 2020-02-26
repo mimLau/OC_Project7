@@ -1,4 +1,4 @@
-package com.mimi.mlibrary.dao;
+package com.mimi.mlibrary.dao.borrowing;
 
 import com.mimi.mlibrary.model.source.borrowing.Borrowing;
 import org.springframework.data.jpa.repository.JpaRepository;
