@@ -7,10 +7,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
-@Entity
-@Table(name="Publications")
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="Publication_type")
+@MappedSuperclass
 public abstract class Publication implements Serializable {
 
     @Id
@@ -25,10 +22,6 @@ public abstract class Publication implements Serializable {
     private Integer id;
     private int nbOfAvailableCopies;
     private int nbTotalOfcopies;
-
-
-    @OneToMany(mappedBy = "publication")
-    private List<Copy> copies;
 
     public Integer getId() {
         return id;
@@ -54,11 +47,4 @@ public abstract class Publication implements Serializable {
         this.nbTotalOfcopies = nbTotalOfcopies;
     }
 
-    public List<Copy> getCopies() {
-        return copies;
-    }
-
-    public void setCopies(List<Copy> copies) {
-        this.copies = copies;
-    }
 }
