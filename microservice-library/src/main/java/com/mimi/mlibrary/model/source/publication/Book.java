@@ -4,9 +4,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
-@DiscriminatorValue("Book")
+@Table( name = "Books")
 public class Book extends Publication implements Serializable {
 
     private String editor;
@@ -20,6 +21,9 @@ public class Book extends Publication implements Serializable {
     @ManyToOne
     @JoinColumn(name="author_fk")
     private Author author;
+
+    @OneToMany(mappedBy = "book")
+    private List<Copy> copies;
 
     public Book() {
         super();
@@ -71,5 +75,13 @@ public class Book extends Publication implements Serializable {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public List<Copy> getCopies() {
+        return copies;
+    }
+
+    public void setCopies(List<Copy> copies) {
+        this.copies = copies;
     }
 }
