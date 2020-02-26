@@ -1,6 +1,8 @@
 package com.mimi.mlibrary.model.source.account;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
+import org.joda.time.LocalDate;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -24,8 +26,9 @@ public abstract class Account implements Serializable {
     private String accountOwnerEmail;
     private String accountOwnerPhoneNb;
     private boolean activeAccount;
-    private String registrationDate;
 
+    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
+    private LocalDate registrationDate;
 
     public Integer getId() {
         return id;
@@ -83,11 +86,11 @@ public abstract class Account implements Serializable {
         this.activeAccount = activeAccount;
     }
 
-    public String getRegistrationDate() {
+    public LocalDate getRegistrationDate() {
         return registrationDate;
     }
 
-    public void setRegistrationDate(String registrationDate) {
+    public void setRegistrationDate(LocalDate registrationDate) {
         this.registrationDate = registrationDate;
     }
 }
