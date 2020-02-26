@@ -1,4 +1,4 @@
-package com.mimi.mlibrary.service;
+package com.mimi.mlibrary.service.publication;
 
 import com.mimi.mlibrary.model.source.publication.Book;
 
