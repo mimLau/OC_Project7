@@ -24,6 +24,7 @@ public class Author implements Serializable {
     private  String name;
 
 
+    @JsonIgnore
     @OneToMany(mappedBy = "author")
     private List<Book> book;
 
