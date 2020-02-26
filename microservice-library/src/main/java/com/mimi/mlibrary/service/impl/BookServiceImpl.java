@@ -20,4 +20,14 @@ public class BookServiceImpl implements BookService {
     public List<Book> findAll() {
         return bookDao.findAll();
     }
+
+    @Override
+    public List<Book> findAllByAuthor( String name ) {
+        return bookDao.findAllByAuthor( name );
+    }
+
+    @Override
+    public List<Book> findAllByTitle( String title ) {
+        return bookDao.findAllByTitle( title );
+    }
 }
