@@ -3,6 +3,8 @@ package com.mimi.mlibrary.model.source.publication;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mimi.mlibrary.model.source.borrowing.Borrowing;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
+import org.joda.time.LocalDate;
 
 import javax.persistence.*;
 import java.util.List;
@@ -23,7 +25,9 @@ public class Copy {
     private Integer id;
     private String barcode;
     private boolean available;
-    private String returnDate;
+
+    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
+    private LocalDate returnDate;
 
 
     @JsonIgnore
@@ -69,11 +73,11 @@ public class Copy {
         this.available = available;
     }
 
-    public String getReturnDate() {
+    public LocalDate getReturnDate() {
         return returnDate;
     }
 
-    public void setReturnDate(String returnDate) {
+    public void setReturnDate(LocalDate returnDate) {
         this.returnDate = returnDate;
     }
 
