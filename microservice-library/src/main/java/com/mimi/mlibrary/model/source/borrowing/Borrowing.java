@@ -3,6 +3,7 @@ package com.mimi.mlibrary.model.source.borrowing;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mimi.mlibrary.model.source.account.MemberAccount;
 import com.mimi.mlibrary.model.source.publication.Copy;
+import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 import org.joda.time.LocalDate;
 
@@ -14,7 +15,14 @@ import java.io.Serializable;
 public class Borrowing implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(
+            strategy= GenerationType.AUTO,
+            generator="native"
+    )
+    @GenericGenerator(
+            name = "native",
+            strategy = "native"
+    )
     private Integer id;
 
     @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
