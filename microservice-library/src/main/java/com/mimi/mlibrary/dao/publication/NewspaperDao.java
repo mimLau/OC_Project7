@@ -13,5 +13,8 @@ import java.util.List;
 public interface NewspaperDao extends JpaRepository<Newspaper, Integer> {
 
     @Query("SELECT n FROM Newspaper n WHERE n.name= :name")
-    List<Newspaper> findAllByName( @Param("name") String name);
+    List<Newspaper> findAllByName( @Param("name") String name );
+
+    @Query("SELECT n FROM Newspaper n WHERE n.releaseDate= :date")
+    List<Newspaper> findAllByDate( @Param("date") String date );
 }
