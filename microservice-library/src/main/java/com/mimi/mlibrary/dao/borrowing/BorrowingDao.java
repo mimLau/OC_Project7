@@ -14,4 +14,7 @@ public interface BorrowingDao extends JpaRepository<Borrowing, Integer> {
     @Query("SELECT b FROM Borrowing  b JOIN FETCH b.member m WHERE m.id= :id")
     List<Borrowing> findByMemberId(@Param("id") int id);
 
+    @Query("SELECT b FROM Borrowing  b JOIN FETCH b.copy c WHERE c.id= :id")
+    List<Borrowing> findByCopyId( @Param("id") int id);
+
 }
