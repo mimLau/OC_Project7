@@ -1,4 +1,4 @@
-package com.mimi.mlibrary.service;
+package com.mimi.mlibrary.service.borrowing;
 
 import com.mimi.mlibrary.model.dest.borrowing.BorrowingDto;
 import com.mimi.mlibrary.model.source.borrowing.Borrowing;

@@ -1,10 +1,9 @@
-package com.mimi.mlibrary.service.impl;
+package com.mimi.mlibrary.service.impl.borrowing;
 
 import com.mimi.mlibrary.dao.BorrowingDao;
 import com.mimi.mlibrary.mapper.borrowing.BorrowingMapper;
-import com.mimi.mlibrary.model.dest.borrowing.BorrowingDto;
 import com.mimi.mlibrary.model.source.borrowing.Borrowing;
-import com.mimi.mlibrary.service.BorrowingService;
+import com.mimi.mlibrary.service.borrowing.BorrowingService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
