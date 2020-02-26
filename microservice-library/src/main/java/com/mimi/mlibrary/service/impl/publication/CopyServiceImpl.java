@@ -1,10 +1,10 @@
-package com.mimi.mlibrary.service.impl;
+package com.mimi.mlibrary.service.impl.publication;
 
 import com.mimi.mlibrary.dao.CopyDao;
 import com.mimi.mlibrary.mapper.publication.CopyMapper;
 import com.mimi.mlibrary.model.source.publication.Copy;
 import com.mimi.mlibrary.model.dest.publication.CopyDto;
-import com.mimi.mlibrary.service.CopyService;
+import com.mimi.mlibrary.service.publication.CopyService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
