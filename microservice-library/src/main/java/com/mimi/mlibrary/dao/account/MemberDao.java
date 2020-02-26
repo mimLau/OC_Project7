@@ -1,4 +1,4 @@
-package com.mimi.mlibrary.dao;
+package com.mimi.mlibrary.dao.account;
 
 import com.mimi.mlibrary.model.source.account.MemberAccount;
 import org.springframework.data.jpa.repository.JpaRepository;
