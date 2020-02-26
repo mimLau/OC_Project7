@@ -24,6 +24,7 @@ public class Library implements Serializable {
     private String name;
     private String address;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "library")
     private List<Copy> copies;
 
