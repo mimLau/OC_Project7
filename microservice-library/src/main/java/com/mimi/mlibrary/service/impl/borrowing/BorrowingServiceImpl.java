@@ -20,6 +20,11 @@ public class BorrowingServiceImpl implements BorrowingService {
     }
 
     @Override
+    public List<Borrowing> findAll() {
+        return borrowingDao.findAll();
+    }
+
+    @Override
     public List<Borrowing> findByMemberId(int memberId) {
         return borrowingDao.findByMemberId( memberId );
     }
