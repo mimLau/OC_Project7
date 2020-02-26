@@ -18,7 +18,7 @@ public class NewspaperController {
         this.newspaperService = newspaperService;
     }
 
-    @GetMapping( value = "/NewspaperByName/{name}" )
+    @GetMapping( value = "/Newspapers/{name}" )
     public List<Newspaper> findAllByName(@PathVariable String name ){
         return newspaperService.findAllByName( name );
     }
