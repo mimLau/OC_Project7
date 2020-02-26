@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mimi.mlibrary.model.source.account.MemberAccount;
 import com.mimi.mlibrary.model.source.publication.Copy;
 import org.hibernate.annotations.Type;
+import org.joda.time.LocalDate;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -16,9 +17,11 @@ public class Borrowing implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    private String returnDate;
-    private String borrowingDate;
-    private int reminderNb;
+    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
+    private LocalDate returnDate;
+
+    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
+    private LocalDate borrowingDate;
 
     @Type(type = "numeric_boolean")
     private boolean extented;
@@ -36,6 +39,8 @@ public class Borrowing implements Serializable {
     @JoinColumn
     private MemberAccount member;
 
+    private int reminderNb;
+
     public Integer getId() {
         return id;
     }
@@ -44,19 +49,19 @@ public class Borrowing implements Serializable {
         this.id = id;
     }
 
-    public String getReturnDate() {
+    public LocalDate getReturnDate() {
         return returnDate;
     }
 
-    public void setReturnDate(String returnDate) {
+    public void setReturnDate(LocalDate returnDate) {
         this.returnDate = returnDate;
     }
 
-    public String getBorrowingDate() {
+    public LocalDate getBorrowingDate() {
         return borrowingDate;
     }
 
-    public void setBorrowingDate(String borrowingDate) {
+    public void setBorrowingDate(LocalDate borrowingDate) {
         this.borrowingDate = borrowingDate;
     }
 
