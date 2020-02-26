@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface BorrowingService {
 
-    //List<BorrowingDto> findAll();
+    List<Borrowing> findAll();
     List<Borrowing> findByMemberId( int memberId );
 }
