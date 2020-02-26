@@ -1,4 +1,4 @@
-package com.mimi.mlibrary.dao;
+package com.mimi.mlibrary.dao.publication;
 
 import com.mimi.mlibrary.model.source.publication.Book;
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -1,6 +1,6 @@
 package com.mimi.mlibrary.service.impl.publication;
 
-import com.mimi.mlibrary.dao.BookDao;
+import com.mimi.mlibrary.dao.publication.BookDao;
 import com.mimi.mlibrary.model.source.publication.Book;
 import com.mimi.mlibrary.service.publication.BookService;
 import org.springframework.stereotype.Service;
