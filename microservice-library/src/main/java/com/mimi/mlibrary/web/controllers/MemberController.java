@@ -20,24 +20,24 @@ public class MemberController {
         this.MemberService = MemberService;
     }
 
-    @GetMapping( value = "/Member" )
+    @GetMapping( value = "/Members" )
     public List<MemberAccount> getAllMembers() {
         return MemberService.findAll();
     }
 
-    @GetMapping( value = "/Member/{id}" )
-    public Optional<MemberAccount> getMemberById(@PathVariable int id ) {
+    @GetMapping( value = "/Members", params = "id" )
+    public Optional<MemberAccount> getMemberById( @RequestParam("id") int id ) {
         return MemberService.findById( id );
     }
 
 
-    @GetMapping( value = "/Member/email/{email}" )
-    public MemberAccount getMemberByEmail ( @PathVariable("email") String email ) {
+    @GetMapping( value = "/Members", params = "email")
+    public MemberAccount getMemberByEmail ( @RequestParam("email") String email ) {
         return MemberService.getMemberByEmail(email);
     }
 
-    @GetMapping( value = "/Member/firstname/{firstname}/lastname/{lastname}" )
-    public MemberAccount getMemberByEmail ( @PathVariable("firstname") String firstname, @PathVariable("lastname") String lastname ) {
+    @GetMapping( value = "/Members", params = { "firstname", "lastname" })
+    public MemberAccount getMemberByName ( @RequestParam("firstname") String firstname, @RequestParam("lastname") String lastname ) {
         return MemberService.getMemberByNames( firstname, lastname );
     }
 
