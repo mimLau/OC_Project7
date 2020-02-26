@@ -14,7 +14,7 @@ public class MemberAccount extends Account {
     private String barcode;
     private int nbOfCurrentsBorrowings;
 
-    @OneToMany(mappedBy = "Member")
+    @OneToMany(mappedBy = "member")
     private List<Borrowing> borrowings;
 
     public String getBarcode() {
