@@ -13,6 +13,7 @@ public interface PublicationService {
 
     List<Author> findAllAuthor();
     Author saveAuthor( Author author );
+    void deleteAuthorById( int id );
 
 
     List<Book> findAllBook();
