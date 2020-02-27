@@ -3,7 +3,7 @@ package com.mimi.mlibrary.service.impl;
 import com.mimi.mlibrary.dao.borrowing.BorrowingDao;
 import com.mimi.mlibrary.mapper.borrowing.BorrowingMapper;
 import com.mimi.mlibrary.model.source.borrowing.Borrowing;
-import com.mimi.mlibrary.service.borrowing.BorrowingService;
+import com.mimi.mlibrary.service.BorrowingService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
