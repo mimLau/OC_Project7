@@ -1,6 +1,8 @@
 package com.mimi.mlibrary.model.source.publication;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -26,8 +28,8 @@ public class Author implements Serializable {
     private String alias;
 
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "author")
+    @JsonManagedReference
+    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
     private List<Book> book;
 
     public Integer getId() {
