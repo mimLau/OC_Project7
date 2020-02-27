@@ -12,6 +12,8 @@ public interface PublicationService {
 
 
     List<Author> findAllAuthor();
+    Author saveAuthor( Author author );
+
 
     List<Book> findAllBook();
     List<Book> findAllBookByAuthor( String name );

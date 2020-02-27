@@ -31,16 +31,18 @@ public class PublicationServiceImpl implements PublicationService {
 
 
     //Author
-
     @Override
     public List<Author> findAllAuthor() {
         return authorDao.findAll();
     }
 
+    @Override
+    public Author saveAuthor( Author author ) {
+        return authorDao.save( author );
+    }
 
 
     //Book
-
     @Override
     public List<Book> findAllBook() {
         return bookDao.findAll();
@@ -64,7 +66,6 @@ public class PublicationServiceImpl implements PublicationService {
 
 
     //Copy
-
     @Override
     public List<Copy> findAllCopy() {
         return copyDao.findAll();
@@ -95,7 +96,6 @@ public class PublicationServiceImpl implements PublicationService {
 
 
     //Newspaper
-
     @Override
     public List<Newspaper> findAllNewspaper() {
         return newspaperDao.findAll();

@@ -2,10 +2,11 @@ package com.mimi.mlibrary.web.controllers;
 
 import com.mimi.mlibrary.model.source.publication.*;
 import com.mimi.mlibrary.service.PublicationService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -21,6 +22,16 @@ public class PublicationController {
     @GetMapping( value = "/Authors" )
     public List<Author> getAllAuthor() {
         return publicationService.findAllAuthor();
+    }
+
+    @PostMapping( value = "/Authors/add" )
+    public ResponseEntity<Void> addAuthor(@RequestBody Author author ) {
+        Author addedBorrowing = publicationService.saveAuthor( author );
+        if( addedBorrowing == null)
+            return ResponseEntity.noContent().build();
+
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand( addedBorrowing.getId() ).toUri();
+        return ResponseEntity.created( location ).build();
     }
 
     //Book
