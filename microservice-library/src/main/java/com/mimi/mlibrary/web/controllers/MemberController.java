@@ -16,7 +16,7 @@ public class MemberController {
 
     private AccountService accountService;
 
-    MemberController(AccountServiceImpl MemberService ) {
+    MemberController(AccountService accountService) {
         this.accountService = accountService;
     }
 
@@ -30,18 +30,17 @@ public class MemberController {
         return accountService.findById( id );
     }
 
-
     @GetMapping( value = "/Members", params = "email")
-    public MemberAccount getMemberByEmail ( @RequestParam("email") String email ) {
+    public Optional<MemberAccount> getMemberByEmail ( @RequestParam("email") String email ) {
         return accountService.getMemberByEmail(email);
     }
 
     @GetMapping( value = "/Members", params = { "firstname", "lastname" })
-    public MemberAccount getMemberByName ( @RequestParam("firstname") String firstname, @RequestParam("lastname") String lastname ) {
+    public Optional<MemberAccount> getMemberByName ( @RequestParam("firstname") String firstname, @RequestParam("lastname") String lastname ) {
         return accountService.getMemberByNames( firstname, lastname );
     }
 
-    @PostMapping( value = "/Members/add" )
+    @PostMapping( value = "/Members" )
     public ResponseEntity<Void> addMember( @RequestBody MemberAccount Member ) {
         MemberAccount addedMember = accountService.save( Member );
         if( addedMember == null)
@@ -51,8 +50,8 @@ public class MemberController {
         return ResponseEntity.created( location ).build();
     }
 
-    @PostMapping( value = "/Member/nbBorr/{barcode}" )
-    public void incrementBorrowingsNbBorrowings ( @PathVariable("barcode") String barcode ) {
+    @PutMapping( value = "/Members" , params = "barcode" )
+    public void incrementBorrowingsNbBorrowings ( @RequestParam("barcode") String barcode ) {
         accountService.incrementNbOfCurrentsBorrowings( barcode );
     }
 
