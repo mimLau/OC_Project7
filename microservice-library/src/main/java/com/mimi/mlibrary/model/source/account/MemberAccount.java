@@ -14,8 +14,8 @@ public class MemberAccount extends Account {
     private String barcode;
     private int nbOfCurrentsBorrowings;
 
-    @JsonManagedReference
-    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+    @JsonManagedReference(value = "member")
+    @OneToMany(mappedBy = "member")
     private List<Borrowing> borrowings;
 
     public String getBarcode() {
