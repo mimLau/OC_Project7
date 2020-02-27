@@ -1,5 +1,6 @@
 package com.mimi.mlibrary.model.source.publication;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.mimi.mlibrary.model.source.borrowing.Borrowing;
@@ -30,16 +31,20 @@ public class Copy {
     @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
     private LocalDate returnDate;
 
+    @JsonManagedReference(value = "copy_borrowing")
+    @OneToMany(mappedBy = "copy")
+    private List<Borrowing> borrowings;
 
-    @JsonIgnore
+
+    @JsonBackReference(value="book_copy")
     @OneToOne
     private Book book;
 
-    @JsonIgnore
+    @JsonBackReference(value="review_copy")
     @OneToOne
     private Review review;
 
-    @JsonIgnore
+    @JsonBackReference(value="newspaper_copy")
     @OneToOne
     private Newspaper newspaper;
 
@@ -47,9 +52,6 @@ public class Copy {
     @JoinColumn
     private Library library;
 
-    @JsonManagedReference(value = "copy")
-    @OneToMany(mappedBy = "copy")
-    private List<Borrowing> borrowings;
 
     public Integer getId() {
         return id;
