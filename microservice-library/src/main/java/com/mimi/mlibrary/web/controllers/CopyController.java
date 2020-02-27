@@ -3,6 +3,7 @@ package com.mimi.mlibrary.web.controllers;
 import com.mimi.mlibrary.model.source.account.MemberAccount;
 import com.mimi.mlibrary.model.source.publication.Copy;
 import com.mimi.mlibrary.service.publication.CopyService;
+import org.joda.time.LocalDate;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,5 +22,11 @@ public class CopyController {
     @GetMapping( value = "/Copies" )
     public List<Copy> getAllCopies() {
         return copyService.findAll();
+    }
+
+
+    @GetMapping( value = "/Copies/delay" )
+    public List<Copy> findAllByDelay(  ) {
+    return copyService.findAllByDelay();
     }
 }
