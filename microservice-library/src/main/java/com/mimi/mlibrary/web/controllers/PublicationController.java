@@ -2,6 +2,7 @@ package com.mimi.mlibrary.web.controllers;
 
 import com.mimi.mlibrary.model.source.publication.*;
 import com.mimi.mlibrary.service.PublicationService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -25,13 +26,20 @@ public class PublicationController {
     }
 
     @PostMapping( value = "/Authors/add" )
-    public ResponseEntity<Void> addAuthor(@RequestBody Author author ) {
+    public ResponseEntity<Void> addAuthor( @RequestBody Author author ) {
         Author addedBorrowing = publicationService.saveAuthor( author );
         if( addedBorrowing == null)
             return ResponseEntity.noContent().build();
 
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand( addedBorrowing.getId() ).toUri();
         return ResponseEntity.created( location ).build();
+    }
+
+    @DeleteMapping( value = "/Authors/delete", params = "id")
+    public @ResponseBody ResponseEntity<String> deleteAuthorById( @RequestParam int id ) {
+        publicationService.deleteAuthorById( id );
+
+        return new ResponseEntity<String>("DELETE Response", HttpStatus.OK);
     }
 
     //Book
