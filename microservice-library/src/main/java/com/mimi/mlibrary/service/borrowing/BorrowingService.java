@@ -9,4 +9,5 @@ public interface BorrowingService {
 
     List<Borrowing> findAll();
     List<Borrowing> findByMemberId( int memberId );
+    Borrowing save( Borrowing borrowing );
 }
