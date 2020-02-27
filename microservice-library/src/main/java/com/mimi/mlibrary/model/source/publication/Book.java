@@ -1,6 +1,8 @@
 package com.mimi.mlibrary.model.source.publication;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -18,7 +20,9 @@ public class Book extends Publication implements Serializable {
     @Enumerated(EnumType.STRING)
     private Category category;
 
-    @ManyToOne
+
+    @JsonBackReference
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="author_fk")
     private Author author;
 
