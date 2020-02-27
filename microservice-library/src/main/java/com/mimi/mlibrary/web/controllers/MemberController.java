@@ -1,8 +1,8 @@
 package com.mimi.mlibrary.web.controllers;
 
 import com.mimi.mlibrary.model.source.account.MemberAccount;
-import com.mimi.mlibrary.service.account.MemberService;
-import com.mimi.mlibrary.service.impl.account.MemberServiceImpl;
+import com.mimi.mlibrary.service.AccountService;
+import com.mimi.mlibrary.service.impl.AccountServiceImpl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -14,36 +14,36 @@ import java.util.Optional;
 @RestController
 public class MemberController {
 
-    private MemberService memberService;
+    private AccountService accountService;
 
-    MemberController(MemberServiceImpl MemberService ) {
-        this.memberService = memberService;
+    MemberController(AccountServiceImpl MemberService ) {
+        this.accountService = accountService;
     }
 
     @GetMapping( value = "/Members" )
     public List<MemberAccount> getAllMembers() {
-        return memberService.findAll();
+        return accountService.findAll();
     }
 
     @GetMapping( value = "/Members", params = "id" )
     public Optional<MemberAccount> getMemberById( @RequestParam("id") int id ) {
-        return memberService.findById( id );
+        return accountService.findById( id );
     }
 
 
     @GetMapping( value = "/Members", params = "email")
     public MemberAccount getMemberByEmail ( @RequestParam("email") String email ) {
-        return memberService.getMemberByEmail(email);
+        return accountService.getMemberByEmail(email);
     }
 
     @GetMapping( value = "/Members", params = { "firstname", "lastname" })
     public MemberAccount getMemberByName ( @RequestParam("firstname") String firstname, @RequestParam("lastname") String lastname ) {
-        return memberService.getMemberByNames( firstname, lastname );
+        return accountService.getMemberByNames( firstname, lastname );
     }
 
     @PostMapping( value = "/Members/add" )
     public ResponseEntity<Void> addMember( @RequestBody MemberAccount Member ) {
-        MemberAccount addedMember = memberService.save( Member );
+        MemberAccount addedMember = accountService.save( Member );
         if( addedMember == null)
             return ResponseEntity.noContent().build();
 
@@ -53,7 +53,7 @@ public class MemberController {
 
     @PostMapping( value = "/Member/nbBorr/{barcode}" )
     public void incrementBorrowingsNbBorrowings ( @PathVariable("barcode") String barcode ) {
-        memberService.incrementNbOfCurrentsBorrowings( barcode );
+        accountService.incrementNbOfCurrentsBorrowings( barcode );
     }
 
 }
