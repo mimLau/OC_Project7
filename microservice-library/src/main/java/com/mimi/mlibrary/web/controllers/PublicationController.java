@@ -1,9 +1,6 @@
 package com.mimi.mlibrary.web.controllers;
 
-import com.mimi.mlibrary.model.source.publication.Book;
-import com.mimi.mlibrary.model.source.publication.Copy;
-import com.mimi.mlibrary.model.source.publication.Newspaper;
-import com.mimi.mlibrary.model.source.publication.Review;
+import com.mimi.mlibrary.model.source.publication.*;
 import com.mimi.mlibrary.service.PublicationService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,9 +17,13 @@ public class PublicationController {
         this.publicationService = publicationService;
     }
 
+    //Author
+    @GetMapping( value = "/Authors" )
+    public List<Author> getAllAuthor() {
+        return publicationService.findAllAuthor();
+    }
 
     //Book
-
     @GetMapping( value = "/Books" )
     public List<Book> getAllBooks() {
         return publicationService.findAllBook();
@@ -33,7 +34,7 @@ public class PublicationController {
         return publicationService.findAllBookByAuthor( name );
     }
 
-    @GetMapping( value = "/Books/", params = "title")
+    @GetMapping( value = "/Books", params = "title")
     public List<Book> findAllByTitle( @RequestParam String title ) {
         return publicationService.findAllBookByTitle( title );
     }
