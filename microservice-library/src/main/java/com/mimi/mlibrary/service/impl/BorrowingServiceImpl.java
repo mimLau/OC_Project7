@@ -1,4 +1,4 @@
-package com.mimi.mlibrary.service.impl.borrowing;
+package com.mimi.mlibrary.service.impl;
 
 import com.mimi.mlibrary.dao.borrowing.BorrowingDao;
 import com.mimi.mlibrary.mapper.borrowing.BorrowingMapper;
