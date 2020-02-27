@@ -1,7 +1,7 @@
 package com.mimi.mlibrary.web.controllers;
 
 import com.mimi.mlibrary.model.source.borrowing.Borrowing;
-import com.mimi.mlibrary.service.borrowing.BorrowingService;
+import com.mimi.mlibrary.service.BorrowingService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
