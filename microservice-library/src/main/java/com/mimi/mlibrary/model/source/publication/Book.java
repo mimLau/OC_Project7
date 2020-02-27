@@ -21,11 +21,13 @@ public class Book extends Publication implements Serializable {
     private Category category;
 
 
-    @JsonBackReference
+    @JsonBackReference(value="book_author")
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="author_fk")
     private Author author;
 
+
+    @JsonManagedReference(value="book_copy")
     @OneToMany(mappedBy = "book")
     private List<Copy> copies;
 
