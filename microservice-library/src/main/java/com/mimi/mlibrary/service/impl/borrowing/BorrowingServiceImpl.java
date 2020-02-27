@@ -29,6 +29,14 @@ public class BorrowingServiceImpl implements BorrowingService {
         return borrowingDao.findByMemberId( memberId );
     }
 
+    @Override
+    public Borrowing save( Borrowing borrowing ) {
+        return borrowingDao.save( borrowing );
+    }
+
+
+
+
     /*@Override
     public List<BorrowingDto> findAll() {
         List <Borrowing> borrowings = borrowingDao.findAll();
