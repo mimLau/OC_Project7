@@ -1,30 +1,114 @@
 package com.mimi.mlibrary.web.controllers;
 
-import com.mimi.mlibrary.dao.AuthorDao;
-import com.mimi.mlibrary.model.dest.publication.BookDto;
-import com.mimi.mlibrary.model.source.publication.Author;
-import com.mimi.mlibrary.model.source.publication.Publication;
-import com.mimi.mlibrary.model.dest.publication.PublicationDto;
+import com.mimi.mlibrary.model.source.publication.Book;
+import com.mimi.mlibrary.model.source.publication.Copy;
+import com.mimi.mlibrary.model.source.publication.Newspaper;
+import com.mimi.mlibrary.model.source.publication.Review;
 import com.mimi.mlibrary.service.PublicationService;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 public class PublicationController {
-    private PublicationService publicationService;
-    private AuthorDao authorDao;
 
-    public PublicationController(PublicationService publicationService, AuthorDao authorDao ){
+    private PublicationService publicationService;
+
+    public PublicationController(PublicationService publicationService){
         this.publicationService = publicationService;
-        this.authorDao = authorDao;
     }
 
-    @GetMapping( value = "/Book")
+
+    //Book
+
+    @GetMapping( value = "/Books" )
+    public List<Book> getAllBooks() {
+        return publicationService.findAllBook();
+    }
+
+    @GetMapping( value = "/Books", params = "name" )
+    public List<Book> findAllByAuthor( @RequestParam String name ) {
+        return publicationService.findAllBookByAuthor( name );
+    }
+
+    @GetMapping( value = "/Books/", params = "title")
+    public List<Book> findAllByTitle( @RequestParam String title ) {
+        return publicationService.findAllBookByTitle( title );
+    }
+
+    @GetMapping( value = "/Books/AuthorId", params = "id")
+    public List<Book> findAllByAuthorId( @RequestParam int id ) {
+        return publicationService.findAllBookByAuthorId( id );
+    }
+
+
+    //Copy
+
+    @GetMapping( value = "/Copies" )
+    public List<Copy> getAllCopies() {
+        return publicationService.findAllCopy();
+    }
+
+
+    @GetMapping( value = "/Copies/delay" )
+    public List<Copy> findAllByDelay(  ) {
+        return publicationService.findAllCopyByDelay();
+    }
+
+
+    //Newspaper
+
+    @GetMapping( value = "/Newspapers")
+    public List<Newspaper> getAllNewspaper(){
+        return publicationService.findAllNewspaper();
+    }
+
+    @GetMapping( value = "/Newspapers", params = "name")
+    public List<Newspaper> findAllNewspaperByName( @RequestParam String name ){
+        return publicationService.findAllNewspaperByName( name );
+    }
+
+    @GetMapping( value = "/Newspapers", params = "date")
+    public List<Newspaper> findAllNewspapersByDate( @RequestParam String date ){
+        return publicationService.findAllNewspaperByDate( date );
+    }
+
+
+    //Review
+
+    @GetMapping( value = "/Reviews")
+    public List<Review> findAllReview(){
+        return publicationService.findAllReview();
+    }
+
+    @GetMapping( value = "/Reviews", params = "name")
+    public List<Review> findAllReviewByName( @RequestParam String name ){
+        return publicationService.findAllReviewByName( name );
+    }
+
+    @GetMapping( value = "/Reviews", params = "date")
+    public List<Review> findAllReviewsByDate( @RequestParam String date ){
+        return publicationService.findAllReviewByDate( date );
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /*@GetMapping( value = "/Book")
     public List<BookDto> getAllBooks() {
         return publicationService.findAllBooks();
     }
@@ -57,9 +141,9 @@ public class PublicationController {
         return publicationService.findAllByTitle( title );
     }*/
 
-    @GetMapping( value = "/Author" )
+    /*@GetMapping( value = "/Author" )
     public List<Author> findAll() {
         return authorDao.findAll();
-    }
+    }*/
 }
 
