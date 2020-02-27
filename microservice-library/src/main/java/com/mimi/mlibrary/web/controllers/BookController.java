@@ -32,4 +32,9 @@ public class BookController {
     public List<Book> findAllByTitle( @RequestParam String title ) {
         return bookService.findAllByTitle( title );
     }
+
+    @GetMapping( value = "/Books/AuthorId", params = "id")
+    public List<Book> findAllByAuthorId( @RequestParam int id ) {
+        return bookService.findAllByAuthorId( id );
+    }
 }
