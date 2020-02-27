@@ -1,8 +1,8 @@
-package com.mimi.mlibrary.service.impl.account;
+package com.mimi.mlibrary.service.impl;
 
 import com.mimi.mlibrary.dao.account.MemberDao;
 import com.mimi.mlibrary.model.source.account.MemberAccount;
-import com.mimi.mlibrary.service.account.MemberService;
+import com.mimi.mlibrary.service.MemberService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
