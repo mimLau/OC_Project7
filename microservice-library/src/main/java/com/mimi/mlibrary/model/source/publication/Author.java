@@ -28,7 +28,7 @@ public class Author implements Serializable {
     private String alias;
 
 
-    @JsonManagedReference
+    @JsonManagedReference(value="book_author")
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
     private List<Book> book;
 
