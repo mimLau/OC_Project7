@@ -5,7 +5,7 @@ import com.mimi.mlibrary.model.source.account.MemberAccount;
 import java.util.List;
 import java.util.Optional;
 
-public interface MemberService {
+public interface AccountService {
 
     List<MemberAccount> findAll();
     Optional<MemberAccount> findById( int id );
