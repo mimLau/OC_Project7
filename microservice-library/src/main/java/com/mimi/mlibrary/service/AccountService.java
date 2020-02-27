@@ -10,8 +10,8 @@ public interface AccountService {
     List<MemberAccount> findAll();
     Optional<MemberAccount> findById( int id );
     MemberAccount save(MemberAccount Member);
-    MemberAccount getMemberById( Integer id );
-    MemberAccount getMemberByEmail( String email);
-    MemberAccount getMemberByNames( String firstname, String lastname );
+    Optional<MemberAccount> getMemberById( Integer id );
+    Optional<MemberAccount> getMemberByEmail( String email);
+    Optional<MemberAccount> getMemberByNames( String firstname, String lastname );
     void incrementNbOfCurrentsBorrowings( String barcode );
 }
