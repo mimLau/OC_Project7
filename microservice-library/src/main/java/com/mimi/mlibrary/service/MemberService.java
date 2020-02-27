@@ -1,4 +1,4 @@
-package com.mimi.mlibrary.service.account;
+package com.mimi.mlibrary.service;
 
 import com.mimi.mlibrary.model.source.account.MemberAccount;
 
