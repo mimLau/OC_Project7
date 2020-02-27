@@ -27,7 +27,7 @@ public abstract class Account implements Serializable {
     private String accountOwnerPhoneNb;
     private boolean activeAccount;
 
-    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
+    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
     private LocalDate registrationDate;
 
     public Integer getId() {
