@@ -18,13 +18,13 @@ INSERT INTO libraries (id, address, name) VALUES (2, '5 avenue de normandie', 'B
 INSERT INTO libraries (id, address, name) VALUES (3, '2 rue Charles Péguy', 'Librairie Kleber');
 
 INSERT INTO books ( id, nb_of_available_copies, nb_total_ofcopies, category, editor, isbn, publishing_date, title, author_fk ) Values
-( 1, 1, 1, 'NOVEL', 'Ldp Jeunesse', '2010008995', '2014', 'Les misérables', 1 );
+( 1, 1, 3, 'NOVEL', 'Ldp Jeunesse', '2010008995', '2014', 'Les misérables', 1 );
 INSERT INTO books ( id, nb_of_available_copies, nb_total_ofcopies, category, editor, isbn, publishing_date, title, author_fk ) Values
-( 2, 1, 1, 'POETRY', 'Gallimard', '2070321908', '2015', 'Odes et Ballades', 1 );
+( 2, 2, 2, 'POETRY', 'Gallimard', '2070321908', '2015', 'Odes et Ballades', 1 );
 INSERT INTO books ( id, nb_of_available_copies, nb_total_ofcopies, category, editor, isbn, publishing_date, title, author_fk ) Values
-( 3, 1, 1, 'NOVEL', 'Belin Éducation', '2701151589', '2019', 'Bel-Ami', 2 );
+( 3, 1, 2, 'NOVEL', 'Belin Éducation', '2701151589', '2019', 'Bel-Ami', 2 );
 INSERT INTO books ( id, nb_of_available_copies, nb_total_ofcopies, category, editor, isbn, publishing_date, title, author_fk ) Values
-( 4, 1, 1, 'THEATER', 'Nathan', ' 978-2-09-188737-1', '2018', 'Le médecin malgé lui', 4);
+( 4, 1, 3, 'THEATER', 'Nathan', ' 978-2-09-188737-1', '2018', 'Le médecin malgé lui', 4);
 
 
 INSERT INTO REVIEWS(id, nb_of_available_copies, nb_total_ofcopies, name, release_date ) VALUES
