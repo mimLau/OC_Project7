@@ -1,5 +1,6 @@
 package com.mimi.mlibrary.model.source.borrowing;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mimi.mlibrary.model.source.account.MemberAccount;
 import com.mimi.mlibrary.model.source.publication.Copy;
@@ -42,8 +43,8 @@ public class Borrowing implements Serializable {
     @JoinColumn
     private Copy copy;
 
-    @JsonIgnore
-    @ManyToOne
+    @JsonBackReference
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn
     private MemberAccount member;
 
