@@ -2,18 +2,18 @@ package com.mimi.mlibrary.service.impl;
 
 import com.mimi.mlibrary.dao.account.MemberDao;
 import com.mimi.mlibrary.model.source.account.MemberAccount;
-import com.mimi.mlibrary.service.MemberService;
+import com.mimi.mlibrary.service.AccountService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class MemberServiceImpl implements MemberService {
+public class AccountServiceImpl implements AccountService {
 
     private MemberDao MemberDao;
 
-    MemberServiceImpl( MemberDao MemberDao ) {
+    AccountServiceImpl(MemberDao MemberDao ) {
         this.MemberDao = MemberDao;
     }
 
