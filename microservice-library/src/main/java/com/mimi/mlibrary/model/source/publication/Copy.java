@@ -1,6 +1,7 @@
 package com.mimi.mlibrary.model.source.publication;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.mimi.mlibrary.model.source.borrowing.Borrowing;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
@@ -46,6 +47,7 @@ public class Copy {
     @JoinColumn
     private Library library;
 
+    @JsonManagedReference(value = "copy")
     @OneToMany(mappedBy = "copy")
     private List<Borrowing> borrowings;
 
