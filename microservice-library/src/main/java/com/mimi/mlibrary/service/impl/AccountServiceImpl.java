@@ -11,41 +11,41 @@ import java.util.Optional;
 @Service
 public class AccountServiceImpl implements AccountService {
 
-    private MemberDao MemberDao;
+    private MemberDao memberDao;
 
-    AccountServiceImpl(MemberDao MemberDao ) {
-        this.MemberDao = MemberDao;
+    AccountServiceImpl(MemberDao memberDao ) {
+        this.memberDao = memberDao;
     }
 
     public List<MemberAccount> findAll() {
-        return MemberDao.findAll();
+        return memberDao.findAll();
     }
 
     public Optional<MemberAccount> findById( int id ) {
-        return MemberDao.findById( id );
+        return memberDao.findById( id );
     }
 
     public MemberAccount save(MemberAccount Member) {
-        return MemberDao.save( Member );
+        return memberDao.save( Member );
     }
 
     @Override
-    public MemberAccount getMemberById( Integer id ) {
-        return MemberDao.getMemberById( id );
+    public Optional<MemberAccount> getMemberById( Integer id ) {
+        return memberDao.getMemberById( id );
     }
 
     @Override
-    public MemberAccount getMemberByEmail( String email ) {
-        return MemberDao.getMemberByEmail( email );
+    public Optional<MemberAccount> getMemberByEmail( String email ) {
+        return memberDao.getMemberByEmail( email );
     }
 
     @Override
-    public MemberAccount getMemberByNames( String firstname, String lastname ) {
-        return MemberDao.getMemberByNames( firstname, lastname );
+    public Optional<MemberAccount> getMemberByNames( String firstname, String lastname ) {
+        return memberDao.getMemberByNames( firstname, lastname );
     }
 
     @Override
     public void incrementNbOfCurrentsBorrowings( String barcode ) {
-         MemberDao.incrementNbOfCurrentsBorrowings( barcode );
+         memberDao.incrementNbOfCurrentsBorrowings( barcode );
     }
 }
