@@ -26,7 +26,7 @@ public class Copy {
     private String barcode;
     private boolean available;
 
-    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
+    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
     private LocalDate returnDate;
 
 
