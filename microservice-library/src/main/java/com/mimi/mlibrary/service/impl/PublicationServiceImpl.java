@@ -1,4 +1,4 @@
-package com.mimi.mlibrary.service.impl.publication;
+package com.mimi.mlibrary.service.impl;
 
 import com.mimi.mlibrary.dao.publication.*;
 import com.mimi.mlibrary.model.source.publication.*;
