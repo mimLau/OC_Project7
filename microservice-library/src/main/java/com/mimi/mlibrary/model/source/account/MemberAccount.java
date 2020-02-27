@@ -1,10 +1,10 @@
 package com.mimi.mlibrary.model.source.account;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.mimi.mlibrary.model.source.borrowing.Borrowing;
 
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
@@ -14,7 +14,8 @@ public class MemberAccount extends Account {
     private String barcode;
     private int nbOfCurrentsBorrowings;
 
-    @OneToMany(mappedBy = "member")
+    @JsonManagedReference
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<Borrowing> borrowings;
 
     public String getBarcode() {
