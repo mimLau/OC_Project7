@@ -2,6 +2,7 @@ package com.mimi.mlibrary.web.controllers;
 
 import com.mimi.mlibrary.model.source.borrowing.Borrowing;
 import com.mimi.mlibrary.service.BorrowingService;
+import org.joda.time.LocalDate;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -18,7 +19,12 @@ public class BorrowingController {
         this.borrowingService = borrowingService;
     }
 
-    @GetMapping( value = "/Borrowings/MemberId", params = "id" )
+    @GetMapping( value = "/Borrowings", params = "id" )
+    public Borrowing findBorrowingById( @RequestParam int id ) {
+        return borrowingService.findBorrowingById( id );
+    }
+
+    @GetMapping( value = "/Borrowings/Members", params = "id" )
     public List<Borrowing> findAllByMemberId( @RequestParam int id ) {
         return borrowingService.findByMemberId( id );
     }
@@ -28,8 +34,8 @@ public class BorrowingController {
         return borrowingService.findAll();
     }
 
-    @PostMapping( value = "/Borrowings/add" )
-    public ResponseEntity<Void> addBorrowing(@RequestBody Borrowing borrowing ) {
+    @PostMapping( value = "/Borrowings" )
+    public ResponseEntity<Void> addBorrowing( @RequestBody Borrowing borrowing ) {
         Borrowing addedBorrowing = borrowingService.save( borrowing );
         if( addedBorrowing == null)
             return ResponseEntity.noContent().build();
@@ -38,5 +44,10 @@ public class BorrowingController {
         return ResponseEntity.created( location ).build();
     }
 
+
+    @PutMapping( value = "/Borrowings", params = { "days", "id" } )
+    public void updateBorrowingReturnDateById( @RequestParam int days , @RequestParam int id ) {
+        borrowingService.updateBorrowingReturnDateById( days, id );
+    }
 
 }
