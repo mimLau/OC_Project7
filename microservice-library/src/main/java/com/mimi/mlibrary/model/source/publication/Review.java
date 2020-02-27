@@ -1,5 +1,7 @@
 package com.mimi.mlibrary.model.source.publication;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -14,6 +16,7 @@ public class Review extends Publication implements Serializable {
     private String releaseDate;
     private String name;
 
+    @JsonManagedReference( value="review_copy")
     @OneToMany(mappedBy = "review")
     private List<Copy> copies;
 
