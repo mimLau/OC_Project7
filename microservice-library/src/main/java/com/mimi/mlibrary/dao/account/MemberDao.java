@@ -9,18 +9,19 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface MemberDao extends JpaRepository<MemberAccount, Integer> {
 
     @Query( "SELECT m FROM MemberAccount m WHERE m.id= :id" )
-    MemberAccount getMemberById( @Param("id") Integer id);
+    Optional<MemberAccount> getMemberById( @Param("id") Integer id);
 
     @Query( "SELECT m FROM MemberAccount m WHERE m.accountOwnerEmail= :email" )
-    MemberAccount getMemberByEmail( @Param("email") String email);
+    Optional<MemberAccount> getMemberByEmail(@Param("email") String email);
 
     @Query( "SELECT m FROM MemberAccount m WHERE m.accountOwnerFirstname= :firstname AND m.accountOwnerLastname= :lastname")
-    MemberAccount getMemberByNames( @Param("firstname") String firstname, @Param("lastname") String lastname );
+    Optional<MemberAccount> getMemberByNames( @Param("firstname") String firstname, @Param("lastname") String lastname );
 
     @Modifying
     @Transactional
