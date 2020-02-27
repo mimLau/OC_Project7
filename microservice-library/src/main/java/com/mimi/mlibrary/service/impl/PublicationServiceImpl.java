@@ -41,6 +41,11 @@ public class PublicationServiceImpl implements PublicationService {
         return authorDao.save( author );
     }
 
+    @Override
+    public void deleteAuthorById( int id ) {
+         authorDao.deleteAuthorById( id );
+    }
+
 
     //Book
     @Override
