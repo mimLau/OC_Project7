@@ -1,5 +1,6 @@
 package com.mimi.mlibrary.web.controllers;
 
+import com.mimi.mlibrary.model.dest.publication.BookDto;
 import com.mimi.mlibrary.model.source.publication.*;
 import com.mimi.mlibrary.service.PublicationService;
 import org.springframework.http.HttpStatus;
@@ -44,7 +45,7 @@ public class PublicationController {
 
     //Book
     @GetMapping( value = "/Books" )
-    public List<Book> getAllBooks() {
+    public List<BookDto> getAllBooks() {
         return publicationService.findAllBook();
     }
 
