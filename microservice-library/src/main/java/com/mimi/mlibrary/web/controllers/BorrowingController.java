@@ -19,6 +19,11 @@ public class BorrowingController {
         this.borrowingService = borrowingService;
     }
 
+    @GetMapping( value = "/Borrowings" )
+    public List<Borrowing> getAllBorrowings() {
+        return borrowingService.findAll();
+    }
+
     @GetMapping( value = "/Borrowings", params = "id" )
     public Borrowing findBorrowingById( @RequestParam int id ) {
         return borrowingService.findBorrowingById( id );
@@ -27,11 +32,6 @@ public class BorrowingController {
     @GetMapping( value = "/Borrowings/Members", params = "id" )
     public List<Borrowing> findAllByMemberId( @RequestParam int id ) {
         return borrowingService.findByMemberId( id );
-    }
-
-    @GetMapping( value = "/Borrowings" )
-    public List<Borrowing> getAllBorrowings() {
-        return borrowingService.findAll();
     }
 
     @PostMapping( value = "/Borrowings" )
