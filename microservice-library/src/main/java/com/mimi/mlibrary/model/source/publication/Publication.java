@@ -1,10 +1,13 @@
 package com.mimi.mlibrary.model.source.publication;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.annotations.GenericGenerator;
+import org.joda.time.LocalDate;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
@@ -21,11 +24,54 @@ public abstract class Publication implements Serializable {
             strategy = "native"
     )
     private Integer id;
+    private String title;
+
+    private String identificationNb;
     private int nbOfAvailableCopies;
     private int nbTotalOfcopies;
+    private LocalDate publicationDate;
+
+    @Enumerated(EnumType.STRING)
+    private Category category;
+
+    @JsonManagedReference( value="publication_copy")
+    @OneToMany(mappedBy = "publication")
+    private List<Copy> copies;
 
     public Integer getId() {
         return id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public LocalDate getPublicationDate() {
+        return publicationDate;
+    }
+
+    public void setPublicationDate(LocalDate publicationDate) {
+        this.publicationDate = publicationDate;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public String getIdentificationNb() {
+        return identificationNb;
+    }
+
+    public void setIdentificationNb(String identificationNb) {
+        this.identificationNb = identificationNb;
     }
 
     public void setId(Integer id) {
@@ -48,4 +94,11 @@ public abstract class Publication implements Serializable {
         this.nbTotalOfcopies = nbTotalOfcopies;
     }
 
+    public List<Copy> getCopies() {
+        return copies;
+    }
+
+    public void setCopies(List<Copy> copies) {
+        this.copies = copies;
+    }
 }
