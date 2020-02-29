@@ -1,7 +1,6 @@
 package com.mimi.mlibrary.model.source.publication;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.mimi.mlibrary.model.source.borrowing.Borrowing;
 import org.hibernate.annotations.GenericGenerator;
@@ -35,18 +34,9 @@ public class Copy {
     @OneToMany(mappedBy = "copy")
     private List<Borrowing> borrowings;
 
-
-    @JsonBackReference(value="book_copy")
+    @JsonBackReference(value="publication_copy")
     @OneToOne
-    private Book book;
-
-    @JsonBackReference(value="review_copy")
-    @OneToOne
-    private Review review;
-
-    @JsonBackReference(value="newspaper_copy")
-    @OneToOne
-    private Newspaper newspaper;
+    private Publication publication;
 
     @ManyToOne
     @JoinColumn
@@ -85,28 +75,12 @@ public class Copy {
         this.returnDate = returnDate;
     }
 
-    public Book getBook() {
-        return book;
+    public Publication getPublication() {
+        return publication;
     }
 
-    public void setBook(Book book) {
-        this.book = book;
-    }
-
-    public Review getReview() {
-        return review;
-    }
-
-    public void setReview(Review review) {
-        this.review = review;
-    }
-
-    public Newspaper getNewspaper() {
-        return newspaper;
-    }
-
-    public void setNewspaper(Newspaper newspaper) {
-        this.newspaper = newspaper;
+    public void setPublication(Publication publication) {
+        this.publication = publication;
     }
 
     public Library getLibrary() {
