@@ -4,5 +4,12 @@ public enum Category {
 
     NOVEL,
     THEATER,
-    POETRY;
+    POETRY,
+    YOUTH,
+    SCIENTIST,
+    COOKING,
+    LITERARY,
+    NATIONAL,
+    REGIONAL;
+
 }
