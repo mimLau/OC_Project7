@@ -2,15 +2,12 @@ package com.mimi.mlibrary.model.source.publication;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
 @Entity
-@Table( name = "NewsPapers")
+@DiscriminatorValue("NewsPaper")
 public class Newspaper extends Publication implements Serializable {
 
     private String releaseDate;

@@ -9,7 +9,7 @@ import java.io.Serializable;
 import java.util.List;
 
 @Entity
-@Table( name = "Books")
+@DiscriminatorValue("Book")
 public class Book extends Publication implements Serializable {
 
     private String editor;
