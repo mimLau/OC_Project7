@@ -8,7 +8,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table( name = "Members")
+@DiscriminatorValue("Member")
 public class MemberAccount extends Account {
 
     private String barcode;
