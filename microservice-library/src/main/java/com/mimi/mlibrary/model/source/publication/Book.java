@@ -12,59 +12,26 @@ import java.util.List;
 @DiscriminatorValue("Book")
 public class Book extends Publication implements Serializable {
 
-    private String editor;
-    private String publishingDate;
-    private String title;
-    private String isbn;
-
-    @Enumerated(EnumType.STRING)
-    private Category category;
-
+    @ManyToOne
+    @JsonBackReference(value="book_editor")
+    @JoinColumn(name = "edithor_fk")
+    private Editor editor;
 
     @JsonBackReference(value="book_author")
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="author_fk")
     private Author author;
 
-
-    @JsonManagedReference(value="book_copy")
-    @OneToMany(mappedBy = "book")
-    private List<Copy> copies;
-
     public Book() {
         super();
     }
 
-    public String getEditor() {
+    public Editor getEditor() {
         return editor;
     }
 
-    public void setEditor(String editor) {
+    public void setEditor(Editor editor) {
         this.editor = editor;
-    }
-
-    public String getPublishingDate() {
-        return publishingDate;
-    }
-
-    public void setPublishingDate(String publishingDate) {
-        this.publishingDate = publishingDate;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getIsbn() {
-        return isbn;
-    }
-
-    public void setIsbn(String isbn) {
-        this.isbn = isbn;
     }
 
     public Author getAuthor() {
@@ -75,19 +42,5 @@ public class Book extends Publication implements Serializable {
         this.author = author;
     }
 
-    public Category getCategory() {
-        return category;
-    }
 
-    public void setCategory(Category category) {
-        this.category = category;
-    }
-
-    public List<Copy> getCopies() {
-        return copies;
-    }
-
-    public void setCopies(List<Copy> copies) {
-        this.copies = copies;
-    }
 }
