@@ -7,7 +7,8 @@ import org.joda.time.LocalDate;
 import javax.persistence.*;
 import java.io.Serializable;
 
-@MappedSuperclass
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "User_type")
 public abstract class Account implements Serializable {
 
     @Id
