@@ -8,6 +8,7 @@ public enum Category {
     YOUTH,
     SCIENTIST,
     COOKING,
+    NEWS,
     LITERARY,
     NATIONAL,
     REGIONAL;
