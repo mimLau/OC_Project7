@@ -3,6 +3,7 @@ package com.mimi.mlibrary.model.source.account;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.mimi.mlibrary.model.source.borrowing.Borrowing;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.List;
@@ -14,7 +15,7 @@ public class MemberAccount extends Account {
     private String barcode;
     private int nbOfCurrentsBorrowings;
 
-    @JsonManagedReference(value = "borrowing_member")
+
     @OneToMany(mappedBy = "member")
     private List<Borrowing> borrowings;
 
@@ -34,6 +35,8 @@ public class MemberAccount extends Account {
         this.nbOfCurrentsBorrowings = nbOfCurrentsBorrowings;
     }
 
+    @JsonManagedReference(value = "borrowing_member")
+    @OneToMany(mappedBy = "member")
     public List<Borrowing> getBorrowings() {
         return borrowings;
     }
