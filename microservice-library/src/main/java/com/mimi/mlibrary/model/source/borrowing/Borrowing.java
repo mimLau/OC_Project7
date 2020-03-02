@@ -1,8 +1,6 @@
 package com.mimi.mlibrary.model.source.borrowing;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.mimi.mlibrary.model.source.account.MemberAccount;
 import com.mimi.mlibrary.model.source.publication.Copy;
 import org.hibernate.annotations.GenericGenerator;
@@ -41,12 +39,12 @@ public class Borrowing implements Serializable {
 
     @JsonBackReference(value = "copy_borrowing")
     @ManyToOne
-    @JoinColumn
+    @JoinColumn(name = "copy_fk")
     private Copy copy;
 
     @JsonBackReference(value = "borrowing_member")
     @ManyToOne
-    @JoinColumn
+    @JoinColumn(name = "member_fk")
     private MemberAccount member;
 
     private int reminderNb;
