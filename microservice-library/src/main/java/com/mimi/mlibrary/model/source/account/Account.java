@@ -7,7 +7,9 @@ import org.joda.time.LocalDate;
 import javax.persistence.*;
 import java.io.Serializable;
 
+@Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@Table(name = "accounts")
 @DiscriminatorColumn(name = "User_type")
 public abstract class Account implements Serializable {
 
@@ -31,6 +33,7 @@ public abstract class Account implements Serializable {
     @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
     private LocalDate registrationDate;
 
+    @Id
     public Integer getId() {
         return id;
     }
