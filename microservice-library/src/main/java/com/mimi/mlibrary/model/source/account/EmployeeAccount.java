@@ -1,9 +1,6 @@
 package com.mimi.mlibrary.model.source.account;
 
-import javax.persistence.DiscriminatorColumn;
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @DiscriminatorValue("Employee")
