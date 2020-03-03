@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-public class MemberController {
+public class  MemberController {
 
     private AccountService accountService;
 
@@ -41,8 +41,8 @@ public class MemberController {
     }
 
     @PostMapping( value = "/Members" )
-    public ResponseEntity<Void> addMember( @RequestBody MemberAccount Member ) {
-        MemberAccount addedMember = accountService.save( Member );
+    public ResponseEntity<Void> addMember( @RequestBody MemberAccount member ) {
+        MemberAccount addedMember = accountService.save( member );
         if( addedMember == null)
             return ResponseEntity.noContent().build();
 
@@ -50,9 +50,9 @@ public class MemberController {
         return ResponseEntity.created( location ).build();
     }
 
-    @PutMapping( value = "/Members" , params = "barcode" )
-    public void incrementBorrowingsNbBorrowings ( @RequestParam("barcode") String barcode ) {
-        accountService.incrementNbOfCurrentsBorrowings( barcode );
+    @PutMapping( value = "/Members" , params = "id" )
+    public void incrementBorrowingsNbBorrowings ( @RequestParam("id") int id ) {
+        accountService.updateNbOfCurrentsBorrowings( id );
     }
 
 }
