@@ -5,7 +5,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@DiscriminatorValue("NewsPaper")
+@DiscriminatorValue("Newspaper")
 public class Newspaper extends Publication implements Serializable {
 
 }
