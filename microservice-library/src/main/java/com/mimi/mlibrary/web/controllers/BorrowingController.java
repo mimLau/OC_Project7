@@ -8,6 +8,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class BorrowingController {
@@ -24,7 +25,7 @@ public class BorrowingController {
     }
 
     @GetMapping( value = "/Borrowings", params = "id" )
-    public Borrowing findBorrowingById( @RequestParam int id ) {
+    public Optional<Borrowing> findBorrowingById(@RequestParam int id ) {
         return borrowingService.findBorrowingById( id );
     }
 
