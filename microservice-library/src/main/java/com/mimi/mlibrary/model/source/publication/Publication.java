@@ -3,6 +3,7 @@ package com.mimi.mlibrary.model.source.publication;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 import org.joda.time.LocalDate;
 
 import javax.persistence.*;
@@ -11,6 +12,7 @@ import java.util.List;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@Table(name = "publications")
 @DiscriminatorColumn(name = "Publication_type")
 public abstract class Publication implements Serializable {
 
@@ -29,6 +31,8 @@ public abstract class Publication implements Serializable {
     private String identificationNb;
     private int nbOfAvailableCopies;
     private int nbTotalOfcopies;
+
+    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
     private LocalDate publicationDate;
 
     @Enumerated(EnumType.STRING)
