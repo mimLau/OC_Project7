@@ -4,28 +4,61 @@ import com.mimi.mlibrary.model.source.publication.Book;
 import com.mimi.mlibrary.model.source.publication.Newspaper;
 import com.mimi.mlibrary.model.source.publication.Publication;
 import com.mimi.mlibrary.model.source.publication.Review;
+import org.joda.time.LocalDate;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface PublicationDao extends JpaRepository<Publication, Integer> {
 
-    /*@Query("SELECT b FROM Book b JOIN FETCH b.author a WHERE a.firstname= :name OR a.lastname= :name or a.alias= :name")
-    List<Book> findAllBookByAuthor(@Param("name") String name );*/
 
-    //@Query("SELECT b FROM Book b WHERE b.title LIKE %:title%")
-    /*@Query("SELECT b FROM Book b WHERE b.title= :title")
-    List<Book> findAllByTitle( @Param("title") String title );*/
+    @Query("SELECT b FROM Book b")
+    List<Book> findAllBooks();
 
-   @Query("SELECT b FROM Publication b WHERE b.title= :title")
+    @Query("SELECT n FROM Newspaper n")
+    List<Newspaper> findAllNewspapers();
+
+    @Query("SELECT n FROM Newspaper n WHERE n.publicationDate= :date")
+    List<Newspaper> findAllNewspaperByDate( @Param("date") LocalDate date  );
+
+
+    @Query("SELECT r FROM Review r")
+    List<Review> findAllReviews();
+
+    @Query("SELECT r FROM Review r WHERE r.publicationDate= :date")
+    List<Review> findAllReviewsByDate( @Param("date") LocalDate date );
+
+
+    @Query("SELECT p FROM Publication p WHERE p.id= :id")
+    Optional<Publication> findPublicationById(@Param("id") int id );
+
+    @Query("SELECT p FROM Publication p")
+    List<Publication> findAllPublications();
+
+    @Query("SELECT p FROM Publication p JOIN FETCH p.author a WHERE a.firstname= :name OR a.lastname= :name or a.alias= :name")
+    List<Publication> findAllByAuthor( @Param("name") String name );
+
+    //@Query("SELECT p FROM Publication p  WHERE p.title LIKE %:title%")
+   @Query("SELECT p FROM Publication p  WHERE p.title= :title")
     List<Publication> findAllByTitle( @Param("title") String title );
 
-    /*@Query("SELECT b FROM Book b JOIN FETCH b.author a WHERE a.id= :id")
-    List<Book> findAllByAuthorId(@Param("id") int id );*/
+    @Query("SELECT p FROM Publication p JOIN FETCH p.author a WHERE a.id= :id")
+    List<Publication> findAllByAuthorId( @Param("id") int id );
+
+    @Query("SELECT p FROM Publication p WHERE p.publicationDate= :date")
+    List<Publication> findAllByDate( @Param("date") String date );
+
+
+    @Query("SELECT p FROM Publication p WHERE p.identificationNb= :idNb")
+    Publication findAllByIsbn( @Param("idNb") String idNb );
+
+
+
 
 
 
