@@ -1,6 +1,7 @@
 package com.mimi.mlibrary.dao.borrowing;
 
 import com.mimi.mlibrary.model.source.borrowing.Borrowing;
+import com.mimi.mlibrary.model.source.borrowing.BorrowingStatus;
 import org.joda.time.LocalDate;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -26,6 +27,16 @@ public interface BorrowingDao extends JpaRepository<Borrowing, Integer> {
     @Transactional
     @Modifying
     @Query("Update Borrowing b SET b.returnDate= :newDate WHERE b.id= :id")
-    void  updateBorrowingReturnDateById( @Param("newDate") LocalDate newDate, @Param("id") int id);
+    void  updateBorrowingReturnDateById( @Param("newDate") LocalDate newDate, @Param("id") int id );
+
+    @Transactional
+    @Modifying
+    @Query("Update Borrowing b SET b.extented= true WHERE b.id= :id")
+    void  updateExtensionById( @Param("id") int id );
+
+    @Transactional
+    @Modifying
+    @Query("Update Borrowing b SET b.borrowingStatus= :status WHERE b.id= :id ")
+    void  updateBorrowingStatus( @Param("id") int id, @Param("status") BorrowingStatus borrowingStatus );
 
 }
