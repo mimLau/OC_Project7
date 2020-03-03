@@ -13,5 +13,5 @@ public interface AccountService {
     Optional<MemberAccount> getMemberById( Integer id );
     Optional<MemberAccount> getMemberByEmail( String email);
     Optional<MemberAccount> getMemberByNames( String firstname, String lastname );
-    void incrementNbOfCurrentsBorrowings( int id );
+    void updateNbOfCurrentsBorrowings( int id );
 }
