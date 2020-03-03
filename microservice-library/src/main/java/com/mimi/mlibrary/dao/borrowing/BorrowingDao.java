@@ -11,12 +11,13 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface BorrowingDao extends JpaRepository<Borrowing, Integer> {
 
     @Query("SELECT b FROM Borrowing b WHERE b.id= :id")
-    Borrowing findBorrowingById( @Param("id") int id );
+    Optional<Borrowing> findBorrowingById(@Param("id") int id );
 
     @Query("SELECT b FROM Borrowing  b JOIN FETCH b.member m WHERE m.id= :id")
     List<Borrowing> findByMemberId(@Param("id") int id);
