@@ -33,7 +33,6 @@ public abstract class Account implements Serializable {
     @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
     private LocalDate registrationDate;
 
-    @Id
     public Integer getId() {
         return id;
     }
