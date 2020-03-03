@@ -1,6 +1,10 @@
 package com.mimi.mlibrary.model.dest.publication;
 
+import com.mimi.mlibrary.model.source.borrowing.Borrowing;
 import com.mimi.mlibrary.model.source.publication.Library;
+import com.mimi.mlibrary.model.source.publication.Publication;
+
+import java.util.List;
 
 
 public class CopyDto {
@@ -10,6 +14,10 @@ public class CopyDto {
     private boolean available;
     private String returnDate;
     private Library library;
+
+    private List<Borrowing> borrowings;
+    private Publication publication;
+
 
     public Integer getId() {
         return id;
@@ -49,5 +57,21 @@ public class CopyDto {
 
     public void setLibrary(Library library) {
         this.library = library;
+    }
+
+    public List<Borrowing> getBorrowings() {
+        return borrowings;
+    }
+
+    public void setBorrowings(List<Borrowing> borrowings) {
+        this.borrowings = borrowings;
+    }
+
+    public Publication getPublication() {
+        return publication;
+    }
+
+    public void setPublication(Publication publication) {
+        this.publication = publication;
     }
 }
