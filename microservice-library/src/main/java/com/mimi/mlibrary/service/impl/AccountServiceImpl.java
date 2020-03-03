@@ -45,7 +45,7 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public void incrementNbOfCurrentsBorrowings( String barcode ) {
-         memberDao.incrementNbOfCurrentsBorrowings( barcode );
+    public void updateNbOfCurrentsBorrowings( int id ) {
+         memberDao.updateNbOfCurrentsBorrowings( id, 1);
     }
 }
