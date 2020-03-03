@@ -1,8 +1,10 @@
 package com.mimi.mlibrary.service;
 
 import com.mimi.mlibrary.model.dest.publication.BookDto;
+import com.mimi.mlibrary.model.dest.publication.CopyDto;
 import com.mimi.mlibrary.model.source.publication.*;
 import com.mimi.mlibrary.model.dest.publication.PublicationDto;
+import org.joda.time.LocalDate;
 
 import java.util.List;
 import java.util.Optional;
@@ -10,41 +12,33 @@ import java.util.Optional;
 public interface PublicationService {
 
 
+    List<BookDto> findAllBooks();
+
+    List<Newspaper> findAllNewspapers();
+    List<Newspaper> findAllNewspapersByDate( LocalDate date );
+
+    List<Review> findAllReviews();
+    List<Review> findAllReviewsByDate( LocalDate date );
+
+    Optional<Publication> findPublicationById( int id );
+    List<Publication> findAllPublications();
+    //List<PublicationDto> findAllPublicationDto();
+    List<PublicationDto> findAllByTitle(String title );
+    List<Publication> findAllByAuthor( String name );
+    List<Publication> findAllByAuthorId( int id );
+    Publication findAllByIsbn( String isbn );
 
     List<Author> findAllAuthor();
     Author saveAuthor( Author author );
     void deleteAuthorById( int id );
 
-
-    List<Book> findAllBook();
-    List<Book> findAllBookByAuthor( String name );
-    List<Book> findAllBookByTitle( String title );
-    List<Book> findAllBookByAuthorId( int id );
-
-    //List<CopyDto> findAll();
+    Copy findCopyById( int id );
+    List<CopyDto> findAllCopyDto();
     List<Copy> findAllCopy();
-    List<Copy> findAllCopyByBookId( int id );
-    List<Copy> findAllCopyByReviewId( int id );
-    List<Copy> findAllCopyByNewspaperId( int id );
+    List<Copy> findAllCopyByPublicationId( int id );
     List<Copy> findAllCopyByDelay();
+    void  updateCopyReturnDateById( LocalDate newDate, int id );
 
 
-    List<Newspaper> findAllNewspaper();
-    List<Newspaper> findAllNewspaperByName( String name );
-    List<Newspaper> findAllNewspaperByDate( String date );
-
-    List<Review> findAllReview();
-    List<Review> findAllReviewByName( String name );
-    List<Review> findAllReviewByDate( String date );
-
-
-
-
-    /*List<PublicationDto> findAll();
-    List<BookDto> findAllBooks();
-    Publication findByIsbn( String isbn );
-    List<Publication> findAllByAuthor( String name );
-    List<PublicationDto> findAllByTitle(String title );
-    Optional<Publication> findById( int id);*/
 
 }
