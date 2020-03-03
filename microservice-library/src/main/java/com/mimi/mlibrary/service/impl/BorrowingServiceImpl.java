@@ -1,8 +1,13 @@
 package com.mimi.mlibrary.service.impl;
 
+import com.mimi.mlibrary.dao.account.MemberDao;
 import com.mimi.mlibrary.dao.borrowing.BorrowingDao;
+import com.mimi.mlibrary.dao.publication.CopyDao;
 import com.mimi.mlibrary.mapper.borrowing.BorrowingMapper;
+import com.mimi.mlibrary.model.source.account.MemberAccount;
 import com.mimi.mlibrary.model.source.borrowing.Borrowing;
+import com.mimi.mlibrary.model.source.borrowing.BorrowingStatus;
+import com.mimi.mlibrary.model.source.publication.Copy;
 import com.mimi.mlibrary.service.BorrowingService;
 import org.joda.time.LocalDate;
 import org.springframework.stereotype.Service;
@@ -14,16 +19,20 @@ import java.util.Optional;
 public class BorrowingServiceImpl implements BorrowingService {
 
     private BorrowingDao borrowingDao;
-    //private BorrowingMapper borrowingMapper;
+    private CopyDao copyDao;
+    private MemberDao memberDao;
+    private BorrowingMapper borrowingMapper;
 
-    public BorrowingServiceImpl(BorrowingDao borrowingDao, BorrowingMapper borrowingMapper, BorrowingMapper borrowingMapper1) {
+    public BorrowingServiceImpl(BorrowingDao borrowingDao, BorrowingMapper borrowingMapper, CopyDao copyDao, MemberDao memberDao) {
         this.borrowingDao = borrowingDao;
-        //this.borrowingMapper = borrowingMapper1;
+        this.borrowingMapper = borrowingMapper;
+        this.copyDao = copyDao;
+        this.memberDao = memberDao;
     }
 
 
     @Override
-    public Borrowing findBorrowingById( int id ) {
+    public Optional<Borrowing> findBorrowingById( int id ) {
         return borrowingDao.findBorrowingById( id );
     }
 
@@ -37,25 +46,83 @@ public class BorrowingServiceImpl implements BorrowingService {
         return borrowingDao.findByMemberId( memberId );
     }
 
+    /**
+     *
+     * @param borrowing The created borrowing
+     * @param memberId The id of the user who borrows a publication
+     * @param copyId The id of the available copy of the publication which will be borrowed
+     * @return The created borrowing
+     */
     @Override
-    public Borrowing save( Borrowing borrowing ) {
-        return borrowingDao.save( borrowing );
+    public Borrowing save( Borrowing borrowing, int memberId, int copyId ) {
+
+        // Member research
+        Optional<MemberAccount> member = memberDao.getMemberById( memberId );
+        int currentsBorrowings = member.get().getNbOfCurrentsBorrowings();
+
+        // Copy research
+        Copy copy = copyDao.findCopyById( copyId );
+        boolean available = copy.isAvailable();
+
+        /*
+         * Member has right to borrow only 5 publications
+         * To register or create a borrowing of a copy, this one should be available.
+         */
+        if( currentsBorrowings < 5 && available == true ) {
+
+            copyDao.updateCopyAvailability( false, copyId );
+            memberDao.updateNbOfCurrentsBorrowings( memberId, 1);
+            borrowingDao.save(borrowing);
+        }
+
+
+
+        //TODO MANAGE PB WITH RETURN WHEN CURRENTSBORROWINGS IS >=5
+        return null;
     }
 
     @Override
-    public void updateBorrowingReturnDateById( int extendedDay, int id ) {
+    public void updateBorrowingReturnDateById( int id ) {
 
        //Retrieve a borrowing by its id
-       Borrowing borrowing = borrowingDao.findBorrowingById( id );
+       Optional<Borrowing> borrowing = borrowingDao.findBorrowingById( id );
 
-       //Retrieve the return date of this borrowing
-       LocalDate returnDate = borrowing.getReturnDate();
+        //Retrieve the return date of this borrowing
+        LocalDate returnDate = borrowing.get().getReturnDate();
 
-       //Extend the return date by 4 weeks
-       returnDate = returnDate.plusDays( extendedDay );
+       boolean extension = borrowing.get().isExtented();
+       if( extension != true ) {
+           //Extend the return date by 4 weeks
+           returnDate = returnDate.plusDays( 28 );
+           borrowingDao.updateBorrowingReturnDateById( returnDate, id );
+           borrowingDao.updateExtensionById( id );
 
-       borrowingDao.updateBorrowingReturnDateById( returnDate, id );
+           int copyId = borrowing.get().getCopy().getId();
+           copyDao.updateCopyReturnDateById( returnDate, copyId );
+       }
+        //TODO MESSAGE TO SIGNAL THAT THE USER HAS ALREADY EXTENDED ITS BORROWING.
     }
+
+    @Override
+    public void updateBorrowingExtensionValueById( int id ) {
+        borrowingDao.updateExtensionById( id );
+    }
+
+    @Override
+    public void updateBorrowingStatus( int borrowingId ) {
+
+        Optional<Borrowing> borrowing = borrowingDao.findById( borrowingId );
+        int copyId = borrowing.get().getCopy().getId();
+        int memebrId = borrowing.get().getMember().getId();
+
+        copyDao.updateCopyAvailability( true, copyId );
+        copyDao.updateCopyReturnDateById( null, copyId );
+        memberDao.updateNbOfCurrentsBorrowings( memebrId, -1 );
+
+        borrowingDao.updateBorrowingStatus( borrowingId, BorrowingStatus.FINISHED );
+    }
+
+
 
 
 
