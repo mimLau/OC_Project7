@@ -25,7 +25,9 @@ public interface MemberDao extends JpaRepository<MemberAccount, Integer> {
 
     @Modifying
     @Transactional
-    @Query ("UPDATE MemberAccount m SET m.nbOfCurrentsBorrowings = m.nbOfCurrentsBorrowings + 1 WHERE m.barcode= :barcode")
-    void incrementNbOfCurrentsBorrowings( @Param("barcode") String barcode );
+    @Query ("UPDATE MemberAccount m SET m.nbOfCurrentsBorrowings= m.nbOfCurrentsBorrowings + :nbIncr WHERE m.id= :id")
+    void updateNbOfCurrentsBorrowings( @Param("id") int id, @Param("nbIncr") int nbIncr );
+
+
 
 }
