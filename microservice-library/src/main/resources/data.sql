@@ -36,7 +36,7 @@ INSERT INTO PUBLICATIONS(id, publication_type, category, identification_nb, nb_o
 INSERT INTO PUBLICATIONS(id, publication_type, category, identification_nb, nb_of_available_copies, nb_total_ofcopies, publication_date, title, author_fk, edithor_fk) VALUES
 (6, 'Review', 'SCIENTIST','ereterh', 1, 1, '2020/01/01','Geo', NULL, NULL);
 INSERT INTO PUBLICATIONS(id, publication_type, category, identification_nb, nb_of_available_copies, nb_total_ofcopies, publication_date, title, author_fk, edithor_fk) VALUES
-(7, 'Review', 'News', 'ereterh', 1, 1, '2020/01/01', 'L\'Obs', NULL, NULL);
+(7, 'Review', 'NEWS', 'ereterh', 1, 1, '2020/01/01', 'L\'Obs', NULL, NULL);
 INSERT INTO PUBLICATIONS(id, publication_type, category, identification_nb, nb_of_available_copies, nb_total_ofcopies, publication_date, title, author_fk, edithor_fk) VALUES
 (8, 'Newspaper', 'NATIONAL', 'ereterh', 2, 3, '2020/01/01', 'Le Monde', NULL, NULL);
 INSERT INTO PUBLICATIONS(id, publication_type, category, identification_nb, nb_of_available_copies, nb_total_ofcopies, publication_date, title, author_fk, edithor_fk) VALUES
