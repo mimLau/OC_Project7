@@ -1,6 +1,8 @@
 package com.mimi.mlibrary.model.dest.publication;
 
+import com.mimi.mlibrary.model.source.publication.Category;
 import com.mimi.mlibrary.model.source.publication.Copy;
+import org.joda.time.LocalDate;
 
 import java.util.List;
 
@@ -10,6 +12,10 @@ public class PublicationDto {
     private int nbOfAvailableCopies;
     private int nbTotalOfcopies;
     private List<Copy> copies;
+    private String title;
+    private String identificationNb;
+    private LocalDate publicationDate;
+    private Category category;
 
 
     public PublicationDto() {
@@ -45,5 +51,37 @@ public class PublicationDto {
 
     public void setCopies(List<Copy> copies) {
         this.copies = copies;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getIdentificationNb() {
+        return identificationNb;
+    }
+
+    public void setIdentificationNb(String identificationNb) {
+        this.identificationNb = identificationNb;
+    }
+
+    public LocalDate getPublicationDate() {
+        return publicationDate;
+    }
+
+    public void setPublicationDate(LocalDate publicationDate) {
+        this.publicationDate = publicationDate;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 }
