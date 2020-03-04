@@ -20,7 +20,7 @@ public interface PublicationService {
     List<Review> findAllReviews();
     List<Review> findAllReviewsByDate( LocalDate date );
 
-    Optional<Publication> findPublicationById( int id );
+    Optional<Publication> findPublicationById(int id );
     List<Publication> findAllPublications();
     //List<PublicationDto> findAllPublicationDto();
     List<PublicationDto> findAllByTitle(String title );
@@ -32,7 +32,7 @@ public interface PublicationService {
     Author saveAuthor( Author author );
     void deleteAuthorById( int id );
 
-    Copy findCopyById( int id );
+    Copy findCopyById(int id );
     List<CopyDto> findAllCopyDto();
     List<Copy> findAllCopy();
     List<Copy> findAllCopyByPublicationId( int id );

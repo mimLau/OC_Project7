@@ -1,6 +1,8 @@
 package com.mimi.mlibrary.service.impl;
 
-import com.mimi.mlibrary.dao.publication.*;
+import com.mimi.mlibrary.dao.publication.AuthorDao;
+import com.mimi.mlibrary.dao.publication.CopyDao;
+import com.mimi.mlibrary.dao.publication.PublicationDao;
 import com.mimi.mlibrary.mapper.publication.BookMapper;
 import com.mimi.mlibrary.mapper.publication.PublicationMapper;
 import com.mimi.mlibrary.model.dest.publication.BookDto;
@@ -87,7 +89,7 @@ public class PublicationServiceImpl implements PublicationService {
 
 
     @Override
-    public Optional<Publication> findPublicationById( int id ) {
+    public Optional<Publication> findPublicationById(int id ) {
         return publicationDao.findPublicationById( id );
     }
 

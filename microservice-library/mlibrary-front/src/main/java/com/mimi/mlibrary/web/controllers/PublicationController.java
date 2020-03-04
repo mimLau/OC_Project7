@@ -76,7 +76,7 @@ public class PublicationController {
      * **************/
 
     @GetMapping( value = "/Publications", params = "id" )
-    public Optional<Publication> getPublicationsById(  @RequestParam int id ) {
+    public Optional<Publication> getPublicationsById(@RequestParam int id ) {
         return publicationService.findPublicationById( id );
     }
 
