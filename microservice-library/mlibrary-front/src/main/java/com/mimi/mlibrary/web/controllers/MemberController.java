@@ -1,5 +1,6 @@
 package com.mimi.mlibrary.web.controllers;
 
+import com.mimi.mlibrary.model.dest.account.MemberDto;
 import com.mimi.mlibrary.model.source.account.Member;
 import com.mimi.mlibrary.service.AccountService;
 import org.springframework.http.ResponseEntity;
@@ -20,28 +21,28 @@ public class  MemberController {
     }
 
     @GetMapping( value = "/Members" )
-    public List<Member> getAllMembers() {
+    public List<MemberDto> getAllMembers() {
         return accountService.findAll();
     }
 
     @GetMapping( value = "/Members", params = "id" )
-    public Optional<Member> getMemberById(@RequestParam("id") int id ) {
+    public MemberDto getMemberById(@RequestParam("id") int id ) {
         return accountService.findById( id );
     }
 
     @GetMapping( value = "/Members", params = "email")
-    public Optional<Member> getMemberByEmail (@RequestParam("email") String email ) {
+    public MemberDto getMemberByEmail (@RequestParam("email") String email ) {
         return accountService.getMemberByEmail(email);
     }
 
     @GetMapping( value = "/Members", params = { "firstname", "lastname" })
-    public Optional<Member> getMemberByName (@RequestParam("firstname") String firstname, @RequestParam("lastname") String lastname ) {
+    public MemberDto getMemberByName (@RequestParam("firstname") String firstname, @RequestParam("lastname") String lastname ) {
         return accountService.getMemberByNames( firstname, lastname );
     }
 
     @PostMapping( value = "/Members" )
     public ResponseEntity<Void> addMember( @RequestBody Member member ) {
-        Member addedMember = accountService.save( member );
+        MemberDto addedMember = accountService.save( member );
         if( addedMember == null)
             return ResponseEntity.noContent().build();
 
