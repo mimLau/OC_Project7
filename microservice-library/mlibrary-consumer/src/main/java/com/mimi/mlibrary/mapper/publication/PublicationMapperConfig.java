@@ -8,5 +8,5 @@ import org.mapstruct.MappingTarget;
 @MapperConfig
 public interface PublicationMapperConfig {
 
-    void mapPublication(Publication mean, @MappingTarget PublicationDto publicationDto);
+    void mapPublication( Publication mean, @MappingTarget PublicationDto publicationDto );
 }

@@ -5,7 +5,7 @@ import com.mimi.mlibrary.dao.borrowing.BorrowingDao;
 import com.mimi.mlibrary.dao.publication.CopyDao;
 import com.mimi.mlibrary.mapper.borrowing.BorrowingMapper;
 import com.mimi.mlibrary.model.dest.borrowing.BorrowingDto;
-import com.mimi.mlibrary.model.source.account.MemberAccount;
+import com.mimi.mlibrary.model.source.account.Member;
 import com.mimi.mlibrary.model.source.borrowing.Borrowing;
 import com.mimi.mlibrary.model.source.borrowing.BorrowingStatus;
 import com.mimi.mlibrary.model.source.publication.Copy;
@@ -68,7 +68,7 @@ public class BorrowingServiceImpl implements BorrowingService {
     public BorrowingDto save( Borrowing borrowing, int memberId, int copyId ) {
 
         // Member research
-        Optional<MemberAccount> member = memberDao.getMemberById( memberId );
+        Optional<Member> member = memberDao.getMemberById( memberId );
         int currentsBorrowings = member.get().getNbOfCurrentsBorrowings();
 
         // Copy research

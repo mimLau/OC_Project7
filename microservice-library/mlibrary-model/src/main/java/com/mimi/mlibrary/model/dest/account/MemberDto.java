@@ -1,77 +1,37 @@
 package com.mimi.mlibrary.model.dest.account;
 
-public class MemberDto {
+import com.mimi.mlibrary.model.source.borrowing.Borrowing;
 
-    private Integer id;
-    private String firstname;
-    private String lastname;
-    private String password;
-    private String email;
-    private String phoneNumber;
-    private boolean accountStatus;
-    private String registrationDate;
+import java.util.List;
 
-    public Integer getId() {
-        return id;
+public class MemberDto extends AccountDto {
+
+    private String barcode;
+    private int nbOfCurrentsBorrowings;
+    private List<Borrowing> borrowings;
+
+
+    public String getBarcode() {
+        return barcode;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setBarcode(String barcode) {
+        this.barcode = barcode;
     }
 
-    public String getFirstname() {
-        return firstname;
+    public int getNbOfCurrentsBorrowings() {
+        return nbOfCurrentsBorrowings;
     }
 
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
+    public void setNbOfCurrentsBorrowings(int nbOfCurrentsBorrowings) {
+        this.nbOfCurrentsBorrowings = nbOfCurrentsBorrowings;
     }
 
-    public String getLastname() {
-        return lastname;
+    public List<Borrowing> getBorrowings() {
+        return borrowings;
     }
 
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public boolean isAccountStatus() {
-        return accountStatus;
-    }
-
-    public void setAccountStatus(boolean accountStatus) {
-        this.accountStatus = accountStatus;
-    }
-
-    public String getRegistrationDate() {
-        return registrationDate;
-    }
-
-    public void setRegistrationDate(String registrationDate) {
-        this.registrationDate = registrationDate;
+    public void setBorrowings(List<Borrowing> borrowings) {
+        this.borrowings = borrowings;
     }
 }

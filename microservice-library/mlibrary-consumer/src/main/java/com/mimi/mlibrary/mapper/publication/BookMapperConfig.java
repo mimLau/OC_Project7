@@ -10,5 +10,5 @@ import org.mapstruct.MappingTarget;
 public interface BookMapperConfig extends PublicationMapperConfig {
 
     @InheritConfiguration( name = "mapPublication")
-    void mapBook(Book book, @MappingTarget BookDto bookDto);
+    void mapBook( Book book, @MappingTarget BookDto bookDto );
 }

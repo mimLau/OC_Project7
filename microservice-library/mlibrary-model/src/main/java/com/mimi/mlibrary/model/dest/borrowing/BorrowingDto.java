@@ -1,6 +1,6 @@
 package com.mimi.mlibrary.model.dest.borrowing;
 
-import com.mimi.mlibrary.model.source.account.MemberAccount;
+import com.mimi.mlibrary.model.source.account.Member;
 import com.mimi.mlibrary.model.source.borrowing.BorrowingStatus;
 import com.mimi.mlibrary.model.source.publication.Copy;
 import org.joda.time.LocalDate;
@@ -16,7 +16,7 @@ public class BorrowingDto {
     private boolean extented;
     private BorrowingStatus borrowingStatus;
     private Copy copy;
-    private MemberAccount member;
+    private Member member;
 
     public BorrowingDto() {
     }
@@ -77,11 +77,11 @@ public class BorrowingDto {
         this.copy = copy;
     }
 
-    public MemberAccount getMember() {
+    public Member getMember() {
         return member;
     }
 
-    public void setMember(MemberAccount member) {
+    public void setMember(Member member) {
         this.member = member;
     }
 }
