@@ -1,6 +1,8 @@
 package com.mimi.mlibrary.model.dest.borrowing;
 
+import com.mimi.mlibrary.model.source.account.MemberAccount;
 import com.mimi.mlibrary.model.source.borrowing.BorrowingStatus;
+import com.mimi.mlibrary.model.source.publication.Copy;
 
 
 public class BorrowingDto {
@@ -12,8 +14,8 @@ public class BorrowingDto {
     private int reminderNb;
     private boolean extented;
     private BorrowingStatus borrowingStatus;
-    //private Copy copy;
-    //private Member member;
+    private Copy copy;
+    private MemberAccount member;
 
     public BorrowingDto() {
     }
@@ -64,5 +66,21 @@ public class BorrowingDto {
 
     public void setBorrowingStatus(BorrowingStatus borrowingStatus) {
         this.borrowingStatus = borrowingStatus;
+    }
+
+    public Copy getCopy() {
+        return copy;
+    }
+
+    public void setCopy(Copy copy) {
+        this.copy = copy;
+    }
+
+    public MemberAccount getMember() {
+        return member;
+    }
+
+    public void setMember(MemberAccount member) {
+        this.member = member;
     }
 }
