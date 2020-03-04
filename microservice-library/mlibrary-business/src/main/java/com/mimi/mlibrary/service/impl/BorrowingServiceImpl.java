@@ -4,6 +4,7 @@ import com.mimi.mlibrary.dao.account.MemberDao;
 import com.mimi.mlibrary.dao.borrowing.BorrowingDao;
 import com.mimi.mlibrary.dao.publication.CopyDao;
 import com.mimi.mlibrary.mapper.borrowing.BorrowingMapper;
+import com.mimi.mlibrary.model.dest.borrowing.BorrowingDto;
 import com.mimi.mlibrary.model.source.account.MemberAccount;
 import com.mimi.mlibrary.model.source.borrowing.Borrowing;
 import com.mimi.mlibrary.model.source.borrowing.BorrowingStatus;
@@ -32,18 +33,28 @@ public class BorrowingServiceImpl implements BorrowingService {
 
 
     @Override
-    public Optional<Borrowing> findBorrowingById( int id ) {
-        return borrowingDao.findBorrowingById( id );
+    public BorrowingDto findBorrowingById( int id ) {
+        Optional <Borrowing> borrowing = borrowingDao.findBorrowingById( id );
+        if(borrowing.isPresent()) {
+            return   borrowingMapper.map( borrowing.get() );
+        }
+        return null;
     }
 
     @Override
-    public List<Borrowing> findAll() {
-        return borrowingDao.findAll();
+    public List<BorrowingDto> findAll() {
+        List<Borrowing> borrowings = borrowingDao.findAll();
+        List<BorrowingDto> borrowingDtos = borrowingMapper.map( borrowings );
+
+        return borrowingDtos;
     }
 
     @Override
-    public List<Borrowing> findByMemberId(int memberId) {
-        return borrowingDao.findByMemberId( memberId );
+    public List<BorrowingDto> findByMemberId( int memberId ) {
+        List <Borrowing> borrowings = borrowingDao.findByMemberId( memberId );
+        List<BorrowingDto> borrowingDtos = borrowingMapper.map( borrowings );
+
+        return borrowingDtos;
     }
 
     /**
@@ -54,7 +65,7 @@ public class BorrowingServiceImpl implements BorrowingService {
      * @return The created borrowing
      */
     @Override
-    public Borrowing save( Borrowing borrowing, int memberId, int copyId ) {
+    public BorrowingDto save( Borrowing borrowing, int memberId, int copyId ) {
 
         // Member research
         Optional<MemberAccount> member = memberDao.getMemberById( memberId );
@@ -70,9 +81,12 @@ public class BorrowingServiceImpl implements BorrowingService {
          */
         if( currentsBorrowings < 5 && available == true ) {
 
+            LocalDate today = new LocalDate();
+
             copyDao.updateCopyAvailability( false, copyId );
+            copyDao.updateCopyReturnDateById( today,copyId );
             memberDao.updateNbOfCurrentsBorrowings( memberId, 1);
-            borrowingDao.save(borrowing);
+            borrowingDao.save( borrowing );
         }
 
 
@@ -85,21 +99,22 @@ public class BorrowingServiceImpl implements BorrowingService {
     public void updateBorrowingReturnDateById( int id ) {
 
        //Retrieve a borrowing by its id
-       Optional<Borrowing> borrowing = borrowingDao.findBorrowingById( id );
+       /*Borrowing borrowing = borrowingDao.findBorrowingById( id );
+       BorrowingDto borrowingDto = borrowingMapper.map( borrowing );
 
         //Retrieve the return date of this borrowing
-        LocalDate returnDate = borrowing.get().getReturnDate();
+        LocalDate returnDate = borrowingDto.getReturnDate();
 
-       boolean extension = borrowing.get().isExtented();
+       boolean extension = borrowingDto.isExtented();
        if( extension != true ) {
            //Extend the return date by 4 weeks
            returnDate = returnDate.plusDays( 28 );
            borrowingDao.updateBorrowingReturnDateById( returnDate, id );
            borrowingDao.updateExtensionById( id );
 
-           int copyId = borrowing.get().getCopy().getId();
+           int copyId = borrowing.getCopy().getId();
            copyDao.updateCopyReturnDateById( returnDate, copyId );
-       }
+       }*/
         //TODO MESSAGE TO SIGNAL THAT THE USER HAS ALREADY EXTENDED ITS BORROWING.
     }
 
@@ -113,24 +128,13 @@ public class BorrowingServiceImpl implements BorrowingService {
 
         Optional<Borrowing> borrowing = borrowingDao.findById( borrowingId );
         int copyId = borrowing.get().getCopy().getId();
-        int memebrId = borrowing.get().getMember().getId();
+        int memberId = borrowing.get().getMember().getId();
 
         copyDao.updateCopyAvailability( true, copyId );
         copyDao.updateCopyReturnDateById( null, copyId );
-        memberDao.updateNbOfCurrentsBorrowings( memebrId, -1 );
+        memberDao.updateNbOfCurrentsBorrowings( memberId, -1 );
 
         borrowingDao.updateBorrowingStatus( borrowingId, BorrowingStatus.FINISHED );
     }
 
-
-
-
-
-
-    /*@Override
-    public List<BorrowingDto> findAll() {
-        List <Borrowing> borrowings = borrowingDao.findAll();
-        List <BorrowingDto> borrowingDtos = borrowingMapper.map( borrowings );
-        return borrowingDtos;
-    }*/
 }
