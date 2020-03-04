@@ -1,5 +1,6 @@
 package com.mimi.mlibrary.web.controllers;
 
+import com.mimi.mlibrary.model.dest.borrowing.BorrowingDto;
 import com.mimi.mlibrary.model.source.borrowing.Borrowing;
 import com.mimi.mlibrary.service.BorrowingService;
 import org.springframework.http.ResponseEntity;
@@ -20,23 +21,23 @@ public class BorrowingController {
     }
 
     @GetMapping( value = "/Borrowings" )
-    public List<Borrowing> getAllBorrowings() {
+    public List<BorrowingDto> getAllBorrowings() {
         return borrowingService.findAll();
     }
 
     @GetMapping( value = "/Borrowings", params = "id" )
-    public Optional<Borrowing> findBorrowingById(@RequestParam int id ) {
+    public BorrowingDto findBorrowingById(@RequestParam(required = true) int id ) {
         return borrowingService.findBorrowingById( id );
     }
 
     @GetMapping( value = "/Borrowings/Members", params = "id" )
-    public List<Borrowing> findAllByMemberId( @RequestParam int id ) {
+    public List<BorrowingDto> findAllByMemberId( @RequestParam(required = true) int id ) {
         return borrowingService.findByMemberId( id );
     }
 
     @PostMapping( value = "/Borrowings", params = { "memberId", "copyId" })
-    public ResponseEntity<Void> addBorrowing( @RequestBody Borrowing borrowing, @RequestParam int memberId, @RequestParam int copyId  ) {
-        Borrowing addedBorrowing = borrowingService.save( borrowing, memberId, copyId);
+    public ResponseEntity<Void> addBorrowing( @RequestBody Borrowing borrowing, @RequestParam(required = true) int memberId, @RequestParam(required = true) int copyId  ) {
+        BorrowingDto addedBorrowing = borrowingService.save( borrowing, memberId, copyId);
         if( addedBorrowing == null)
             return ResponseEntity.noContent().build();
 
@@ -45,12 +46,12 @@ public class BorrowingController {
     }
 
     @PutMapping( value = "/Borrowings-return", params = "id" )
-    public void updateBorrowingReturnDate( @RequestParam int id ) {
+    public void updateBorrowingReturnDate( @RequestParam(required = true) int id ) {
         borrowingService.updateBorrowingReturnDateById( id );
     }
 
     @PutMapping( value = "/Borrowings-status", params = "id" )
-    public void updateBorrowingStatus( @RequestParam int id ) {
+    public void updateBorrowingStatus( @RequestParam(required = true) int id ) {
         borrowingService.updateBorrowingStatus( id );
     }
 
