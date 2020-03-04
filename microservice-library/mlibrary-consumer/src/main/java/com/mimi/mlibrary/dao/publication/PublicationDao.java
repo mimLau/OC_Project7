@@ -55,7 +55,7 @@ public interface PublicationDao extends JpaRepository<Publication, Integer> {
 
 
     @Query("SELECT p FROM Publication p WHERE p.identificationNb= :idNb")
-    Publication findAllByIsbn( @Param("idNb") String idNb );
+    Optional <Publication> findAllByIsbn( @Param("idNb") String idNb );
 
 
 

@@ -3,11 +3,8 @@ package com.mimi.mlibrary.service.impl;
 import com.mimi.mlibrary.dao.publication.AuthorDao;
 import com.mimi.mlibrary.dao.publication.CopyDao;
 import com.mimi.mlibrary.dao.publication.PublicationDao;
-import com.mimi.mlibrary.mapper.publication.BookMapper;
-import com.mimi.mlibrary.mapper.publication.PublicationMapper;
-import com.mimi.mlibrary.model.dest.publication.BookDto;
-import com.mimi.mlibrary.model.dest.publication.CopyDto;
-import com.mimi.mlibrary.model.dest.publication.PublicationDto;
+import com.mimi.mlibrary.mapper.publication.*;
+import com.mimi.mlibrary.model.dest.publication.*;
 import com.mimi.mlibrary.model.source.publication.*;
 import com.mimi.mlibrary.service.PublicationService;
 import org.joda.time.LocalDate;
@@ -19,21 +16,29 @@ import java.util.Optional;
 @Service
 public class PublicationServiceImpl implements PublicationService {
 
-    private PublicationDao publicationDao;
+
     private PublicationMapper publicationMapper;
     private BookMapper bookMapper;
+    private NewspaperMapper newspaperMapper;
+    private ReviewMapper reviewMapper;
+    private CopyMapper copyMapper;
+    private AuthorMapper authorMapper;
 
-
+    private PublicationDao publicationDao;
     private AuthorDao authorDao;
     private CopyDao copyDao;
 
 
-    PublicationServiceImpl(PublicationDao publicationDao, PublicationMapper publicationMapper, AuthorDao authorDao, CopyDao copyDao, BookMapper bookMapper) {
+    PublicationServiceImpl(PublicationDao publicationDao, PublicationMapper publicationMapper, AuthorDao authorDao, CopyDao copyDao, BookMapper bookMapper, NewspaperMapper newspaperMapper, ReviewMapper reviewMapper, CopyMapper copyMapper, AuthorMapper authorMapper) {
         this.publicationDao = publicationDao;
         this.publicationMapper = publicationMapper;
         this.authorDao = authorDao;
         this.copyDao = copyDao;
         this.bookMapper = bookMapper;
+        this.newspaperMapper = newspaperMapper;
+        this.reviewMapper = reviewMapper;
+        this.copyMapper = copyMapper;
+        this.authorMapper = authorMapper;
     }
 
 
@@ -55,14 +60,20 @@ public class PublicationServiceImpl implements PublicationService {
      * **************/
 
     @Override
-    public List<Newspaper> findAllNewspapers() {
-        return publicationDao.findAllNewspapers();
+    public List<NewspaperDto> findAllNewspapers() {
+        List<Newspaper> newspapers = publicationDao.findAllNewspapers();
+        List<NewspaperDto> newspaperDtos = newspaperMapper.map( newspapers );
+        return newspaperDtos;
     }
 
     @Override
-    public List<Newspaper> findAllNewspapersByDate( LocalDate date ) {
+    public List<NewspaperDto> findAllNewspapersByDate( LocalDate date ) {
+
+        List<Newspaper> newspapers = publicationDao.findAllNewspaperByDate( date );
+        List<NewspaperDto> newspaperDtos = newspaperMapper.map( newspapers );
+
         //TODO convert date or something like this
-        return publicationDao.findAllNewspaperByDate( date );
+        return newspaperDtos;
     }
 
 
@@ -72,13 +83,17 @@ public class PublicationServiceImpl implements PublicationService {
      * **************/
 
     @Override
-    public List<Review> findAllReviews() {
-        return publicationDao.findAllReviews();
+    public List<ReviewDto> findAllReviews() {
+        List<Review> reviews = publicationDao.findAllReviews();
+        List<ReviewDto> reviewDtos = reviewMapper.map( reviews );
+        return reviewDtos;
     }
 
     @Override
-    public List<Review> findAllReviewsByDate( LocalDate date ) {
-        return publicationDao.findAllReviewsByDate( date );
+    public List<ReviewDto> findAllReviewsByDate( LocalDate date ) {
+        List<Review> reviews = publicationDao.findAllReviewsByDate( date );
+        List<ReviewDto> reviewDtos = reviewMapper.map( reviews );
+        return reviewDtos;
     }
 
 
@@ -89,13 +104,17 @@ public class PublicationServiceImpl implements PublicationService {
 
 
     @Override
-    public Optional<Publication> findPublicationById(int id ) {
-        return publicationDao.findPublicationById( id );
+    public PublicationDto findPublicationById( int id ) {
+        Optional<Publication> publication = publicationDao.findPublicationById( id );
+        PublicationDto publicationDto = publicationMapper.map( publication.get() );
+        return publicationDto;
     }
 
     @Override
-    public List<Publication> findAllPublications() {
-        return publicationDao.findAllPublications();
+    public List<PublicationDto> findAllPublications() {
+        List<Publication> publications =  publicationDao.findAllPublications();
+        List<PublicationDto> publicationDtos =publicationMapper.map( publications );
+        return publicationDtos;
     }
 
     @Override
@@ -105,18 +124,24 @@ public class PublicationServiceImpl implements PublicationService {
     }
 
     @Override
-    public List<Publication> findAllByAuthor( String name ) {
-        return publicationDao.findAllByAuthor( name );
+    public List<PublicationDto> findAllByAuthor( String name ) {
+        List<Publication> publications =  publicationDao.findAllByAuthor( name );
+        List<PublicationDto> publicationDtos =publicationMapper.map( publications );
+        return publicationDtos;
     }
 
     @Override
-    public List<Publication> findAllByAuthorId( int id ) {
-        return publicationDao.findAllByAuthorId( id );
+    public List<PublicationDto> findAllByAuthorId( int id ) {
+        List<Publication> publications =  publicationDao.findAllByAuthorId( id );
+        List<PublicationDto> publicationDtos =publicationMapper.map( publications );
+        return publicationDtos;
     }
 
     @Override
-    public Publication findAllByIsbn( String idNb ) {
-        return publicationDao.findAllByIsbn( idNb);
+    public PublicationDto findAllByIsbn( String idNb ) {
+        Optional<Publication> publication = publicationDao.findAllByIsbn( idNb);
+        PublicationDto publicationDto = publicationMapper.map( publication.get() );
+        return publicationDto;
     }
 
 
@@ -126,13 +151,17 @@ public class PublicationServiceImpl implements PublicationService {
      * **************/
 
    @Override
-    public List<Author> findAllAuthor() {
-        return authorDao.findAll();
+    public List<AuthorDto> findAllAuthor() {
+       List <Author> authors = authorDao.findAll();
+       List<AuthorDto> authorDtos = authorMapper.map( authors );
+       return authorDtos;
     }
 
     @Override
-    public Author saveAuthor( Author author ) {
-        return authorDao.save( author );
+    public AuthorDto saveAuthor( Author author ) {
+        Author savedAuthor = authorDao.save( author );
+        AuthorDto authorDto = authorMapper.map( savedAuthor );
+        return authorDto;
     }
 
     @Override
@@ -147,25 +176,26 @@ public class PublicationServiceImpl implements PublicationService {
      * **************/
 
     @Override
-    public List<Copy> findAllCopy() {
-        return copyDao.findAll();
+    public List<CopyDto> findAllCopy() {
+        List<Copy> copies = copyDao.findAll();
+        List<CopyDto> copyDtos = copyMapper.map( copies );
+        return copyDtos;
     }
 
     @Override
-    public List<CopyDto> findAllCopyDto() {
-        return null;
+    public List<CopyDto> findAllCopyByPublicationId( int publicationId ) {
+        List<Copy> copies = copyDao.findAllCopyByPublicationId( publicationId );
+        List<CopyDto> copyDtos = copyMapper.map( copies );
+
+        return copyDtos;
     }
 
     @Override
-    public List<Copy> findAllCopyByPublicationId( int publicationId ) {
-        return copyDao.findAllCopyByPublicationId( publicationId );
-    }
-
-    @Override
-    public List<Copy> findAllCopyByDelay( ) {
+    public List<CopyDto> findAllCopyByDelay( ) {
         LocalDate localDate = new LocalDate();
-
-        return copyDao.findAllByDelay( localDate );
+        List<Copy> copies = copyDao.findAllByDelay( localDate );
+        List<CopyDto> copyDtos = copyMapper.map( copies );
+        return copyDtos;
     }
 
     @Override
@@ -175,9 +205,10 @@ public class PublicationServiceImpl implements PublicationService {
 
 
     @Override
-    public Copy findCopyById( int id ) {
-        return copyDao.findCopyById( id );
+    public CopyDto findCopyById( int id ) {
+        Optional<Copy> copy = copyDao.findCopyById( id );
+        CopyDto copyDto = copyMapper.map( copy.get() );
+        return copyDto;
     }
-
 
 }

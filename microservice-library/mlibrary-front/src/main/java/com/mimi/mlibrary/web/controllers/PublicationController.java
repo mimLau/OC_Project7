@@ -1,7 +1,6 @@
 package com.mimi.mlibrary.web.controllers;
 
-import com.mimi.mlibrary.model.dest.publication.BookDto;
-import com.mimi.mlibrary.model.dest.publication.PublicationDto;
+import com.mimi.mlibrary.model.dest.publication.*;
 import com.mimi.mlibrary.model.source.publication.*;
 import com.mimi.mlibrary.service.PublicationService;
 import org.joda.time.LocalDate;
@@ -40,12 +39,12 @@ public class PublicationController {
      * **************/
 
     @GetMapping( value = "/Newspapers")
-    public List<Newspaper> getAllNewspaper(){
+    public List<NewspaperDto> getAllNewspaper(){
         return publicationService.findAllNewspapers();
     }
 
     @GetMapping( value = "/Newspapers", params = "date")
-    public List<Newspaper> getAllNewspapersByDate( @RequestParam String date ){
+    public List<NewspaperDto> getAllNewspapersByDate( @RequestParam String date ){
 
         LocalDate d = new LocalDate();
 
@@ -61,12 +60,12 @@ public class PublicationController {
      * **************/
 
     @GetMapping( value = "/Reviews")
-    public List<Review> getAllReview(){
+    public List<ReviewDto> getAllReview(){
         return publicationService.findAllReviews();
     }
 
     @GetMapping( value = "/Reviews", params = "date")
-    public List<Review> getAllReviewsByDate( @RequestParam LocalDate date ){
+    public List<ReviewDto> getAllReviewsByDate( @RequestParam LocalDate date ){
         return publicationService.findAllReviewsByDate( date );
     }
 
@@ -76,12 +75,12 @@ public class PublicationController {
      * **************/
 
     @GetMapping( value = "/Publications", params = "id" )
-    public Optional<Publication> getPublicationsById(@RequestParam int id ) {
+    public PublicationDto getPublicationsById(@RequestParam int id ) {
         return publicationService.findPublicationById( id );
     }
 
     @GetMapping( value = "/Publications")
-    public List<Publication> getAllPublications(  ) {
+    public List<PublicationDto> getAllPublications(  ) {
         return publicationService.findAllPublications();
     }
 
@@ -92,13 +91,13 @@ public class PublicationController {
 
 
     @GetMapping( value = "/Publications", params = "author" )
-    public List<Publication> getAllByAuthor( @RequestParam String author ) {
+    public List<PublicationDto> getAllByAuthor( @RequestParam String author ) {
         return publicationService.findAllByAuthor( author );
     }
 
 
     @GetMapping( value = "/Publications/auth", params = "id")
-    public List<Publication> getAllByAuthorId( @RequestParam int id ) {
+    public List<PublicationDto> getAllByAuthorId( @RequestParam int id ) {
         return publicationService.findAllByAuthorId( id );
     }
 
@@ -109,13 +108,13 @@ public class PublicationController {
      * **************/
 
     @GetMapping( value = "/Authors" )
-    public List<Author> getAllAuthor() {
+    public List<AuthorDto> getAllAuthor() {
         return publicationService.findAllAuthor();
     }
 
     @PostMapping( value = "/Authors" )
     public ResponseEntity<Void> addAuthor( @RequestBody Author author ) {
-        Author addedBorrowing = publicationService.saveAuthor( author );
+        AuthorDto addedBorrowing = publicationService.saveAuthor( author );
         if( addedBorrowing == null)
             return ResponseEntity.noContent().build();
 
@@ -136,22 +135,22 @@ public class PublicationController {
      * **************/
 
     @GetMapping( value = "/Copies")
-    public List<Copy> getAllCopies() {
+    public List<CopyDto> getAllCopies() {
         return publicationService.findAllCopy();
     }
 
     @GetMapping( value = "/Copies", params = "id")
-    public Copy getCoyById( @RequestParam int id ) {
+    public CopyDto getCoyById( @RequestParam int id ) {
         return publicationService.findCopyById( id );
     }
 
     @GetMapping( value = "/Copies/delay" )
-    public List<Copy> getAllByDelay(  ) {
+    public List<CopyDto> getAllByDelay(  ) {
         return publicationService.findAllCopyByDelay();
     }
 
     @GetMapping( value = "/Copies-pub", params = "id" )
-    public List<Copy> getAllCopyPublicationId(  @RequestParam int id  ) {
+    public List<CopyDto> getAllCopyPublicationId(  @RequestParam int id  ) {
         return publicationService.findAllCopyByPublicationId( id );
     }
 

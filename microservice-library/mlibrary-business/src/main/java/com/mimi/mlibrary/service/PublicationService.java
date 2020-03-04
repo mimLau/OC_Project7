@@ -1,9 +1,7 @@
 package com.mimi.mlibrary.service;
 
-import com.mimi.mlibrary.model.dest.publication.BookDto;
-import com.mimi.mlibrary.model.dest.publication.CopyDto;
+import com.mimi.mlibrary.model.dest.publication.*;
 import com.mimi.mlibrary.model.source.publication.*;
-import com.mimi.mlibrary.model.dest.publication.PublicationDto;
 import org.joda.time.LocalDate;
 
 import java.util.List;
@@ -14,29 +12,27 @@ public interface PublicationService {
 
     List<BookDto> findAllBooks();
 
-    List<Newspaper> findAllNewspapers();
-    List<Newspaper> findAllNewspapersByDate( LocalDate date );
+    List<NewspaperDto> findAllNewspapers();
+    List<NewspaperDto> findAllNewspapersByDate(LocalDate date );
 
-    List<Review> findAllReviews();
-    List<Review> findAllReviewsByDate( LocalDate date );
+    List<ReviewDto> findAllReviews();
+    List<ReviewDto> findAllReviewsByDate( LocalDate date );
 
-    Optional<Publication> findPublicationById(int id );
-    List<Publication> findAllPublications();
-    //List<PublicationDto> findAllPublicationDto();
+    PublicationDto findPublicationById(int id );
+    List<PublicationDto> findAllPublications();
     List<PublicationDto> findAllByTitle(String title );
-    List<Publication> findAllByAuthor( String name );
-    List<Publication> findAllByAuthorId( int id );
-    Publication findAllByIsbn( String isbn );
+    List<PublicationDto> findAllByAuthor( String name );
+    List<PublicationDto> findAllByAuthorId( int id );
+    PublicationDto findAllByIsbn( String isbn );
 
-    List<Author> findAllAuthor();
-    Author saveAuthor( Author author );
+    List<AuthorDto> findAllAuthor();
+    AuthorDto saveAuthor( Author author );
     void deleteAuthorById( int id );
 
-    Copy findCopyById(int id );
-    List<CopyDto> findAllCopyDto();
-    List<Copy> findAllCopy();
-    List<Copy> findAllCopyByPublicationId( int id );
-    List<Copy> findAllCopyByDelay();
+    CopyDto findCopyById(int id );
+    List<CopyDto> findAllCopy();
+    List<CopyDto> findAllCopyByPublicationId( int id );
+    List<CopyDto> findAllCopyByDelay();
     void  updateCopyReturnDateById( LocalDate newDate, int id );
 
 

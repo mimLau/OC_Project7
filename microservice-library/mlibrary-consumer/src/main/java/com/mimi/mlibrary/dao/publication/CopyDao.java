@@ -10,11 +10,12 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface CopyDao extends JpaRepository<Copy, Integer> {
 
     @Query("Select  c FROM Copy c where c.id= :id")
-    Copy findCopyById( int id );
+    Optional <Copy> findCopyById(int id );
 
     @Query("Select  c FROM Copy c JOIN FETCH c.publication p where p.id= :id")
     List<Copy> findAllCopyByPublicationId( @Param( "id" ) int id );
