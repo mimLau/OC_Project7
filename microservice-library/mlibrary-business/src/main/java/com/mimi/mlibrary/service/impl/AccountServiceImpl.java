@@ -1,7 +1,7 @@
 package com.mimi.mlibrary.service.impl;
 
 import com.mimi.mlibrary.dao.account.MemberDao;
-import com.mimi.mlibrary.model.source.account.MemberAccount;
+import com.mimi.mlibrary.model.source.account.Member;
 import com.mimi.mlibrary.service.AccountService;
 import org.springframework.stereotype.Service;
 
@@ -17,30 +17,30 @@ public class AccountServiceImpl implements AccountService {
         this.memberDao = memberDao;
     }
 
-    public List<MemberAccount> findAll() {
+    public List<Member> findAll() {
         return memberDao.findAll();
     }
 
-    public Optional<MemberAccount> findById( int id ) {
+    public Optional<Member> findById(int id ) {
         return memberDao.findById( id );
     }
 
-    public MemberAccount save(MemberAccount member) {
+    public Member save(Member member) {
         return memberDao.save( member );
     }
 
     @Override
-    public Optional<MemberAccount> getMemberById( Integer id ) {
+    public Optional<Member> getMemberById(Integer id ) {
         return memberDao.getMemberById( id );
     }
 
     @Override
-    public Optional<MemberAccount> getMemberByEmail( String email ) {
+    public Optional<Member> getMemberByEmail(String email ) {
         return memberDao.getMemberByEmail( email );
     }
 
     @Override
-    public Optional<MemberAccount> getMemberByNames( String firstname, String lastname ) {
+    public Optional<Member> getMemberByNames(String firstname, String lastname ) {
         return memberDao.getMemberByNames( firstname, lastname );
     }
 
