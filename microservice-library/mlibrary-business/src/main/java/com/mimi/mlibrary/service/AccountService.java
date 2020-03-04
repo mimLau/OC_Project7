@@ -1,17 +1,17 @@
 package com.mimi.mlibrary.service;
 
-import com.mimi.mlibrary.model.source.account.MemberAccount;
+import com.mimi.mlibrary.model.source.account.Member;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface AccountService {
 
-    List<MemberAccount> findAll();
-    Optional<MemberAccount> findById( int id );
-    MemberAccount save(MemberAccount Member);
-    Optional<MemberAccount> getMemberById( Integer id );
-    Optional<MemberAccount> getMemberByEmail( String email);
-    Optional<MemberAccount> getMemberByNames( String firstname, String lastname );
+    List<Member> findAll();
+    Optional<Member> findById(int id );
+    Member save(Member Member);
+    Optional<Member> getMemberById(Integer id );
+    Optional<Member> getMemberByEmail(String email);
+    Optional<Member> getMemberByNames(String firstname, String lastname );
     void updateNbOfCurrentsBorrowings( int id );
 }
