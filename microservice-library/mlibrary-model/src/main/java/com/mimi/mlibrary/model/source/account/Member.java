@@ -10,7 +10,7 @@ import java.util.List;
 
 @Entity
 @DiscriminatorValue("Member")
-public class MemberAccount extends Account {
+public class Member extends Account {
 
     private String barcode;
     private int nbOfCurrentsBorrowings;
