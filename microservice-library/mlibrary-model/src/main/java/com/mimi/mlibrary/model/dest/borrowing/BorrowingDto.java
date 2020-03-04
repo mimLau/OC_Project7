@@ -3,13 +3,14 @@ package com.mimi.mlibrary.model.dest.borrowing;
 import com.mimi.mlibrary.model.source.account.MemberAccount;
 import com.mimi.mlibrary.model.source.borrowing.BorrowingStatus;
 import com.mimi.mlibrary.model.source.publication.Copy;
+import org.joda.time.LocalDate;
 
 
 public class BorrowingDto {
 
     private Integer id;
 
-    private String returnDate;
+    private LocalDate returnDate;
     private String borrowingDate;
     private int reminderNb;
     private boolean extented;
@@ -28,11 +29,11 @@ public class BorrowingDto {
         this.id = id;
     }
 
-    public String getReturnDate() {
+    public LocalDate getReturnDate() {
         return returnDate;
     }
 
-    public void setReturnDate(String returnDate) {
+    public void setReturnDate(LocalDate returnDate) {
         this.returnDate = returnDate;
     }
 
