@@ -38,13 +38,11 @@ public class Copy {
     private List<Borrowing> borrowings;
 
     @ManyToOne
-    @Column(nullable = false)
     @JoinColumn(name="publication_fk")
     @JsonBackReference(value="publication_copy")
     private Publication publication;
 
     @ManyToOne
-    @Column(nullable = false)
     @JoinColumn(name = "library_fk")
     private Library library;
 
