@@ -11,7 +11,10 @@ import java.util.List;
 public interface BookMapper {
 
     @InheritConfiguration( name = "mapBook")
-    BookDto map( Book book );
-    List<BookDto> map( List<Book> books );
+    BookDto bookToDto( Book book );
+    List<BookDto> bookToDtoList( List<Book> books );
+
+    Book dtoToBook( BookDto bookDto );
+    List<Book> dtoToBookList( List<BookDto> bookDtos );
 
 }

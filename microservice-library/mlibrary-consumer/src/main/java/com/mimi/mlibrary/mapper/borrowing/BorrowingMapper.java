@@ -12,6 +12,9 @@ import java.util.List;
 public interface BorrowingMapper {
 
     BorrowingMapper INSTANCE = Mappers.getMapper( BorrowingMapper.class );
-    BorrowingDto map(Borrowing borrowing );
-    List<BorrowingDto> map( List<Borrowing> borrowings );
+    BorrowingDto borToDto(Borrowing borrowing );
+    List<BorrowingDto> borToDtoList( List<Borrowing> borrowings );
+
+    Borrowing dtoToBor(BorrowingDto borrowingDto );
+    List<Borrowing> dtoToBorList( List<BorrowingDto> borrowingDtos );
 }

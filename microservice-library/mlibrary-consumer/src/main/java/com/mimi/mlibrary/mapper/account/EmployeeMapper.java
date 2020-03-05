@@ -11,8 +11,11 @@ import java.util.List;
 public interface  EmployeeMapper {
 
     @InheritConfiguration( name = "mapEmployee")
-    EmployeeDto map( Employee employee );
-    List<EmployeeDto> map( List<Employee> employees );
+    EmployeeDto empToDto( Employee employee );
+    List<EmployeeDto> empToDtoList( List<Employee> employees );
+
+    /*Employee dtoToEmp( EmployeeDto employeeDto );
+    List<Employee> dtoToEmpList( List<EmployeeDto> employeeDtos );*/
 
 
 }

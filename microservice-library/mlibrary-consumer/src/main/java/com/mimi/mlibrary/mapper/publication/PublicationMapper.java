@@ -11,9 +11,12 @@ import java.util.List;
 @Mapper
 public interface PublicationMapper {
 
-    PublicationMapper INSTANCE = Mappers.getMapper( PublicationMapper.class);
-    PublicationDto map( Publication publication );
-    List <PublicationDto> map( List<Publication> publications );
+    PublicationMapper INSTANCE = Mappers.getMapper( PublicationMapper.class );
+    PublicationDto pubToDto( Publication publication );
+    List <PublicationDto> pubToDtoList( List<Publication> publications );
+
+    /*Publication dtoToPub( PublicationDto publicationDto );
+    List <Publication> dtoToPubList( List<PublicationDto> publicationDtos );*/
 
 
 

@@ -34,27 +34,17 @@ public class BorrowingServiceImpl implements BorrowingService {
 
     @Override
     public BorrowingDto findBorrowingById( int id ) {
-        Optional <Borrowing> borrowing = borrowingDao.findBorrowingById( id );
-        if(borrowing.isPresent()) {
-            return   borrowingMapper.map( borrowing.get() );
-        }
-        return null;
+        return   borrowingMapper.borToDto( borrowingDao.findBorrowingById( id ).orElse(null));
     }
 
     @Override
     public List<BorrowingDto> findAll() {
-        List<Borrowing> borrowings = borrowingDao.findAll();
-        List<BorrowingDto> borrowingDtos = borrowingMapper.map( borrowings );
-
-        return borrowingDtos;
+        return borrowingMapper.borToDtoList( borrowingDao.findAll());
     }
 
     @Override
     public List<BorrowingDto> findByMemberId( int memberId ) {
-        List <Borrowing> borrowings = borrowingDao.findByMemberId( memberId );
-        List<BorrowingDto> borrowingDtos = borrowingMapper.map( borrowings );
-
-        return borrowingDtos;
+        return borrowingMapper.borToDtoList( borrowingDao.findByMemberId( memberId ) );
     }
 
     /**
@@ -72,8 +62,8 @@ public class BorrowingServiceImpl implements BorrowingService {
         int currentsBorrowings = member.get().getNbOfCurrentsBorrowings();
 
         // Copy research
-        Copy copy = copyDao.findCopyById( copyId );
-        boolean available = copy.isAvailable();
+        Optional <Copy> copy = copyDao.findCopyById( copyId );
+        boolean available = copy.get().isAvailable();
 
         /*
          * Member has right to borrow only 5 publications

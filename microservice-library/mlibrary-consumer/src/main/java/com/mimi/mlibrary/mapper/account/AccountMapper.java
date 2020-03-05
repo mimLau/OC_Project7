@@ -11,7 +11,10 @@ import java.util.List;
 public interface AccountMapper {
 
     AccountMapper INSTANCE = Mappers.getMapper( AccountMapper.class);
-    AccountDto map( Account account );
-    List<AccountDto> map( List<Account> accounts );
+    AccountDto accToDto( Account account );
+    List<AccountDto> accToDtoList( List<Account> accounts );
+
+    /*Account dtoToAcc( AccountDto accountDto );
+    List<Account> dtoToAccList( List<AccountDto> accountDtos );*/
 
 }

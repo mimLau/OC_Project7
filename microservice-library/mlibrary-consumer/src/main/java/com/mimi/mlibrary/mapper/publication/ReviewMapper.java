@@ -11,6 +11,9 @@ import java.util.List;
 public interface ReviewMapper {
 
     @InheritConfiguration( name = "mapReview")
-    ReviewDto map(Review review );
-    List<ReviewDto> map(List<Review> reviews );
+    ReviewDto reviewToDto(Review review );
+    List<ReviewDto> reviewToDtoList(List<Review> reviews );
+
+    /*Review dtoToReview(ReviewDto reviewDto );
+    List<Review> dtoToReviewList(List<ReviewDto> reviewDtos );*/
 }

@@ -1,7 +1,8 @@
 package com.mimi.mlibrary.mapper.account;
 
-import com.mimi.mlibrary.model.dest.account.MemberDto;
+
 import com.mimi.mlibrary.model.source.account.Member;
+import com.mimi.mlibrary.model.dest.account.MemberDto;
 import org.mapstruct.InheritConfiguration;
 import org.mapstruct.Mapper;
 
@@ -11,7 +12,10 @@ import java.util.List;
 public interface MemberMapper {
 
     @InheritConfiguration( name = "mapMember")
-    MemberDto map( Member member );
-    List<MemberDto> map( List<Member> members );
+    MemberDto membToDto( Member member );
+    List<MemberDto> membToDtoList( List<Member> members );
+
+    /*Member dtoToMemb( MemberDto memberDto );
+    List<Member> dtoToMembList( List<MemberDto> memberDtos );*/
 
 }

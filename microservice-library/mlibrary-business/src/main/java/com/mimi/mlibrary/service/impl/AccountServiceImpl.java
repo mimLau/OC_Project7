@@ -8,7 +8,6 @@ import com.mimi.mlibrary.service.AccountService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class AccountServiceImpl implements AccountService {
@@ -23,49 +22,35 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public List<MemberDto> findAll() {
-        List<Member> members =  memberDao.findAll();
-        List<MemberDto> memberDtos = memberMapper.map( members );
-
-        return memberDtos;
+        return memberMapper.membToDtoList( memberDao.findAll() );
     }
 
     @Override
     public MemberDto findById( int id ) {
-        Optional<Member> member = memberDao.findById( id );
-        MemberDto memberDto = memberMapper.map( member.get() );
-
-        return memberDto;
+        return memberMapper.membToDto( memberDao.findById( id ).orElse(null) );
     }
 
     @Override
     public MemberDto save( Member member) {
         Member savedMember = memberDao.save( member );
-        MemberDto memberDto = memberMapper.map( savedMember );
+        MemberDto memberDto = memberMapper.membToDto( savedMember );
 
         return memberDto;
     }
 
     @Override
     public MemberDto getMemberById( Integer id ) {
-        Optional<Member> member = memberDao.getMemberById( id );
-        MemberDto memberDto = memberMapper.map( member.get() );
-        return memberDto;
+        return memberMapper.membToDto( memberDao.getMemberById( id ).orElse(null ));
     }
 
     @Override
     public MemberDto getMemberByEmail( String email ) {
-        Optional<Member> member = memberDao.getMemberByEmail( email );
-        MemberDto memberDto = memberMapper.map( member.get() );
-
-        return memberDto;
+        return memberMapper.membToDto( memberDao.getMemberByEmail( email ).orElse( null) );
     }
 
     @Override
     public MemberDto getMemberByNames( String firstname, String lastname ) {
-        Optional<Member> member = memberDao.getMemberByNames( firstname, lastname );
-        MemberDto memberDto = memberMapper.map( member.get() );
-
-        return memberDto;
+        return memberMapper.membToDto( memberDao.getMemberByNames( firstname, lastname ).orElse( null) );
     }
 
     @Override

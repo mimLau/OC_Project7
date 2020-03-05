@@ -23,10 +23,10 @@ public interface PublicationService {
     List<PublicationDto> findAllByTitle(String title );
     List<PublicationDto> findAllByAuthor( String name );
     List<PublicationDto> findAllByAuthorId( int id );
-    PublicationDto findAllByIsbn( String isbn );
+    PublicationDto findByIsbn( String isbn );
 
     List<AuthorDto> findAllAuthor();
-    AuthorDto saveAuthor( Author author );
+    AuthorDto saveAuthor( AuthorDto authorDto );
     void deleteAuthorById( int id );
 
     CopyDto findCopyById(int id );
