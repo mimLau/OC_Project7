@@ -1,22 +1,25 @@
 package com.mimi.mlibrary.web.controllers;
 
 import com.mimi.mlibrary.model.dest.publication.*;
-import com.mimi.mlibrary.model.source.publication.*;
 import com.mimi.mlibrary.service.PublicationService;
 import com.mimi.mlibrary.web.exceptions.ResourceNotFoundException;
 import org.joda.time.LocalDate;
 import org.joda.time.format.DateTimeFormat;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.servlet.http.HttpServletResponse;
 import java.net.URI;
 import java.util.List;
 
 @RestController
 public class PublicationController {
 
+    final static Logger logger  = LogManager.getLogger(PublicationController.class);
     private PublicationService publicationService;
 
     public PublicationController(PublicationService publicationService){
@@ -142,6 +145,8 @@ public class PublicationController {
 
     @PostMapping( value = "/Authors" )
     public ResponseEntity<String> addAuthor( @RequestBody AuthorDto authorDto ) {
+
+            //org.hibernate.exception.ConstraintViolationException: could not execute statemen
         AuthorDto addedAuthorDto = publicationService.saveAuthor( authorDto );
         if( addedAuthorDto == null)
             //return ResponseEntity.noContent().build();
@@ -171,13 +176,26 @@ public class PublicationController {
         return copyDtos;
     }
 
-    @GetMapping( value = "/Copies", params = "id")
+   /*@GetMapping( value = "/Copies", params = "id")
     public CopyDto getCoyById( @RequestParam int id ) {
         CopyDto copyDto =  publicationService.findCopyById( id ) ;
-        if( copyDto == null ) throw new ResourceNotFoundException(  "Aucun exemplaire ne correspond à cette id." );
+        if( copyDto == null )
+            throw new ResourceNotFoundException(  "Aucun exemplaire ne correspond à cet id." );
 
         return copyDto;
+    }*/
+
+    @GetMapping( value = "/Copies", params = "id")
+    public ResponseEntity<CopyDto> getCoyById( @RequestParam int id, HttpServletResponse response ) {
+
+        logger.info(" Recherche de l'exemplaire avec l'id: " + id );
+        CopyDto copyDto =  publicationService.findCopyById( id ) ;
+
+        if( copyDto == null )
+            return new ResponseEntity<>( null, HttpStatus.NOT_FOUND);
+        else return new ResponseEntity<>( copyDto, HttpStatus.FOUND );
     }
+
 
     @GetMapping( value = "/Copies/delay" )
     public List<CopyDto> getAllByDelay(  ) {
