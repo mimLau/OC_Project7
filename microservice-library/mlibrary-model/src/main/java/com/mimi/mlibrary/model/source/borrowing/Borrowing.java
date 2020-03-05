@@ -25,28 +25,35 @@ public class Borrowing implements Serializable {
     )
     private Integer id;
 
+    @Column(nullable = false)
     @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
     private LocalDate returnDate;
 
+    @Column(nullable = false)
     @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
     private LocalDate borrowingDate;
 
+    @Column(nullable = false)
     @Type(type = "numeric_boolean")
     private boolean extented;
 
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private BorrowingStatus borrowingStatus;
 
+    @Column(nullable = false)
     @JsonBackReference(value = "copy_borrowing")
     @ManyToOne
     @JoinColumn(name = "copy_fk")
     private Copy copy;
 
+    @Column(nullable = false)
     @JsonBackReference(value = "borrowing_member")
     @ManyToOne
     @JoinColumn(name = "member_fk")
     private Member member;
 
+    @Column(nullable = false)
     private int reminderNb;
 
     public Integer getId() {

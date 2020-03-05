@@ -21,6 +21,7 @@ public class Editor {
             strategy = "native"
     )
     private Integer id;
+    @Column(nullable = false)
     private String name;
 
     @JsonManagedReference(value="book_editor")

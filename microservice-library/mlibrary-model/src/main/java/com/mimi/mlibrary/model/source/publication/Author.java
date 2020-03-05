@@ -23,7 +23,9 @@ public class Author implements Serializable {
             strategy = "native"
     )
     private Integer id;
+    @Column(nullable = false)
     private String firstname;
+    @Column(nullable = false)
     private String lastname;
     private String alias;
 

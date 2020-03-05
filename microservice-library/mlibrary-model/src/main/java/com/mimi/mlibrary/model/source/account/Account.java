@@ -23,11 +23,16 @@ public abstract class Account implements Serializable {
             strategy = "native"
     )
     private Integer id;
+    @Column(nullable = false)
     private String accountOwnerFirstname;
+    @Column(nullable = false)
     private String accountOwnerLastname;
+    @Column(nullable = false)
     private String accountOwnerPass;
+    @Column(nullable = false)
     private String accountOwnerEmail;
     private String accountOwnerPhoneNb;
+    @Column(nullable = false)
     private boolean activeAccount;
 
     @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDate")

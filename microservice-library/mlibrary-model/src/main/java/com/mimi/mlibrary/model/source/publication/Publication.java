@@ -26,15 +26,20 @@ public abstract class Publication implements Serializable {
             strategy = "native"
     )
     private Integer id;
+    @Column(nullable = false)
     private String title;
 
+    @Column(nullable = false)
     private String identificationNb;
+    @Column(nullable = false)
     private int nbOfAvailableCopies;
+    @Column(nullable = false)
     private int nbTotalOfcopies;
 
     @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
     private LocalDate publicationDate;
 
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private Category category;
 

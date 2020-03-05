@@ -13,6 +13,7 @@ import java.util.List;
 public class Member extends Account {
 
     private String barcode;
+    @Column(nullable = false)
     private int nbOfCurrentsBorrowings;
 
 

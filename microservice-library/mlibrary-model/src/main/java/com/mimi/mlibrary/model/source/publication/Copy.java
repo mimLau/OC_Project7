@@ -24,22 +24,27 @@ public class Copy {
             strategy = "native"
     )
     private Integer id;
+    @Column(nullable = false)
     private String barcode;
+    @Column(nullable = false)
     private boolean available;
 
     @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
     private LocalDate returnDate;
 
+    @Column(nullable = false)
     @JsonManagedReference(value = "copy_borrowing")
     @OneToMany(mappedBy = "copy")
     private List<Borrowing> borrowings;
 
-    @JsonBackReference(value="publication_copy")
     @ManyToOne
+    @Column(nullable = false)
     @JoinColumn(name="publication_fk")
+    @JsonBackReference(value="publication_copy")
     private Publication publication;
 
     @ManyToOne
+    @Column(nullable = false)
     @JoinColumn(name = "library_fk")
     private Library library;
 
