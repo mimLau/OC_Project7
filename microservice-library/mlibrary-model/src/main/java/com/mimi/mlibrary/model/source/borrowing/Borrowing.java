@@ -41,13 +41,11 @@ public class Borrowing implements Serializable {
     @Enumerated(EnumType.STRING)
     private BorrowingStatus borrowingStatus;
 
-    @Column(nullable = false)
     @JsonBackReference(value = "copy_borrowing")
     @ManyToOne
     @JoinColumn(name = "copy_fk")
     private Copy copy;
 
-    @Column(nullable = false)
     @JsonBackReference(value = "borrowing_member")
     @ManyToOne
     @JoinColumn(name = "member_fk")
