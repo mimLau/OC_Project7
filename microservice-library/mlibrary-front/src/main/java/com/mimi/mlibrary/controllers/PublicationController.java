@@ -1,4 +1,4 @@
-package com.mimi.mlibrary.web.controllers;
+package com.mimi.mlibrary.controllers;
 
 import com.mimi.mlibrary.model.dest.publication.*;
 import com.mimi.mlibrary.service.PublicationService;

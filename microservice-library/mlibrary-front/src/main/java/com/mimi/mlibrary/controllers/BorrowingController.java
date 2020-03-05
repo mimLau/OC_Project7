@@ -1,4 +1,4 @@
-package com.mimi.mlibrary.web.controllers;
+package com.mimi.mlibrary.controllers;
 
 import com.mimi.mlibrary.model.dest.borrowing.BorrowingDto;
 import com.mimi.mlibrary.model.source.borrowing.Borrowing;
@@ -9,7 +9,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 public class BorrowingController {

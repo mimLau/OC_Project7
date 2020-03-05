@@ -1,4 +1,4 @@
-package com.mimi.mlibrary.web.controllers;
+package com.mimi.mlibrary.controllers;
 
 import com.mimi.mlibrary.model.dest.account.MemberDto;
 import com.mimi.mlibrary.model.source.account.Member;
@@ -9,7 +9,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 public class  MemberController {
