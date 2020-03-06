@@ -98,9 +98,6 @@
                 <artifactId>usertype.core</artifactId>
                 <version>7.0.0.CR1</version>
             </dependency>
-
-
-
         </dependencies>
 
     </dependencyManagement>

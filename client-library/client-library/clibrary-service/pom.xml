@@ -5,14 +5,13 @@
 
   <parent>
     <groupId>com.mimi.clibrary</groupId>
-    <artifactId>clibrary</artifactId>
+    <artifactId>client-library</artifactId>
     <version>1.0-SNAPSHOT</version>
   </parent>
 
-  <artifactId>library-model</artifactId>
+  <artifactId>clibrary-service</artifactId>
   <version>1.0-SNAPSHOT</version>
-  <name>library-model</name>
-  <url>http://maven.apache.org</url>
+  <packaging>jar</packaging>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -23,6 +22,17 @@
   <!-- =============================================================== -->
 
   <dependencies>
+    <!-- ===== Modules ===== -->
+    <dependency>
+      <groupId>com.mimi.clibrary</groupId>
+      <artifactId>clibrary-consumer</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.mimi.clibrary</groupId>
+      <artifactId>clibrary-model</artifactId>
+    </dependency>
+
+
     <!-- ===== Third-party libraries ===== -->
     <dependency>
       <groupId>junit</groupId>

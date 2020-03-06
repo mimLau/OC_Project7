@@ -5,14 +5,12 @@
 
   <parent>
     <groupId>com.mimi.clibrary</groupId>
-    <artifactId>clibrary</artifactId>
+    <artifactId>client-library</artifactId>
     <version>1.0-SNAPSHOT</version>
   </parent>
 
-  <artifactId>library-consumer</artifactId>
-  <version>1.0-SNAPSHOT</version>
-  <name>library-consumer</name>
-  <url>http://maven.apache.org</url>
+  <artifactId>clibrary-consumer</artifactId>
+  <packaging>jar</packaging>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -26,7 +24,7 @@
     <!-- ===== Modules ===== -->
     <dependency>
       <groupId>com.mimi.clibrary</groupId>
-      <artifactId>library-model</artifactId>
+      <artifactId>clibrary-model</artifactId>
     </dependency>
 
     <!-- ===== Third-party libraries ===== -->
