@@ -1,7 +1,7 @@
 package com.mimi.mlibrary.mapper.publication;
 
-import com.mimi.mlibrary.model.source.publication.Copy;
-import com.mimi.mlibrary.model.dest.publication.CopyDto;
+import com.mimi.mlibrary.model.entity.publication.Copy;
+import com.mimi.mlibrary.model.dto.publication.CopyDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 

@@ -1,7 +1,7 @@
 package com.mimi.mlibrary.mapper.borrowing;
 
-import com.mimi.mlibrary.model.dest.borrowing.BorrowingDto;
-import com.mimi.mlibrary.model.source.borrowing.Borrowing;
+import com.mimi.mlibrary.model.dto.borrowing.BorrowingDto;
+import com.mimi.mlibrary.model.entity.borrowing.Borrowing;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 

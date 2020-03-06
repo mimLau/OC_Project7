@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         <modelVersion>4.0.0</modelVersion>
+
+        <parent>
+            <artifactId>microservice-library</artifactId>
+            <groupId>com.mimi.mlibrary</groupId>
+            <version>0.0.1-SNAPSHOT</version>
+        </parent>
+
+        <artifactId>mlibrary-service</artifactId>
+        <packaging>jar</packaging>
+
+
+
+        <!-- =============================================================== -->
+        <!-- Dependencies -->
+        <!-- =============================================================== -->
+
+        <dependencies>
+
+            <dependency>
+                <groupId>com.mimi.mlibrary</groupId>
+                <artifactId>mlibrary-consumer</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+            </dependency>
+
+
+            <dependency>
+                <groupId>joda-time</groupId>
+                <artifactId>joda-time</artifactId>
+            </dependency>
+
+            <dependency>
+                <groupId>org.jadira.usertype</groupId>
+                <artifactId>usertype.core</artifactId>
+            </dependency>
+
+        </dependencies>
+
+</project>

@@ -1,7 +1,7 @@
 package com.mimi.mlibrary.mapper.publication;
 
-import com.mimi.mlibrary.model.dest.publication.BookDto;
-import com.mimi.mlibrary.model.source.publication.Book;
+import com.mimi.mlibrary.model.dto.publication.BookDto;
+import com.mimi.mlibrary.model.entity.publication.Book;
 import org.mapstruct.InheritConfiguration;
 import org.mapstruct.MapperConfig;
 import org.mapstruct.MappingTarget;

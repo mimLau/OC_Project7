@@ -1,8 +1,8 @@
 package com.mimi.mlibrary.mapper.account;
 
 
-import com.mimi.mlibrary.model.source.account.Member;
-import com.mimi.mlibrary.model.dest.account.MemberDto;
+import com.mimi.mlibrary.model.entity.account.Member;
+import com.mimi.mlibrary.model.dto.account.MemberDto;
 import org.mapstruct.InheritConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;

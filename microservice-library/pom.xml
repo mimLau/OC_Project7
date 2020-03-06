@@ -45,8 +45,8 @@
     <modules>
         <module>mlibrary-model</module>
         <module>mlibrary-consumer</module>
-        <module>mlibrary-business</module>
-        <module>mlibrary-front</module>
+        <module>mlibrary-service</module>
+        <module>mlibrary-webservice</module>
     </modules>
 
 

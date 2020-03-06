@@ -1,7 +1,7 @@
 package com.mimi.mlibrary.mapper.publication;
 
-import com.mimi.mlibrary.model.source.publication.Author;
-import com.mimi.mlibrary.model.dest.publication.AuthorDto;
+import com.mimi.mlibrary.model.entity.publication.Author;
+import com.mimi.mlibrary.model.dto.publication.AuthorDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
