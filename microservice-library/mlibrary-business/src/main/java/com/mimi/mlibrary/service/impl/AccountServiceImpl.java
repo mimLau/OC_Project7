@@ -1,5 +1,6 @@
 package com.mimi.mlibrary.service.impl;
 
+import com.fasterxml.jackson.annotation.OptBoolean;
 import com.mimi.mlibrary.dao.account.MemberDao;
 import com.mimi.mlibrary.mapper.account.MemberMapper;
 import com.mimi.mlibrary.model.dest.account.MemberDto;
@@ -8,49 +9,48 @@ import com.mimi.mlibrary.service.AccountService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AccountServiceImpl implements AccountService {
 
     private MemberDao memberDao;
-    private MemberMapper memberMapper;
 
-    AccountServiceImpl( MemberDao memberDao, MemberMapper memberMapper ) {
+    AccountServiceImpl( MemberDao memberDao ) {
         this.memberDao = memberDao;
-        this.memberMapper = memberMapper;
     }
 
     @Override
     public List<MemberDto> findAll() {
-        return memberMapper.membToDtoList( memberDao.findAll() );
+        return MemberMapper.INSTANCE.toDtoList( memberDao.findAll() );
     }
 
     @Override
     public MemberDto findById( int id ) {
-        return memberMapper.membToDto( memberDao.findById( id ).orElse(null) );
+        return MemberMapper.INSTANCE.toDto( memberDao.findById( id ).orElse(null) );
     }
 
     @Override
-    public MemberDto save( Member member) {
-        Member savedMember = memberDao.save( member );
-        MemberDto memberDto = memberMapper.membToDto( savedMember );
+    public MemberDto save( MemberDto memberDto ) {
+        //TODO Verify if member already exists
+        Optional.of( MemberMapper.INSTANCE.toEntity( memberDto ) ).ifPresent( member -> memberDao.save( member ));
 
         return memberDto;
     }
 
     @Override
     public MemberDto getMemberById( Integer id ) {
-        return memberMapper.membToDto( memberDao.getMemberById( id ).orElse(null ));
+        return MemberMapper.INSTANCE.toDto( memberDao.getMemberById( id ).orElse(null ));
     }
 
     @Override
     public MemberDto getMemberByEmail( String email ) {
-        return memberMapper.membToDto( memberDao.getMemberByEmail( email ).orElse( null) );
+        return MemberMapper.INSTANCE.toDto( memberDao.getMemberByEmail( email ).orElse( null) );
     }
 
     @Override
     public MemberDto getMemberByNames( String firstname, String lastname ) {
-        return memberMapper.membToDto( memberDao.getMemberByNames( firstname, lastname ).orElse( null) );
+        return MemberMapper.INSTANCE.toDto( memberDao.getMemberByNames( firstname, lastname ).orElse( null) );
     }
 
     @Override

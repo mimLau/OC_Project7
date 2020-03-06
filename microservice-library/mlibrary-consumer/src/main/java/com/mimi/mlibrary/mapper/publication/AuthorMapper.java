@@ -11,11 +11,12 @@ import java.util.List;
 public interface AuthorMapper {
 
     AuthorMapper INSTANCE = Mappers.getMapper( AuthorMapper.class );
-    AuthorDto authToDto( Author author );
-    List<AuthorDto> authToDtoList( List<Author> authors );
 
-    Author dtoToAuth( AuthorDto authorDto );
-    List<Author> dtoToAuthList( List<AuthorDto> authorDtos );
+    AuthorDto toDto( Author author );
+    List<AuthorDto> toDtoList( List<Author> authors );
+
+    Author toEntity( AuthorDto authorDto );
+    List<Author> toEntityList( List<AuthorDto> authorDtos );
 
 
 }

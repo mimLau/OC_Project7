@@ -5,7 +5,6 @@ import com.mimi.mlibrary.dao.publication.CopyDao;
 import com.mimi.mlibrary.dao.publication.PublicationDao;
 import com.mimi.mlibrary.mapper.publication.*;
 import com.mimi.mlibrary.model.dest.publication.*;
-import com.mimi.mlibrary.model.source.publication.Author;
 import com.mimi.mlibrary.service.PublicationService;
 import org.joda.time.LocalDate;
 import org.springframework.stereotype.Service;
@@ -16,29 +15,15 @@ import java.util.Optional;
 @Service
 public class PublicationServiceImpl implements PublicationService {
 
-
-    private PublicationMapper publicationMapper;
-    private BookMapper bookMapper;
-    private NewspaperMapper newspaperMapper;
-    private ReviewMapper reviewMapper;
-    private CopyMapper copyMapper;
-    private AuthorMapper authorMapper;
-
     private PublicationDao publicationDao;
     private AuthorDao authorDao;
     private CopyDao copyDao;
 
 
-    PublicationServiceImpl(PublicationDao publicationDao, PublicationMapper publicationMapper, AuthorDao authorDao, CopyDao copyDao, BookMapper bookMapper, NewspaperMapper newspaperMapper, ReviewMapper reviewMapper, CopyMapper copyMapper, AuthorMapper authorMapper) {
+    PublicationServiceImpl( PublicationDao publicationDao, AuthorDao authorDao, CopyDao copyDao ) {
         this.publicationDao = publicationDao;
-        this.publicationMapper = publicationMapper;
         this.authorDao = authorDao;
         this.copyDao = copyDao;
-        this.bookMapper = bookMapper;
-        this.newspaperMapper = newspaperMapper;
-        this.reviewMapper = reviewMapper;
-        this.copyMapper = copyMapper;
-        this.authorMapper = authorMapper;
     }
 
 
@@ -49,7 +34,7 @@ public class PublicationServiceImpl implements PublicationService {
 
     @Override
     public List<BookDto> findAllBooks() {
-        return bookMapper.bookToDtoList( publicationDao.findAllBooks() );
+        return BookMapper.INSTANCE.toDtoList( publicationDao.findAllBooks() );
     }
 
 
@@ -59,13 +44,13 @@ public class PublicationServiceImpl implements PublicationService {
 
     @Override
     public List<NewspaperDto> findAllNewspapers() {
-        return newspaperMapper.newsToDtoList( publicationDao.findAllNewspapers() );
+        return NewspaperMapper.INSTANCE.toDtoList( publicationDao.findAllNewspapers() );
     }
 
     @Override
     public List<NewspaperDto> findAllNewspapersByDate( LocalDate date ) {
         //TODO convert date or something like this
-        return newspaperMapper.newsToDtoList( publicationDao.findAllNewspaperByDate( date ) );
+        return NewspaperMapper.INSTANCE.toDtoList( publicationDao.findAllNewspaperByDate( date ) );
     }
 
 
@@ -76,12 +61,12 @@ public class PublicationServiceImpl implements PublicationService {
 
     @Override
     public List<ReviewDto> findAllReviews() {
-        return reviewMapper.reviewToDtoList( publicationDao.findAllReviews());
+        return ReviewMapper.INSTANCE.toDtoList( publicationDao.findAllReviews());
     }
 
     @Override
     public List<ReviewDto> findAllReviewsByDate( LocalDate date ) {
-        return reviewMapper.reviewToDtoList( publicationDao.findAllReviewsByDate( date ) );
+        return ReviewMapper.INSTANCE.toDtoList( publicationDao.findAllReviewsByDate( date ) );
     }
 
 
@@ -93,32 +78,32 @@ public class PublicationServiceImpl implements PublicationService {
 
     @Override
     public PublicationDto findPublicationById( int id ) {
-        return publicationMapper.INSTANCE.pubToDto( publicationDao.findPublicationById( id ).orElse( null ));
+        return PublicationMapper.INSTANCE.toDto( publicationDao.findPublicationById( id ).orElse( null ));
     }
 
     @Override
     public List<PublicationDto> findAllPublications() {
-        return  publicationMapper.pubToDtoList( publicationDao.findAllPublications());
+        return  PublicationMapper.INSTANCE.toDtoList( publicationDao.findAllPublications());
     }
 
     @Override
     public List<PublicationDto> findAllByTitle( String title ) {
-       return  publicationMapper.pubToDtoList( publicationDao.findAllByTitle( title ));
+       return  PublicationMapper.INSTANCE.toDtoList( publicationDao.findAllByTitle( title ));
     }
 
     @Override
     public List<PublicationDto> findAllByAuthor( String name ) {
-        return publicationMapper.pubToDtoList( publicationDao.findAllByAuthor( name ) );
+        return PublicationMapper.INSTANCE.toDtoList( publicationDao.findAllByAuthor( name ) );
     }
 
     @Override
     public List<PublicationDto> findAllByAuthorId( int id ) {
-        return publicationMapper.pubToDtoList( publicationDao.findAllByAuthorId( id ) );
+        return PublicationMapper.INSTANCE.toDtoList( publicationDao.findAllByAuthorId( id ) );
     }
 
     @Override
     public PublicationDto findByIsbn( String idNb ) {
-        return publicationMapper.pubToDto( publicationDao.findAllByIsbn( idNb).orElse( null ));
+        return PublicationMapper.INSTANCE.toDto( publicationDao.findAllByIsbn( idNb).orElse( null ));
     }
 
 
@@ -129,13 +114,13 @@ public class PublicationServiceImpl implements PublicationService {
 
    @Override
     public List<AuthorDto> findAllAuthor() {
-       return authorMapper.authToDtoList( authorDao.findAll() );
+       return AuthorMapper.INSTANCE.toDtoList( authorDao.findAll() );
     }
 
     @Override
     public AuthorDto saveAuthor( AuthorDto authorDto ) {
 
-       Optional.of( AuthorMapper.INSTANCE.dtoToAuth( authorDto ) ).ifPresent( author -> authorDao.save( author ) );
+       Optional.of( AuthorMapper.INSTANCE.toEntity( authorDto ) ).ifPresent( author -> authorDao.save( author ) );
        //authorDao.save( AuthorMapper.INSTANCE.dtoToAuth( authorDto ));
        return authorDto;
     }
@@ -153,18 +138,18 @@ public class PublicationServiceImpl implements PublicationService {
 
     @Override
     public List<CopyDto> findAllCopy() {
-        return copyMapper.copyTodtoList( copyDao.findAll() );
+        return CopyMapper.INSTANCE.toDtoList( copyDao.findAll() );
     }
 
     @Override
     public List<CopyDto> findAllCopyByPublicationId( int publicationId ) {
-        return copyMapper.copyTodtoList( copyDao.findAllCopyByPublicationId( publicationId ) );
+        return CopyMapper.INSTANCE.toDtoList( copyDao.findAllCopyByPublicationId( publicationId ) );
     }
 
     @Override
     public List<CopyDto> findAllCopyByDelay( ) {
         LocalDate localDate = new LocalDate();
-        return copyMapper.copyTodtoList( copyDao.findAllByDelay( localDate ) );
+        return CopyMapper.INSTANCE.toDtoList( copyDao.findAllByDelay( localDate ) );
     }
 
     @Override
@@ -175,7 +160,7 @@ public class PublicationServiceImpl implements PublicationService {
 
     @Override
     public CopyDto findCopyById( int id ) {
-        return copyMapper.copyToDto( copyDao.findCopyById( id ).orElse(null) );
+        return CopyMapper.INSTANCE.toDto( copyDao.findCopyById( id ).orElse(null) );
     }
 
 }

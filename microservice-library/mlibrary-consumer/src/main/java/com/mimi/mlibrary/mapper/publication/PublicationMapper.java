@@ -12,13 +12,8 @@ import java.util.List;
 public interface PublicationMapper {
 
     PublicationMapper INSTANCE = Mappers.getMapper( PublicationMapper.class );
-    PublicationDto pubToDto( Publication publication );
-    List <PublicationDto> pubToDtoList( List<Publication> publications );
 
-    /*Publication dtoToPub( PublicationDto publicationDto );
-    List <Publication> dtoToPubList( List<PublicationDto> publicationDtos );*/
-
-
-
+    PublicationDto toDto( Publication publication );
+    List <PublicationDto> toDtoList( List<Publication> publications );
 
 }

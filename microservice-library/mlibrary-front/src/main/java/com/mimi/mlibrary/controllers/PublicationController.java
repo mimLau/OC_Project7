@@ -2,7 +2,7 @@ package com.mimi.mlibrary.controllers;
 
 import com.mimi.mlibrary.model.dest.publication.*;
 import com.mimi.mlibrary.service.PublicationService;
-import com.mimi.mlibrary.web.exceptions.ResourceNotFoundException;
+import com.mimi.mlibrary.exceptions.ResourceNotFoundException;
 import org.joda.time.LocalDate;
 import org.joda.time.format.DateTimeFormat;
 import org.apache.logging.log4j.LogManager;

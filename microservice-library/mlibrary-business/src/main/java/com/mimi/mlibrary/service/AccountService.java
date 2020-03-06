@@ -10,9 +10,9 @@ public interface AccountService {
 
     List<MemberDto> findAll();
     MemberDto findById( int id );
-    MemberDto save(Member Member);
+    MemberDto save( MemberDto memberDto );
     MemberDto getMemberById( Integer id );
-    MemberDto getMemberByEmail( String email);
+    MemberDto getMemberByEmail( String email );
     MemberDto getMemberByNames( String firstname, String lastname );
     void updateNbOfCurrentsBorrowings( int id );
 }

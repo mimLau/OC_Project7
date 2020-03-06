@@ -1,7 +1,6 @@
 package com.mimi.mlibrary.controllers;
 
 import com.mimi.mlibrary.model.dest.account.MemberDto;
-import com.mimi.mlibrary.model.source.account.Member;
 import com.mimi.mlibrary.service.AccountService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -40,8 +39,8 @@ public class  MemberController {
     }
 
     @PostMapping( value = "/Members" )
-    public ResponseEntity<Void> addMember( @RequestBody Member member ) {
-        MemberDto addedMember = accountService.save( member );
+    public ResponseEntity<Void> addMember( @RequestBody MemberDto memberDto ) {
+        MemberDto addedMember = accountService.save( memberDto );
         if( addedMember == null)
             return ResponseEntity.noContent().build();
 

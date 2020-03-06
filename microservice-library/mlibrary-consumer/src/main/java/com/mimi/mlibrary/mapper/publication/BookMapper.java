@@ -4,17 +4,20 @@ import com.mimi.mlibrary.model.source.publication.Book;
 import com.mimi.mlibrary.model.dest.publication.BookDto;
 import org.mapstruct.InheritConfiguration;
 import org.mapstruct.Mapper;
+import org.mapstruct.factory.Mappers;
 
 import java.util.List;
 
 @Mapper( config = BookMapperConfig.class )
 public interface BookMapper {
 
-    @InheritConfiguration( name = "mapBook")
-    BookDto bookToDto( Book book );
-    List<BookDto> bookToDtoList( List<Book> books );
+    BookMapper INSTANCE = Mappers.getMapper( BookMapper.class );
 
-    Book dtoToBook( BookDto bookDto );
-    List<Book> dtoToBookList( List<BookDto> bookDtos );
+    @InheritConfiguration( name = "mapBook")
+    BookDto toDto( Book book );
+    List<BookDto> toDtoList( List<Book> books );
+
+    Book toBook( BookDto bookDto );
+    List<Book> toBookList( List<BookDto> bookDtos );
 
 }
