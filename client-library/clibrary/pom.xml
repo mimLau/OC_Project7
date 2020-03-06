@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.mimi.clibrary</groupId>
+  <artifactId>clibrary</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+
+  <name>clibrary</name>
+  <url>http://maven.apache.org</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <!-- =============================================================== -->
+  <!-- Modules -->
+  <!-- =============================================================== -->
+
+  <modules>
+    <module>library-batch</module>
+    <module>library-webapp</module>
+    <module>library-service</module>
+    <module>library-consumer</module>
+    <module>library-model</module>
+  </modules>
+
+  <!-- =============================================================== -->
+  <!-- Dependencies management -->
+  <!-- =============================================================== -->
+  <dependencyManagement>
+    <dependencies>
+      <!-- ===== Modules ===== -->
+    <dependency>
+      <groupId>com.mimi.clibrary</groupId>
+      <artifactId>library-batch</artifactId>
+      <version>1.0-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>com.mimi.clibrary</groupId>
+      <artifactId>library-webapp</artifactId>
+      <version>1.0-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>com.mimi.clibrary</groupId>
+      <artifactId>library-consumer</artifactId>
+      <version>1.0-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>com.mimi.clibrary</groupId>
+      <artifactId>library-model</artifactId>
+      <version>1.0-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>com.mimi.clibrary</groupId>
+      <artifactId>library-service</artifactId>
+      <version>1.0-SNAPSHOT</version>
+    </dependency>
+  </dependencies>
+  </dependencyManagement>
+
+</project>
