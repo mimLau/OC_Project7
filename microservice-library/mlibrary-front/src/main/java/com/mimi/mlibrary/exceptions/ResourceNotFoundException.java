@@ -1,4 +1,4 @@
-package com.mimi.mlibrary.web.exceptions;
+package com.mimi.mlibrary.exceptions;
 
 
 import org.springframework.http.HttpStatus;
