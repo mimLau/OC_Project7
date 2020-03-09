@@ -4,7 +4,7 @@ package com.mimi.mlibrary.model.entity.publication;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
-import org.joda.time.LocalDate;
+import java.time.LocalDate;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -36,7 +36,8 @@ public abstract class Publication implements Serializable {
     @Column(nullable = false)
     private int nbTotalOfcopies;
 
-    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
+    //@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
+    //private LocalDate publicationDate;
     private LocalDate publicationDate;
 
     @Column(nullable = false)
