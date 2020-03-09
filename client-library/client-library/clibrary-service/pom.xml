@@ -27,6 +27,7 @@
       <groupId>com.mimi.clibrary</groupId>
       <artifactId>clibrary-consumer</artifactId>
     </dependency>
+
     <dependency>
       <groupId>com.mimi.clibrary</groupId>
       <artifactId>clibrary-model</artifactId>
