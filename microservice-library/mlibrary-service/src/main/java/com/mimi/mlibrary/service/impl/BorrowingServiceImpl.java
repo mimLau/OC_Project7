@@ -10,7 +10,7 @@ import com.mimi.mlibrary.model.entity.borrowing.Borrowing;
 import com.mimi.mlibrary.model.entity.borrowing.BorrowingStatus;
 import com.mimi.mlibrary.model.entity.publication.Copy;
 import com.mimi.mlibrary.service.contract.BorrowingService;
-import org.joda.time.LocalDate;
+import java.time.LocalDate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -71,7 +71,7 @@ public class BorrowingServiceImpl implements BorrowingService {
          */
         if( currentsBorrowings < 5 && available == true ) {
 
-            LocalDate today = new LocalDate();
+            LocalDate today = LocalDate.now();
 
             copyRepository.updateCopyAvailability( false, copyId );
             copyRepository.updateCopyReturnDateById( today,copyId );
