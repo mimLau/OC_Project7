@@ -3,7 +3,7 @@ package com.mimi.mlibrary.model.dto.borrowing;
 import com.mimi.mlibrary.model.entity.account.Member;
 import com.mimi.mlibrary.model.entity.borrowing.BorrowingStatus;
 import com.mimi.mlibrary.model.entity.publication.Copy;
-import org.joda.time.LocalDate;
+import java.time.LocalDate;
 
 
 public class BorrowingDto {
