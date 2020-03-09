@@ -2,13 +2,15 @@ package com.mimi.mlibrary.service.impl;
 
 import com.mimi.mlibrary.repository.publication.AuthorRepository;
 import com.mimi.mlibrary.repository.publication.CopyRepository;
+import com.mimi.mlibrary.repository.publication.LibraryRepository;
 import com.mimi.mlibrary.repository.publication.PublicationRepository;
 import com.mimi.mlibrary.mapper.publication.*;
 import com.mimi.mlibrary.model.dto.publication.*;
 import com.mimi.mlibrary.service.contract.PublicationService;
-import org.joda.time.LocalDate;
+import java.time.LocalDate;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,15 +20,21 @@ public class PublicationServiceImpl implements PublicationService {
     private PublicationRepository publicationRepository;
     private AuthorRepository authorRepository;
     private CopyRepository copyRepository;
+    private LibraryRepository libraryRepository;
 
 
-    PublicationServiceImpl(PublicationRepository publicationRepository, AuthorRepository authorRepository, CopyRepository copyRepository) {
+    PublicationServiceImpl(PublicationRepository publicationRepository, AuthorRepository authorRepository, CopyRepository copyRepository, LibraryRepository libraryRepository) {
         this.publicationRepository = publicationRepository;
         this.authorRepository = authorRepository;
         this.copyRepository = copyRepository;
+        this.libraryRepository = libraryRepository;
     }
 
 
+    @Override
+    public List<LibraryDto> findAllLibraries() {
+        return LibraryMapper.INSTANCE.toDtoList( libraryRepository.findAllLibraries() );
+    }
 
     /****************
      * Books
@@ -148,7 +156,7 @@ public class PublicationServiceImpl implements PublicationService {
 
     @Override
     public List<CopyDto> findAllCopyByDelay( ) {
-        LocalDate localDate = new LocalDate();
+        LocalDate localDate = LocalDate.now();
         return CopyMapper.INSTANCE.toDtoList( copyRepository.findAllByDelay( localDate ) );
     }
 
