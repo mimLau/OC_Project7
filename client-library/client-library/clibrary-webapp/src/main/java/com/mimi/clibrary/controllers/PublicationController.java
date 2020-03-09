@@ -6,7 +6,8 @@ import org.mimi.clibrary.proxies.FeignProxy;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 
 import java.util.List;
 

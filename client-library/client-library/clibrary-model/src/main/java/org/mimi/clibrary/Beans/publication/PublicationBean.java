@@ -5,7 +5,7 @@ import java.time.LocalDate;
 
 import java.util.List;
 
-public abstract class PublicationBean {
+public  class PublicationBean {
 
     private int id;
     private String title;
