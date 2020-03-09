@@ -5,7 +5,7 @@ import com.mimi.mlibrary.model.entity.account.Member;
 import com.mimi.mlibrary.model.entity.publication.Copy;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
-import org.joda.time.LocalDate;
+import java.time.LocalDate;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -26,11 +26,11 @@ public class Borrowing implements Serializable {
     private Integer id;
 
     @Column(nullable = false)
-    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
+   // @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
     private LocalDate returnDate;
 
     @Column(nullable = false)
-    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
+   // @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
     private LocalDate borrowingDate;
 
     @Column(nullable = false)
