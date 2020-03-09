@@ -4,12 +4,13 @@ import com.mimi.mlibrary.model.entity.publication.Book;
 import com.mimi.mlibrary.model.entity.publication.Newspaper;
 import com.mimi.mlibrary.model.entity.publication.Publication;
 import com.mimi.mlibrary.model.entity.publication.Review;
-import org.joda.time.LocalDate;
+import java.time.LocalDate;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
