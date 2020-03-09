@@ -3,10 +3,10 @@ package com.mimi.mlibrary.controllers;
 import com.mimi.mlibrary.model.dto.publication.*;
 import com.mimi.mlibrary.service.contract.PublicationService;
 import com.mimi.mlibrary.exceptions.ResourceNotFoundException;
-import org.joda.time.LocalDate;
-import org.joda.time.format.DateTimeFormat;
+import java.time.LocalDate;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +14,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.servlet.http.HttpServletResponse;
 import java.net.URI;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -26,6 +27,13 @@ public class PublicationController {
         this.publicationService = publicationService;
     }
 
+    @GetMapping( value = "/Libraries" )
+    public List<LibraryDto> getAllLibraries() {
+        List<LibraryDto> libraryDtos = publicationService.findAllLibraries();
+        if( libraryDtos.isEmpty() ) throw new ResourceNotFoundException(  "La liste des librairies est vide." );
+
+        return libraryDtos;
+    }
 
     /****************
      * Books
@@ -53,10 +61,10 @@ public class PublicationController {
     }
 
     @GetMapping( value = "/Newspapers", params = "date")
-    public List<NewspaperDto> getAllNewspapersByDate( @RequestParam String date ) {
+    public List<NewspaperDto> getAllNewspapersByDate( @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date ) {
 
-        LocalDate localDate = LocalDate.parse( date, DateTimeFormat.forPattern("yyyy/MM/dd"));
-        List<NewspaperDto> newspaperDtos = publicationService.findAllNewspapersByDate( localDate );
+        //LocalDate localDate = LocalDate.parse( date, DateTimeFormat.forPattern("yyyy/MM/dd"));
+        List<NewspaperDto> newspaperDtos = publicationService.findAllNewspapersByDate( date );
         if( newspaperDtos.isEmpty() ) throw new ResourceNotFoundException(  "Aucun journal ne correspond à cette date." );
 
         return newspaperDtos;
