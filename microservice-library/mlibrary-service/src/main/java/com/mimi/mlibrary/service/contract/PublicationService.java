@@ -1,12 +1,14 @@
 package com.mimi.mlibrary.service.contract;
 
 import com.mimi.mlibrary.model.dto.publication.*;
-import org.joda.time.LocalDate;
+import java.time.LocalDate;
 
+import java.util.Date;
 import java.util.List;
 
 public interface PublicationService {
 
+    List<LibraryDto> findAllLibraries();
 
     List<BookDto> findAllBooks();
 
