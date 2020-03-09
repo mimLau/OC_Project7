@@ -1,6 +1,6 @@
 package org.mimi.clibrary.Beans.publication;
 
-import org.joda.time.LocalDate;
+import java.time.LocalDate;
 import org.mimi.clibrary.Beans.borrowing.BorrowingBean;
 
 import java.util.List;
