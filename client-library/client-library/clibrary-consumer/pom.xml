@@ -21,6 +21,7 @@
   <!-- =============================================================== -->
 
   <dependencies>
+
     <!-- ===== Modules ===== -->
     <dependency>
       <groupId>com.mimi.clibrary</groupId>
@@ -34,5 +35,20 @@
       <version>3.8.1</version>
       <scope>test</scope>
     </dependency>
+
+    <dependency>
+      <groupId>org.springframework.cloud</groupId>
+      <artifactId>spring-cloud-openfeign-core</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>joda-time</groupId>
+      <artifactId>joda-time</artifactId>
+    </dependency>
+    <!-- dependency>
+      <groupId>org.jadira.usertype</groupId>
+      <artifactId>usertype.core</artifactId>
+    </dependency -->
+
   </dependencies>
 </project>
