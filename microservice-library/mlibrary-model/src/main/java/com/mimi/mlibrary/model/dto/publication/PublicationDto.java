@@ -2,7 +2,7 @@ package com.mimi.mlibrary.model.dto.publication;
 
 import com.mimi.mlibrary.model.entity.publication.Category;
 import com.mimi.mlibrary.model.entity.publication.Copy;
-import org.joda.time.LocalDate;
+import java.time.LocalDate;
 
 import java.util.List;
 
