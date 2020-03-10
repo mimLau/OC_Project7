@@ -4,18 +4,21 @@ import com.mimi.mlibrary.model.dto.account.EmployeeDto;
 import com.mimi.mlibrary.model.entity.account.Employee;
 import org.mapstruct.InheritConfiguration;
 import org.mapstruct.Mapper;
+import org.mapstruct.factory.Mappers;
 
 import java.util.List;
 
 @Mapper( config = EmployeeMapperConfig.class )
 public interface  EmployeeMapper {
 
-    @InheritConfiguration( name = "mapEmployee")
-    EmployeeDto empToDto( Employee employee );
-    List<EmployeeDto> empToDtoList( List<Employee> employees );
+    EmployeeMapper INSTANCE = Mappers.getMapper( EmployeeMapper.class );
 
-    /*Employee dtoToEmp( EmployeeDto employeeDto );
-    List<Employee> dtoToEmpList( List<EmployeeDto> employeeDtos );*/
+    @InheritConfiguration( name = "mapEmployee")
+    EmployeeDto toDto( Employee employee );
+    List<EmployeeDto> toDtoList( List<Employee> employees );
+
+    Employee toEntity( EmployeeDto employeeDto );
+    List<Employee> toEntityList( List<EmployeeDto> employeeDtos );
 
 
 }
