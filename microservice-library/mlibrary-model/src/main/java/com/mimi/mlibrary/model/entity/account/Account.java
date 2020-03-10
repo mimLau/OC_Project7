@@ -11,7 +11,7 @@ import java.io.Serializable;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @Table(name = "accounts")
 @DiscriminatorColumn(name = "User_type")
-public abstract class Account implements Serializable {
+public class Account implements Serializable {
 
     @Id
     @GeneratedValue(
