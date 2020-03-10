@@ -6,24 +6,23 @@ import org.mimi.clibrary.proxies.FeignProxy;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 
 import java.util.List;
 
 @Controller
-public class PublicationController {
+public class PublicationClientController {
 
-    private FeignProxy feignProxy;
+    private FeignProxy proxy;
 
-    public PublicationController( FeignProxy feignProxy ) {
-        this.feignProxy = feignProxy;
+    public PublicationClientController(FeignProxy proxy ) {
+        this.proxy = proxy;
     }
 
     @RequestMapping("/Publications")
     public String publication( Model model) {
 
-        List<PublicationBean> publications = feignProxy.getAllPublications();
+        List<PublicationBean> publications = proxy.getAllPublications();
         model.addAttribute( "publications", publications );
         return "publication";
     }

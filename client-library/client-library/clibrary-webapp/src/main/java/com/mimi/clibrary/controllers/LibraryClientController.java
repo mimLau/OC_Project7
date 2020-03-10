@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import java.util.List;
 
 @Controller
-public class LibraryController {
+public class LibraryClientController {
 
     private FeignProxy feignProxy;
 
-    public LibraryController(FeignProxy feignProxy) {
+    public LibraryClientController(FeignProxy feignProxy) {
         this.feignProxy = feignProxy;
     }
 
