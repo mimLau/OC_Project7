@@ -18,6 +18,11 @@ public class  MemberController {
         this.accountService = accountService;
     }
 
+    @GetMapping( value = "/Members", params = { "mail", "pass"} )
+    public MemberDto getMemberByMailAndPass(@RequestParam("mail") String mail, @RequestParam("pass") String pass) {
+        return accountService.findMemberByMailAndPass( mail, pass );
+    }
+
     @GetMapping( value = "/Members" )
     public List<MemberDto> getAllMembers() {
         return accountService.findAll();

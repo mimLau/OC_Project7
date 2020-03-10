@@ -1,5 +1,8 @@
 package com.mimi.mlibrary.service.impl;
 
+import com.mimi.mlibrary.mapper.account.EmployeeMapper;
+import com.mimi.mlibrary.model.dto.account.EmployeeDto;
+import com.mimi.mlibrary.repository.account.EmployeeRepository;
 import com.mimi.mlibrary.repository.account.MemberRepository;
 import com.mimi.mlibrary.mapper.account.MemberMapper;
 import com.mimi.mlibrary.model.dto.account.MemberDto;
@@ -13,9 +16,21 @@ import java.util.Optional;
 public class AccountServiceImpl implements AccountService {
 
     private MemberRepository memberRepository;
+    private EmployeeRepository employeeRepository;
 
-    AccountServiceImpl(MemberRepository memberRepository) {
+    AccountServiceImpl( MemberRepository memberRepository, EmployeeRepository employeeRepository ) {
         this.memberRepository = memberRepository;
+        this.employeeRepository = employeeRepository;
+    }
+
+    @Override
+    public MemberDto findMemberByMailAndPass(String mail, String password) {
+        return MemberMapper.INSTANCE.toDto( memberRepository.getMemberByEmailAndPass( mail, password ).orElse( null) );
+    }
+
+    @Override
+    public EmployeeDto findEmployeeByMailAndPass(String mail, String password) {
+        return EmployeeMapper.INSTANCE.toDto( employeeRepository.getEmployeeByEmailAndPass( mail, password ).orElse( null) );
     }
 
     @Override

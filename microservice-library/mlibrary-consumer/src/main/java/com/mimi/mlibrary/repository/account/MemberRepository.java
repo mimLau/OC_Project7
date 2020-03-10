@@ -1,5 +1,6 @@
 package com.mimi.mlibrary.repository.account;
 
+import com.mimi.mlibrary.model.entity.account.Employee;
 import com.mimi.mlibrary.model.entity.account.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -13,14 +14,17 @@ import java.util.Optional;
 @Repository
 public interface MemberRepository extends JpaRepository<Member, Integer> {
 
+    @Query( "SELECT m FROM Member m WHERE m.mail= :mail AND m.accountOwnerPass= :pass" )
+    Optional<Member> getMemberByEmailAndPass( @Param("mail") String mail, @Param("pass") String pass );
+
     @Query( "SELECT m FROM Member m WHERE m.id= :id" )
-    Optional<Member> getMemberById(@Param("id") Integer id);
+    Optional<Member> getMemberById( @Param("id") Integer id);
 
     @Query( "SELECT m FROM Member m WHERE m.accountOwnerEmail= :email" )
-    Optional<Member> getMemberByEmail(@Param("email") String email);
+    Optional<Member> getMemberByEmail( @Param("email") String email );
 
     @Query( "SELECT m FROM Member m WHERE m.accountOwnerFirstname= :firstname AND m.accountOwnerLastname= :lastname")
-    Optional<Member> getMemberByNames(@Param("firstname") String firstname, @Param("lastname") String lastname );
+    Optional<Member> getMemberByNames( @Param("firstname") String firstname, @Param("lastname") String lastname );
 
     @Modifying
     @Transactional

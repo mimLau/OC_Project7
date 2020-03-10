@@ -1,11 +1,16 @@
 package com.mimi.mlibrary.service.contract;
 
+import com.mimi.mlibrary.model.dto.account.EmployeeDto;
 import com.mimi.mlibrary.model.dto.account.MemberDto;
+import com.mimi.mlibrary.model.entity.account.Employee;
+import com.mimi.mlibrary.model.entity.account.Member;
 
 import java.util.List;
 
 public interface AccountService {
 
+    MemberDto findMemberByMailAndPass( String mail, String password );
+    EmployeeDto findEmployeeByMailAndPass( String mail, String password );
     List<MemberDto> findAll();
     MemberDto findById( int id );
     MemberDto save( MemberDto memberDto );
