@@ -37,56 +37,52 @@
 
 		<!-- ===== Third-party libraries ===== -->
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-devtools</artifactId>
-			<scope>runtime</scope>
-			<optional>true</optional>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-devtools</artifactId>
+				<scope>runtime</scope>
+				<optional>true</optional>
 		</dependency>
-
 		<dependency>
-			<groupId>org.webjars</groupId>
-			<artifactId>bootstrap</artifactId>
-			<version>4.4.1</version>
+				<groupId>org.webjars</groupId>
+				<artifactId>bootstrap</artifactId>
+				<version>4.4.1</version>
 		</dependency>
-
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-			<exclusions>
-				<exclusion>
-					<groupId>org.junit.vintage</groupId>
-					<artifactId>junit-vintage-engine</artifactId>
-				</exclusion>
-			</exclusions>
+				<groupId>org.webjars</groupId>
+				<artifactId>webjars-locator</artifactId>
+				<version>0.39</version>
 		</dependency>
-
-
-
 		<dependency>
-			<groupId>joda-time</groupId>
-			<artifactId>joda-time</artifactId>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-test</artifactId>
+				<scope>test</scope>
+				<exclusions>
+						<exclusion>
+							<groupId>org.junit.vintage</groupId>
+							<artifactId>junit-vintage-engine</artifactId>
+						</exclusion>
+				</exclusions>
 		</dependency>
-
+		<dependency>
+				<groupId>joda-time</groupId>
+				<artifactId>joda-time</artifactId>
+		</dependency>
 		<!--dependency>
-			<groupId>org.jadira.usertype</groupId>
-			<artifactId>usertype.core</artifactId>
+				<groupId>org.jadira.usertype</groupId>
+				<artifactId>usertype.core</artifactId>
 		</dependency -->
-
 		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-openfeign</artifactId>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-starter-openfeign</artifactId>
 		</dependency>
-
 	</dependencies>
 
 	<build>
