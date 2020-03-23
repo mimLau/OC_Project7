@@ -2,8 +2,6 @@ package com.mimi.mlibrary.service.contract;
 
 import com.mimi.mlibrary.model.dto.publication.*;
 import java.time.LocalDate;
-
-import java.util.Date;
 import java.util.List;
 
 public interface PublicationService {
@@ -34,7 +32,6 @@ public interface PublicationService {
     List<CopyDto> findAllCopyByPublicationId( int id );
     List<CopyDto> findAllCopyByDelay();
     void  updateCopyReturnDateById( LocalDate newDate, int id );
-
 
 
 }
