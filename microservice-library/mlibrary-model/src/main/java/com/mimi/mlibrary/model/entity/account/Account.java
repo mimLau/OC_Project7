@@ -2,10 +2,10 @@ package com.mimi.mlibrary.model.entity.account;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
-import org.joda.time.LocalDate;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDate;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
@@ -35,7 +35,7 @@ public class Account implements Serializable {
     @Column(nullable = false)
     private boolean activeAccount;
 
-    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
+    //@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
     private LocalDate registrationDate;
 
     public Integer getId() {
