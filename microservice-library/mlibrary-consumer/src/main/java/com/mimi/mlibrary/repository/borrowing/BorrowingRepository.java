@@ -2,7 +2,7 @@ package com.mimi.mlibrary.repository.borrowing;
 
 import com.mimi.mlibrary.model.entity.borrowing.Borrowing;
 import com.mimi.mlibrary.model.entity.borrowing.BorrowingStatus;
-import org.joda.time.LocalDate;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -10,6 +10,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,7 +29,7 @@ public interface BorrowingRepository extends JpaRepository<Borrowing, Integer> {
     @Transactional
     @Modifying
     @Query("Update Borrowing b SET b.returnDate= :newDate WHERE b.id= :id")
-    void  updateBorrowingReturnDateById( @Param("newDate") LocalDate newDate, @Param("id") int id );
+    void  updateBorrowingReturnDateById(@Param("newDate") LocalDate newDate, @Param("id") int id );
 
     @Transactional
     @Modifying
