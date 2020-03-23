@@ -1,8 +1,10 @@
 package org.mimi.clibrary.Beans.account;
 
-import org.joda.time.LocalDate;
+import org.jetbrains.annotations.NotNull;
 
-public abstract class AccountBean {
+import java.time.LocalDate;
+
+public class AccountBean {
 
     private Integer id;
     private String accountOwnerFirstname;
