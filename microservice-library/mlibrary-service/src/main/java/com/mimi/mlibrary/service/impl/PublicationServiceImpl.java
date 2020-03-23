@@ -8,9 +8,9 @@ import com.mimi.mlibrary.mapper.publication.*;
 import com.mimi.mlibrary.model.dto.publication.*;
 import com.mimi.mlibrary.service.contract.PublicationService;
 import java.time.LocalDate;
+
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -41,10 +41,11 @@ public class PublicationServiceImpl implements PublicationService {
      * **************/
 
     @Override
-    public List<BookDto> findAllBooks() {
-        return BookMapper.INSTANCE.toDtoList( publicationRepository.findAllBooks() );
-    }
+    public List<BookDto> findAllBooks(  ) {
+        //Pageable bb = PageRequest.of(0, 4, Sort.by("title"));
+        return  BookMapper.INSTANCE.toDtoList(publicationRepository.findAllBooks( ));
 
+    }
 
     /****************
      * Newspapers
