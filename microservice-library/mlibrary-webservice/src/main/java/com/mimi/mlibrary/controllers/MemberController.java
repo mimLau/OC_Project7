@@ -1,5 +1,6 @@
 package com.mimi.mlibrary.controllers;
 
+import com.mimi.mlibrary.exceptions.ResourceNotFoundException;
 import com.mimi.mlibrary.model.dto.account.MemberDto;
 import com.mimi.mlibrary.service.contract.AccountService;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +21,10 @@ public class  MemberController {
 
     @GetMapping( value = "/Members", params = { "mail", "pass"} )
     public MemberDto getMemberByMailAndPass(@RequestParam("mail") String mail, @RequestParam("pass") String pass) {
-        return accountService.findMemberByMailAndPass( mail, pass );
+        MemberDto memberDto = accountService.findMemberByMailAndPass( mail, pass );
+        if( memberDto == null ) throw new ResourceNotFoundException( "Combinaison mot de passe/email incorrecte." );
+
+        return memberDto;
     }
 
     @GetMapping( value = "/Members" )
