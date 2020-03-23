@@ -1,6 +1,7 @@
 package com.mimi.mlibrary.model.dto.account;
 
-import org.joda.time.LocalDate;
+
+import java.time.LocalDate;
 
 public class AccountDto {
 
