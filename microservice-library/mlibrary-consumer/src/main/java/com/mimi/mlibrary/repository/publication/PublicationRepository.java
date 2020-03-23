@@ -5,6 +5,9 @@ import com.mimi.mlibrary.model.entity.publication.Newspaper;
 import com.mimi.mlibrary.model.entity.publication.Publication;
 import com.mimi.mlibrary.model.entity.publication.Review;
 import java.time.LocalDate;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -17,6 +20,9 @@ import java.util.Optional;
 @Repository
 public interface PublicationRepository extends JpaRepository<Publication, Integer> {
 
+
+    @Query("SELECT b FROM Book b")
+    Page<Book> findAllBooks( Pageable pageable );
 
     @Query("SELECT b FROM Book b")
     List<Book> findAllBooks();
