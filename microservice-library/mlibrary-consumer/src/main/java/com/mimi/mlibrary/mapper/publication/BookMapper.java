@@ -5,6 +5,7 @@ import com.mimi.mlibrary.model.dto.publication.BookDto;
 import org.mapstruct.InheritConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
@@ -16,6 +17,7 @@ public interface BookMapper {
     @InheritConfiguration( name = "mapBook")
     BookDto toDto( Book book );
     List<BookDto> toDtoList( List<Book> books );
+    List<BookDto> toDtoList( Page<Book> books );
 
     Book toBook( BookDto bookDto );
     List<Book> toBookList( List<BookDto> bookDtos );
