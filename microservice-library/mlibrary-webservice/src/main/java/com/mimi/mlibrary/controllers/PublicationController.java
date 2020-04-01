@@ -135,39 +135,6 @@ public class PublicationController {
 
 
     /****************
-     * Authors
-     * **************/
-
-    @GetMapping( value = "/Authors" )
-    public List<AuthorDto> getAllAuthor() {
-        List<AuthorDto> authorDtos =  publicationService.findAllAuthor();
-        if( authorDtos.isEmpty() ) throw new ResourceNotFoundException(  "Il n'y a pas d'auteur qui correspond à votre recherche." );
-
-        return authorDtos ;
-    }
-
-    @PostMapping( value = "/Authors" )
-    public ResponseEntity<String> addAuthor( @RequestBody AuthorDto authorDto ) {
-
-            //org.hibernate.exception.ConstraintViolationException: could not execute statemen
-        AuthorDto addedAuthorDto = publicationService.saveAuthor( authorDto );
-        if( addedAuthorDto == null)
-            //return ResponseEntity.noContent().build();
-            return new ResponseEntity<>("La ressource envoyée est vide.", HttpStatus.NO_CONTENT);
-
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand( addedAuthorDto.getId() ).toUri();
-        return ResponseEntity.created( location ).build();
-    }
-
-    @DeleteMapping( value = "/Authors", params = "id")
-    public @ResponseBody ResponseEntity<String> deleteAuthorById( @RequestParam int id ) {
-        publicationService.deleteAuthorById( id );
-
-        return new ResponseEntity<String>("DELETE Response", HttpStatus.OK);
-    }
-
-
-    /****************
      * Copies
      * **************/
 
