@@ -89,8 +89,7 @@ public class BorrowingServiceImpl implements BorrowingService {
     public void updateBorrowingReturnDateById( int id ) {
 
        //Retrieve a borrowing by its id
-       /*Borrowing borrowing = borrowingDao.findBorrowingById( id );
-       BorrowingDto borrowingDto = borrowingMapper.map( borrowing );
+        BorrowingDto borrowingDto = borrowingMapper.borToDto( borrowingRepository.findBorrowingById( id ).orElse(null));
 
         //Retrieve the return date of this borrowing
         LocalDate returnDate = borrowingDto.getReturnDate();
@@ -99,12 +98,12 @@ public class BorrowingServiceImpl implements BorrowingService {
        if( extension != true ) {
            //Extend the return date by 4 weeks
            returnDate = returnDate.plusDays( 28 );
-           borrowingDao.updateBorrowingReturnDateById( returnDate, id );
-           borrowingDao.updateExtensionById( id );
+           borrowingRepository.updateBorrowingReturnDateById( returnDate, id );
+           borrowingRepository.updateExtensionById( id );
 
-           int copyId = borrowing.getCopy().getId();
+           int copyId = borrowingDto.getCopy().getId();
            copyRepository.updateCopyReturnDateById( returnDate, copyId );
-       }*/
+       }
         //TODO MESSAGE TO SIGNAL THAT THE USER HAS ALREADY EXTENDED ITS BORROWING.
     }
 
