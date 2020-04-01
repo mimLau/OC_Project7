@@ -4,6 +4,11 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
         <modelVersion>4.0.0</modelVersion>
 
+
+        <!-- ============================================================= -->
+        <!--                      Parent information                       -->
+        <!-- ============================================================= -->
+
         <parent>
             <artifactId>microservice-library</artifactId>
             <groupId>com.mimi.mlibrary</groupId>
@@ -17,56 +22,53 @@
 
 
         <!-- =============================================================== -->
-        <!-- Dependencies -->
+        <!--                        Dependencies                             -->
         <!-- =============================================================== -->
 
         <dependencies>
-
-            <!-- ===== Modules ===== -->
-            <dependency>
-                <groupId>com.mimi.mlibrary</groupId>
-                <artifactId>mlibrary-service</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
-            </dependency>
-            <dependency>
-                <groupId>com.mimi.mlibrary</groupId>
-                <artifactId>mlibrary-model</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
-            </dependency>
-
-            <!-- =-=-=-= Framework =-=-=-= -->
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter</artifactId>
-            </dependency>
-
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-web</artifactId>
-            </dependency>
-
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-test</artifactId>
-                <scope>test</scope>
-                <exclusions>
-                    <exclusion>
-                        <groupId>org.junit.vintage</groupId>
-                        <artifactId>junit-vintage-engine</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-
-            <dependency>
-                <groupId>joda-time</groupId>
-                <artifactId>joda-time</artifactId>
-            </dependency>
-
-            <dependency>
-                <groupId>org.jadira.usertype</groupId>
-                <artifactId>usertype.core</artifactId>
-            </dependency>
-
+                <!-- Modules -->
+                <dependency>
+                        <groupId>com.mimi.mlibrary</groupId>
+                        <artifactId>mlibrary-service</artifactId>
+                        <version>0.0.1-SNAPSHOT</version>
+                </dependency>
+                <dependency>
+                        <groupId>com.mimi.mlibrary</groupId>
+                        <artifactId>mlibrary-model</artifactId>
+                        <version>0.0.1-SNAPSHOT</version>
+                </dependency>
+                <!--  Third-party libraries -->
+                <dependency>
+                        <groupId>org.springframework.boot</groupId>
+                        <artifactId>spring-boot-starter</artifactId>
+                </dependency>
+                <dependency>
+                        <groupId>org.springframework.boot</groupId>
+                        <artifactId>spring-boot-starter-web</artifactId>
+                </dependency>
+                <!-- dependency>
+                        <groupId>org.springframework.boot</groupId>
+                        <artifactId>spring-boot-starter-security</artifactId>
+                </dependency -->
+                <dependency>
+                        <groupId>org.springframework.boot</groupId>
+                        <artifactId>spring-boot-starter-test</artifactId>
+                        <scope>test</scope>
+                        <exclusions>
+                            <exclusion>
+                                <groupId>org.junit.vintage</groupId>
+                                <artifactId>junit-vintage-engine</artifactId>
+                            </exclusion>
+                        </exclusions>
+                </dependency>
+                <dependency>
+                        <groupId>joda-time</groupId>
+                        <artifactId>joda-time</artifactId>
+                </dependency>
+                <dependency>
+                        <groupId>org.jadira.usertype</groupId>
+                        <artifactId>usertype.core</artifactId>
+                </dependency>
         </dependencies>
 
 
