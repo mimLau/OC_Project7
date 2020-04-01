@@ -7,27 +7,19 @@ import java.time.LocalDate;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import javax.servlet.http.HttpServletResponse;
-import java.net.URI;
-import java.util.Date;
 import java.util.List;
 
 @RestController
 @RequestMapping("/Publications")
 public class PublicationController {
 
-    final static Logger logger  = LogManager.getLogger(PublicationController.class);
     private PublicationService publicationService;
 
     public PublicationController(PublicationService publicationService){
         this.publicationService = publicationService;
     }
-
 
 
     /****************
@@ -123,64 +115,12 @@ public class PublicationController {
         return publicationDtos;
     }
 
-
     @GetMapping( value = "/author", params = "id")
     public List<PublicationDto> getAllByAuthorId( @RequestParam int id ) {
         List<PublicationDto> publicationDtos =  publicationService.findAllByAuthorId( id );
         if( publicationDtos.isEmpty() ) throw new ResourceNotFoundException(  "Il n'y a pas de livre qui corresponde à cet auteur." );
 
         return publicationDtos;
-    }
-
-
-
-    /****************
-     * Copies
-     * **************/
-
-    @GetMapping( value = "/Copies")
-    public List<CopyDto> getAllCopies() {
-        List<CopyDto> copyDtos =  publicationService.findAllCopy();
-        if( copyDtos.isEmpty() ) throw new ResourceNotFoundException(  "Il n'y a aucun exemplaire d'ouvrage dans la base de données." );
-
-        return copyDtos;
-    }
-
-   /*@GetMapping( value = "/Copies", params = "id")
-    public CopyDto getCoyById( @RequestParam int id ) {
-        CopyDto copyDto =  publicationService.findCopyById( id ) ;
-        if( copyDto == null )
-            throw new ResourceNotFoundException(  "Aucun exemplaire ne correspond à cet id." );
-
-        return copyDto;
-    }*/
-
-    @GetMapping( value = "/Copies", params = "id")
-    public ResponseEntity<CopyDto> getCoyById( @RequestParam int id, HttpServletResponse response ) {
-
-        logger.info(" Recherche de l'exemplaire avec l'id: " + id );
-        CopyDto copyDto =  publicationService.findCopyById( id ) ;
-
-        if( copyDto == null )
-            return new ResponseEntity<>( null, HttpStatus.NOT_FOUND);
-        else return new ResponseEntity<>( copyDto, HttpStatus.FOUND );
-    }
-
-
-    @GetMapping( value = "/Copies/delay" )
-    public List<CopyDto> getAllByDelay(  ) {
-        List<CopyDto> copyDtos =  publicationService.findAllCopyByDelay();
-        if( copyDtos.isEmpty() ) throw new ResourceNotFoundException(  "Il n'y a aucun exemplaire dont la date de retour est passée." );
-
-        return copyDtos;
-    }
-
-    @GetMapping( value = "/Copies-pub", params = "id" )
-    public List<CopyDto> getAllCopyPublicationId( @RequestParam int id  ) {
-        List<CopyDto> copyDtos =  publicationService.findAllCopyByPublicationId( id );
-        if( copyDtos.isEmpty() ) throw new ResourceNotFoundException(  "Il n'y a aucun exemplaire qui correspond à cette ouvrage." );
-
-        return copyDtos;
     }
 
 }
