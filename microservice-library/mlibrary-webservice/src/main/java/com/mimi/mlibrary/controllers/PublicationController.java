@@ -18,6 +18,7 @@ import java.util.Date;
 import java.util.List;
 
 @RestController
+@RequestMapping("/Publications")
 public class PublicationController {
 
     final static Logger logger  = LogManager.getLogger(PublicationController.class);
@@ -27,13 +28,7 @@ public class PublicationController {
         this.publicationService = publicationService;
     }
 
-    @GetMapping( value = "/Libraries" )
-    public List<LibraryDto> getAllLibraries() {
-        List<LibraryDto> libraryDtos = publicationService.findAllLibraries();
-        if( libraryDtos.isEmpty() ) throw new ResourceNotFoundException(  "La liste des librairies est vide." );
 
-        return libraryDtos;
-    }
 
     /****************
      * Books
@@ -96,7 +91,7 @@ public class PublicationController {
      * Publications
      * **************/
 
-    @GetMapping( value = "/Publications", params = "id" )
+    @GetMapping( params = "id" )
     public PublicationDto getPublicationsById(@RequestParam int id ) {
         PublicationDto publicationDto = publicationService.findPublicationById( id );
         if( publicationDto == null ) throw new ResourceNotFoundException( "Il n'y a pas d'ouvrage qui correspond à cette date." );
@@ -104,7 +99,7 @@ public class PublicationController {
         return publicationDto;
     }
 
-    @GetMapping( value = "/Publications")
+    @GetMapping
     public List<PublicationDto> getAllPublications() {
         List<PublicationDto> publicationDtos = publicationService.findAllPublications();
         if( publicationDtos.isEmpty() ) throw new ResourceNotFoundException( "Il n'y a pas d'ouvrage dans la base de données." );
@@ -112,7 +107,7 @@ public class PublicationController {
         return publicationDtos ;
     }
 
-    @GetMapping( value = "/Publications", params = "title")
+    @GetMapping( params = "title")
     public List<PublicationDto> getAllPublicationsByTitle( @RequestParam String title ) {
         List<PublicationDto> publicationDtos = publicationService.findAllByTitle( title );
         if( publicationDtos.isEmpty() ) throw new ResourceNotFoundException( "Il n'y a pas d'ouvrage qui correspond à ce titre." );
@@ -120,7 +115,7 @@ public class PublicationController {
         return publicationDtos;
     }
 
-    @GetMapping( value = "/Publications", params = "author" )
+    @GetMapping( params = "author" )
     public List<PublicationDto> getAllByAuthor( @RequestParam String author ) {
         List<PublicationDto> publicationDtos =  publicationService.findAllByAuthor( author );
         if( publicationDtos.isEmpty() ) throw new ResourceNotFoundException( "Il n'y a pas de livre qui corresponde à cet auteur." );
@@ -129,7 +124,7 @@ public class PublicationController {
     }
 
 
-    @GetMapping( value = "/Publications/auth", params = "id")
+    @GetMapping( value = "/author", params = "id")
     public List<PublicationDto> getAllByAuthorId( @RequestParam int id ) {
         List<PublicationDto> publicationDtos =  publicationService.findAllByAuthorId( id );
         if( publicationDtos.isEmpty() ) throw new ResourceNotFoundException(  "Il n'y a pas de livre qui corresponde à cet auteur." );
