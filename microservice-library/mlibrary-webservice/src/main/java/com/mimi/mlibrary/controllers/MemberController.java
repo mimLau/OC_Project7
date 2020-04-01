@@ -10,7 +10,9 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 import java.util.List;
 
+@CrossOrigin
 @RestController
+@RequestMapping("/Members")
 public class  MemberController {
 
     private AccountService accountService;
@@ -19,7 +21,7 @@ public class  MemberController {
         this.accountService = accountService;
     }
 
-    @GetMapping( value = "/Members", params = { "mail", "pass"} )
+    @GetMapping( params = { "mail", "pass"} )
     public MemberDto getMemberByMailAndPass(@RequestParam("mail") String mail, @RequestParam("pass") String pass) {
         MemberDto memberDto = accountService.findMemberByMailAndPass( mail, pass );
         if( memberDto == null ) throw new ResourceNotFoundException( "Combinaison mot de passe/email incorrecte." );
@@ -27,27 +29,27 @@ public class  MemberController {
         return memberDto;
     }
 
-    @GetMapping( value = "/Members" )
+    @GetMapping
     public List<MemberDto> getAllMembers() {
         return accountService.findAll();
     }
 
-    @GetMapping( value = "/Members", params = "id" )
+    @GetMapping( params = "id" )
     public MemberDto getMemberById(@RequestParam("id") int id ) {
         return accountService.findById( id );
     }
 
-    @GetMapping( value = "/Members", params = "email")
+    @GetMapping( params = "email")
     public MemberDto getMemberByEmail (@RequestParam("email") String email ) {
         return accountService.getMemberByEmail(email);
     }
 
-    @GetMapping( value = "/Members", params = { "firstname", "lastname" })
+    @GetMapping( params = { "firstname", "lastname" })
     public MemberDto getMemberByName (@RequestParam("firstname") String firstname, @RequestParam("lastname") String lastname ) {
         return accountService.getMemberByNames( firstname, lastname );
     }
 
-    @PostMapping( value = "/Members" )
+    @PostMapping
     public ResponseEntity<Void> addMember( @RequestBody MemberDto memberDto ) {
         MemberDto addedMember = accountService.save( memberDto );
         if( addedMember == null)
@@ -57,7 +59,7 @@ public class  MemberController {
         return ResponseEntity.created( location ).build();
     }
 
-    @PutMapping( value = "/Members" , params = "id" )
+    @PutMapping( params = "id" )
     public void incrementBorrowingsNbBorrowings ( @RequestParam("id") int id ) {
         accountService.updateNbOfCurrentsBorrowings( id );
     }
