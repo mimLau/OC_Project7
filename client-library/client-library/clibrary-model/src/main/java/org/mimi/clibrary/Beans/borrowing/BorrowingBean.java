@@ -10,7 +10,7 @@ public class BorrowingBean {
     private LocalDate returnDate;
     private LocalDate borrowingDate;
     private boolean extented;
-    private BorrowingBeanStatus borrowingStatus;
+    private String borrowingStatus;
     private CopyBean copy;
     private MemberBean member;
     private int reminderNb;
@@ -47,11 +47,11 @@ public class BorrowingBean {
         this.extented = extented;
     }
 
-    public BorrowingBeanStatus getBorrowingStatus() {
+    public String getBorrowingStatus() {
         return borrowingStatus;
     }
 
-    public void setBorrowingStatus(BorrowingBeanStatus borrowingStatus) {
+    public void setBorrowingStatus(String borrowingStatus) {
         this.borrowingStatus = borrowingStatus;
     }
 

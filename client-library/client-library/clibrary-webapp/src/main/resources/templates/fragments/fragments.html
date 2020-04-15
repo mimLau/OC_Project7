@@ -1,42 +1,110 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-    <head th:fragment="metaInformations">
+<html xmlns:th="http://www.thymeleaf.org" lang="fr"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+    <!-- Fragment #1 : Header files contains css references -->
+    <head th:fragment="headerfiles">
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+
         <!-- CSS -->
-        <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/4.4.1/css/bootstrap.min.css}"/>
-        <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+        <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css}">
+        <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css}">
+        <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css}">
+        <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.1/css/swiper.min.css}">
+        <link rel="stylesheet" th:href="@{/assets/css/styles.css}" type="text/css">
+        <link rel="stylesheet" th:href="@{/assets/css/checkboxStyle.css}" type="text/css">
     </head>
     <body>
 
-        <!-- Header fragment -->
-        <div class="pos-f-t" th:fragment="header">
-            <div class="collapse" id="navbarToggleExternalContent">
-                <div class="bg-dark p-4">
-                    <h5 class="text-white h4">Bienvenue dans votre espace.</h5>
-                    <span class="text-muted"></span>
-                </div>
-            </div>
-            <nav class="navbar navbar-dark bg-dark">
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-            </nav>
-        </div>
+    <!-- Fragment #2 : Navbar contains nav links -->
+    <div th:fragment="nav">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#" th:href="@{~/}">BMS</a>
 
-        <!-- Scripts fragment -->
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <div>
+                            <span th:if="${ session.user }">
+                                <span th:if="${ session.user.role == 'USER' }">
+                                    <a class="nav-link" href="#" th:href="@{~/user/home}"><i class="fa fa-home"></i>Accueil</a>
+                                </span>
+                                <span th:if="${ session.user.role == 'ADMIN' }">
+                                    <a class="nav-link" href="#" th:href="@{~/admin/home}"><i class="fa fa-home"></i>Accueil</a>
+                                </span>
+                            </span>
+                            <span th:unless="${ session.user }">
+                                  <a class="nav-link" href="#" th:href="@{~/}"><i class="fa fa-home"></i>Accueil</a>
+                            </span>
+                        </div>
+
+                    </li>
+                    <span th:if="${ session.user }">
+                        <span th:if="${ session.user.role == 'USER' }">
+                            <li class="nav-item">
+                                <div class="dropdown">
+                                    <a class="dropdown-toggle nav-link" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Mon profil
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                        <a class="nav-link dropdown-item" href="#" >Mes informations personnelles</a>
+                                        <a class="nav-link dropdown-item" href="#" th:href="@{~/userBorrowings}">Mes emprunts</a>
+                                    </div>
+                                </div>
+                            </li>
+                        </span>
+                    </span>
+                    <span th:if="${ session.user }">
+                        <span th:if="${ session.user.role == 'ADMIN' }">
+                            <li class="nav-item">
+                                <div class="dropdown">
+                                    <a class="dropdown-toggle nav-link" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Admin
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                        <a class="nav-link dropdown-item" href="#" th:href="@{~/borrowings}" >Liste des emprunts</a>
+                                        <a class="nav-link dropdown-item" href="#" th:href="@{~/delays}">Listes des retards</a>
+                                    </div>
+                                </div>
+                            </li>
+                        </span>
+                    </span>
+                    <li class="nav-item">
+                        <div class="dropdown">
+                            <a class="dropdown-toggle nav-link" type="button" id="dropdownMenu3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Recherche
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenu3">
+                                <a class="nav-link dropdown-item" href="#" th:href="@{~/Libraries}" >Liste des médiatèques</a>
+                                <a class="nav-link dropdown-item" href="#" th:href="@{~/Research}">Catalogue médiatèques</a>
+                            </div>
+                        </div>
+
+                    </li>
+
+                </ul>
+                <!--span th:if="${#request.contextPath} == @{~/login}"-->
+                    <!--form class="form-inline my-2 my-lg-0" form-method="post" th:action="@{/logout}">
+                        </form-->
+                <button th:if="${ session.user }"  class="btn btn-outline-danger my-2 my-sm-0 btn-sm" type="submit">Logout</button>
+                <a th:href="@{~/login}"><button th:unless="${ session.user }"  class="btn btn-outline-info my-2 my-sm-0 btn-sm" type="submit">Login</button></a>
+
+            </div>
+        </nav>
+    </div>
+
+        <!-- Fragment #3 : Scripts fragment -->
         <div th:fragment="script">
             <script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js}"></script>
             <script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.bundle.min.js}"></script>
             <script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.1/js/swiper.jquery.min.js}"></script>
-            <script th:src="@{/webjars/bootstrap/4.4.1/js/bootstrap.min.js}"></script>
+            <!--script th:src="@{/webjars/bootstrap/4.4.1/js/bootstrap.min.js}"></script-->
         </div>
 
-        <!-- Footer fragment -->
+        <!-- Fragment #4 : Footer fragment -->
         <div th:fragment="footer">
             &copy; 2020 Bibliothèques
         </div>
-
     </body>
-
-
 </html>

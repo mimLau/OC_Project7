@@ -8,10 +8,9 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @RestController
@@ -41,8 +40,8 @@ public class CopyController {
         return copyDto;
     }*/
 
-    @GetMapping( value = "/Copies", params = "id")
-    public ResponseEntity<CopyDto> getCoyById(@RequestParam int id, HttpServletResponse response ) {
+    @GetMapping( value = "/Copies/{id}" )
+    public ResponseEntity<CopyDto> getCoyById( @PathVariable int id ) {
 
         logger.info(" Recherche de l'exemplaire avec l'id: " + id );
         CopyDto copyDto =  publicationService.findCopyById( id ) ;
@@ -61,12 +60,21 @@ public class CopyController {
         return copyDtos;
     }
 
-    @GetMapping( value = "/Copies/publication", params = "id" )
-    public List<CopyDto> getAllCopyPublicationId( @RequestParam int id  ) {
+    @GetMapping( value = "/Copies/publication/{id}" )
+    public List<CopyDto> getAllCopyByPublicationId( @PathVariable int id  ) {
         List<CopyDto> copyDtos =  publicationService.findAllCopyByPublicationId( id );
         if( copyDtos.isEmpty() ) throw new ResourceNotFoundException(  "Il n'y a aucun exemplaire qui correspond à cette ouvrage." );
 
         return copyDtos;
     }
+
+    @GetMapping( value = "/Copies/publication", params = "pubId")
+    public List<CopyDto> getAvailableCopiesByLibrary( @RequestParam int pubId  ) {
+        List<CopyDto> copyDtos =  publicationService.findAvailableCopiesByLibrary( pubId );
+        if( copyDtos.isEmpty() ) throw new ResourceNotFoundException(  "Il n'y a pas d'exemplaires de disponible de l'ouvrage recherché." );
+
+        return copyDtos;
+    }
+
 
 }

@@ -15,6 +15,6 @@ public interface BorrowingMapper {
     BorrowingDto borToDto(Borrowing borrowing );
     List<BorrowingDto> borToDtoList( List<Borrowing> borrowings );
 
-    Borrowing dtoToBor(BorrowingDto borrowingDto );
+    Borrowing dtoToBor( BorrowingDto borrowingDto );
     List<Borrowing> dtoToBorList( List<BorrowingDto> borrowingDtos );
 }

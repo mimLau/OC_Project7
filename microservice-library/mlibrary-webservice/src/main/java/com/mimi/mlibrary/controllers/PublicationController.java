@@ -1,11 +1,10 @@
 package com.mimi.mlibrary.controllers;
 
 import com.mimi.mlibrary.model.dto.publication.*;
+import com.mimi.mlibrary.model.entity.publication.Category;
 import com.mimi.mlibrary.service.contract.PublicationService;
 import com.mimi.mlibrary.exceptions.ResourceNotFoundException;
 import java.time.LocalDate;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,20 +25,20 @@ public class PublicationController {
      * Books
      * **************/
 
-    @GetMapping( value = "/Books" )
+   /* @GetMapping( value = "/Books" )
     public List<BookDto> getAllBooks() {
         List<BookDto> bookDtos = publicationService.findAllBooks();
         if( bookDtos.isEmpty() ) throw new ResourceNotFoundException(  "La liste des livres est vide." );
 
         return bookDtos;
-    }
+    }*/
 
 
     /****************
      * Newspapers
      * **************/
 
-    @GetMapping( value = "/Newspapers" )
+    /*@GetMapping( value = "/Newspapers" )
     public List<NewspaperDto> getAllNewspaper() {
         List<NewspaperDto> newspaperDtos = publicationService.findAllNewspapers();
         if( newspaperDtos.isEmpty() ) throw new ResourceNotFoundException(  "La liste des journaux est vide." );
@@ -47,22 +46,22 @@ public class PublicationController {
         return newspaperDtos;
     }
 
-    @GetMapping( value = "/Newspapers", params = "date")
-    public List<NewspaperDto> getAllNewspapersByDate( @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date ) {
+    @GetMapping( value = "/Newspapers/{date}" )
+    public List<NewspaperDto> getAllNewspapersByDate( @PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date ) {
 
         //LocalDate localDate = LocalDate.parse( date, DateTimeFormat.forPattern("yyyy/MM/dd"));
         List<NewspaperDto> newspaperDtos = publicationService.findAllNewspapersByDate( date );
         if( newspaperDtos.isEmpty() ) throw new ResourceNotFoundException(  "Aucun journal ne correspond à cette date." );
 
         return newspaperDtos;
-    }
+    }*/
 
 
     /****************
      * Reviews
      * **************/
 
-    @GetMapping( value = "/Reviews")
+    /*@GetMapping( value = "/Reviews")
     public List<ReviewDto> getAllReview() {
         List<ReviewDto> reviewDtos = publicationService.findAllReviews();
         if( reviewDtos.isEmpty() ) throw new ResourceNotFoundException(  "La liste des revues est vide." );
@@ -70,21 +69,38 @@ public class PublicationController {
         return reviewDtos;
     }
 
-    @GetMapping( value = "/Reviews", params = "date")
-    public List<ReviewDto> getAllReviewsByDate( @RequestParam LocalDate date ) {
+    @GetMapping( value = "/Reviews/{date}" )
+    public List<ReviewDto> getAllReviewsByDate( @PathVariable LocalDate date ) {
         List<ReviewDto> reviewDtos = publicationService.findAllReviewsByDate( date );
         if( reviewDtos.isEmpty() ) throw new ResourceNotFoundException(  "Aucune revue ne correspond à cette date." );
 
         return reviewDtos ;
-    }
+    }*/
 
 
     /****************
      * Publications
      * **************/
 
-    @GetMapping( params = "id" )
-    public PublicationDto getPublicationsById(@RequestParam int id ) {
+    @GetMapping( "/criteria/{criteria}/{value}/{libId}" )
+    public List<PublicationDto> getPublicationByCriteria( @PathVariable  String criteria, @PathVariable  String value, @PathVariable int libId ) {
+        List<PublicationDto> publicationDtos = publicationService.findPublicationByCriteria( criteria, value, libId );
+        if( publicationDtos.isEmpty() ) throw new ResourceNotFoundException( "Cet ouvrage n'existe pas dans notre base de données." );
+
+        return publicationDtos ;
+    }
+
+    @GetMapping( value = "/criterias" )
+    public List<PublicationDto> getPublicationByCrit( @RequestParam(required = false) String author, @RequestParam(required = false) String title , @RequestParam(required = false) Category category,
+                                                      @RequestParam(required = false) LocalDate date, @RequestParam(required = false) String editor, @RequestParam(required = false, defaultValue = "0") int libId ) {
+        List<PublicationDto> publicationDtos = publicationService.findAllByCriteria( author,  title, category, date, editor, libId );
+        if( publicationDtos.isEmpty() ) throw new ResourceNotFoundException( "Cet ouvrage n'existe pas dans notre base de données." );
+
+        return publicationDtos ;
+    }
+
+    @GetMapping( "/{id}" )
+    public PublicationDto getPublicationsById( @PathVariable int id ) {
         PublicationDto publicationDto = publicationService.findPublicationById( id );
         if( publicationDto == null ) throw new ResourceNotFoundException( "Il n'y a pas d'ouvrage qui correspond à cette date." );
 
@@ -99,24 +115,24 @@ public class PublicationController {
         return publicationDtos ;
     }
 
-    @GetMapping( params = "title")
+    /*@GetMapping( params = "title")
     public List<PublicationDto> getAllPublicationsByTitle( @RequestParam String title ) {
         List<PublicationDto> publicationDtos = publicationService.findAllByTitle( title );
         if( publicationDtos.isEmpty() ) throw new ResourceNotFoundException( "Il n'y a pas d'ouvrage qui correspond à ce titre." );
 
         return publicationDtos;
-    }
+    }*/
 
-    @GetMapping( params = "author" )
+   /* @GetMapping( params = "author" )
     public List<PublicationDto> getAllByAuthor( @RequestParam String author ) {
         List<PublicationDto> publicationDtos =  publicationService.findAllByAuthor( author );
         if( publicationDtos.isEmpty() ) throw new ResourceNotFoundException( "Il n'y a pas de livre qui corresponde à cet auteur." );
 
         return publicationDtos;
-    }
+    }*/
 
-    @GetMapping( value = "/author", params = "id")
-    public List<PublicationDto> getAllByAuthorId( @RequestParam int id ) {
+    @GetMapping( value = "/author/{id}")
+    public List<PublicationDto> getAllByAuthorId( @PathVariable int id ) {
         List<PublicationDto> publicationDtos =  publicationService.findAllByAuthorId( id );
         if( publicationDtos.isEmpty() ) throw new ResourceNotFoundException(  "Il n'y a pas de livre qui corresponde à cet auteur." );
 

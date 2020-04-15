@@ -11,10 +11,10 @@ public class BorrowingDto {
     private Integer id;
 
     private LocalDate returnDate;
-    private String borrowingDate;
+    private LocalDate borrowingDate;
     private int reminderNb;
     private boolean extented;
-    private BorrowingStatus borrowingStatus;
+    private String borrowingStatus;
     private Copy copy;
     private Member member;
 
@@ -37,11 +37,11 @@ public class BorrowingDto {
         this.returnDate = returnDate;
     }
 
-    public String getBorrowingDate() {
+    public LocalDate getBorrowingDate() {
         return borrowingDate;
     }
 
-    public void setBorrowingDate(String borrowingDate) {
+    public void setBorrowingDate( LocalDate borrowingDate ) {
         this.borrowingDate = borrowingDate;
     }
 
@@ -61,11 +61,11 @@ public class BorrowingDto {
         this.extented = extented;
     }
 
-    public BorrowingStatus getBorrowingStatus() {
+    public String getBorrowingStatus() {
         return borrowingStatus;
     }
 
-    public void setBorrowingStatus(BorrowingStatus borrowingStatus) {
+    public void setBorrowingStatus(String borrowingStatus) {
         this.borrowingStatus = borrowingStatus;
     }
 

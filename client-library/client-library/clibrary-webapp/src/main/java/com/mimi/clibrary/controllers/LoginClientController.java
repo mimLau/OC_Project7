@@ -1,52 +1,92 @@
 package com.mimi.clibrary.controllers;
 
 import feign.FeignException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.mimi.clibrary.Beans.account.EmployeeBean;
 import org.mimi.clibrary.Beans.account.MemberBean;
+import org.mimi.clibrary.Beans.account.UserBean;
+import org.mimi.clibrary.proxies.AuthFeignProxy;
 import org.mimi.clibrary.proxies.FeignProxy;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
 @SessionAttributes("memberSession")
 public class LoginClientController {
 
+    final static Logger logger  = LogManager.getLogger(LoginClientController.class);
     private FeignProxy proxy;
+    private AuthFeignProxy authProxy;
 
-    private static final String MEMBER_ATT = "member";
+    private static final String USER_ATT = "user";
     private static final String MEMBER_MAIL = "mail";
     private static final String MEMBER_PASS = "PASS";
     private static final String ERROR_MESS = "* Combinaison Email/mot de passe incorrecte.";
 
     private static final String LOGIN_VIEW = "login";
-    private static final String USER_HOME_VIEW = "redirect:/user/home";
+    private static final String USER_HOME_PAGE = "redirect:/user/home";
 
-
-    public LoginClientController(FeignProxy proxy ) {
+    public LoginClientController(FeignProxy proxy, AuthFeignProxy authProxy) {
         this.proxy = proxy;
+        this.authProxy = authProxy;
     }
 
-
     @GetMapping("/login")
-    public String showLoginForm( Model model ) {
-        model.addAttribute( MEMBER_ATT , new MemberBean() );
-        return LOGIN_VIEW;
+    public String showLoginForm( Model model  ) {
+        model.addAttribute( USER_ATT , new UserBean() );
 
+        return LOGIN_VIEW;
     }
 
     @PostMapping("/login")
+    public String login(@ModelAttribute( USER_ATT ) UserBean user, BindingResult result, Model model, HttpSession session ) {
+
+        String stringToken = authProxy.login( user );
+        Object token = stringToken;
+        session.setAttribute("token", token);
+
+        logger.info( " Token: " +  token );
+        if ( token == null ) {
+
+            return LOGIN_VIEW;
+        }
+        else
+        {
+            try {
+                MemberBean member = proxy.getMemberByMailAndPass( user.getUsername(), user.getPassword(), token );
+                session.setAttribute("user", member );
+                return USER_HOME_PAGE;
+            }
+          catch(FeignException f) {
+                EmployeeBean employee = proxy.getEmployeeByMailAndPass( user.getUsername(), user.getPassword(), token );
+                session.setAttribute("user", employee );
+                return USER_HOME_PAGE;
+            }
+
+
+            //getEmployeeByMailAndPass
+
+
+        }
+
+    }
+
+
+    /*@PostMapping("/login")
     public String checkMemberCred(@ModelAttribute( MEMBER_ATT ) MemberBean member, BindingResult result, Model model ) {
 
         try {
 
             MemberBean memberB = proxy.getMemberByMailAndPass( member.getAccountOwnerEmail(), member.getAccountOwnerPass() );
             //model.addAttribute( "memberSession", memberB );
-            model.addAttribute( "memberSession", "fffff" );
 
             return  USER_HOME_VIEW;
         }
@@ -57,5 +97,5 @@ public class LoginClientController {
             return LOGIN_VIEW;
         }
 
-    }
+    }*/
 }

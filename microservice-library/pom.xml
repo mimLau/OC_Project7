@@ -56,49 +56,44 @@
     <!-- =============================================================== -->
 
     <dependencyManagement>
-
-        <dependencies>
-
-            <!-- ===== Modules ===== -->
-
-            <dependency>
-                <groupId>com.mimi.mlibrary</groupId>
-                <artifactId>microservice-business</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
-            </dependency>
-            <dependency>
-                <groupId>com.mimi.mlibrary</groupId>
-                <artifactId>microservice-consumer</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
-            </dependency>
-            <dependency>
-                <groupId>com.mimi.mlibrary</groupId>
-                <artifactId>microservice-front</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
-            </dependency>
-            <dependency>
-                <groupId>com.mimi.mlibrary</groupId>
-                <artifactId>microservice-model</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
-            </dependency>
-
-
-            <!-- ===== Third part libraries ===== -->
-
-
-            <!-- Jadira custom hibernate type mappings-->
-            <dependency>
-                <groupId>joda-time</groupId>
-                <artifactId>joda-time</artifactId>
-                <version>2.10.5</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.jadira.usertype</groupId>
-                <artifactId>usertype.core</artifactId>
-                <version>7.0.0.CR1</version>
-            </dependency>
-        </dependencies>
-
+            <dependencies>
+                <!-- Modules -->
+                    <dependency>
+                            <groupId>com.mimi.mlibrary</groupId>
+                            <artifactId>microservice-business</artifactId>
+                            <version>0.0.1-SNAPSHOT</version>
+                    </dependency>
+                    <dependency>
+                            <groupId>com.mimi.mlibrary</groupId>
+                            <artifactId>microservice-consumer</artifactId>
+                            <version>0.0.1-SNAPSHOT</version>
+                    </dependency>
+                    <dependency>
+                            <groupId>com.mimi.mlibrary</groupId>
+                            <artifactId>microservice-front</artifactId>
+                            <version>0.0.1-SNAPSHOT</version>
+                    </dependency>
+                    <dependency>
+                            <groupId>com.mimi.mlibrary</groupId>
+                            <artifactId>microservice-model</artifactId>
+                            <version>0.0.1-SNAPSHOT</version>
+                    </dependency>
+                    <!-- Third part libraries -->
+                    <dependency>
+                            <groupId>joda-time</groupId>
+                            <artifactId>joda-time</artifactId>
+                            <version>2.10.5</version>
+                    </dependency>
+                    <dependency>
+                            <groupId>org.jadira.usertype</groupId>
+                            <artifactId>usertype.core</artifactId>
+                            <version>7.0.0.CR1</version>
+                    </dependency>
+                    <dependency>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                            <optional>true</optional>
+                    </dependency>
+            </dependencies>
     </dependencyManagement>
 </project>

@@ -1,22 +1,36 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-    <head>
+    <head th:insert="fragments/fragments.html :: headerfiles">
         <meta charset="UTF-8">
         <title>Ouvrages</title>
-        <link rel="stylesheet" type="text/css" href="webjars/bootstrap/4.0.0-2/css/bootstrap.min.css" />
     </head>
     <body>
+        <div th:insert="fragments/fragments.html :: nav"></div>
+
+            <p>Liste des médiathèques du groupe BMS</p>
+
+
+
         <div class="container">
 
-            <h1>Publications</h1>
-            <div class="row">
-                <div th:each=" library : ${libraries}">
-                    <span th:text="${library.id}"></span>
-                    <p th:text="${library.address}"></p>
-                </div>
-            </div>
-        </div>
 
-        <script type="text/javascript" src="webjars/bootstrap/4.0.0-2/js/bootstrap.min.js"></script>
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Adresse</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each=" library : ${libraries}">
+                    <td th:text="${library.name}"></td>
+                    <td th:text="${library.address}"></td>
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+        <div th:insert="fragments/fragments.html :: footer" class="footer"></div>
+        <div th:insert="fragments/fragments.html :: script"></div>
     </body>
 </html>

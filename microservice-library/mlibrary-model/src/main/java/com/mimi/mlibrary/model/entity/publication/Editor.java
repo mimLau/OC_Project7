@@ -2,12 +2,16 @@ package com.mimi.mlibrary.model.entity.publication;
 
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@Getter
+@Setter
 @Table(name = "editors")
 public class Editor {
 
@@ -24,32 +28,7 @@ public class Editor {
     @Column(nullable = false)
     private String name;
 
-    @JsonManagedReference(value="book_editor")
+    @JsonManagedReference(value="publication_editor")
     @OneToMany(mappedBy = "editor")
-    private List<Book> books;
-
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public List<Book> getBooks() {
-        return books;
-    }
-
-    public void setBooks(List<Book> books) {
-        this.books = books;
-    }
+    private List<Publication> publications;
 }

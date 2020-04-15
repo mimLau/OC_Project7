@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lanf="fr">
+    <head th:insert="fragments/fragments.html :: headerfiles">
+        <meta charset="UTF-8">
+        <title>Publication</title>
+    </head>
+    <body>
+        <div th:insert="fragments/fragments.html :: nav"></div>
+            <div class="container">
+                <div class="row">
+
+                    <ul>
+                    <li th:text="${publication.id}"></li>
+                    <li  th:text="${publication.title}"></li>
+
+                        <ul th:each=" copie : ${publication.copies}">
+
+                            <li th:text="${copie.library.name}"></li>
+                            <li th:text= "${publication.editor} ? ${publication.editor.name} : ' ' "></li>
+                            <li th:text="${copie.available} ? 'Disponible' : 'Indisponible' "></li>
+                        </ul>
+
+
+                        <div>
+                            <!--span th:text="@{~/}" /-->
+                            <div th:text="${#request.contextPath}" />
+                        </div>
+
+                    </ul>
+                </div>
+            </div>
+
+        <div th:insert="fragments/fragments.html :: footer" class="footer"></div>
+        <div th:insert="fragments/fragments.html :: script"></div>
+    </body>
+</html>

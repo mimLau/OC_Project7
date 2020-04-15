@@ -1,19 +1,20 @@
-
 .bg {
-    background: url('../img/Library.jpg') no-repeat;
+    background: url('/../../img/Library.jpg') no-repeat;
     width: 100%;
     height: 100vh;
     background-size: 100%;
 }
 
-
-.form-container {
+.form-login {
     position: absolute;
     top: 15vh;
-    background: #fff;
-    padding: 30px;
     border-radius: 10px;
     box-shadow: 0px 0px 10px 0px #000;
+}
+.form-container {
+
+    background: #fff;
+    padding: 30px;
 }
 
 .error {

@@ -17,14 +17,20 @@ import java.util.Optional;
 @Repository
 public interface BorrowingRepository extends JpaRepository<Borrowing, Integer> {
 
+    @Query("SELECT b FROM Borrowing b WHERE b.borrowingStatus= :status")
+    List<Borrowing> findAllBorrowings( @Param("status") BorrowingStatus status );
+
     @Query("SELECT b FROM Borrowing b WHERE b.id= :id")
     Optional<Borrowing> findBorrowingById(@Param("id") int id );
 
-    @Query("SELECT b FROM Borrowing  b JOIN FETCH b.member m WHERE m.id= :id")
-    List<Borrowing> findByMemberId(@Param("id") int id);
+    @Query("SELECT b FROM Borrowing  b JOIN FETCH b.member m WHERE m.id= :id and b.borrowingStatus= :status")
+    List<Borrowing> findByMemberId(@Param("id") int id, @Param("status") BorrowingStatus status );
 
     @Query("SELECT b FROM Borrowing  b JOIN FETCH b.copy c WHERE c.id= :id")
     List<Borrowing> findByCopyId( @Param("id") int id );
+
+    @Query("SELECT b FROM Borrowing b WHERE b.returnDate < :current_date ")
+    List<Borrowing> findByDelay( @Param("current_date") LocalDate currentDate );
 
     @Transactional
     @Modifying

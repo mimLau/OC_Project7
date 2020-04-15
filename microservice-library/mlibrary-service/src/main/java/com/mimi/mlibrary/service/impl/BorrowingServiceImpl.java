@@ -1,5 +1,6 @@
 package com.mimi.mlibrary.service.impl;
 
+import com.mimi.mlibrary.mapper.account.MemberMapper;
 import com.mimi.mlibrary.repository.account.MemberRepository;
 import com.mimi.mlibrary.repository.borrowing.BorrowingRepository;
 import com.mimi.mlibrary.repository.publication.CopyRepository;
@@ -11,6 +12,9 @@ import com.mimi.mlibrary.model.entity.borrowing.BorrowingStatus;
 import com.mimi.mlibrary.model.entity.publication.Copy;
 import com.mimi.mlibrary.service.contract.BorrowingService;
 import java.time.LocalDate;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,6 +22,8 @@ import java.util.Optional;
 
 @Service
 public class BorrowingServiceImpl implements BorrowingService {
+
+    final static Logger logger  = LogManager.getLogger(Borrowing.class);
 
     private BorrowingRepository borrowingRepository;
     private CopyRepository copyRepository;
@@ -39,23 +45,23 @@ public class BorrowingServiceImpl implements BorrowingService {
 
     @Override
     public List<BorrowingDto> findAll() {
-        return borrowingMapper.borToDtoList( borrowingRepository.findAll());
+        return borrowingMapper.borToDtoList( borrowingRepository.findAllBorrowings( BorrowingStatus.INPROGRESS));
     }
 
     @Override
     public List<BorrowingDto> findByMemberId( int memberId ) {
-        return borrowingMapper.borToDtoList( borrowingRepository.findByMemberId( memberId ) );
+        return borrowingMapper.borToDtoList( borrowingRepository.findByMemberId( memberId, BorrowingStatus.INPROGRESS) );
     }
 
     /**
      *
-     * @param borrowing The created borrowing
+     * @param borrowingDto The created borrowing
      * @param memberId The id of the user who borrows a publication
      * @param copyId The id of the available copy of the publication which will be borrowed
      * @return The created borrowing
      */
     @Override
-    public BorrowingDto save( Borrowing borrowing, int memberId, int copyId ) {
+    public BorrowingDto save( BorrowingDto borrowingDto, int memberId, int copyId ) {
 
         // Member research
         Optional<Member> member = memberRepository.getMemberById( memberId );
@@ -74,22 +80,33 @@ public class BorrowingServiceImpl implements BorrowingService {
             LocalDate today = LocalDate.now();
 
             copyRepository.updateCopyAvailability( false, copyId );
-            copyRepository.updateCopyReturnDateById( today,copyId );
+            copyRepository.updateCopyReturnDateById( today.plusDays( 28 ),copyId );
             memberRepository.updateNbOfCurrentsBorrowings( memberId, 1);
-            borrowingRepository.save( borrowing );
+
+            //Set attributes to the created borrowing.
+            borrowingDto.setReturnDate( today.plusDays( 28 ) );
+            borrowingDto.setBorrowingDate( today );
+            borrowingDto.setExtented( false );
+            borrowingDto.setBorrowingStatus( "INPROGRESS" );
+            borrowingDto.setReminderNb( 0 );
+
+            Optional.of( BorrowingMapper.INSTANCE.dtoToBor( borrowingDto ) ).ifPresent( borrowing -> borrowingRepository.save( borrowing ));
+            return borrowingDto;
         }
 
+        logger.info(" L'exemplaire sélectionné n'est pas disponible et/ou l'utilisateur a 5 livres à son actif:\n"
+                        + "Id utilisateur: " + member.get().getId() + "\n"
+                        + "Nombre de livres empruntés: " + currentsBorrowings + "\n"
+                        + "Publication disponible?: " + available + "\n");
 
-
-        //TODO MANAGE PB WITH RETURN WHEN CURRENTSBORROWINGS IS >=5
         return null;
     }
 
     @Override
-    public void updateBorrowingReturnDateById( int id ) {
+    public void extendBorrowingReturnDateById( int borrowingId ) {
 
        //Retrieve a borrowing by its id
-        BorrowingDto borrowingDto = borrowingMapper.borToDto( borrowingRepository.findBorrowingById( id ).orElse(null));
+        BorrowingDto borrowingDto = borrowingMapper.borToDto( borrowingRepository.findBorrowingById( borrowingId ).orElse(null));
 
         //Retrieve the return date of this borrowing
         LocalDate returnDate = borrowingDto.getReturnDate();
@@ -98,8 +115,8 @@ public class BorrowingServiceImpl implements BorrowingService {
        if( extension != true ) {
            //Extend the return date by 4 weeks
            returnDate = returnDate.plusDays( 28 );
-           borrowingRepository.updateBorrowingReturnDateById( returnDate, id );
-           borrowingRepository.updateExtensionById( id );
+           borrowingRepository.updateBorrowingReturnDateById( returnDate, borrowingId );
+           borrowingRepository.updateExtensionById( borrowingId );
 
            int copyId = borrowingDto.getCopy().getId();
            copyRepository.updateCopyReturnDateById( returnDate, copyId );
@@ -107,10 +124,10 @@ public class BorrowingServiceImpl implements BorrowingService {
         //TODO MESSAGE TO SIGNAL THAT THE USER HAS ALREADY EXTENDED ITS BORROWING.
     }
 
-    @Override
+    /*@Override
     public void updateBorrowingExtensionValueById( int id ) {
         borrowingRepository.updateExtensionById( id );
-    }
+    }*/
 
     @Override
     public void updateBorrowingStatus( int borrowingId ) {
@@ -124,6 +141,13 @@ public class BorrowingServiceImpl implements BorrowingService {
         memberRepository.updateNbOfCurrentsBorrowings( memberId, -1 );
 
         borrowingRepository.updateBorrowingStatus( borrowingId, BorrowingStatus.FINISHED );
+    }
+
+    @Override
+    public List<BorrowingDto> findByDelay() {
+        LocalDate currentDate = LocalDate.now();
+        return  BorrowingMapper.INSTANCE.borToDtoList( borrowingRepository.findByDelay( currentDate ) );
+
     }
 
 }

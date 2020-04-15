@@ -1,11 +1,13 @@
 INSERT INTO accounts( id, user_type, account_owner_email, account_owner_firstname, account_owner_lastname, account_owner_pass, account_owner_phone_nb, active_account, registration_date, role, barcode, nb_of_currents_borrowings) VALUES
-( 1,'Member', 'lam99@hotmail.fr', 'Maryam', 'Launois', 'maryam', '0388324567', 1, '2019/02/10', NULL, 'LAUNMAR1-1', 2);
+( 1,'Member', 'lam99@hotmail.fr', 'Maryam', 'Maryam', 'maryam', '0388324567', 1, '2019/02/10', 'USER', 'LAUNMAR1-1', 2);
 INSERT INTO accounts( id, user_type, account_owner_email, account_owner_firstname, account_owner_lastname, account_owner_pass, account_owner_phone_nb, active_account, registration_date, role, barcode, nb_of_currents_borrowings) VALUES
-( 2,'Member', 'sofie.a@gmail.com', 'Sophie', 'Richt', 'sophie', '0388324567', 1, '2019/02/10', NULL, 'RICHSOP1-2', 1);
+( 2,'Member', 'sofie.a@gmail.com', 'Sophie', 'Sophie', 'sophie', '0388324567', 1, '2019/02/10', 'USER', 'RICHSOP1-2', 1);
 INSERT INTO accounts( id, user_type, account_owner_email, account_owner_firstname, account_owner_lastname, account_owner_pass, account_owner_phone_nb, active_account, registration_date, role, barcode, nb_of_currents_borrowings) VALUES
-( 3,'Member', 'est@hotmail.fr', 'Estelle', 'Velsin', 'estelle', '0388324567', 1, '2019/02/10', NULL, 'VELSEST2-2', 0);
+( 3,'Member', 'est@hotmail.fr', 'Fanny', 'Fanny', 'fanny', '0388324567', 1, '2019/02/10', 'USER', 'VELSEST2-2', 0);
 INSERT INTO accounts( id, user_type, account_owner_email, account_owner_firstname, account_owner_lastname, account_owner_pass, account_owner_phone_nb, active_account, registration_date, role, barcode, nb_of_currents_borrowings) VALUES
-( 4,'Member',  'admin@gmail.com','Safia', 'Chouaib', 'safia', '0388324567', 1, '2019/02/10', NULL,  'CHOUSAF3-1', 0);
+( 4,'Employee',  'lib@gmail.com','Esthel', 'Esthel', 'esthel', '0388324567', 1, '2019/02/10', 'LIBRARY',  NULL, 0);
+INSERT INTO accounts( id, user_type, account_owner_email, account_owner_firstname, account_owner_lastname, account_owner_pass, account_owner_phone_nb, active_account, registration_date, role, barcode, nb_of_currents_borrowings) VALUES
+( 5,'Employee',  'admin@gmail.com','admin', 'admin', 'admin', '0388324567', 1, '2019/02/10', 'ADMIN',  NULL, 0);
 
 
 
@@ -23,24 +25,24 @@ INSERT INTO editors(id, name) VALUES (2, 'Gallimard');
 INSERT INTO editors(id, name) VALUES (3, 'Belin Éducation');
 INSERT INTO editors(id, name) VALUES (4, 'Nathan');
 
-INSERT INTO PUBLICATIONS(id, publication_type, category, identification_nb, nb_of_available_copies, nb_total_ofcopies, publication_date, title, author_fk, edithor_fk) VALUES
-( 1, 'Book', 'NOVEL', '2010008995', 1, 3, '2014/01/01', 'Les misérables', 1, 1 );
-INSERT INTO PUBLICATIONS(id, publication_type, category, identification_nb, nb_of_available_copies, nb_total_ofcopies, publication_date, title, author_fk, edithor_fk) VALUES
-( 2, 'Book', 'POETRY', '2070321908', 2, 2, '2015/01/01', 'Odes et Ballades', 1, 2 );
-INSERT INTO PUBLICATIONS(id, publication_type, category, identification_nb, nb_of_available_copies, nb_total_ofcopies, publication_date, title, author_fk, edithor_fk) VALUES
-( 3, 'Book', 'NOVEL', '2701151589', 1, 2, '2019/01/01', 'Bel-Ami', 2, 3 );
-INSERT INTO PUBLICATIONS(id, publication_type, category, identification_nb, nb_of_available_copies, nb_total_ofcopies, publication_date, title, author_fk, edithor_fk) VALUES
-( 4, 'Book', 'THEATER',' 978-2-09-188737-1', 1, 3, '2018', 'Le médecin malgé lui', 4, 4);
-INSERT INTO PUBLICATIONS(id, publication_type, category, identification_nb, nb_of_available_copies, nb_total_ofcopies, publication_date, title, author_fk, edithor_fk) VALUES
-(5, 'Review', 'SCIENTIST', 'dsfdgh', 1, 1, '2020/01/01','Geo', NULL, NULL);
-INSERT INTO PUBLICATIONS(id, publication_type, category, identification_nb, nb_of_available_copies, nb_total_ofcopies, publication_date, title, author_fk, edithor_fk) VALUES
-(6, 'Review', 'SCIENTIST','ereterh', 1, 1, '2020/01/01','Geo', NULL, NULL);
-INSERT INTO PUBLICATIONS(id, publication_type, category, identification_nb, nb_of_available_copies, nb_total_ofcopies, publication_date, title, author_fk, edithor_fk) VALUES
-(7, 'Review', 'NEWS', 'ereterh', 1, 1, '2020/01/01', 'L\'Obs', NULL, NULL);
-INSERT INTO PUBLICATIONS(id, publication_type, category, identification_nb, nb_of_available_copies, nb_total_ofcopies, publication_date, title, author_fk, edithor_fk) VALUES
-(8, 'Newspaper', 'NATIONAL', 'ereterh', 2, 3, '2020/01/01', 'Le Monde', NULL, NULL);
-INSERT INTO PUBLICATIONS(id, publication_type, category, identification_nb, nb_of_available_copies, nb_total_ofcopies, publication_date, title, author_fk, edithor_fk) VALUES
-(9, 'Newspaper', 'NATIONAL', 'ereterh', 1, 1, '2020/01/01', 'Le Monde', NULL, NULL);
+INSERT INTO PUBLICATIONS(id, category, sub_category, identification_nb, nb_of_available_copies, nb_total_ofcopies, publication_date, title, author_fk, edithor_fk) VALUES
+( 1, 'BOOK', 'NOVEL', '2010008995', 1, 3, '2014/01/01', 'Les misérables', 1, 1 );
+INSERT INTO PUBLICATIONS(id, category, sub_category, identification_nb, nb_of_available_copies, nb_total_ofcopies, publication_date, title, author_fk, edithor_fk) VALUES
+( 2, 'BOOK', 'POETRY', '2070321908', 2, 2, '2015/01/01', 'Odes et Ballades', 1, 2 );
+INSERT INTO PUBLICATIONS(id, category, sub_category, identification_nb, nb_of_available_copies, nb_total_ofcopies, publication_date, title, author_fk, edithor_fk) VALUES
+( 3, 'BOOK', 'NOVEL', '2701151589', 1, 2, '2019/01/01', 'Bel-Ami', 2, 3 );
+INSERT INTO PUBLICATIONS(id, category, sub_category, identification_nb, nb_of_available_copies, nb_total_ofcopies, publication_date, title, author_fk, edithor_fk) VALUES
+( 4, 'BOOK', 'THEATER',' 978-2-09-188737-1', 1, 3, '2018/01/01', 'Le médecin malgé lui', 4, 4);
+INSERT INTO PUBLICATIONS(id, category, sub_category, identification_nb, nb_of_available_copies, nb_total_ofcopies, publication_date, title, author_fk, edithor_fk) VALUES
+(5, 'REVIEW', 'SCIENTIST', 'dsfdgh', 1, 1, '2020/01/01','Geo', NULL, NULL);
+INSERT INTO PUBLICATIONS(id, category, sub_category, identification_nb, nb_of_available_copies, nb_total_ofcopies, publication_date, title, author_fk, edithor_fk) VALUES
+(6, 'REVIEW', 'SCIENTIST','ereterh', 1, 1, '2020/01/01','Geo', NULL, NULL);
+INSERT INTO PUBLICATIONS(id, category, sub_category, identification_nb, nb_of_available_copies, nb_total_ofcopies, publication_date, title, author_fk, edithor_fk) VALUES
+(7, 'REVIEW', 'NEWS', 'ereterh', 1, 1, '2020/01/01', 'L''Obs', NULL, NULL);
+INSERT INTO PUBLICATIONS(id, category, sub_category, identification_nb, nb_of_available_copies, nb_total_ofcopies, publication_date, title, author_fk, edithor_fk) VALUES
+(8, 'NEWSPAPER', 'NATIONAL', 'ereterh', 2, 3, '2020/01/01', 'Le Monde', NULL, NULL);
+INSERT INTO PUBLICATIONS(id, category, sub_category, identification_nb, nb_of_available_copies, nb_total_ofcopies, publication_date, title, author_fk, edithor_fk) VALUES
+(9, 'NEWSPAPER', 'NATIONAL', 'ereterh', 1, 1, '2020/01/01', 'Le Monde', NULL, NULL);
 
 
 

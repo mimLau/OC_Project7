@@ -16,12 +16,14 @@ public interface CopyRepository extends JpaRepository<Copy, Integer> {
     @Query("Select  c FROM Copy c where c.id= :id")
     Optional <Copy> findCopyById(int id );
 
+    @Query("Select  c FROM Copy c JOIN FETCH c.publication p where p.id= :id and (c.available= true) group by c.library")
+    List<Copy> countAllCopyByPublicationIdAndDistinctLib( @Param( "id" ) int id );
+
     @Query("Select  c FROM Copy c JOIN FETCH c.publication p where p.id= :id")
     List<Copy> findAllCopyByPublicationId( @Param( "id" ) int id );
 
     @Query("SELECT c FROM Copy c WHERE c.returnDate < :today")
     List<Copy> findAllByDelay( @Param("today") LocalDate currentDate );
-
 
     @Transactional
     @Modifying

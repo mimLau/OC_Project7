@@ -6,6 +6,7 @@ public class LibraryBean {
 
     private Integer id;
     private String address;
+    private String name;
     private List<CopyBean> copies;
 
     public Integer getId() {
@@ -22,6 +23,14 @@ public class LibraryBean {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public List<CopyBean> getCopies() {
