@@ -35,6 +35,10 @@ public class Account implements Serializable {
     @Column(nullable = false)
     private boolean activeAccount;
 
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
     //@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
     private LocalDate registrationDate;
 
@@ -101,4 +105,13 @@ public class Account implements Serializable {
     public void setRegistrationDate(LocalDate registrationDate) {
         this.registrationDate = registrationDate;
     }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
 }

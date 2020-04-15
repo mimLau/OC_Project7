@@ -18,4 +18,5 @@ public interface AccountService {
     MemberDto getMemberByEmail( String email );
     MemberDto getMemberByNames( String firstname, String lastname );
     void updateNbOfCurrentsBorrowings( int id );
+
 }

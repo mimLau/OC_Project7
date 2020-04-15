@@ -14,6 +14,7 @@ public class AccountBean {
     private String accountOwnerPhoneNb;
     private boolean activeAccount;
     private LocalDate registrationDate;
+    private String role;
 
     public Integer getId() {
         return id;
@@ -77,5 +78,13 @@ public class AccountBean {
 
     public void setRegistrationDate(LocalDate registrationDate) {
         this.registrationDate = registrationDate;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }

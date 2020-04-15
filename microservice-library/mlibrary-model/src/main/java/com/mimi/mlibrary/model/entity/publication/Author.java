@@ -1,6 +1,8 @@
 package com.mimi.mlibrary.model.entity.publication;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -8,8 +10,10 @@ import java.io.Serializable;
 import java.util.List;
 
 @Entity
+@Getter
+@Setter
 @Table(name = "Authors")
-public class Author implements Serializable {
+public class Author {
 
     @Id
     @GeneratedValue(
@@ -28,47 +32,8 @@ public class Author implements Serializable {
     private String alias;
 
 
-    @JsonManagedReference(value="book_author")
+    @JsonManagedReference(value="publication_author")
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
-    private List<Book> book;
+    private List<Publication> publications;
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getFirstname() {
-        return firstname;
-    }
-
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
-    }
-
-    public String getLastname() {
-        return lastname;
-    }
-
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
-    }
-
-    public String getAlias() {
-        return alias;
-    }
-
-    public void setAlias(String alias) {
-        this.alias = alias;
-    }
-
-    public List<Book> getBook() {
-        return book;
-    }
-
-    public void setBook(List<Book> book) {
-        this.book = book;
-    }
 }

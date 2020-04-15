@@ -30,7 +30,7 @@ public class AuthorController {
     }
 
     @PostMapping( value = "/Authors" )
-    public ResponseEntity<String> addAuthor(@RequestBody AuthorDto authorDto ) {
+    public ResponseEntity<String> addAuthor( @RequestBody AuthorDto authorDto ) {
 
         //org.hibernate.exception.ConstraintViolationException: could not execute statemen
         AuthorDto addedAuthorDto = publicationService.saveAuthor( authorDto );
@@ -42,8 +42,8 @@ public class AuthorController {
         return ResponseEntity.created( location ).build();
     }
 
-    @DeleteMapping( value = "/Authors", params = "id")
-    public @ResponseBody ResponseEntity<String> deleteAuthorById( @RequestParam int id ) {
+    @DeleteMapping( value = "/Authors/{id}")
+    public @ResponseBody ResponseEntity<String> deleteAuthorById( @PathVariable int id ) {
         publicationService.deleteAuthorById( id );
 
         return new ResponseEntity<String>("DELETE Response", HttpStatus.OK);

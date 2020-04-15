@@ -1,6 +1,8 @@
 package com.mimi.mlibrary.model.dto.account;
 
 
+import com.mimi.mlibrary.model.entity.account.Role;
+
 import java.time.LocalDate;
 
 public class AccountDto {
@@ -12,6 +14,7 @@ public class AccountDto {
     private String accountOwnerEmail;
     private String accountOwnerPhoneNb;
     private boolean activeAccount;
+    private String role;
 
     private LocalDate registrationDate;
 
@@ -78,5 +81,13 @@ public class AccountDto {
 
     public void setRegistrationDate(LocalDate registrationDate) {
         this.registrationDate = registrationDate;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }
