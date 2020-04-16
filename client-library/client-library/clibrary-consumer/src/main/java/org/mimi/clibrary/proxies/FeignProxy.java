@@ -9,6 +9,7 @@ import org.mimi.clibrary.Beans.publication.PublicationBean;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @FeignClient( name = "library-webservice", url = "localhost:8080" )
@@ -40,6 +41,9 @@ public interface FeignProxy {
     @GetMapping( "/Publications/criteria/{criteria}/{value}/{libId}" )
     List<PublicationBean> getPublicationByCriteria( @PathVariable  String criteria, @PathVariable  String value, @PathVariable  int libId );
 
+    @GetMapping( "/Publications/criterias" )
+    List<PublicationBean> getPublicationByCrit( @RequestParam(required = false) String author, @RequestParam(required = false) String title , @RequestParam(required = false) String category,
+                                                     @RequestParam(required = false) String editor, @RequestParam(required = false, defaultValue = "0") int libId );
 
 
     @GetMapping( value = "/Libraries" )
