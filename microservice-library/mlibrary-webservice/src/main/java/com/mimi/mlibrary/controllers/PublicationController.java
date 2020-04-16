@@ -91,9 +91,9 @@ public class PublicationController {
     }
 
     @GetMapping( value = "/criterias" )
-    public List<PublicationDto> getPublicationByCrit( @RequestParam(required = false) String author, @RequestParam(required = false) String title , @RequestParam(required = false) Category category,
-                                                      @RequestParam(required = false) LocalDate date, @RequestParam(required = false) String editor, @RequestParam(required = false, defaultValue = "0") int libId ) {
-        List<PublicationDto> publicationDtos = publicationService.findAllByCriteria( author,  title, category, date, editor, libId );
+    public List<PublicationDto> getPublicationByCrit( @RequestParam(required = false) String author, @RequestParam(required = false) String title , @RequestParam(required = false) String cat,
+                                                      @RequestParam(required = false) String editor, @RequestParam(required = false, defaultValue = "0") int libId ) {
+        List<PublicationDto> publicationDtos = publicationService.findAllByCriteria( author,  title, cat, editor, libId );
         if( publicationDtos.isEmpty() ) throw new ResourceNotFoundException( "Cet ouvrage n'existe pas dans notre base de données." );
 
         return publicationDtos ;
