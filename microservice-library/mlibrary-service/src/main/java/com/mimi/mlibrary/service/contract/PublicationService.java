@@ -10,7 +10,7 @@ import java.util.List;
 public interface PublicationService {
 
     List<LibraryDto> findAllLibraries();
-    List<PublicationDto> findAllByCriteria(String author, String title, Category category, LocalDate date, String editor, int libId );
+    List<PublicationDto> findAllByCriteria(String author, String title, String category, String editor, int libId );
 
     List<PublicationDto> findPublicationByCriteria( String criteria, String value, int libId );
     PublicationDto findPublicationById( int id );
