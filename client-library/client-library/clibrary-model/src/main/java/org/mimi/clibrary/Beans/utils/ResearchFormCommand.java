@@ -7,9 +7,10 @@ import java.util.List;
 
 @Getter
 @Setter
-public class FormCommand {
+public class ResearchFormCommand {
 
-        String textField;
+        String autorTextField;
+        String titleTextField;
         String textareaField;
         String datetimeField;
         String colorField;
@@ -17,6 +18,7 @@ public class FormCommand {
         List<String> multiCheckboxSelectedValues;
         String checkboxSelectedValue;
         String radioButtonSelectedValue;
-        String dropdownSelectedValue;
+        String selectedCat;
+        String selectedEdit;
 
 }
