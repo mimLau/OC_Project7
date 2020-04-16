@@ -49,13 +49,28 @@ public class PublicationServiceImpl implements PublicationService {
     }
 
     @Override
-    public List<PublicationDto> findAllByCriteria(String author, String title, Category category, LocalDate date, String editor, int libId ) {
+    public List<PublicationDto> findAllByCriteria(String author, String title, String category, String editor, int libId ) {
+
         Criteria criteria = new Criteria();
+
+        if( category != null ) {
+            switch (category) {
+
+                case "Livres":
+                    criteria.setCategory(Category.BOOK);
+                    break;
+                case "Journaux":
+                    criteria.setCategory(Category.NEWSPAPER);
+                    break;
+                case "Revues":
+                    criteria.setCategory(Category.REVIEW);
+                    break;
+            }
+        }
+
         criteria.setAuthorName( author );
-        criteria.setCategory( category );
         criteria.setEditorName( editor );
         criteria.setTitle( title );
-        criteria.setPubDate( date );
         criteria.setLibId( libId );
         Specification<Publication> pubSpec = new PublicationSpecification(  criteria );
 
