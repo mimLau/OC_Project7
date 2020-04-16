@@ -1,15 +1,105 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html" lanf="fr">
     <head th:insert="fragments/fragments.html :: headerfiles">
-        <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>Formulaire de recherche</title>
     </head>
     <body>
         <div th:insert="fragments/fragments.html :: nav"></div>
+
         <section class="container-fluid">
             <section class="row justify-content-center">
+
+                <div class="col-md-6 order-md-1">
+
+                    <form class="form-container"  th:action="@{/Research}" th:object="${researchFormCommand}" method="post">
+                        <h6 class="mb-3">Recherche dans le catalogue des Médiathèques</h6><br/>
+
+                        <div class="mb-3">
+                            <label for="author">Auteur</label>
+                            <input type="text" class="form-control" id="author" th:field="*{autorTextField}">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="title">Titre</label>
+                            <input type="text" class="form-control" id="title" th:field="*{titleTextField}">
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="category">Catégorie</label>
+                                <select class="form-control" th:field="*{selectedCat}" id="category" >
+                                    <option value="">Selectioner...</option>
+                                    <option th:each="cat : ${category}" th:text="${cat}" th:value="${cat}"></option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="editor">Editeur</label>
+                                <select class="form-control" th:field="*{selectedEdit}" id="editor" >
+                                    <option value="">Selectioner...</option>
+                                    <option th:each="edit : ${editor}" th:text="${edit}" th:value="${edit}"></option>
+                                </select>
+                            </div>
+
+                        </div>
+
+                        <hr class="mb-4">
+
+
+                        <div th:each=" library : ${libraries}">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input"
+                                       th:id="${library.id}"
+                                       th:value="${library.id}"
+                                       th:field="*{checkboxSelectedValue}">
+
+                                <label class="custom-control-label"
+                                       th:for="${library.id}"
+                                       th:text="${library.name}"></label>
+                            </div>
+                        </div>
+
+                        <br/>
+
+                        <button class="btn btn-primary btn-lg btn-block" type="submit">Rechercher</button>
+                    </form>
+                </div>
+
+            </section>
+        </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <!--section class="container-fluid">
+            <section class="row justify-content-center">
                 <section class="col-6">
-                    <form class="form-container"  th:action="@{/Research}" th:object="${formCommand}" method="post">
+                    <form class="form-container"  th:action="@{/Research}" th:object="${researchFormCommand}" method="post">
 
                         <div class="form-group">
                             <div class="row">
@@ -48,8 +138,16 @@
                     </form>
                 </section>
             </section>
-        </section>
+        </section-->
 
+        <!--footer class="my-5 pt-5 text-muted text-center text-small">
+            <p class="mb-1">© 2017-2018 Company Name</p>
+            <ul class="list-inline">
+                <li class="list-inline-item"><a href="#">Privacy</a></li>
+                <li class="list-inline-item"><a href="#">Terms</a></li>
+                <li class="list-inline-item"><a href="#">Support</a></li>
+            </ul>
+        </footer-->
 
 
 
