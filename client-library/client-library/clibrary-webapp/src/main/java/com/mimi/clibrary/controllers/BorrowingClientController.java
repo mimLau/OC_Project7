@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
@@ -31,6 +33,7 @@ public class BorrowingClientController {
         List<BorrowingBean> borrowings = feignProxy.findAllByMemberId( member.getId(), token );
 
         model.addAttribute( "borrowings", borrowings );
+        model.addAttribute("toDay", LocalDate.now());
         return "userBorrowings";
     }
 
