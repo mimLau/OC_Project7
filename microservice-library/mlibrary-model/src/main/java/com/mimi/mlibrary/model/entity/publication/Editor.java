@@ -1,6 +1,7 @@
 package com.mimi.mlibrary.model.entity.publication;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
@@ -28,7 +29,7 @@ public class Editor {
     @Column(nullable = false)
     private String name;
 
-    @JsonManagedReference(value="publication_editor")
+    @JsonBackReference(value="publication_editor")
     @OneToMany(mappedBy = "editor")
     private List<Publication> publications;
 }
