@@ -6,31 +6,59 @@
     </head>
     <body>
         <div th:insert="fragments/fragments.html :: nav"></div>
-            <div class="container">
-                <div class="row">
+        <section class="container-fluid">
+            <section class="row justify-content-center">
 
-                    <ul>
-                    <li th:text="${publication.id}"></li>
-                    <li  th:text="${publication.title}"></li>
+                        <div class="col-6" style="top: 15vh;">
+                            <div class="card">
+                                <div class="card-header">
+                                    <ul class="nav nav-tabs card-header-tabs" id="bologna-list" role="tablist">
+                                        <li class="nav-item">
+                                            <a class="nav-link active" href="#description" role="tab" aria-controls="description" aria-selected="true">Descritpion</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link"  href="#history" role="tab" aria-controls="history" aria-selected="false">Résumé</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#deals" role="tab" aria-controls="deals" aria-selected="false">Disponibilité</a>
+                                        </li>
+                                    </ul>
+                                </div>
 
-                        <ul th:each=" copie : ${publication.copies}">
+                                <div class="card-body">
+                                    <h6 class="card-title"><span  th:text="${ publication.title }"/>  <span th:if="${ publication.author != null }"> / <span th:text="${ publication.author.firstname }"/> <span th:text="${ publication.author.lastname }"/></span></h6>
 
-                            <li th:text="${copie.library.name}"></li>
-                            <li th:text= "${publication.editor} ? ${publication.editor.name} : ' ' "></li>
-                            <li th:text="${copie.available} ? 'Disponible' : 'Indisponible' "></li>
-                        </ul>
+                                    <div class="tab-content mt-3">
+                                        <div class="tab-pane active" id="description" role="tabpanel">
+                                            Catégorie: <span  th:text="${ publication.subCategory }"></span><br/>
+                                            Edition: <span th:if="${ publication.editor != null }"><span th:text="${ publication.editor.name }"/></span>
+                                        </div>
 
+                                        <div class="tab-pane" id="history" role="tabpanel" aria-labelledby="history-tab">
+                                        </div>
 
-                        <div>
-                            <!--span th:text="@{~/}" /-->
-                            <div th:text="${#request.contextPath}" />
+                                        <div class="tab-pane" id="deals" role="tabpanel" aria-labelledby="deals-tab">
+                                            <div th:each=" copie : ${ copies }">
+                                                Librairie: <span th:text="${ copie.library.name }"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
-                    </ul>
-                </div>
-            </div>
+            </section>
+        </section>
+
+
 
         <div th:insert="fragments/fragments.html :: footer" class="footer"></div>
         <div th:insert="fragments/fragments.html :: script"></div>
+    <script>
+        $('#bologna-list a').on('click', function (e) {
+            e.preventDefault()
+            $(this).tab('show')
+        })
+    </script>
     </body>
 </html>

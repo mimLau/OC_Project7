@@ -23,8 +23,11 @@ public class PublicationSpecification implements Specification<Publication> {
         //final Join<Publication, Library> pub = root.join("library",  JoinType.LEFT);
 
 
+                                                            //and (c.available= true) group by c.library
         if( criteria.getLibId() != 0 ) {
-            predicate.getExpressions().add( cBuilder.equal( root.join("copies",  JoinType.LEFT).get("library").get("id"), criteria.getLibId() ) );
+
+
+            predicate.getExpressions().add( cBuilder.equal( root.join("copies",  JoinType.LEFT).get("library").get("id"),  criteria.getLibId() ) );
 
         }
 

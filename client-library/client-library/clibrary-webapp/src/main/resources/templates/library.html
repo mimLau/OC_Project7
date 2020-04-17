@@ -7,29 +7,29 @@
     <body>
         <div th:insert="fragments/fragments.html :: nav"></div>
 
-            <p>Liste des médiathèques du groupe BMS</p>
+        <section class="container-fluid">
+            <section class="row justify-content-center">
+                <div class="responsive-table-line" style="margin:0px auto;max-width:1500px;"><br/><br/>
 
+                    <span>Liste des librairies du groupe BMS</span><br/><br/>
+                    <table class="table table-hover" style="border: 1px solid #DDD;">
+                        <thead>
+                        <tr>
+                            <th scope="col">Nom</th>
+                            <th scope="col">Adresse</th>
+                        </tr>
+                        </thead>
+                    <tbody>
+                        <tr th:each=" library : ${libraries}">
+                            <td th:text="${library.name}"></td>
+                            <td th:text="${library.address}"></td>
+                        </tr>
+                    </tbody>
+                    </table>
+                </div>
+            </section>
+        </section>
 
-
-        <div class="container">
-
-
-            <table class="table table-hover">
-                <thead>
-                <tr>
-                    <th scope="col">Nom</th>
-                    <th scope="col">Adresse</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each=" library : ${libraries}">
-                    <td th:text="${library.name}"></td>
-                    <td th:text="${library.address}"></td>
-                </tr>
-                </tbody>
-            </table>
-
-        </div>
         <div th:insert="fragments/fragments.html :: footer" class="footer"></div>
         <div th:insert="fragments/fragments.html :: script"></div>
     </body>

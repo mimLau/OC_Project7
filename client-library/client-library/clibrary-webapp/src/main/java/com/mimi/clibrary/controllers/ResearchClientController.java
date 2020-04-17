@@ -1,7 +1,6 @@
 package com.mimi.clibrary.controllers;
 
 import feign.FeignException;
-import jdk.internal.org.jline.utils.Log;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.mimi.clibrary.Beans.publication.LibraryBean;
@@ -19,11 +18,14 @@ import java.util.Map;
 
 @Controller
 public class ResearchClientController {
+
     private FeignProxy feignProxy;
+
     private static final String RESEARCH_VIEW = "research";
+    private static final String RESEARCH_PAGE = "redirect:/Research";
     private static final String PUBLICATION_RESULT_PAGE = "redirect:/publication/result";
     private static final String FORMCOMMAND_ATT = "researchFormCommand";
-    private static final String ERROR_MESS = "Pas de résultat";
+    private static final String ERROR_MESS = "Aucun résultat ne correspond à votre recherche.";
     final static Logger logger  = LogManager.getLogger(ResearchClientController.class);
 
     public ResearchClientController( FeignProxy feignProxy ) {
@@ -60,49 +62,38 @@ public class ResearchClientController {
     @PostMapping("/Research")
     public String researchForm(@ModelAttribute(FORMCOMMAND_ATT) ResearchFormCommand researchFormCommand, HttpSession session, Model model ) {
 
-        Map<String, Object> map = new HashMap<String, Object>();
         int selectedLibrarieId = 0;
+        Map<String, Object> criteriaMap = new HashMap<>();
 
         if( researchFormCommand.getCheckboxSelectedValue()  != null ) {
             selectedLibrarieId = Integer.parseInt(researchFormCommand.getCheckboxSelectedValue());
 
         }
-        map.put("libId", selectedLibrarieId);
+        criteriaMap.put("libId", selectedLibrarieId);
 
         if( researchFormCommand.getSelectedCat()  != null && !researchFormCommand.getSelectedCat().isEmpty())
-            map.put("cat",  researchFormCommand.getSelectedCat());
+            criteriaMap.put("cat",  researchFormCommand.getSelectedCat());
         else
-            map.put("cat", null);
+            criteriaMap.put("cat", null);
 
         if( researchFormCommand.getSelectedEdit()  != null && !researchFormCommand.getSelectedEdit().isEmpty())
-            map.put("edit",  researchFormCommand.getSelectedEdit());
+            criteriaMap.put("editor",  researchFormCommand.getSelectedEdit());
         else
-            map.put("edit", null);
+            criteriaMap.put("editor", null);
 
         if( researchFormCommand.getAutorTextField()  != null && !researchFormCommand.getAutorTextField().isEmpty() )
-            map.put("author",  researchFormCommand.getAutorTextField());
+            criteriaMap.put("author",  researchFormCommand.getAutorTextField());
         else
-            map.put("author", null);
+            criteriaMap.put("author", null);
 
         if( researchFormCommand.getTitleTextField()  != null && !researchFormCommand.getTitleTextField().isEmpty() )
-            map.put("title",  researchFormCommand.getTitleTextField());
+            criteriaMap.put("title",  researchFormCommand.getTitleTextField());
         else
-            map.put("title", null);
+            criteriaMap.put("title", null);
 
-
-        Map<String, Integer> test  = new HashMap<String, Integer>();
-        test.put("test", 23);
-
-       /* Log.error("test" + test.get("test"));
-
-        String cat =  (String) map.get("cat");
-        Log.error("(String) map.get(categor)" + cat);*/
 
         try {
-
-            List<PublicationBean> publications = feignProxy.getPublicationByCrit( (String) map.get("author"), (String) map.get("title"), (String) map.get("cat"), (String) map.get("editor"), (Integer) map.get("libId") );
-
-
+            List<PublicationBean> publications = feignProxy.getPublicationByCriteria( (String) criteriaMap.get("author"), (String) criteriaMap.get("title"), (String) criteriaMap.get("cat"), (String) criteriaMap.get("editor"), (Integer) criteriaMap.get("libId") );
 
             session.setAttribute("publications", publications);
 
@@ -111,7 +102,7 @@ public class ResearchClientController {
         } catch ( FeignException feign ) {
 
             model.addAttribute("errorMessage", ERROR_MESS);
-            return RESEARCH_VIEW;
+            return RESEARCH_PAGE;
         }
 
     }

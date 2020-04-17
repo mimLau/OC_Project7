@@ -38,12 +38,9 @@ public interface FeignProxy {
     @GetMapping( value = "/Publications", params = "title" )
     List<PublicationBean> getAllPublicationsByTitle( @RequestParam String title );
 
-    @GetMapping( "/Publications/criteria/{criteria}/{value}/{libId}" )
-    List<PublicationBean> getPublicationByCriteria( @PathVariable  String criteria, @PathVariable  String value, @PathVariable  int libId );
-
-    @GetMapping( "/Publications/criterias" )
-    List<PublicationBean> getPublicationByCrit( @RequestParam(required = false) String author, @RequestParam(required = false) String title , @RequestParam(required = false) String category,
-                                                     @RequestParam(required = false) String editor, @RequestParam(required = false, defaultValue = "0") int libId );
+    @GetMapping( value ="/Publications/criterias", params = { "author", "title", "category", "editor", "libId" })
+    List<PublicationBean> getPublicationByCriteria( @RequestParam String author, @RequestParam String title , @RequestParam String category,
+                                                     @RequestParam String editor, @RequestParam(required = false, defaultValue = "0") int libId );
 
 
     @GetMapping( value = "/Libraries" )

@@ -19,20 +19,8 @@ public interface PublicationRepository extends JpaRepository<Publication, Intege
     Page<Book> findAllBooks( Pageable pageable );
 
     @Query("SELECT b FROM Book b")
-    List<Book> findAllBooks();
+    List<Book> findAllBooks();*/
 
-    @Query("SELECT n FROM Newspaper n")
-    List<Newspaper> findAllNewspapers();
-
-    @Query("SELECT n FROM Newspaper n WHERE n.publicationDate= :date")
-    List<Newspaper> findAllNewspaperByDate( @Param("date") LocalDate date  );
-
-
-    @Query("SELECT r FROM Review r")
-    List<Review> findAllReviews();
-
-    @Query("SELECT r FROM Review r WHERE r.publicationDate= :date")
-    List<Review> findAllReviewsByDate( @Param("date") LocalDate date );*/
 
 
     @Query("SELECT p FROM Publication p WHERE p.id= :id")

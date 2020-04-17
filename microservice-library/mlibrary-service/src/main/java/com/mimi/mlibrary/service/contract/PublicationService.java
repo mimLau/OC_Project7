@@ -11,8 +11,6 @@ public interface PublicationService {
 
     List<LibraryDto> findAllLibraries();
     List<PublicationDto> findAllByCriteria(String author, String title, String category, String editor, int libId );
-
-    List<PublicationDto> findPublicationByCriteria( String criteria, String value, int libId );
     PublicationDto findPublicationById( int id );
     List<PublicationDto> findAllPublications();
     List<PublicationDto> findAllByAuthor( String name, int libId );

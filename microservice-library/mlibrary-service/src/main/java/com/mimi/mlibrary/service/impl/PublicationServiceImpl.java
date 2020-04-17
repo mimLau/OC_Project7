@@ -35,7 +35,7 @@ public class PublicationServiceImpl implements PublicationService {
     private LibraryRepository libraryRepository;
 
 
-    PublicationServiceImpl(PublicationRepository publicationRepository, AuthorRepository authorRepository, CopyRepository copyRepository, LibraryRepository libraryRepository) {
+    PublicationServiceImpl( PublicationRepository publicationRepository, AuthorRepository authorRepository, CopyRepository copyRepository, LibraryRepository libraryRepository) {
         this.publicationRepository = publicationRepository;
         this.authorRepository = authorRepository;
         this.copyRepository = copyRepository;
@@ -49,7 +49,7 @@ public class PublicationServiceImpl implements PublicationService {
     }
 
     @Override
-    public List<PublicationDto> findAllByCriteria(String author, String title, String category, String editor, int libId ) {
+    public List<PublicationDto> findAllByCriteria( String author, String title, String category, String editor, int libId ) {
 
         Criteria criteria = new Criteria();
 
@@ -89,63 +89,11 @@ public class PublicationServiceImpl implements PublicationService {
 
     }*/
 
-    /****************
-     * Newspapers
-     * **************/
-
-   /* @Override
-    public List<NewspaperDto> findAllNewspapers() {
-        return NewspaperMapper.INSTANCE.toDtoList( publicationRepository.findAllNewspapers() );
-    }
-
-    @Override
-    public List<NewspaperDto> findAllNewspapersByDate( LocalDate date ) {
-        //TODO convert date or something like this
-        return NewspaperMapper.INSTANCE.toDtoList( publicationRepository.findAllNewspaperByDate( date ) );
-    }*/
-
-
-
-    /****************
-     * Reviews
-     * **************/
-
-    /*@Override
-    public List<ReviewDto> findAllReviews() {
-        return ReviewMapper.INSTANCE.toDtoList( publicationRepository.findAllReviews());
-    }
-
-    @Override
-    public List<ReviewDto> findAllReviewsByDate( LocalDate date ) {
-        return ReviewMapper.INSTANCE.toDtoList( publicationRepository.findAllReviewsByDate( date ) );
-    }*/
-
 
     /****************
      * Publications
      * **************/
 
-
-    @Override
-    public List<PublicationDto> findPublicationByCriteria( String criteria, String value, int libId ) {
-        List<PublicationDto> publicationDtos = new ArrayList<>();
-        if ( criteria.equals( EXACT_TITLE_ATT ))
-            if( libId == 0)
-                 publicationDtos = PublicationMapper.INSTANCE.toDtoList( publicationRepository.findAllByExactTitle( value ));
-            else publicationDtos = PublicationMapper.INSTANCE.toDtoList( publicationRepository.findAllByExactTitle( value, libId ));
-
-        else if ( criteria.equals( TITLE_ATT ))
-            if( libId == 0)
-                 publicationDtos = PublicationMapper.INSTANCE.toDtoList( publicationRepository.findAllByTitle( value));
-            else publicationDtos = PublicationMapper.INSTANCE.toDtoList( publicationRepository.findAllByTitle( value, libId ));
-
-        else if ( criteria.equals( AUTHOR_ATT ))
-            if ( libId==0 )
-                 publicationDtos = this.findAllByAuthor( value );
-            else publicationDtos = this.findAllByAuthor( value, libId );
-
-        return publicationDtos;
-    }
 
     @Override
     public PublicationDto findPublicationById( int id ) {
