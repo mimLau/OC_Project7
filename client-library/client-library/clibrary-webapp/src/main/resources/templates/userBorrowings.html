@@ -26,14 +26,14 @@
                                 <td th:text="${borrowing.copy.publication.title}"></td>
                                 <td th:text="${borrowing.borrowingDate}"></td>
                                 <td>
-                                    <span th:if="${borrowing.returnDate > toDay}"><span th:text="${borrowing.returnDate}" style="color: red"/></span>
-                                    <span th:unless="${borrowing.returnDate > toDay}"><span th:text="${borrowing.returnDate}"/></span>
+                                    <span th:if="${borrowing.returnDate > toDay}"><span th:text="${#temporals.format(borrowing.returnDate, 'dd-MM-yyyy')}" style="color: red"/></span>
+                                    <span th:unless="${borrowing.returnDate > toDay}"><span th:text="${#temporals.format(borrowing.returnDate, 'dd-MM-yyyy')}"/></span>
                                 </td>
                                 <td >
                                     <span th:if="${borrowing.extented}"></span>
                                     <span  th:unless="${borrowing.extented}"> <a th:href="@{~/extends(id=${borrowing.id})}" ><button class="btn btn-outline-danger my-2 my-sm-0 btn-sm">Prolonger</button></a> </span>
                                 </td>
-                            </tr>
+                            </tr>  
                         </tbody>
                     </table>
                 </div>

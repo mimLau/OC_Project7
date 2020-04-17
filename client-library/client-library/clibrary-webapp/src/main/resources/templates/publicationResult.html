@@ -23,7 +23,7 @@
                             <tr th:each=" publication : ${session.publications}">
                                 <td ><a style="text-decoration: none" th:href="@{~/Publication(id=${publication.id})}" th:text="${publication.title}"></a></td>
                                 <td th:text= "${publication.editor} ? ${publication.editor.name} : ' ' "></td>
-                                <td th:text="${publication.publicationDate}"></td>
+                                <td th:text="${#temporals.format(publication.publicationDate, 'dd-MM-yyyy')}"></td>
                                 <td th:text="${publication.nbOfAvailableCopies}"></td>
                             </tr>
                         </tbody>

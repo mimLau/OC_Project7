@@ -51,6 +51,7 @@ public class BorrowingClientController {
         Object token = session.getAttribute("token");
         List<BorrowingBean> borrowings = feignProxy.getAllBorrowings( token );
         model.addAttribute( "borrowings", borrowings );
+        model.addAttribute("toDay", LocalDate.now());
         return "borrowings";
     }
 
@@ -60,6 +61,7 @@ public class BorrowingClientController {
         Object token = session.getAttribute("token");
         List<BorrowingBean> borrowings = feignProxy.findByDelay( token );
         model.addAttribute( "borrowings", borrowings );
+        model.addAttribute("toDay", LocalDate.now());
         return "delays";
     }
 }
