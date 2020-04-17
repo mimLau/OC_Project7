@@ -13,7 +13,6 @@
                     <table class="table table-hover" style="border: 1px solid #DDD;">
                         <thead>
                             <tr>
-                                <th scope="col">Id</th>
                                 <th scope="col">Titre</th>
                                 <th scope="col">Date d'emprunt</th>
                                 <th scope="col">Date de retour</th>
@@ -22,7 +21,6 @@
                         </thead>
                         <tbody>
                             <tr th:each=" borrowing : ${borrowings}">
-                                <td th:text="${borrowing.id}"></td>
                                 <td th:text="${borrowing.copy.publication.title}"></td>
                                 <td th:text="${borrowing.borrowingDate}"></td>
                                 <td>
@@ -33,7 +31,7 @@
                                     <span th:if="${borrowing.extented}"></span>
                                     <span  th:unless="${borrowing.extented}"> <a th:href="@{~/extends(id=${borrowing.id})}" ><button class="btn btn-outline-danger my-2 my-sm-0 btn-sm">Prolonger</button></a> </span>
                                 </td>
-                            </tr>  
+                            </tr>
                         </tbody>
                     </table>
                 </div>

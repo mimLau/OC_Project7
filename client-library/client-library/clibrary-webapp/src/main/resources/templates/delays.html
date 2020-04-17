@@ -7,29 +7,30 @@
     <body>
         <div th:insert="fragments/fragments.html :: nav"></div>
 
-        <div class="container">
-            <table class="table table-hover">
-                <thead>
-                <tr>
-                    <th scope="col">Id</th>
-                    <th scope="col">Titre</th>
-                    <th scope="col">Date d'emprunt</th>
-                    <th scope="col">Date de retour</th>
-                    <th scope="col">Prolongation</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each=" borrowing : ${borrowings}">
-                    <td th:text="${borrowing.id}"></td>
-                    <td th:text="${borrowing.copy.publication.title}"></td>
-                    <td th:text="${#temporals.format(borrowing.borrowingDate, 'dd-MM-yyyy')}"></td>
-                    <td th:text="${#temporals.format(borrowing.returnDate, 'dd-MM-yyyy')}" style="color: red"></td>
-                    <td if th:if="${borrowing.extented}" style="font-size: large"> Effectuée</td>
-                </tr>
-                </tbody>
-            </table>
-
-        </div>
+        <section class="container-fluid">
+            <section class="row justify-content-center">
+                <div class="responsive-table-line" style="margin:0px auto;max-width:1500px;"><br/><br/>
+                    <table class="table table-hover" style="border: 1px solid #DDD;">
+                        <thead>
+                            <tr>
+                                <th scope="col">Titre</th>
+                                <th scope="col">Date d'emprunt</th>
+                                <th scope="col">Date de retour</th>
+                                <th scope="col">Prolongation</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each=" borrowing : ${borrowings}">
+                                <td th:text="${borrowing.copy.publication.title}"></td>
+                                <td th:text="${#temporals.format(borrowing.borrowingDate, 'dd-MM-yyyy')}"></td>
+                                <td th:text="${#temporals.format(borrowing.returnDate, 'dd-MM-yyyy')}" style="color: red"></td>
+                                <td if th:if="${borrowing.extented}" style="font-size: large"> Effectuée</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </section>
 
 
         <div th:insert="fragments/fragments.html :: footer" class="footer"></div>
