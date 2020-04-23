@@ -5,7 +5,9 @@ import com.mimi.mlibrary.model.entity.borrowing.Borrowing;
 import org.springframework.data.repository.query.Param;
 
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 public interface BorrowingService {
 
@@ -17,5 +19,6 @@ public interface BorrowingService {
     //void  updateBorrowingExtensionValueById( int id) ;
     void  updateBorrowingStatus( int borrowingId );
     List<BorrowingDto> findByDelay();
+    Map<String, LocalDate> findOutdatedBorrowingsEmailMember();
 
 }

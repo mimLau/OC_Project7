@@ -12,6 +12,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/Borrowings")
@@ -63,11 +64,11 @@ public class BorrowingController {
         borrowingService.updateBorrowingStatus( id );
     }
 
-    @GetMapping( "/delay" )
-    public List<BorrowingDto> findByDelay() {
-        return   borrowingService.findByDelay();
+    @GetMapping( "/delay/email" )
+    public Map<String, LocalDate> getOutdatedBorrowingsEmailMember() {
+        return  borrowingService.findOutdatedBorrowingsEmailMember();
     }
 
 
-
 }
+

@@ -17,8 +17,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class BorrowingServiceImpl implements BorrowingService {
@@ -152,8 +151,19 @@ public class BorrowingServiceImpl implements BorrowingService {
     @Override
     public List<BorrowingDto> findByDelay() {
         LocalDate currentDate = LocalDate.now();
-        return  BorrowingMapper.INSTANCE.borToDtoList( borrowingRepository.findByDelay( currentDate ) );
+        return  BorrowingMapper.INSTANCE.borToDtoList( borrowingRepository.findByDelay( currentDate , BorrowingStatus.INPROGRESS ) );
 
     }
 
+    @Override
+    public Map<String, LocalDate> findOutdatedBorrowingsEmailMember() {
+
+        List <BorrowingDto>  borrowingDtos = this.findByDelay();
+        Map<String, LocalDate> emailsAndReturnDates = new HashMap<>();
+
+        for( BorrowingDto borrowing : borrowingDtos )
+            emailsAndReturnDates.put(borrowing.getMember().getAccountOwnerEmail(), borrowing.getReturnDate() );
+
+        return emailsAndReturnDates;
+    }
 }

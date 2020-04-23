@@ -29,8 +29,8 @@ public interface BorrowingRepository extends JpaRepository<Borrowing, Integer> {
     @Query("SELECT b FROM Borrowing  b JOIN FETCH b.copy c WHERE c.id= :id")
     List<Borrowing> findByCopyId( @Param("id") int id );
 
-    @Query("SELECT b FROM Borrowing b WHERE b.returnDate < :current_date ")
-    List<Borrowing> findByDelay( @Param("current_date") LocalDate currentDate );
+    @Query("SELECT b FROM Borrowing b WHERE b.returnDate < :current_date AND b.borrowingStatus= :status")
+    List<Borrowing> findByDelay( @Param("current_date") LocalDate currentDate, @Param("status") BorrowingStatus status );
 
     @Transactional
     @Modifying
