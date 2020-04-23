@@ -3,6 +3,7 @@ package com.mimi.mlibrary.controllers;
 import com.mimi.mlibrary.exceptions.ResourceNotFoundException;
 import com.mimi.mlibrary.mapper.borrowing.BorrowingMapper;
 import com.mimi.mlibrary.model.dto.borrowing.BorrowingDto;
+import com.mimi.mlibrary.model.entity.borrowing.BorrowingJson;
 import com.mimi.mlibrary.service.contract.BorrowingService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -38,9 +39,10 @@ public class BorrowingController {
         return borrowingService.findByMemberId( id );
     }
 
-    @PostMapping( params = { "mbId", "cpId" },  consumes={"application/json"})
-    public ResponseEntity<Void> addBorrowing( @RequestBody BorrowingDto borrowingDto, @RequestParam(required = true) int mbId, @RequestParam(required = true) int cpId  ) {
-        BorrowingDto addedBorrowing = borrowingService.save( borrowingDto, mbId, cpId);
+    @PostMapping( consumes={"application/json"})
+    public ResponseEntity<Void> addBorrowing(@RequestBody BorrowingJson borrowingJson ) {
+
+        BorrowingDto addedBorrowing = borrowingService.save( borrowingJson.getMember(), borrowingJson.getCopy() );
 
         if( addedBorrowing == null ) throw new ResourceNotFoundException( "L'utilisateur ne peut pas emprunter cette exemplaire.\n Exemplaire indisponible ou l'utilisateur a déjà 5 emprunts en cours." );
 

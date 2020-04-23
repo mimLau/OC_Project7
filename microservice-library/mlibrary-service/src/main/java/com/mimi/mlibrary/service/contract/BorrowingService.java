@@ -12,7 +12,7 @@ public interface BorrowingService {
     BorrowingDto findBorrowingById(int id );
     List<BorrowingDto> findAll();
     List<BorrowingDto> findByMemberId( int memberId );
-    BorrowingDto save( BorrowingDto borrowingDto, int memberId, int copyId );
+    BorrowingDto save( int memberId, int copyId );
     void extendBorrowingReturnDateById( int borrowingId );
     //void  updateBorrowingExtensionValueById( int id) ;
     void  updateBorrowingStatus( int borrowingId );

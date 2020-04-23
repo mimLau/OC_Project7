@@ -55,13 +55,13 @@ public class BorrowingServiceImpl implements BorrowingService {
 
     /**
      *
-     * @param borrowingDto The created borrowing
+
      * @param memberId The id of the user who borrows a publication
      * @param copyId The id of the available copy of the publication which will be borrowed
      * @return The created borrowing
      */
     @Override
-    public BorrowingDto save( BorrowingDto borrowingDto, int memberId, int copyId ) {
+    public BorrowingDto save( int memberId, int copyId ) {
 
         // Member research
         Optional<Member> member = memberRepository.getMemberById( memberId );
@@ -83,7 +83,13 @@ public class BorrowingServiceImpl implements BorrowingService {
             copyRepository.updateCopyReturnDateById( today.plusDays( 28 ),copyId );
             memberRepository.updateNbOfCurrentsBorrowings( memberId, 1);
 
+
             //Set attributes to the created borrowing.
+
+            BorrowingDto borrowingDto = new BorrowingDto();
+
+            borrowingDto.setCopy( copy.get() );
+            borrowingDto.setMember( member.get() );
             borrowingDto.setReturnDate( today.plusDays( 28 ) );
             borrowingDto.setBorrowingDate( today );
             borrowingDto.setExtented( false );
