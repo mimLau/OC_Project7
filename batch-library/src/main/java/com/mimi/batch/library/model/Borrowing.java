@@ -14,8 +14,9 @@ public class Borrowing {
     private String borrowingStatus;
     private Member member;
     private int reminderNb;
-    /*private LocalDate returnDate;
-    private LocalDate borrowingDate;*/
+    private LocalDate returnDate;
+    private LocalDate borrowingDate;
+    private Copy copy;
 
 
 }

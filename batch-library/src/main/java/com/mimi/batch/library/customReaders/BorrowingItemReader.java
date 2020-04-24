@@ -1,4 +1,4 @@
-package com.mimi.batch.library.CustomReaders;
+package com.mimi.batch.library.customReaders;
 
 import com.mimi.batch.library.model.Borrowing;
 import com.mimi.batch.library.proxies.FeignProxy;

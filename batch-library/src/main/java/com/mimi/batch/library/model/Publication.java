@@ -11,9 +11,9 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Member extends Account {
+public  class Publication {
 
-    private List<Borrowing> borrowings;
-    private String barcode;
-
+    private String title;
+    private List<Copy> copies;
+    private String identificationNb;
 }
