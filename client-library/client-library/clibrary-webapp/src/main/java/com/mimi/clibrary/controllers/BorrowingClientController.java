@@ -21,7 +21,7 @@ public class BorrowingClientController {
 
     private FeignProxy feignProxy;
 
-    public BorrowingClientController(FeignProxy feignProxy) {
+    public BorrowingClientController( FeignProxy feignProxy ) {
         this.feignProxy = feignProxy;
     }
 

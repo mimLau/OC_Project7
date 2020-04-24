@@ -1,5 +1,7 @@
 package com.mimi.mlibrary.controllers;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.mimi.mlibrary.exceptions.ResourceNotFoundException;
 import com.mimi.mlibrary.mapper.borrowing.BorrowingMapper;
 import com.mimi.mlibrary.model.dto.borrowing.BorrowingDto;
@@ -64,8 +66,13 @@ public class BorrowingController {
         borrowingService.updateBorrowingStatus( id );
     }
 
+    @GetMapping( "/delay" )
+    public List<BorrowingDto> findByDelay() {
+       return borrowingService.findByDelay();
+    }
+
     @GetMapping( "/delay/email" )
-    public Map<String, LocalDate> getOutdatedBorrowingsEmailMember() {
+    public Map<String, LocalDate> getOutdatedBorrowingsAndEmailMember() {
         return  borrowingService.findOutdatedBorrowingsEmailMember();
     }
 
