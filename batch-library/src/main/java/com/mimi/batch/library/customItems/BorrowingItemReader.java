@@ -1,14 +1,15 @@
-package com.mimi.batch.library.customReaders;
+package com.mimi.batch.library.customItems;
 
 import com.mimi.batch.library.model.Borrowing;
 import com.mimi.batch.library.proxies.FeignProxy;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.batch.item.ItemReader;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-
+//@Component
 public class BorrowingItemReader implements ItemReader<Borrowing> {
     final static Logger LOGGER  = LogManager.getLogger( BorrowingItemReader.class );
     private int nextBorrowingIndex;
