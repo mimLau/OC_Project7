@@ -22,7 +22,7 @@ public class MailUtil {
             message.setText(TextBody);
             message.setSubject("AVIS DE RETARD");
             message.setFrom("Projet7OCLib@gmail.com");
-            sender.send(message);
+            sender.send( message );
             msg = "mail triggered successfully to : " + to;
         } catch (Exception e) {
             msg = e.getMessage();

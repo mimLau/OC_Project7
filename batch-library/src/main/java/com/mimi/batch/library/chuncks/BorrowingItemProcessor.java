@@ -1,4 +1,4 @@
-package com.mimi.batch.library.customItems;
+package com.mimi.batch.library.chuncks;
 
 import com.mimi.batch.library.model.Borrowing;
 import org.springframework.batch.item.ItemProcessor;

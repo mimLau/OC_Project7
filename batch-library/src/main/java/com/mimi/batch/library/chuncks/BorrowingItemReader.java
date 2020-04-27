@@ -1,11 +1,10 @@
-package com.mimi.batch.library.customItems;
+package com.mimi.batch.library.chuncks;
 
 import com.mimi.batch.library.model.Borrowing;
 import com.mimi.batch.library.proxies.FeignProxy;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.batch.item.ItemReader;
-import org.springframework.lang.Nullable;
 
 import java.util.List;
 
@@ -22,7 +21,6 @@ public class BorrowingItemReader implements ItemReader<Borrowing> {
         this.token = token;
     }
 
-    @Nullable
     @Override
     public Borrowing read() throws  Exception {
         LOGGER.info("Reading the information of the next borrowing");

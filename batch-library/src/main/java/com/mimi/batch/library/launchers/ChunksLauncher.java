@@ -1,4 +1,4 @@
-package com.mimi.batch.library.task;
+package com.mimi.batch.library.launchers;
 
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobParameters;
@@ -9,10 +9,10 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 
 @EnableScheduling
-public class BorrowingBatchLauncher {
+public class ChunksLauncher {
 
-    @Autowired JobLauncher jobLauncher;
-    @Autowired Job job;
+    @Autowired private JobLauncher jobLauncher;
+    @Autowired private Job job;
 
 
     @Scheduled(cron = "0 */1 * * * ?")
@@ -23,4 +23,6 @@ public class BorrowingBatchLauncher {
                 .toJobParameters();
         jobLauncher.run(job, params);
     }
+
+
 }
