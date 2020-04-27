@@ -1,13 +1,19 @@
 package com.mimi.batch.library.config;
 
+import com.mimi.batch.library.chuncks.BorrowingItemReader;
 import com.mimi.batch.library.model.Borrowing;
+import com.mimi.batch.library.model.UserBatch;
 import com.mimi.batch.library.proxies.AuthFeignProxy;
 import com.mimi.batch.library.proxies.FeignProxy;
+import org.springframework.batch.core.Job;
+import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.item.ItemProcessor;
+import org.springframework.batch.item.ItemReader;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
@@ -15,7 +21,7 @@ public class ChunksConfig {
 
     private JobBuilderFactory jobBuilderFactory;
     private StepBuilderFactory stepBuilderFactory;
-    //@Autowired private ItemReader<Borrowing> borrowingItemReader;
+    @Autowired private ItemReader<Borrowing> borrowingItemReader;
     @Autowired private ItemWriter<Borrowing> borrowingItemWriter;
     @Autowired private ItemProcessor<Borrowing, Borrowing> borrowingItemProcessor;
 
@@ -34,7 +40,7 @@ public class ChunksConfig {
     }
 
 
-    /*@Bean
+    @Bean
     ItemReader<Borrowing> borrowingItemReader() {
         String token = authProxy.login( new UserBatch() );
         return new BorrowingItemReader( proxy, token );
@@ -56,7 +62,7 @@ public class ChunksConfig {
                 .flow(step1())
                 .end()
                 .build();
-    }*/
+    }
 
 }
 
