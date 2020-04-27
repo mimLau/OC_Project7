@@ -1,11 +1,10 @@
-package com.mimi.batch.library.config;
+package com.mimi.batch.library.batchConfig;
 
 import com.mimi.batch.library.customItems.BorrowingItemReader;
 import com.mimi.batch.library.model.Borrowing;
 import com.mimi.batch.library.model.UserBatch;
 import com.mimi.batch.library.proxies.AuthFeignProxy;
 import com.mimi.batch.library.proxies.FeignProxy;
-import com.mimi.batch.library.utils.MailUtil;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
@@ -13,15 +12,9 @@ import org.springframework.batch.core.configuration.annotation.StepBuilderFactor
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.batch.item.ItemReader;
 import org.springframework.batch.item.ItemWriter;
-import org.springframework.batch.item.xml.StaxEventItemWriter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.io.FileSystemResource;
-import org.springframework.oxm.xstream.XStreamMarshaller;
-
-import java.util.HashMap;
-import java.util.Map;
 
 @Configuration
 public class BorrowingBatchConfig {
@@ -57,7 +50,7 @@ public class BorrowingBatchConfig {
     @Bean
     public Step step1() {
         return stepBuilderFactory.get("step1")
-                .<Borrowing, Borrowing>chunk(100)
+                .<Borrowing, Borrowing>chunk(1)
                 .reader( borrowingItemReader )
                 .processor(borrowingItemProcessor )
                 .writer( borrowingItemWriter ).build();

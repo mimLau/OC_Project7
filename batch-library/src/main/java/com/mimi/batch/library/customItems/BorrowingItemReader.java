@@ -5,28 +5,28 @@ import com.mimi.batch.library.proxies.FeignProxy;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.batch.item.ItemReader;
-import org.springframework.stereotype.Component;
+import org.springframework.lang.Nullable;
 
 import java.util.List;
 
-//@Component
 public class BorrowingItemReader implements ItemReader<Borrowing> {
     final static Logger LOGGER  = LogManager.getLogger( BorrowingItemReader.class );
     private int nextBorrowingIndex;
     private List<Borrowing> borrowings;
     private FeignProxy proxy;
+    private String token;
 
     public BorrowingItemReader( FeignProxy proxy, String token ) {
+        this.nextBorrowingIndex = 0;
         this.proxy = proxy;
-
-        borrowings =  this.proxy.getOutdatedBorrowingLists( token );
-        nextBorrowingIndex = 0;
+        this.token = token;
     }
 
-
+    @Nullable
     @Override
     public Borrowing read() throws  Exception {
         LOGGER.info("Reading the information of the next borrowing");
+        borrowings =  this.proxy.getOutdatedBorrowingLists( token );
 
         Borrowing nextBorrowing = null;
 
