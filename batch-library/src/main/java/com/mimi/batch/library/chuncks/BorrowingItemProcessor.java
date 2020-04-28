@@ -6,7 +6,7 @@ import org.springframework.batch.item.ItemProcessor;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 
-import com.mimi.batch.library.utils.MailUtil;
+import com.mimi.batch.library.mail.MailNotification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class BorrowingItemProcessor implements ItemProcessor<Borrowing, Borrowing> {
 
-   @Autowired private MailUtil util;
+   @Autowired private MailNotification util;
 
     @Override
     public Borrowing process(Borrowing borrowing) throws Exception {
