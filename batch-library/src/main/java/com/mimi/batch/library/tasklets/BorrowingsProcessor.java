@@ -2,24 +2,26 @@ package com.mimi.batch.library.tasklets;
 
 import com.mimi.batch.library.mail.EmailService;
 import com.mimi.batch.library.mail.Mail;
-import com.mimi.batch.library.model.Borrowing;
-import com.mimi.batch.library.proxies.FeignProxy;
 import com.mimi.batch.library.mail.MailNotification;
+import com.mimi.batch.library.model.Borrowing;
+import com.mimi.batch.library.model.Member;
+import com.mimi.batch.library.model.MemberBorrowing;
+import com.mimi.batch.library.proxies.FeignProxy;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.batch.core.StepContribution;
 import org.springframework.batch.core.scope.context.ChunkContext;
 import org.springframework.batch.core.step.tasklet.Tasklet;
 import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class BorrowingsProcessor implements Tasklet {
 
-    @Autowired private MailNotification util;
+    private final Logger LOGGER = LogManager.getLogger( BorrowingsProcessor.class );
+
     @Autowired
     private EmailService emailService;
     private List<Borrowing> borrowings;
@@ -34,48 +36,53 @@ public class BorrowingsProcessor implements Tasklet {
 
     @Override
     public RepeatStatus execute( StepContribution contribution, ChunkContext chunkContext ) throws Exception {
-        borrowings =  this.proxy.getOutdatedBorrowingLists( token );
-        String msg = "";
+        borrowings = this.proxy.getOutdatedBorrowingLists(token);
 
-        /*for( Borrowing borrowing : borrowings ) {
-            msg = util.sendEmail(borrowing.getMember().getAccountOwnerEmail(), buildMessage(borrowing));
-            System.out.println(msg);
-        }*/
+        Map<String, List<Borrowing>> emailBorrowing = new HashMap<>();
 
-        for( Borrowing borrowing : borrowings ) {
-            Mail mail = new Mail();
-            mail.setFrom("Projet7OCLib@gmail.com");
-            mail.setTo( borrowing.getMember().getAccountOwnerEmail() );
-            mail.setSubject("AVIS DE RETARD");
+        for (Borrowing b : borrowings) {
+            addValue( b.getMember().getAccountOwnerEmail(), b, emailBorrowing );
 
-            Map<String, Object> model = new HashMap<>();
-            model.put("name", borrowing.getMember().getAccountOwnerLastname() + " " + borrowing.getMember().getAccountOwnerFirstname());
-            model.put("date", LocalDate.now() );
-            model.put("userNb", borrowing.getMember().getBarcode() );
-            model.put("title", borrowing.getCopy().getPublication().getTitle() );
-            model.put("publicationNb", borrowing.getMember().getBarcode() );
-            model.put("deadLine", new SimpleDateFormat("dd/MM/yyyy").format(java.sql.Date.valueOf(borrowing.getReturnDate())) );
-            mail.setModel(model);
-
-            emailService.sendSimpleMessage(mail);
         }
 
+        /*for (Map.Entry<String, List<Borrowing>> entry : emailBorrowing.entrySet()) {
+            LOGGER.error("Id user: " + entry.getKey() );
 
-        return RepeatStatus.FINISHED;
+            for(Borrowing bor : entry.getValue() ){
+                LOGGER.error("Titre: " + bor.getCopy().getPublication().getTitle());
+            }
+        }*/
+
+            for (Map.Entry<String, List<Borrowing>> entry : emailBorrowing.entrySet()) {
+
+                Mail mail = new Mail();
+                mail.setFrom("Projet7OCLib@gmail.com");
+                mail.setTo( entry.getKey() );
+                mail.setSubject("AVIS DE RETARD");
+
+                Map<String, Object> model = new HashMap<>();
+                //model.put("name", entry.getKey().getAccountOwnerLastname() + " " + entry.getKey().getAccountOwnerFirstname());
+                model.put("date", LocalDate.now());
+               // model.put("userNb", entry.getKey().getBarcode());
+                model.put("borrowings", entry.getValue());
+
+                mail.setModel(model);
+                emailService.sendSimpleMessage(mail);
+
+            }
+
+            return RepeatStatus.FINISHED;
+        }
+
+    public static void addValue( String key, Borrowing value, Map<String, List<Borrowing>> map) {
+        List<Borrowing> list = map.get(key);
+        if (list == null) {
+            list = new ArrayList<>();
+        }
+        list.add(value);
+        map.put(key, list);
     }
 
-    private String buildMessage( Borrowing borrowing ) {
-        String mailBody = "Bonjour," + "\n"
-                + "\n" + "- Date  : " + LocalDate.now()
-                + "\n" + "- Nom de l'abonnée  : " + borrowing.getMember().getAccountOwnerLastname() + " " + borrowing.getMember().getAccountOwnerFirstname()
-                + "\n" + "- Numéro de l'abonnée  : " + borrowing.getMember().getBarcode()
-                + "\n" + "- Titre : " + borrowing.getCopy().getPublication().getTitle()
-                + "\n" + "- No de document  : " + borrowing.getCopy().getPublication().getIdentificationNb()
-                + "\n" + "- Échéance  : " + new SimpleDateFormat("dd/MM/yyyy").format(java.sql.Date.valueOf(borrowing.getReturnDate()))
-                + "\n" + "\n" + "Nous vous remercions de bien vouloir rapporter au plus vite ce(s) document(s) dans l'une des bibliothèques municipales de Strasbourg."
 
-                + "\n" + "\n" + "Ceci est un rappel automatique, veuillez ne pas répondre à cet email.";
 
-        return mailBody;
-    }
 }

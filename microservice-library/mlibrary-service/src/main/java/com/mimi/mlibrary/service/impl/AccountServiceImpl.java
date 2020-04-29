@@ -2,6 +2,8 @@ package com.mimi.mlibrary.service.impl;
 
 import com.mimi.mlibrary.mapper.account.EmployeeMapper;
 import com.mimi.mlibrary.model.dto.account.EmployeeDto;
+import com.mimi.mlibrary.model.dto.borrowing.BorrowingDto;
+import com.mimi.mlibrary.model.entity.borrowing.BorrowingStatus;
 import com.mimi.mlibrary.repository.account.EmployeeRepository;
 import com.mimi.mlibrary.repository.account.MemberRepository;
 import com.mimi.mlibrary.mapper.account.MemberMapper;
@@ -9,8 +11,8 @@ import com.mimi.mlibrary.model.dto.account.MemberDto;
 import com.mimi.mlibrary.service.contract.AccountService;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
+import java.time.LocalDate;
+import java.util.*;
 
 @Service
 public class AccountServiceImpl implements AccountService {
@@ -70,4 +72,12 @@ public class AccountServiceImpl implements AccountService {
     public void updateNbOfCurrentsBorrowings( int id ) {
          memberRepository.updateNbOfCurrentsBorrowings( id, 1);
     }
+
+    @Override
+    public List<MemberDto> getMembersByOutdatedBorrowing( ) {
+        LocalDate currentDate = LocalDate.now();
+        return MemberMapper.INSTANCE.toDtoList( memberRepository.getMembersByOutdatedBorrowing( currentDate , BorrowingStatus.INPROGRESS ) );
+    }
+
+
 }

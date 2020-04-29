@@ -2,6 +2,7 @@ package com.mimi.mlibrary.repository.account;
 
 import com.mimi.mlibrary.model.entity.account.Employee;
 import com.mimi.mlibrary.model.entity.account.Member;
+import com.mimi.mlibrary.model.entity.borrowing.BorrowingStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -9,6 +10,8 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -25,6 +28,9 @@ public interface MemberRepository extends JpaRepository<Member, Integer> {
 
     @Query( "SELECT m FROM Member m WHERE m.accountOwnerFirstname= :firstname AND m.accountOwnerLastname= :lastname")
     Optional<Member> getMemberByNames( @Param("firstname") String firstname, @Param("lastname") String lastname );
+
+    @Query( "SELECT m FROM Member m JOIN m.borrowings b WHERE b.returnDate < :current_date AND b.borrowingStatus= :status" )
+    List<Member> getMembersByOutdatedBorrowing( @Param("current_date") LocalDate currentDate, @Param("status") BorrowingStatus status );
 
     @Modifying
     @Transactional

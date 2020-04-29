@@ -1,7 +1,6 @@
 package com.mimi.batch.library.model;
 
 import lombok.*;
-import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 
@@ -11,6 +10,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class Borrowing {
 
+    private Integer id;
     private boolean extented;
     private String borrowingStatus;
     private Member member;

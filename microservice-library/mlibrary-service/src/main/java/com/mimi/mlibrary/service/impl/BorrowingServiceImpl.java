@@ -1,23 +1,24 @@
 package com.mimi.mlibrary.service.impl;
 
-import com.mimi.mlibrary.mapper.account.MemberMapper;
-import com.mimi.mlibrary.repository.account.MemberRepository;
-import com.mimi.mlibrary.repository.borrowing.BorrowingRepository;
-import com.mimi.mlibrary.repository.publication.CopyRepository;
 import com.mimi.mlibrary.mapper.borrowing.BorrowingMapper;
 import com.mimi.mlibrary.model.dto.borrowing.BorrowingDto;
 import com.mimi.mlibrary.model.entity.account.Member;
 import com.mimi.mlibrary.model.entity.borrowing.Borrowing;
 import com.mimi.mlibrary.model.entity.borrowing.BorrowingStatus;
 import com.mimi.mlibrary.model.entity.publication.Copy;
+import com.mimi.mlibrary.repository.account.MemberRepository;
+import com.mimi.mlibrary.repository.borrowing.BorrowingRepository;
+import com.mimi.mlibrary.repository.publication.CopyRepository;
 import com.mimi.mlibrary.service.contract.BorrowingService;
-import java.time.LocalDate;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 @Service
 public class BorrowingServiceImpl implements BorrowingService {
@@ -128,11 +129,6 @@ public class BorrowingServiceImpl implements BorrowingService {
        }
         //TODO MESSAGE TO SIGNAL THAT THE USER HAS ALREADY EXTENDED ITS BORROWING.
     }
-
-    /*@Override
-    public void updateBorrowingExtensionValueById( int id ) {
-        borrowingRepository.updateExtensionById( id );
-    }*/
 
     @Override
     public void updateBorrowingStatus( int borrowingId ) {
