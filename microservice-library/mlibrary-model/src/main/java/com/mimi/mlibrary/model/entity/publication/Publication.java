@@ -2,7 +2,6 @@ package com.mimi.mlibrary.model.entity.publication;
 
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
@@ -58,7 +57,7 @@ public  class Publication implements Serializable {
     private Author author;
 
     @ManyToOne
-    @JsonManagedReference(value="publication_editor")
+    @JsonBackReference(value="publication_editor")
     @JoinColumn(name = "edithor_fk")
     private Editor editor;
 
