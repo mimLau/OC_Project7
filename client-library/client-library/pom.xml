@@ -37,7 +37,6 @@
 
         <modules>
                  <module>clibrary-model</module>
-                 <module>clibrary-batch</module>
                  <module>clibrary-consumer</module>
                  <module>clibrary-service</module>
                  <module>clibrary-webapp</module>
