@@ -1,39 +1,22 @@
 package org.mimi.clibrary.Beans.account;
 
-import org.mimi.clibrary.Beans.borrowing.BorrowingBean;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.mimi.clibrary.Beans.Loan.LoanBean;
 
 import java.util.List;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class MemberBean extends AccountBean {
 
     private String barcode;
-    private int nbOfCurrentsBorrowings;
-    private List<BorrowingBean> borrowings;
+    private int nbOfCurrentsLoans;
+    private List<LoanBean> loans;
 
-    public MemberBean() {
-    }
 
-    public String getBarcode() {
-        return barcode;
-    }
-
-    public void setBarcode(String barcode) {
-        this.barcode = barcode;
-    }
-
-    public int getNbOfCurrentsBorrowings() {
-        return nbOfCurrentsBorrowings;
-    }
-
-    public void setNbOfCurrentsBorrowings(int nbOfCurrentsBorrowings) {
-        this.nbOfCurrentsBorrowings = nbOfCurrentsBorrowings;
-    }
-
-    public List<BorrowingBean> getBorrowings() {
-        return borrowings;
-    }
-
-    public void setBorrowings(List<BorrowingBean> borrowings) {
-        this.borrowings = borrowings;
-    }
 }

@@ -10,11 +10,11 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @Controller
-public class MemberClientController {
+public class MemberController {
 
     private FeignProxy feignProxy;
 
-    public MemberClientController(FeignProxy feignProxy ) {
+    public MemberController(FeignProxy feignProxy ) {
         this.feignProxy = feignProxy;
     }
 

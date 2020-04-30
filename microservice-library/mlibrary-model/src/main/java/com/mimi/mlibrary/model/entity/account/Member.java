@@ -1,10 +1,19 @@
 package com.mimi.mlibrary.model.entity.account;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.mimi.mlibrary.model.entity.borrowing.Borrowing;
+import com.mimi.mlibrary.model.entity.loan.Loan;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.List;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 
 @Entity
 @DiscriminatorValue("Member")
@@ -12,35 +21,8 @@ public class Member extends Account {
 
     private String barcode;
     @Column(nullable = false)
-    private int nbOfCurrentsBorrowings;
-
-
+    private int nbOfCurrentsLoans;
+    @JsonManagedReference(value = "Loan_member")
     @OneToMany(mappedBy = "member")
-    private List<Borrowing> borrowings;
-
-    public String getBarcode() {
-        return barcode;
-    }
-
-    public void setBarcode(String barcode) {
-        this.barcode = barcode;
-    }
-
-    public int getNbOfCurrentsBorrowings() {
-        return nbOfCurrentsBorrowings;
-    }
-
-    public void setNbOfCurrentsBorrowings(int nbOfCurrentsBorrowings) {
-        this.nbOfCurrentsBorrowings = nbOfCurrentsBorrowings;
-    }
-
-    @JsonManagedReference(value = "borrowing_member")
-    @OneToMany(mappedBy = "member")
-    public List<Borrowing> getBorrowings() {
-        return borrowings;
-    }
-
-    public void setBorrowings(List<Borrowing> borrowings) {
-        this.borrowings = borrowings;
-    }
+    private List<Loan> Loans;
 }

@@ -20,7 +20,7 @@ public class Copy {
     private String barcode;
     private boolean available;
     private LocalDate returnDate;
-    private List<Borrowing> borrowings;
+    private List<Loan> Loans;
     private Publication publication;
 
 

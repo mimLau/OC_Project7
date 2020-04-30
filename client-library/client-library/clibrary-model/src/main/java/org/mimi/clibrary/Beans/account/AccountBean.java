@@ -1,9 +1,18 @@
 package org.mimi.clibrary.Beans.account;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.jetbrains.annotations.NotNull;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class AccountBean {
 
     private Integer id;
@@ -15,76 +24,4 @@ public class AccountBean {
     private boolean activeAccount;
     private LocalDate registrationDate;
     private String role;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getAccountOwnerFirstname() {
-        return accountOwnerFirstname;
-    }
-
-    public void setAccountOwnerFirstname(String accountOwnerFirstname) {
-        this.accountOwnerFirstname = accountOwnerFirstname;
-    }
-
-    public String getAccountOwnerLastname() {
-        return accountOwnerLastname;
-    }
-
-    public void setAccountOwnerLastname(String accountOwnerLastname) {
-        this.accountOwnerLastname = accountOwnerLastname;
-    }
-
-    public String getAccountOwnerPass() {
-        return accountOwnerPass;
-    }
-
-    public void setAccountOwnerPass(String accountOwnerPass) {
-        this.accountOwnerPass = accountOwnerPass;
-    }
-
-    public String getAccountOwnerEmail() {
-        return accountOwnerEmail;
-    }
-
-    public void setAccountOwnerEmail(String accountOwnerEmail) {
-        this.accountOwnerEmail = accountOwnerEmail;
-    }
-
-    public String getAccountOwnerPhoneNb() {
-        return accountOwnerPhoneNb;
-    }
-
-    public void setAccountOwnerPhoneNb(String accountOwnerPhoneNb) {
-        this.accountOwnerPhoneNb = accountOwnerPhoneNb;
-    }
-
-    public boolean isActiveAccount() {
-        return activeAccount;
-    }
-
-    public void setActiveAccount(boolean activeAccount) {
-        this.activeAccount = activeAccount;
-    }
-
-    public LocalDate getRegistrationDate() {
-        return registrationDate;
-    }
-
-    public void setRegistrationDate(LocalDate registrationDate) {
-        this.registrationDate = registrationDate;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
 }

@@ -2,7 +2,7 @@ package org.mimi.clibrary.proxies;
 
 import org.mimi.clibrary.Beans.account.EmployeeBean;
 import org.mimi.clibrary.Beans.account.MemberBean;
-import org.mimi.clibrary.Beans.borrowing.BorrowingBean;
+import org.mimi.clibrary.Beans.Loan.LoanBean;
 import org.mimi.clibrary.Beans.publication.CopyBean;
 import org.mimi.clibrary.Beans.publication.LibraryBean;
 import org.mimi.clibrary.Beans.publication.PublicationBean;
@@ -42,10 +42,8 @@ public interface FeignProxy {
     List<PublicationBean> getPublicationByCriteria( @RequestParam String author, @RequestParam String title , @RequestParam String category,
                                                      @RequestParam String editor, @RequestParam(required = false, defaultValue = "0") int libId );
 
-
     @GetMapping( value = "/Libraries" )
     List<LibraryBean> getAllLibraries();
-
 
 
     @GetMapping( value = "/Copies/{id}" )
@@ -56,16 +54,16 @@ public interface FeignProxy {
 
 
 
-    @GetMapping( "/Borrowings/Members/{id}" )
-    List<BorrowingBean> findAllByMemberId( @PathVariable int id, @RequestHeader("Authorization") Object accessToken );
+    @GetMapping( "/Loans/Members/{id}" )
+    List<LoanBean> findAllByMemberId( @PathVariable int id, @RequestHeader("Authorization") Object accessToken );
 
-    @PutMapping( "/Borrowings/return/{borrowingId}" )
-    void extendBorrowingReturnDate( @PathVariable int borrowingId, @RequestHeader("Authorization") Object accessToken  );
+    @PutMapping( "/Loans/return/{LoanId}" )
+    void extendLoanReturnDate( @PathVariable int LoanId, @RequestHeader("Authorization") Object accessToken  );
 
-    @GetMapping( "/Borrowings" )
-    List<BorrowingBean> getAllBorrowings( @RequestHeader("Authorization") Object accessToken );
+    @GetMapping( "/Loans" )
+    List<LoanBean> getAllLoans( @RequestHeader("Authorization") Object accessToken );
 
 
-    @GetMapping( "/Borrowings/delay" )
-    List<BorrowingBean> findByDelay( @RequestHeader("Authorization") Object accessToken);
+    @GetMapping( "/Loans/delay" )
+    List<LoanBean> findByDelay( @RequestHeader("Authorization") Object accessToken);
 }

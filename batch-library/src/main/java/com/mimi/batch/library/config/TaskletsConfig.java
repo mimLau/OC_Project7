@@ -1,16 +1,15 @@
 package com.mimi.batch.library.config;
 
-import com.mimi.batch.library.model.Borrowing;
+import com.mimi.batch.library.model.Loan;
 import com.mimi.batch.library.model.UserBatch;
 import com.mimi.batch.library.proxies.AuthFeignProxy;
 import com.mimi.batch.library.proxies.FeignProxy;
-import com.mimi.batch.library.tasklets.BorrowingsProcessor;
-import com.mimi.batch.library.tasklets.BorrowingsReader;
+import com.mimi.batch.library.tasklets.LoansProcessor;
+import com.mimi.batch.library.tasklets.LoansReader;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
-import org.springframework.batch.core.step.tasklet.Tasklet;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -32,40 +31,40 @@ public class TaskletsConfig {
     }
 
    /* @Bean
-    public BorrowingsReader borrowingsReader() {
+    public LoansReader loansReader() {
         String token = authProxy.login( new UserBatch() );
-        return new BorrowingsReader( proxy, token );
+        return new LoansReader( proxy, token );
     }*/
 
     @Bean
-    public BorrowingsProcessor borrowingsProcessor() {
+    public LoansProcessor loansProcessor() {
         String token = authProxy.login( new UserBatch() );
-        return new BorrowingsProcessor( proxy, token );
+        return new LoansProcessor( proxy, token );
     }
 
 
     /*@Bean
-    public Step readBorrowings() throws Exception {
+    public Step readLoans() throws Exception {
 
-        return steps.get("readBorrowings")
-                .tasklet( borrowingsReader() )
+        return steps.get("readLoans")
+                .tasklet( loansReader() )
                 .build();
     }*/
 
 
     @Bean
-    public Step processBorrowings() throws Exception {
-        return steps.get("processBorrowings")
-                .tasklet( borrowingsProcessor() )
+    public Step processLoans() throws Exception {
+        return steps.get("processLoans")
+                .tasklet( loansProcessor() )
                 .build();
     }
 
     @Bean
     public Job taskletsJob() throws Exception {
         return this.jobs.get("taskletsJob")
-                //.start( readBorrowings() )
-                //.next( processBorrowings() )
-                .start( processBorrowings() )
+                //.start( readLoans() )
+                //.next( processLoans() )
+                .start( processLoans() )
                 .build();
     }
 }

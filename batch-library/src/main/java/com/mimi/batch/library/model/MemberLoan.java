@@ -11,8 +11,8 @@ import java.util.List;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class MemberBorrowing {
+public class MemberLoan {
 
     private Member member;
-    private List<Borrowing> borrowings;
+    private List<Loan> Loans;
 }

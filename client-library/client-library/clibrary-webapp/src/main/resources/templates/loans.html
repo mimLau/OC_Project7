@@ -20,14 +20,14 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:each=" borrowing : ${borrowings}">
-                            <td th:text="${borrowing.copy.publication.title}"></td>
-                            <td th:text="${#temporals.format(borrowing.borrowingDate, 'dd-MM-yyyy')}"></td>
+                        <tr th:each=" loan : ${loans}">
+                            <td th:text="${loan.copy.publication.title}"></td>
+                            <td th:text="${#temporals.format(loan.loanDate, 'dd-MM-yyyy')}"></td>
                             <td>
-                                <span th:if="${borrowing.returnDate > toDay}"><span th:text="${#temporals.format(borrowing.returnDate, 'dd-MM-yyyy')}" style="color: red"/></span>
-                                <span th:unless="${borrowing.returnDate > toDay}"><span th:text="${#temporals.format(borrowing.returnDate, 'dd-MM-yyyy')}"/></span>
+                                <span th:if="${loan.returnDate > toDay}"><span th:text="${#temporals.format(loan.returnDate, 'dd-MM-yyyy')}" style="color: red"/></span>
+                                <span th:unless="${loan.returnDate > toDay}"><span th:text="${#temporals.format(loan.returnDate, 'dd-MM-yyyy')}"/></span>
                             </td>
-                            <td if th:if="${borrowing.extented}" style="font-size: large"> Effectuée</td>
+                            <td if th:if="${loan.extented}" style="font-size: large"> Effectuée</td>
                             </tr>
                         </tbody>
                     </table>

@@ -1,4 +1,4 @@
-package com.mimi.mlibrary.model.entity.borrowing;
+package com.mimi.mlibrary.model.entity.loan;
 
 import com.mimi.mlibrary.model.entity.account.Member;
 import com.mimi.mlibrary.model.entity.publication.Copy;
@@ -7,7 +7,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class BorrowingJson {
+public class LoanJson {
 
     private Integer member;
     private Integer copy;

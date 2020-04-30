@@ -1,7 +1,7 @@
 package com.mimi.batch.library.config;
 
-import com.mimi.batch.library.chuncks.BorrowingItemReader;
-import com.mimi.batch.library.model.Borrowing;
+import com.mimi.batch.library.chuncks.LoanItemReader;
+import com.mimi.batch.library.model.Loan;
 import com.mimi.batch.library.model.UserBatch;
 import com.mimi.batch.library.proxies.AuthFeignProxy;
 import com.mimi.batch.library.proxies.FeignProxy;
@@ -21,9 +21,9 @@ public class ChunksConfig {
 
     private JobBuilderFactory jobBuilderFactory;
     private StepBuilderFactory stepBuilderFactory;
-    @Autowired private ItemReader<Borrowing> borrowingItemReader;
-    @Autowired private ItemWriter<Borrowing> borrowingItemWriter;
-    @Autowired private ItemProcessor<Borrowing, Borrowing> borrowingItemProcessor;
+    @Autowired private ItemReader<Loan> LoanItemReader;
+    @Autowired private ItemWriter<Loan> LoanItemWriter;
+    @Autowired private ItemProcessor<Loan, Loan> LoanItemProcessor;
 
 
     private FeignProxy proxy;
@@ -41,19 +41,19 @@ public class ChunksConfig {
 
 
     @Bean
-    ItemReader<Borrowing> borrowingItemReader() {
+    ItemReader<Loan> LoanItemReader() {
         String token = authProxy.login( new UserBatch() );
-        return new BorrowingItemReader( proxy, token );
+        return new LoanItemReader( proxy, token );
     }
 
 
     @Bean
     public Step step1() {
         return stepBuilderFactory.get("step1")
-                .<Borrowing, Borrowing>chunk(1)
-                .reader( borrowingItemReader )
-                .processor(borrowingItemProcessor )
-                .writer( borrowingItemWriter ).build();
+                .<Loan, Loan>chunk(1)
+                .reader( LoanItemReader )
+                .processor(LoanItemProcessor )
+                .writer( LoanItemWriter ).build();
     }
 
     @Bean

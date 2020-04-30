@@ -52,8 +52,8 @@ public class AccountController {
     }
 
     @GetMapping(value = "/Members/delay" )
-    public List<MemberDto> findMembersByOutdatedBorrowing() {
-        return accountService.getMembersByOutdatedBorrowing();
+    public List<MemberDto> findMembersByOutdatedLoan() {
+        return accountService.getMembersByOutdatedLoan();
     }
 
     @PostMapping(value = "/Members")
@@ -67,8 +67,8 @@ public class AccountController {
     }
 
     @PutMapping( value = "/Members/{id}" )
-    public void incrementBorrowingsNbBorrowings ( @PathVariable("id") int id ) {
-        accountService.updateNbOfCurrentsBorrowings( id );
+    public void incrementLoansNbLoans ( @PathVariable("id") int id ) {
+        accountService.updateNbOfCurrentsLoans( id );
     }
 
 

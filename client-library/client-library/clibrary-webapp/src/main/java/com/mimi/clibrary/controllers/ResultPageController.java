@@ -11,7 +11,7 @@ public class ResultPageController {
 
 
 
-    @GetMapping("/publication/result")
+    @GetMapping("/Publication/result")
     public String homePage( Model model ) {
 
         return PUBLICATION_VIEW;

@@ -1,7 +1,7 @@
 package com.mimi.mlibrary.model.entity.publication;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.mimi.mlibrary.model.entity.borrowing.Borrowing;
+import com.mimi.mlibrary.model.entity.loan.Loan;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
@@ -30,20 +30,15 @@ public class Copy {
     private String barcode;
     @Column(nullable = false)
     private boolean available;
-
-    //@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
     private LocalDate returnDate;
-
     @Column(nullable = false)
-    @JsonManagedReference(value = "copy_borrowing")
+    @JsonManagedReference(value = "copy_Loan")
     @OneToMany(mappedBy = "copy")
-    private List<Borrowing> borrowings;
-
+    private List<Loan> Loans;
     @ManyToOne
     @JoinColumn(name="publication_fk")
     //@JsonManagedReference(value="publication_copy")
     private Publication publication;
-
     @ManyToOne
     @JoinColumn(name = "library_fk")
     private Library library;

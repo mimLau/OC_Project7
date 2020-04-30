@@ -9,7 +9,7 @@
         <section class="container-fluid bg">
             <section class="row justify-content-center">
                 <section class="col-12 col-sm-6 col-md-3">
-                    <form class="form-container form-login" action="#" th:action="@{/login}" th:object="${user}" method="post">
+                    <form class="form-container form-login" action="#" th:action="@{/Login}" th:object="${user}" method="post">
                         <div class="form-group">
                            <input class="form-control" type="text" th:field="*{username}" name="user_name" placeholder="Email"/>
                            <!--span class="error" th:if="${#fields.hasErrors('accountOwnerEmail')}" th:errors="*{accountOwnerEmail}">name error</span-->

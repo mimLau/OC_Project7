@@ -12,11 +12,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 
 @Controller
-public class PublicationClientController {
+public class PublicationController {
 
     private FeignProxy proxy;
 
-    public PublicationClientController(FeignProxy proxy ) {
+    public PublicationController(FeignProxy proxy ) {
         this.proxy = proxy;
     }
 

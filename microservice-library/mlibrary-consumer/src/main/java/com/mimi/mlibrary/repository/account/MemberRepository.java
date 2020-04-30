@@ -1,8 +1,7 @@
 package com.mimi.mlibrary.repository.account;
 
-import com.mimi.mlibrary.model.entity.account.Employee;
 import com.mimi.mlibrary.model.entity.account.Member;
-import com.mimi.mlibrary.model.entity.borrowing.BorrowingStatus;
+import com.mimi.mlibrary.model.entity.loan.LoanStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -29,13 +28,13 @@ public interface MemberRepository extends JpaRepository<Member, Integer> {
     @Query( "SELECT m FROM Member m WHERE m.accountOwnerFirstname= :firstname AND m.accountOwnerLastname= :lastname")
     Optional<Member> getMemberByNames( @Param("firstname") String firstname, @Param("lastname") String lastname );
 
-    @Query( "SELECT m FROM Member m JOIN m.borrowings b WHERE b.returnDate < :current_date AND b.borrowingStatus= :status" )
-    List<Member> getMembersByOutdatedBorrowing( @Param("current_date") LocalDate currentDate, @Param("status") BorrowingStatus status );
+    @Query( "SELECT m FROM Member m JOIN m.Loans b WHERE b.returnDate < :current_date AND b.loanStatus= :status" )
+    List<Member> getMembersByOutdatedLoan( @Param("current_date") LocalDate currentDate, @Param("status") LoanStatus status );
 
     @Modifying
     @Transactional
-    @Query ("UPDATE Member m SET m.nbOfCurrentsBorrowings= m.nbOfCurrentsBorrowings + :nbIncr WHERE m.id= :id")
-    void updateNbOfCurrentsBorrowings( @Param("id") int id, @Param("nbIncr") int nbIncr );
+    @Query ("UPDATE Member m SET m.nbOfCurrentsLoans= m.nbOfCurrentsLoans + :nbIncr WHERE m.id= :id")
+    void updateNbOfCurrentsLoans( @Param("id") int id, @Param("nbIncr") int nbIncr );
 
 
 

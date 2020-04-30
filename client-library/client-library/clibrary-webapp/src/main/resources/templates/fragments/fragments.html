@@ -35,10 +35,10 @@
                         <div>
                             <span th:if="${ session.user }">
                                 <span th:if="${ session.user.role == 'USER' }">
-                                    <a class="nav-link" href="#" th:href="@{~/user/home}"><i class="fa fa-home"></i>Accueil</a>
+                                    <a class="nav-link" href="#" th:href="@{~/User/home}"><i class="fa fa-home"></i>Accueil</a>
                                 </span>
                                 <span th:if="${ session.user.role == 'ADMIN' }">
-                                    <a class="nav-link" href="#" th:href="@{~/admin/home}"><i class="fa fa-home"></i>Accueil</a>
+                                    <a class="nav-link" href="#" th:href="@{~/Admin/home}"><i class="fa fa-home"></i>Accueil</a>
                                 </span>
                             </span>
                             <span th:unless="${ session.user }">
@@ -56,7 +56,7 @@
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
                                         <a class="nav-link dropdown-item" href="#" >Mes informations personnelles</a>
-                                        <a class="nav-link dropdown-item" href="#" th:href="@{~/userBorrowings}">Mes emprunts</a>
+                                        <a class="nav-link dropdown-item" href="#" th:href="@{~/UserLoans}">Mes emprunts</a>
                                     </div>
                                 </div>
                             </li>
@@ -70,8 +70,8 @@
                                         Admin
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                        <a class="nav-link dropdown-item" href="#" th:href="@{~/borrowings}" >Liste des emprunts</a>
-                                        <a class="nav-link dropdown-item" href="#" th:href="@{~/delays}">Listes des retards</a>
+                                        <a class="nav-link dropdown-item" href="#" th:href="@{~/Loans}" > Prêts en cours</a>
+                                        <a class="nav-link dropdown-item" href="#" th:href="@{~/Delays}"> Retards</a>
                                     </div>
                                 </div>
                             </li>
@@ -83,7 +83,7 @@
                                 Recherche
                             </a>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenu3">
-                                <a class="nav-link dropdown-item" href="#" th:href="@{~/Libraries}" >Liste des librairies</a>
+                                <a class="nav-link dropdown-item" href="#" th:href="@{~/Libraries}" >Librairies</a>
                                 <a class="nav-link dropdown-item" href="#" th:href="@{~/Research}">Catalogue ouvrages</a>
                             </div>
                         </div>
@@ -94,8 +94,8 @@
                 <!--span th:if="${#request.contextPath} == @{~/login}"-->
                     <!--form class="form-inline my-2 my-lg-0" form-method="post" th:action="@{/logout}">
                         </form-->
-                <a th:href="@{~/login}"><button th:if="${ session.user }"  class="btn btn-outline-danger my-2 my-sm-0 btn-sm" type="submit">Logout</button></a>
-                <a th:href="@{~/logout}"><button th:unless="${ session.user }"  class="btn btn-outline-info my-2 my-sm-0 btn-sm" type="submit">Login</button></a>
+                <a th:href="@{~/Logout}"><button th:if="${ session.user }"  class="btn btn-outline-danger my-2 my-sm-0 btn-sm" type="submit">Logout</button></a>
+                <a th:href="@{~/Login}"><button th:unless="${ session.user }"  class="btn btn-outline-info my-2 my-sm-0 btn-sm" type="submit">Login</button></a>
 
             </div>
         </nav>

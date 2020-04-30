@@ -13,7 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 public class Member extends Account {
 
-    private List<Borrowing> borrowings;
+    private List<Loan> Loans;
     private String barcode;
 
 }

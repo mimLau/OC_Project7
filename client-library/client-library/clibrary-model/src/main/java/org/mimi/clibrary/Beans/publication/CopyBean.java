@@ -1,7 +1,7 @@
 package org.mimi.clibrary.Beans.publication;
 
 import java.time.LocalDate;
-import org.mimi.clibrary.Beans.borrowing.BorrowingBean;
+import org.mimi.clibrary.Beans.Loan.LoanBean;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ public class CopyBean {
     private String barcode;
     private boolean available;
     private LocalDate returnDate;
-    private List<BorrowingBean> borrowings;
+    private List<LoanBean> Loans;
     private PublicationBean publication;
     private LibraryBean library;
 
@@ -51,12 +51,12 @@ public class CopyBean {
         this.returnDate = returnDate;
     }
 
-    public List<BorrowingBean> getBorrowings() {
-        return borrowings;
+    public List<LoanBean> getLoans() {
+        return Loans;
     }
 
-    public void setBorrowings(List<BorrowingBean> borrowings) {
-        this.borrowings = borrowings;
+    public void setLoans(List<LoanBean> Loans) {
+        this.Loans = Loans;
     }
 
     public PublicationBean getPublication() {

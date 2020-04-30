@@ -34,10 +34,10 @@
                         <!--br/><b>Nom de l'abonnée :</b> <span th:text="${name}"/>
                         <br/><b>N° de l'abonnée </b> <span th:text="${userNb}"/></p-->
 
-                    <p th:each="borrowing : ${borrowings}">
-                        <br/><b>Titre :</b> <span th:text="${borrowing.copy.publication.title}"></span>
-                        <br/><b>N° de l'ouvrage :</b> <span th:text="${borrowing.copy.publication.identificationNb}"></span>
-                        <br/><b>Echéance :</b> <span th:text="${borrowing.returnDate}"></span>
+                    <p th:each="Loan : ${Loans}">
+                        <br/><b>Titre :</b> <span th:text="${Loan.copy.publication.title}"></span>
+                        <br/><b>N° de l'ouvrage :</b> <span th:text="${Loan.copy.publication.identificationNb}"></span>
+                        <br/><b>Echéance :</b> <span th:text="${Loan.returnDate}"></span>
                     </p>
                 </td>
             </tr>

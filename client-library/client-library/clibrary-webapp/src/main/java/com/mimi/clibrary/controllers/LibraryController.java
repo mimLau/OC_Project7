@@ -10,11 +10,11 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
-public class LibraryClientController {
+public class LibraryController {
 
     private FeignProxy feignProxy;
 
-    public LibraryClientController( FeignProxy feignProxy ) {
+    public LibraryController(FeignProxy feignProxy ) {
         this.feignProxy = feignProxy;
     }
 

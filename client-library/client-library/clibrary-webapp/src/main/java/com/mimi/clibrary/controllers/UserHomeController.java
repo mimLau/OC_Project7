@@ -13,17 +13,17 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
-public class UserHomeClientController {
+public class UserHomeController {
 
     private FeignProxy feignProxy;
     private static final String USER_HOME_VIEW = "userHome";
 
-    public UserHomeClientController(FeignProxy feignProxy) {
+    public UserHomeController(FeignProxy feignProxy) {
         this.feignProxy = feignProxy;
     }
 
 
-    @GetMapping("/user/home")
+    @GetMapping("/User/home")
     public String homePage( Model model ) {
 
         return USER_HOME_VIEW;

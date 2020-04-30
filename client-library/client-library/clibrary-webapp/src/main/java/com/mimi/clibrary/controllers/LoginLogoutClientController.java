@@ -16,13 +16,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 @Controller
 @SessionAttributes("memberSession")
-public class LoginClientController {
+public class LoginLogoutClientController {
 
-    final static Logger logger  = LogManager.getLogger(LoginClientController.class);
+    final static Logger LOGGER  = LogManager.getLogger(LoginLogoutClientController.class);
     private FeignProxy proxy;
     private AuthFeignProxy authProxy;
 
@@ -32,28 +33,37 @@ public class LoginClientController {
     private static final String ERROR_MESS = "* Combinaison Email/mot de passe incorrecte.";
 
     private static final String LOGIN_VIEW = "login";
-    private static final String USER_HOME_PAGE = "redirect:/user/home";
+    private static final String LOGIN_PAGE = "redirect:/Login";
+    private static final String USER_HOME_PAGE = "redirect:/User/home";
 
-    public LoginClientController(FeignProxy proxy, AuthFeignProxy authProxy) {
+    public LoginLogoutClientController(FeignProxy proxy, AuthFeignProxy authProxy) {
         this.proxy = proxy;
         this.authProxy = authProxy;
     }
 
-    @GetMapping("/login")
+    @GetMapping("/Login")
     public String showLoginForm( Model model  ) {
         model.addAttribute( USER_ATT , new UserBean() );
 
         return LOGIN_VIEW;
     }
 
-    @PostMapping("/login")
+    @GetMapping("/Logout")
+    public String logoutUser(  HttpSession session  ) {
+
+        session.removeAttribute("token");
+        session.removeAttribute("user");
+        return LOGIN_PAGE;
+    }
+
+    @PostMapping("/Login")
     public String login(@ModelAttribute( USER_ATT ) UserBean user, BindingResult result, Model model, HttpSession session ) {
 
         String stringToken = authProxy.login( user );
         Object token = stringToken;
         session.setAttribute("token", token);
 
-        logger.info( " Token: " +  token );
+        LOGGER.info( " Token: " +  token );
         if ( token == null ) {
 
             return LOGIN_VIEW;

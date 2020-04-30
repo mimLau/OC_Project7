@@ -17,18 +17,18 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-public class ResearchClientController {
+public class ResearchController {
 
     private FeignProxy feignProxy;
 
     private static final String RESEARCH_VIEW = "research";
     private static final String RESEARCH_PAGE = "redirect:/Research";
-    private static final String PUBLICATION_RESULT_PAGE = "redirect:/publication/result";
+    private static final String PUBLICATION_RESULT_PAGE = "redirect:/Publication/result";
     private static final String FORMCOMMAND_ATT = "researchFormCommand";
     private static final String ERROR_MESS = "Aucun résultat ne correspond à votre recherche.";
-    final static Logger logger  = LogManager.getLogger(ResearchClientController.class);
+    final static Logger LOGGER  = LogManager.getLogger(ResearchController.class);
 
-    public ResearchClientController( FeignProxy feignProxy ) {
+    public ResearchController(FeignProxy feignProxy ) {
         this.feignProxy = feignProxy;
     }
 
