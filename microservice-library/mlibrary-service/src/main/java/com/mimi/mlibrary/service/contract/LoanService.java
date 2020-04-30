@@ -12,8 +12,9 @@ public interface LoanService {
     List<LoanDto> findAll();
     List<LoanDto> findByMemberId( int memberId );
     LoanDto save( int memberId, int copyId );
-    void extendLoanReturnDateById( int LoanId );
-    void  updateLoanStatus( int LoanId );
+    void extendLoanReturnDateById( int loanId );
+    void  updateLoanStatus( int loanId );
+    void updateReminderNbById( int loanId);
     List<LoanDto> findByDelay();
     Map<String, LocalDate> findOutdatedLoansEmailMember();
 

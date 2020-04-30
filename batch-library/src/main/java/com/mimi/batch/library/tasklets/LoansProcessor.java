@@ -64,6 +64,10 @@ public class LoansProcessor implements Tasklet {
                 mail.setModel(model);
                 emailService.sendSimpleMessage(mail);
 
+                //Increment reminder number of a loan each time an email is sending.
+                for(Loan l : entry.getValue() )
+                    this.proxy.updateReminderNbById( l.getId(), token );
+
             }
 
             return RepeatStatus.FINISHED;

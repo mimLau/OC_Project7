@@ -6,16 +6,18 @@ import org.springframework.batch.core.StepContribution;
 import org.springframework.batch.core.scope.context.ChunkContext;
 import org.springframework.batch.core.step.tasklet.Tasklet;
 import org.springframework.batch.repeat.RepeatStatus;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestHeader;
 
 import java.util.List;
 
 public class LoansReader implements Tasklet {
 
-    private List<Loan> Loans;
+    private List<Loan> loans;
     private FeignProxy proxy;
     private String token;
 
-    public LoansReader(FeignProxy proxy, String token ) {
+    public LoansReader( FeignProxy proxy, String token ) {
         this.proxy = proxy;
         this.token = token;
     }
@@ -23,7 +25,7 @@ public class LoansReader implements Tasklet {
 
     @Override
     public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception {
-        Loans =  this.proxy.getOutdatedLoanLists( token );
+        loans =  this.proxy.getOutdatedLoanLists( token );
         return RepeatStatus.FINISHED;
     }
 }

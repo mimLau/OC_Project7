@@ -17,34 +17,36 @@ import java.util.Optional;
 @Repository
 public interface LoanRepository extends JpaRepository<Loan, Integer> {
 
-    @Query("SELECT b FROM Loan b WHERE b.loanStatus= :status")
+    @Query("SELECT l FROM Loan l WHERE l.loanStatus= :status")
     List<Loan> findAllLoans( @Param("status") LoanStatus status );
 
-    @Query("SELECT b FROM Loan b WHERE b.id= :id")
+    @Query("SELECT l FROM Loan l WHERE l.id= :id")
     Optional<Loan> findLoanById(@Param("id") int id );
 
-    @Query("SELECT b FROM Loan  b JOIN FETCH b.member m WHERE m.id= :id and b.loanStatus= :status")
+    @Query("SELECT l FROM Loan  l JOIN FETCH l.member m WHERE m.id= :id and l.loanStatus= :status")
     List<Loan> findByMemberId(@Param("id") int id, @Param("status") LoanStatus status );
 
-    @Query("SELECT b FROM Loan  b JOIN FETCH b.copy c WHERE c.id= :id")
-    List<Loan> findByCopyId( @Param("id") int id );
-
-    @Query("SELECT b FROM Loan b WHERE b.returnDate < :current_date AND b.loanStatus= :status")
+    @Query("SELECT l FROM Loan l WHERE l.returnDate < :current_date AND l.loanStatus= :status")
     List<Loan> findByDelay( @Param("current_date") LocalDate currentDate, @Param("status") LoanStatus status );
 
     @Transactional
     @Modifying
-    @Query("Update Loan b SET b.returnDate= :newDate WHERE b.id= :id")
+    @Query("Update Loan l SET l.returnDate= :newDate WHERE l.id= :id")
     void  updateLoanReturnDateById(@Param("newDate") LocalDate newDate, @Param("id") int id );
 
     @Transactional
     @Modifying
-    @Query("Update Loan b SET b.extented= true WHERE b.id= :id")
+    @Query("Update Loan l SET l.extented= true WHERE l.id= :id")
     void  updateExtensionById( @Param("id") int id );
 
     @Transactional
     @Modifying
-    @Query("Update Loan b SET b.loanStatus= :status WHERE b.id= :id ")
+    @Query("Update Loan l SET l.loanStatus= :status WHERE l.id= :id ")
     void  updateLoanStatus( @Param("id") int id, @Param("status") LoanStatus loanStatus );
+
+    @Transactional
+    @Modifying
+    @Query("Update Loan l SET l.reminderNb= l.reminderNb + 1 WHERE l.id= :id")
+    void  updateReminderNbById( @Param("id") int id );
 
 }

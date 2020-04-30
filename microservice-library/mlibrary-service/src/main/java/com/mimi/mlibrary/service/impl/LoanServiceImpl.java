@@ -25,13 +25,13 @@ public class LoanServiceImpl implements LoanService {
 
     final static Logger logger  = LogManager.getLogger(Loan.class);
 
-    private LoanRepository LoanRepository;
+    private LoanRepository loanRepository;
     private CopyRepository copyRepository;
     private MemberRepository memberRepository;
     private LoanMapper LoanMapper;
 
-    public LoanServiceImpl(LoanRepository LoanRepository, LoanMapper LoanMapper, CopyRepository copyRepository, MemberRepository memberRepository) {
-        this.LoanRepository = LoanRepository;
+    public LoanServiceImpl(LoanRepository loanRepository, LoanMapper LoanMapper, CopyRepository copyRepository, MemberRepository memberRepository) {
+        this.loanRepository = loanRepository;
         this.LoanMapper = LoanMapper;
         this.copyRepository = copyRepository;
         this.memberRepository = memberRepository;
@@ -40,17 +40,17 @@ public class LoanServiceImpl implements LoanService {
 
     @Override
     public LoanDto findLoanById( int id ) {
-        return   LoanMapper.toDto( LoanRepository.findLoanById( id ).orElse(null));
+        return   LoanMapper.toDto( loanRepository.findLoanById( id ).orElse(null));
     }
 
     @Override
     public List<LoanDto> findAll() {
-        return LoanMapper.toDtoList( LoanRepository.findAllLoans( LoanStatus.INPROGRESS));
+        return LoanMapper.toDtoList( loanRepository.findAllLoans( LoanStatus.INPROGRESS));
     }
 
     @Override
     public List<LoanDto> findByMemberId( int memberId ) {
-        return LoanMapper.toDtoList( LoanRepository.findByMemberId( memberId, LoanStatus.INPROGRESS) );
+        return LoanMapper.toDtoList( loanRepository.findByMemberId( memberId, LoanStatus.INPROGRESS) );
     }
 
     /**
@@ -96,7 +96,7 @@ public class LoanServiceImpl implements LoanService {
             LoanDto.setLoanStatus( "INPROGRESS" );
             LoanDto.setReminderNb( 0 );
 
-            Optional.of( LoanMapper.INSTANCE.toEntity( LoanDto ) ).ifPresent( Loan -> LoanRepository.save( Loan ));
+            Optional.of( LoanMapper.INSTANCE.toEntity( LoanDto ) ).ifPresent( Loan -> loanRepository.save( Loan ));
             return LoanDto;
         }
 
@@ -112,7 +112,7 @@ public class LoanServiceImpl implements LoanService {
     public void extendLoanReturnDateById( int LoanId ) {
 
        //Retrieve a Loan by its id
-        LoanDto LoanDto = LoanMapper.toDto( LoanRepository.findLoanById( LoanId ).orElse(null));
+        LoanDto LoanDto = LoanMapper.toDto( loanRepository.findLoanById( LoanId ).orElse(null));
 
         //Retrieve the return date of this Loan
         LocalDate returnDate = LoanDto.getReturnDate();
@@ -121,8 +121,8 @@ public class LoanServiceImpl implements LoanService {
        if( extension != true ) {
            //Extend the return date by 4 weeks
            returnDate = returnDate.plusDays( 28 );
-           LoanRepository.updateLoanReturnDateById( returnDate, LoanId );
-           LoanRepository.updateExtensionById( LoanId );
+           loanRepository.updateLoanReturnDateById( returnDate, LoanId );
+           loanRepository.updateExtensionById( LoanId );
 
            int copyId = LoanDto.getCopy().getId();
            copyRepository.updateCopyReturnDateById( returnDate, copyId );
@@ -131,34 +131,40 @@ public class LoanServiceImpl implements LoanService {
     }
 
     @Override
-    public void updateLoanStatus( int LoanId ) {
+    public void updateLoanStatus( int loanId ) {
 
-        Optional<Loan> Loan = LoanRepository.findById( LoanId );
-        int copyId = Loan.get().getCopy().getId();
-        int memberId = Loan.get().getMember().getId();
+        Optional<Loan> loan = loanRepository.findById( loanId );
+        int copyId = loan.get().getCopy().getId();
+        int memberId = loan.get().getMember().getId();
 
         copyRepository.updateCopyAvailability( true, copyId );
         copyRepository.updateCopyReturnDateById( null, copyId );
         memberRepository.updateNbOfCurrentsLoans( memberId, -1 );
 
-        LoanRepository.updateLoanStatus( LoanId, LoanStatus.FINISHED );
+        loanRepository.updateLoanStatus( loanId, LoanStatus.FINISHED );
+    }
+
+
+    @Override
+    public void updateReminderNbById( int loanId ) {
+        loanRepository.updateReminderNbById( loanId );
     }
 
     @Override
     public List<LoanDto> findByDelay() {
         LocalDate currentDate = LocalDate.now();
-        return  LoanMapper.INSTANCE.toDtoList( LoanRepository.findByDelay( currentDate , LoanStatus.INPROGRESS ) );
+        return  LoanMapper.INSTANCE.toDtoList( loanRepository.findByDelay( currentDate , LoanStatus.INPROGRESS ) );
 
     }
 
     @Override
     public Map<String, LocalDate> findOutdatedLoansEmailMember() {
 
-        List <LoanDto>  LoanDtos = this.findByDelay();
+        List <LoanDto>  loanDtos = this.findByDelay();
         Map<String, LocalDate> emailsAndReturnDates = new HashMap<>();
 
-        for( LoanDto Loan : LoanDtos )
-            emailsAndReturnDates.put(Loan.getMember().getAccountOwnerEmail(), Loan.getReturnDate() );
+        for( LoanDto loan : loanDtos )
+            emailsAndReturnDates.put(loan.getMember().getAccountOwnerEmail(), loan.getReturnDate() );
 
         return emailsAndReturnDates;
     }

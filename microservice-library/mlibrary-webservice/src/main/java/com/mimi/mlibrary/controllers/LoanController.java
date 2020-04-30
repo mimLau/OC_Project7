@@ -17,32 +17,32 @@ import java.util.Map;
 @RequestMapping("/Loans")
 public class LoanController {
 
-    private LoanService LoanService;
+    private LoanService loanService;
 
-    public LoanController( LoanService LoanService ) {
-        this.LoanService = LoanService;
+    public LoanController( LoanService loanService ) {
+        this.loanService = loanService;
     }
 
     @GetMapping
     public List<LoanDto> getAllLoans() {
-        return LoanService.findAll();
+        return loanService.findAll();
     }
 
     @GetMapping( "/{id}" )
     public LoanDto findLoanById( @PathVariable int id ) {
-        return LoanService.findLoanById( id );
+        return loanService.findLoanById( id );
     }
 
 
     @GetMapping( "/Members/{id}" )
     public List<LoanDto> findAllLoansByMemberId( @PathVariable int id ) {
-        return LoanService.findByMemberId( id );
+        return loanService.findByMemberId( id );
     }
 
     @PostMapping( consumes={"application/json"})
     public ResponseEntity<Void> addLoan(@RequestBody LoanJson LoanJson ) {
 
-        LoanDto addedLoan = LoanService.save( LoanJson.getMember(), LoanJson.getCopy() );
+        LoanDto addedLoan = loanService.save( LoanJson.getMember(), LoanJson.getCopy() );
 
         if( addedLoan == null ) throw new ResourceNotFoundException( "L'utilisateur ne peut pas emprunter cette exemplaire.\n Exemplaire indisponible ou l'utilisateur a déjà 5 emprunts en cours." );
 
@@ -55,22 +55,27 @@ public class LoanController {
 
     @PutMapping( "/returnDate/{LoanId}" )
     public void extendLoanReturnDate( @PathVariable int LoanId ) {
-        LoanService.extendLoanReturnDateById( LoanId );
+        loanService.extendLoanReturnDateById( LoanId );
     }
 
-    @PutMapping( "/status/{id}" )
-    public void updateLoanStatus( @PathVariable int id ) {
-        LoanService.updateLoanStatus( id );
+    @PutMapping( "/status/{loanId}" )
+    public void updateLoanStatus( @PathVariable int loanId ) {
+        loanService.updateLoanStatus( loanId );
+    }
+
+    @PutMapping( value = "/reminderNb/{loanId}" )
+    public void updateReminderNbById( @PathVariable int loanId ) {
+        loanService.updateReminderNbById( loanId );
     }
 
     @GetMapping( "/delay" )
     public List<LoanDto> findByDelay() {
-       return LoanService.findByDelay();
+       return loanService.findByDelay();
     }
 
     @GetMapping( "/delay/email" )
     public Map<String, LocalDate> getOutdatedLoansAndEmailMember() {
-        return  LoanService.findOutdatedLoansEmailMember();
+        return  loanService.findOutdatedLoansEmailMember();
     }
 
 
