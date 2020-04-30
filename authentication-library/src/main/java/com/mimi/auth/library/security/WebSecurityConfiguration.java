@@ -37,51 +37,10 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
             .csrf().disable()
             .sessionManagement().sessionCreationPolicy( SessionCreationPolicy.STATELESS )
             .and( )
-            //.addFilter( new JwtAuthenticationFilter( authenticationManager() ) )
             .addFilter( new JwtAuthorizationFilter( authenticationManager() , this.userRepository))
             .authorizeRequests()
             .antMatchers("/login").permitAll()
-            /*.antMatchers("/manager/**").authenticated()
-            .antMatchers("/manager/**").hasAnyRole("ADMIN", "MANAGER")*/
             .anyRequest().authenticated();
-
-            //http.addFilterAfter( new JwtAuthorizationFilter( authenticationManager() , this.userRepository) , UsernamePasswordAuthenticationFilter.class); //Utiliser notre filtre avant le  UsernamePasswordAuthenticationFilter qui est utilisé par défaut dans Spring
-
-
-        /*http.addFilter( new JwtAuthenticationFilter( authenticationManager() ) );
-        http.addFilterBefore( new JwtAuthorizationFilter( this.userRepository ), UsernamePasswordAuthenticationFilter.class );*/
-
-        // Add JWT filters
-        //.addFilter( new JwtAuthenticationFilter( authenticationManager() ) )
-            // remove csrf and state in session because in jwt we do not need them
-            /*.csrf().disable()
-            .sessionManagement().sessionCreationPolicy( SessionCreationPolicy.STATELESS )
-            .and()
-            // Add JWT filters
-            /*.addFilter( new JwtAuthenticationFilter( authenticationManager() ) )
-            .addFilter( new JwtAuthorizationFilter( authenticationManager() , this.userRepository ))
-            .authorizeRequests()
-            //configure access rules
-            .antMatchers(HttpMethod.OPTIONS, "/login" ).permitAll()
-            .antMatchers("/api/public/admin/*").hasRole("ADMIN");
-            //.antMatchers("/index.html").permitAll()
-            //.antMatchers("/profile/**").authenticated()
-            //.antMatchers("/admin/**").hasRole("ADMIN")
-            //.antMatchers("/management/**").hasAnyRole("ADMIN", "MANAGER")
-            //.antMatchers("/Members").hasAuthority("ACCESS_USER")
-            //
-            //.antMatchers("/api/public/test2").hasAuthority("ACCESS_TEST2")
-            //.antMatchers("/api/public/users").hasRole("ADMIN");
-            /*.and()
-            .formLogin()
-            .loginProcessingUrl("/signin")
-            .loginPage("/login").permitAll()
-            .usernameParameter("txtUsername")
-            .passwordParameter("txtPassword");
-            /*.and()
-            .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login");
-            /*.and()
-            .rememberMe().tokenValiditySeconds(2592000).key("mySecret!").rememberMeParameter("checkRememberMe");*/
     }
 
 
