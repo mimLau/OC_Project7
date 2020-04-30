@@ -36,8 +36,8 @@ public class Account implements Serializable {
     private String accountOwnerFirstname;
     @Column(nullable = false)
     private String accountOwnerLastname;
-    @Column(nullable = false)
-    private String accountOwnerPass;
+   /* @Column(nullable = false)
+    private String accountOwnerPass;*/
     @Column(nullable = false)
     private String accountOwnerEmail;
     @Column(nullable = false)

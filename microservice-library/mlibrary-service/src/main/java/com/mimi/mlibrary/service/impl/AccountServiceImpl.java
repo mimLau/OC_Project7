@@ -30,15 +30,15 @@ public class AccountServiceImpl implements AccountService {
 
     }
 
-    @Override
+    /*@Override
     public MemberDto findMemberByMailAndPass(String mail, String password) {
         return MemberMapper.INSTANCE.toDto( memberRepository.getMemberByEmailAndPass( mail, password ).orElse( null) );
-    }
+    }*
 
     @Override
     public EmployeeDto findEmployeeByMailAndPass(String mail, String password) {
         return EmployeeMapper.INSTANCE.toDto( employeeRepository.getEmployeeByEmailAndPass( mail, password ).orElse( null) );
-    }
+    }*/
 
     @Override
     public EmployeeDto findEmployeeByUsername( String username ) {
@@ -68,7 +68,7 @@ public class AccountServiceImpl implements AccountService {
         return MemberMapper.INSTANCE.toDto( memberRepository.getMemberById( id ).orElse(null ));
     }
 
-    @Override
+    /*@Override
     public MemberDto getMemberByEmail( String email ) {
         return MemberMapper.INSTANCE.toDto( memberRepository.getMemberByEmail( email ).orElse( null) );
     }
@@ -76,7 +76,7 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public MemberDto getMemberByNames( String firstname, String lastname ) {
         return MemberMapper.INSTANCE.toDto( memberRepository.getMemberByNames( firstname, lastname ).orElse( null) );
-    }
+    }*/
 
     @Override
     public void updateNbOfCurrentsLoans( int id ) {

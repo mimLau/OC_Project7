@@ -32,7 +32,6 @@ public class AuthorController {
     @PostMapping( value = "/Authors" )
     public ResponseEntity<String> addAuthor( @RequestBody AuthorDto authorDto ) {
 
-        //org.hibernate.exception.ConstraintViolationException: could not execute statemen
         AuthorDto addedAuthorDto = publicationService.saveAuthor( authorDto );
         if( addedAuthorDto == null)
             //return ResponseEntity.noContent().build();

@@ -7,17 +7,17 @@ import java.util.List;
 public interface AccountService {
 
     MemberDto findMemberByUsername( String username );
-    MemberDto findMemberByMailAndPass( String mail, String password );
+    //MemberDto findMemberByMailAndPass( String mail, String password );
     List<MemberDto> findAll();
     MemberDto findById( int id );
     MemberDto save( MemberDto memberDto );
     MemberDto getMemberById( Integer id );
-    MemberDto getMemberByEmail( String email );
-    MemberDto getMemberByNames( String firstname, String lastname );
+    //MemberDto getMemberByEmail( String email );
+    //MemberDto getMemberByNames( String firstname, String lastname );
     void updateNbOfCurrentsLoans( int id );
     List<MemberDto> getMembersByOutdatedLoan( );
 
-    EmployeeDto findEmployeeByMailAndPass( String mail, String password );
+    //EmployeeDto findEmployeeByMailAndPass( String mail, String password );
     EmployeeDto findEmployeeByUsername( String username );
 
 }

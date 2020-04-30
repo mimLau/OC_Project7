@@ -17,7 +17,7 @@ public class AccountDto {
     private String accountOwnerUsername;
     private String accountOwnerFirstname;
     private String accountOwnerLastname;
-    private String accountOwnerPass;
+    //private String accountOwnerPass;
     private String accountOwnerEmail;
     private String accountOwnerPhoneNb;
     private boolean activeAccount;

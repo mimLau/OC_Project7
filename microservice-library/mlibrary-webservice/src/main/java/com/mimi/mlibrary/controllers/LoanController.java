@@ -35,7 +35,7 @@ public class LoanController {
 
 
     @GetMapping( "/Members/{id}" )
-    public List<LoanDto> findAllByMemberId( @PathVariable int id ) {
+    public List<LoanDto> findAllLoansByMemberId( @PathVariable int id ) {
         return LoanService.findByMemberId( id );
     }
 
@@ -53,7 +53,7 @@ public class LoanController {
         return ResponseEntity.created( location ).build();
     }
 
-    @PutMapping( "/return/{LoanId}" )
+    @PutMapping( "/returnDate/{LoanId}" )
     public void extendLoanReturnDate( @PathVariable int LoanId ) {
         LoanService.extendLoanReturnDateById( LoanId );
     }

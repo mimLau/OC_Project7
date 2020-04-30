@@ -24,7 +24,7 @@ public class PublicationController {
     public String publication( Model model, @RequestParam int id ) {
 
         PublicationBean publication = proxy.getPublicationsById( id );
-        List<CopyBean> copies = proxy.getAvailableCopiesByLibrary( id );
+        List<CopyBean> copies = proxy.getAvailableCopiesByLibrary( id );//TODO A VERIFIER
 
         model.addAttribute( "publication", publication );
         model.addAttribute( "copies", copies );

@@ -29,7 +29,7 @@ public class LoanController {
 
         MemberBean member = (MemberBean) session.getAttribute("user");
         Object token = session.getAttribute("token");
-        List<LoanBean> loans = feignProxy.findAllByMemberId( member.getId(), token );
+        List<LoanBean> loans = feignProxy.findAllLoansByMemberId( member.getId(), token );
 
         model.addAttribute( "loans", loans );
         model.addAttribute("toDay", LocalDate.now());
@@ -58,7 +58,7 @@ public class LoanController {
     public String delays( Model model, HttpSession session ) {
 
         Object token = session.getAttribute("token");
-        List<LoanBean> loans = feignProxy.findByDelay( token );
+        List<LoanBean> loans = feignProxy.findLoansByDelay( token );
         model.addAttribute( "loans", loans );
         model.addAttribute("toDay", LocalDate.now());
         return "delays";
