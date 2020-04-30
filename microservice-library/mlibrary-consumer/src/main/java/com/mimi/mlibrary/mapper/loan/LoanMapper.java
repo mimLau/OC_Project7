@@ -12,9 +12,9 @@ import java.util.List;
 public interface LoanMapper {
 
     LoanMapper INSTANCE = Mappers.getMapper( LoanMapper.class );
-    LoanDto borToDto(Loan loan );
-    List<LoanDto> borToDtoList( List<Loan> loans );
+    LoanDto toDto(Loan loan );
+    List<LoanDto> toDtoList( List<Loan> loans );
 
-    Loan dtoToBor( LoanDto loanDto );
-    List<Loan> dtoToBorList( List<LoanDto> loanDtos );
+    Loan toEntity( LoanDto loanDto );
+    List<Loan> toEntityList( List<LoanDto> loanDtos );
 }

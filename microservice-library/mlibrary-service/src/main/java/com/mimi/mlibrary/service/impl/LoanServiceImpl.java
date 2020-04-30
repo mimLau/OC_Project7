@@ -40,17 +40,17 @@ public class LoanServiceImpl implements LoanService {
 
     @Override
     public LoanDto findLoanById( int id ) {
-        return   LoanMapper.borToDto( LoanRepository.findLoanById( id ).orElse(null));
+        return   LoanMapper.toDto( LoanRepository.findLoanById( id ).orElse(null));
     }
 
     @Override
     public List<LoanDto> findAll() {
-        return LoanMapper.borToDtoList( LoanRepository.findAllLoans( LoanStatus.INPROGRESS));
+        return LoanMapper.toDtoList( LoanRepository.findAllLoans( LoanStatus.INPROGRESS));
     }
 
     @Override
     public List<LoanDto> findByMemberId( int memberId ) {
-        return LoanMapper.borToDtoList( LoanRepository.findByMemberId( memberId, LoanStatus.INPROGRESS) );
+        return LoanMapper.toDtoList( LoanRepository.findByMemberId( memberId, LoanStatus.INPROGRESS) );
     }
 
     /**
@@ -96,7 +96,7 @@ public class LoanServiceImpl implements LoanService {
             LoanDto.setLoanStatus( "INPROGRESS" );
             LoanDto.setReminderNb( 0 );
 
-            Optional.of( LoanMapper.INSTANCE.dtoToBor( LoanDto ) ).ifPresent( Loan -> LoanRepository.save( Loan ));
+            Optional.of( LoanMapper.INSTANCE.toEntity( LoanDto ) ).ifPresent( Loan -> LoanRepository.save( Loan ));
             return LoanDto;
         }
 
@@ -112,7 +112,7 @@ public class LoanServiceImpl implements LoanService {
     public void extendLoanReturnDateById( int LoanId ) {
 
        //Retrieve a Loan by its id
-        LoanDto LoanDto = LoanMapper.borToDto( LoanRepository.findLoanById( LoanId ).orElse(null));
+        LoanDto LoanDto = LoanMapper.toDto( LoanRepository.findLoanById( LoanId ).orElse(null));
 
         //Retrieve the return date of this Loan
         LocalDate returnDate = LoanDto.getReturnDate();
@@ -147,7 +147,7 @@ public class LoanServiceImpl implements LoanService {
     @Override
     public List<LoanDto> findByDelay() {
         LocalDate currentDate = LocalDate.now();
-        return  LoanMapper.INSTANCE.borToDtoList( LoanRepository.findByDelay( currentDate , LoanStatus.INPROGRESS ) );
+        return  LoanMapper.INSTANCE.toDtoList( LoanRepository.findByDelay( currentDate , LoanStatus.INPROGRESS ) );
 
     }
 
