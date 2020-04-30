@@ -35,7 +35,7 @@ public class EmailService {
                     StandardCharsets.UTF_8.name()
                 );
 
-        helper.addAttachment("logo.png", new ClassPathResource("/static/img/BMS.png"));
+        helper.addAttachment("logo.jpg", new ClassPathResource("/static/img/BMS.jpg"));
 
         Context context = new Context();
         context.setVariables( mail.getModel() );

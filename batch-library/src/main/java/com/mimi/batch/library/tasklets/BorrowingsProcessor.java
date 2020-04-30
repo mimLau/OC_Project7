@@ -62,7 +62,6 @@ public class BorrowingsProcessor implements Tasklet {
 
                 Map<String, Object> model = new HashMap<>();
                 //model.put("name", entry.getKey().getAccountOwnerLastname() + " " + entry.getKey().getAccountOwnerFirstname());
-                model.put("date", LocalDate.now());
                // model.put("userNb", entry.getKey().getBarcode());
                 model.put("borrowings", entry.getValue());
 
