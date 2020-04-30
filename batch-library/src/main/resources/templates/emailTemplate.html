@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html" lanf="fr">
+<html xmlns:th="http://www.thymeleaf.org">
     <head>
         <title>Sending Email with Thymeleaf HTML Template Example</title>
 
@@ -34,11 +34,11 @@
                         <!--br/><b>Nom de l'abonnée :</b> <span th:text="${name}"/>
                         <br/><b>N° de l'abonnée </b> <span th:text="${userNb}"/></p-->
 
-                    <p th:each="Loan : ${Loans}">
-                        <br/><b>Titre :</b> <span th:text="${Loan.copy.publication.title}"></span>
-                        <br/><b>N° de l'ouvrage :</b> <span th:text="${Loan.copy.publication.identificationNb}"></span>
-                        <br/><b>Echéance :</b> <span th:text="${Loan.returnDate}"></span>
-                    </p>
+                    <p th:each="loan : ${loans}">
+                        <br/><b>Titre :</b> <span th:text="${loan.copy.publication.title}"></span>
+                        <br/><b>N° de l'ouvrage :</b> <span th:text="${loan.copy.publication.identificationNb}"></span>
+                        <!--br/><b>Echéance :</b> <span th:text="${#temporals.format(loan.returnDate, 'dd-MM-yyyy')}"></span></p-->
+                        <br/><b>Echéance :</b> <span th:text="${loan.returnDate}"></span></p>
                 </td>
             </tr>
             <tr>

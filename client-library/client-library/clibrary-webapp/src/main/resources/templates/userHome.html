@@ -8,7 +8,7 @@
         <div th:insert="fragments/fragments.html :: nav"></div>
 
         <div th:object="${session.user}">
-            <p>Bonjour <span th:text="*{accountOwnerFirstname}">Sebastian</span>.</p>
+            <p>Bonjour <span th:text="*{accountOwnerFirstname}"></span>!</p>
             <p>Bienvenue dans votre espace personnel!</p>
         </div>
 

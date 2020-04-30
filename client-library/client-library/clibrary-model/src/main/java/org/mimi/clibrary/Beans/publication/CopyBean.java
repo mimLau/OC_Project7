@@ -1,7 +1,7 @@
 package org.mimi.clibrary.Beans.publication;
 
 import java.time.LocalDate;
-import org.mimi.clibrary.Beans.Loan.LoanBean;
+import org.mimi.clibrary.Beans.loan.LoanBean;
 
 import java.util.List;
 

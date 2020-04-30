@@ -24,9 +24,8 @@
                             <td th:text="${loan.copy.publication.title}"></td>
                             <td th:text="${#temporals.format(loan.loanDate, 'dd-MM-yyyy')}"></td>
                             <td>
-                                <span th:if="${loan.returnDate > toDay}"><span th:text="${#temporals.format(loan.returnDate, 'dd-MM-yyyy')}" style="color: red"/></span>
-                                <span th:unless="${loan.returnDate > toDay}"><span th:text="${#temporals.format(loan.returnDate, 'dd-MM-yyyy')}"/></span>
-                            </td>
+                                <span th:if="${loan.returnDate > toDay}"></span><span th:text="${#temporals.format(loan.returnDate, 'dd-MM-yyyy')}" style="color: red"></span>
+                                <span th:unless="${loan.returnDate > toDay}"></span><span th:text="${#temporals.format(loan.returnDate, 'dd-MM-yyyy')}"></span></td>
                             <td if th:if="${loan.extented}" style="font-size: large"> Effectuée</td>
                             </tr>
                         </tbody>

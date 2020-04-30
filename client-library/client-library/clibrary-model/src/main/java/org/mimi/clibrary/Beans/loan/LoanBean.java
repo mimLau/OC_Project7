@@ -1,4 +1,4 @@
-package org.mimi.clibrary.Beans.Loan;
+package org.mimi.clibrary.Beans.loan;
 
 import java.time.LocalDate;
 
@@ -17,7 +17,7 @@ public class LoanBean {
 
     private Integer id;
     private LocalDate returnDate;
-    private LocalDate LoanDate;
+    private LocalDate loanDate;
     private boolean extented;
     private String loanStatus;
     private CopyBean copy;

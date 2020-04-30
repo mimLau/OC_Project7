@@ -14,5 +14,5 @@ import java.util.List;
 public class MemberLoan {
 
     private Member member;
-    private List<Loan> Loans;
+    private List<Loan> loans;
 }

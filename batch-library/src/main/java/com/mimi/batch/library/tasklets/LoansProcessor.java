@@ -2,10 +2,7 @@ package com.mimi.batch.library.tasklets;
 
 import com.mimi.batch.library.mail.EmailService;
 import com.mimi.batch.library.mail.Mail;
-import com.mimi.batch.library.mail.MailNotification;
 import com.mimi.batch.library.model.Loan;
-import com.mimi.batch.library.model.Member;
-import com.mimi.batch.library.model.MemberLoan;
 import com.mimi.batch.library.proxies.FeignProxy;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -15,7 +12,6 @@ import org.springframework.batch.core.step.tasklet.Tasklet;
 import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.time.LocalDate;
 import java.util.*;
 
 public class LoansProcessor implements Tasklet {
@@ -24,7 +20,7 @@ public class LoansProcessor implements Tasklet {
 
     @Autowired
     private EmailService emailService;
-    private List<Loan> Loans;
+    private List<Loan> loans;
     private FeignProxy proxy;
     private String token;
 
@@ -36,12 +32,12 @@ public class LoansProcessor implements Tasklet {
 
     @Override
     public RepeatStatus execute( StepContribution contribution, ChunkContext chunkContext ) throws Exception {
-        Loans = this.proxy.getOutdatedLoanLists(token);
+        loans = this.proxy.getOutdatedLoanLists(token);
 
         Map<String, List<Loan>> emailLoan = new HashMap<>();
 
-        for (Loan b : Loans) {
-            addValue( b.getMember().getAccountOwnerEmail(), b, emailLoan );
+        for (Loan l : loans) {
+            addValue( l.getMember().getAccountOwnerEmail(), l, emailLoan );
 
         }
 
@@ -63,7 +59,7 @@ public class LoansProcessor implements Tasklet {
                 Map<String, Object> model = new HashMap<>();
                 //model.put("name", entry.getKey().getAccountOwnerLastname() + " " + entry.getKey().getAccountOwnerFirstname());
                // model.put("userNb", entry.getKey().getBarcode());
-                model.put("Loans", entry.getValue());
+                model.put("loans", entry.getValue());
 
                 mail.setModel(model);
                 emailService.sendSimpleMessage(mail);

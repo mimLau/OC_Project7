@@ -2,7 +2,7 @@ package org.mimi.clibrary.proxies;
 
 import org.mimi.clibrary.Beans.account.EmployeeBean;
 import org.mimi.clibrary.Beans.account.MemberBean;
-import org.mimi.clibrary.Beans.Loan.LoanBean;
+import org.mimi.clibrary.Beans.loan.LoanBean;
 import org.mimi.clibrary.Beans.publication.CopyBean;
 import org.mimi.clibrary.Beans.publication.LibraryBean;
 import org.mimi.clibrary.Beans.publication.PublicationBean;

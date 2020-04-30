@@ -3,7 +3,7 @@ package com.mimi.clibrary.controllers;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.mimi.clibrary.Beans.account.MemberBean;
-import org.mimi.clibrary.Beans.Loan.LoanBean;
+import org.mimi.clibrary.Beans.loan.LoanBean;
 import org.mimi.clibrary.proxies.FeignProxy;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

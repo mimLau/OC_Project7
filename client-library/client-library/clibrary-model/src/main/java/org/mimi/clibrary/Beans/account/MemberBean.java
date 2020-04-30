@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.mimi.clibrary.Beans.Loan.LoanBean;
+import org.mimi.clibrary.Beans.loan.LoanBean;
 
 import java.util.List;
 

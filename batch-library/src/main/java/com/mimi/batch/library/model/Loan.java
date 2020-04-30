@@ -12,11 +12,11 @@ public class Loan {
 
     private Integer id;
     private boolean extented;
-    private String LoanStatus;
+    private String loanStatus;
     private Member member;
     private int reminderNb;
     private LocalDate returnDate;
-    private LocalDate LoanDate;
+    private LocalDate loanDate;
     private Copy copy;
 
 
