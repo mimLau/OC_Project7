@@ -21,7 +21,7 @@ public class AccountController {
         this.accountService = accountService;
     }
 
-    @GetMapping
+    @GetMapping( "/Members" )
     public List<MemberDto> getAllMembers() {
         return accountService.findAll();
     }
@@ -31,8 +31,15 @@ public class AccountController {
         return accountService.findById(id);
     }
 
+    @GetMapping( value = "/Members", params = {"username"} )
+    public MemberDto getMemberUsername( @RequestParam("username") String username ) {
+        MemberDto memberDto = accountService.findMemberByUsername( username );
+        if( memberDto == null ) throw new ResourceNotFoundException( "L'utilisateur recherché n'existe pas." );
 
-    @GetMapping(value = "/Members",  params = { "mail", "pass"} )
+        return memberDto;
+    }
+
+    @GetMapping( value = "/Members",  params = { "mail", "pass"} )
     public MemberDto getMemberByMailAndPass(@RequestParam("mail") String mail, @RequestParam("pass") String pass) {
         MemberDto memberDto = accountService.findMemberByMailAndPass( mail, pass );
         if( memberDto == null ) throw new ResourceNotFoundException( "Combinaison mot de passe/email incorrecte." );
@@ -40,23 +47,23 @@ public class AccountController {
         return memberDto;
     }
 
-    @GetMapping(value = "/Members",   params = "email")
+    @GetMapping( value = "/Members",   params = "email" )
     public MemberDto getMemberByEmail ( @RequestParam("email") String email ) {
         return accountService.getMemberByEmail(email);
     }
 
 
-    @GetMapping(value = "/Members",   params = { "firstname", "lastname" })
+    @GetMapping( value = "/Members",   params = {"firstname", "lastname"} )
     public MemberDto getMemberByName (@RequestParam("firstname") String firstname, @RequestParam("lastname") String lastname ) {
         return accountService.getMemberByNames( firstname, lastname );
     }
 
-    @GetMapping(value = "/Members/delay" )
+    @GetMapping( value = "/Members/delay" )
     public List<MemberDto> findMembersByOutdatedLoan() {
         return accountService.getMembersByOutdatedLoan();
     }
 
-    @PostMapping(value = "/Members")
+    @PostMapping( value = "/Members" )
     public ResponseEntity<Void> addMember( @RequestBody MemberDto memberDto ) {
         MemberDto addedMember = accountService.save( memberDto );
         if( addedMember == null)
@@ -72,7 +79,7 @@ public class AccountController {
     }
 
 
-    @GetMapping(value = "/Employees",   params = { "mail", "pass"} )
+    @GetMapping( value = "/Employees",   params = { "mail", "pass"} )
     public EmployeeDto getEmployeeByMailAndPass(@RequestParam("mail") String mail, @RequestParam("pass") String pass) {
         EmployeeDto employeeDto = accountService.findEmployeeByMailAndPass( mail, pass );
         if( employeeDto == null ) throw new ResourceNotFoundException( "Combinaison mot de passe/email incorrecte." );
@@ -80,6 +87,13 @@ public class AccountController {
         return employeeDto;
     }
 
+    @GetMapping( value = "/Employees", params = {"username"}  )
+    public EmployeeDto getEmployeeUsername( @RequestParam("username") String username ) {
+        EmployeeDto employeeDto = accountService.findEmployeeByUsername( username );
+        if( employeeDto == null ) throw new ResourceNotFoundException( "Il n'existe pas d'emlpoyé avec cet identifiant dans notre base de données." );
+
+        return employeeDto;
+    }
 
 
 }

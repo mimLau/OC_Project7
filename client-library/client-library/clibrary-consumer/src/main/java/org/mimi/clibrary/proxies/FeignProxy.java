@@ -21,12 +21,20 @@ public interface FeignProxy {
     @GetMapping( value ="/Members", params = { "mail", "pass" } )
     MemberBean getMemberByMailAndPass( @RequestParam("mail") String mail, @RequestParam("pass") String pass, @RequestHeader("Authorization") Object accessToken );
 
+    @GetMapping( value ="/Members", params = { "username" } )
+    MemberBean getMemberByUsername( @RequestParam("username") String username, @RequestHeader("Authorization") Object accessToken );
+
+
     @GetMapping( value = "/Members", params = "id" )
-    MemberBean getMemberById(@RequestParam("id") int id );
+    MemberBean getMemberById( @RequestParam("id") int id );
 
 
     @GetMapping(value = "/Employees", params = { "mail", "pass"} )
-    EmployeeBean getEmployeeByMailAndPass(@RequestParam("mail") String mail, @RequestParam("pass") String pass, @RequestHeader("Authorization") Object accessToken);
+    EmployeeBean getEmployeeByMailAndPass( @RequestParam("mail") String mail, @RequestParam("pass") String pass, @RequestHeader("Authorization") Object accessToken);
+
+    @GetMapping( value ="/Employees", params = { "username" } )
+    EmployeeBean getEmployeeByUsername( @RequestParam("username") String username, @RequestHeader("Authorization") Object accessToken );
+
 
 
     @GetMapping( value = "/Publications" )

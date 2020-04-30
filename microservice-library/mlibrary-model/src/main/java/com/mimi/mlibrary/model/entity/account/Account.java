@@ -12,8 +12,8 @@ import java.time.LocalDate;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @Table(name = "accounts")
@@ -31,6 +31,8 @@ public class Account implements Serializable {
     )
     private Integer id;
     @Column(nullable = false)
+    private String accountOwnerUsername;
+    @Column(nullable = false)
     private String accountOwnerFirstname;
     @Column(nullable = false)
     private String accountOwnerLastname;
@@ -38,6 +40,7 @@ public class Account implements Serializable {
     private String accountOwnerPass;
     @Column(nullable = false)
     private String accountOwnerEmail;
+    @Column(nullable = false)
     private String accountOwnerPhoneNb;
     @Column(nullable = false)
     private boolean activeAccount;
@@ -45,6 +48,5 @@ public class Account implements Serializable {
     @Enumerated(EnumType.STRING)
     private Role role;
     private LocalDate registrationDate;
-
 
 }

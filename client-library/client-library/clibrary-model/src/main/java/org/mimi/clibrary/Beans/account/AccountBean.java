@@ -16,6 +16,7 @@ import java.time.LocalDate;
 public class AccountBean {
 
     private Integer id;
+    private String username;
     private String accountOwnerFirstname;
     private String accountOwnerLastname;
     private String accountOwnerPass;

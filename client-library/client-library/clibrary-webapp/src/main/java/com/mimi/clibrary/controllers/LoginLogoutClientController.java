@@ -71,12 +71,14 @@ public class LoginLogoutClientController {
         else
         {
             try {
-                MemberBean member = proxy.getMemberByMailAndPass( user.getUsername(), user.getPassword(), token );
+                //MemberBean member = proxy.getMemberByMailAndPass( user.getUsername(), user.getPassword(), token );
+                MemberBean member = proxy.getMemberByUsername( user.getUsername(), token );
                 session.setAttribute("user", member );
                 return USER_HOME_PAGE;
             }
           catch(FeignException f) {
-                EmployeeBean employee = proxy.getEmployeeByMailAndPass( user.getUsername(), user.getPassword(), token );
+                //EmployeeBean employee = proxy.getEmployeeByMailAndPass( user.getUsername(), user.getPassword(), token );
+              EmployeeBean employee = proxy.getEmployeeByUsername( user.getUsername(), token );
                 session.setAttribute("user", employee );
                 return USER_HOME_PAGE;
             }

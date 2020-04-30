@@ -1,7 +1,5 @@
 package com.mimi.mlibrary.model.dto.account;
 
-
-import com.mimi.mlibrary.model.entity.account.Role;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,6 +14,7 @@ import java.time.LocalDate;
 public class AccountDto {
 
     private Integer id;
+    private String accountOwnerUsername;
     private String accountOwnerFirstname;
     private String accountOwnerLastname;
     private String accountOwnerPass;

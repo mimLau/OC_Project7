@@ -17,5 +17,5 @@ public class MemberDto extends AccountDto {
 
     private String barcode;
     private int nbOfCurrentsLoans;
-    private List<Loan> Loans;
+    private List<Loan> loans;
 }

@@ -2,7 +2,6 @@ package com.mimi.mlibrary.service.impl;
 
 import com.mimi.mlibrary.mapper.account.EmployeeMapper;
 import com.mimi.mlibrary.model.dto.account.EmployeeDto;
-import com.mimi.mlibrary.model.dto.loan.LoanDto;
 import com.mimi.mlibrary.model.entity.loan.LoanStatus;
 import com.mimi.mlibrary.repository.account.EmployeeRepository;
 import com.mimi.mlibrary.repository.account.MemberRepository;
@@ -26,6 +25,12 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
+    public MemberDto findMemberByUsername( String username ) {
+        return MemberMapper.INSTANCE.toDto( memberRepository.getMemberByUsername( username ).orElse( null) );
+
+    }
+
+    @Override
     public MemberDto findMemberByMailAndPass(String mail, String password) {
         return MemberMapper.INSTANCE.toDto( memberRepository.getMemberByEmailAndPass( mail, password ).orElse( null) );
     }
@@ -33,6 +38,11 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public EmployeeDto findEmployeeByMailAndPass(String mail, String password) {
         return EmployeeMapper.INSTANCE.toDto( employeeRepository.getEmployeeByEmailAndPass( mail, password ).orElse( null) );
+    }
+
+    @Override
+    public EmployeeDto findEmployeeByUsername( String username ) {
+        return EmployeeMapper.INSTANCE.toDto( employeeRepository.getEmployeeByUsername( username ).orElse( null) );
     }
 
     @Override
@@ -78,6 +88,8 @@ public class AccountServiceImpl implements AccountService {
         LocalDate currentDate = LocalDate.now();
         return MemberMapper.INSTANCE.toDtoList( memberRepository.getMembersByOutdatedLoan( currentDate , LoanStatus.INPROGRESS ) );
     }
+
+
 
 
 }

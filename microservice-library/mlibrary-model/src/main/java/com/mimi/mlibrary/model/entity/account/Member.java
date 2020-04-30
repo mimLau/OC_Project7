@@ -8,21 +8,21 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.List;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-
 @Entity
 @DiscriminatorValue("Member")
 public class Member extends Account {
 
     private String barcode;
-    @Column(nullable = false)
     private int nbOfCurrentsLoans;
     @JsonManagedReference(value = "Loan_member")
     @OneToMany(mappedBy = "member")
-    private List<Loan> Loans;
+    private List<Loan> loans;
+
 }
