@@ -14,6 +14,8 @@
                         <thead>
                             <tr>
                                 <th scope="col">Titre</th>
+                                <th scope="col">N° d'identification</th>
+                                <th scope="col">Parution/Publication</th>
                                 <th scope="col">Date d'emprunt</th>
                                 <th scope="col">Date de retour</th>
                                 <th scope="col"></th>
@@ -22,6 +24,8 @@
                         <tbody>
                             <tr th:each=" loan : ${loans}">
                                 <td th:text="${loan.copy.publication.title}"></td>
+                                <td th:text="${loan.copy.barcode}"></td>
+                                <td th:text="${loan.copy.publication.publicationDate}"></td>
                                 <td th:text="${#temporals.format(loan.loanDate, 'dd-MM-yyyy')}"></td>
                                 <td>
                                     <span th:if="${loan.returnDate < toDay}"><span th:text="${#temporals.format(loan.returnDate, 'dd-MM-yyyy')}" style="color: red"/></span>
