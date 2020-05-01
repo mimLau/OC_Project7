@@ -40,15 +40,9 @@ public class LoanController {
     }
 
     @PostMapping( consumes={"application/json"})
-    public ResponseEntity<Void> addLoan(@RequestBody LoanJson LoanJson ) {
+    public ResponseEntity<Void> addLoan( @RequestBody LoanJson loanJson ) {
 
-        LoanDto addedLoan = loanService.save( LoanJson.getMember(), LoanJson.getCopy() );
-
-        if( addedLoan == null ) throw new ResourceNotFoundException( "L'utilisateur ne peut pas emprunter cette exemplaire.\n Exemplaire indisponible ou l'utilisateur a déjà 5 emprunts en cours." );
-
-        /*if( addedLoan == null)
-            return ResponseEntity.noContent().build();*/
-
+        LoanDto addedLoan = loanService.save( loanJson.getMember(), loanJson.getCopy() );
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand( addedLoan.getId() ).toUri();
         return ResponseEntity.created( location ).build();
     }

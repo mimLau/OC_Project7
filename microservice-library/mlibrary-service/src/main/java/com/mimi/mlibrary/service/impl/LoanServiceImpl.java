@@ -9,7 +9,9 @@ import com.mimi.mlibrary.model.entity.publication.Copy;
 import com.mimi.mlibrary.repository.account.MemberRepository;
 import com.mimi.mlibrary.repository.loan.LoanRepository;
 import com.mimi.mlibrary.repository.publication.CopyRepository;
+import com.mimi.mlibrary.repository.publication.PublicationRepository;
 import com.mimi.mlibrary.service.contract.LoanService;
+import com.mimi.mlibrary.service.exceptions.BadRequestException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
@@ -28,11 +30,11 @@ public class LoanServiceImpl implements LoanService {
     private LoanRepository loanRepository;
     private CopyRepository copyRepository;
     private MemberRepository memberRepository;
-    private LoanMapper LoanMapper;
+    private PublicationRepository publicationRepository;
 
-    public LoanServiceImpl(LoanRepository loanRepository, LoanMapper LoanMapper, CopyRepository copyRepository, MemberRepository memberRepository) {
+    public LoanServiceImpl(LoanRepository loanRepository, CopyRepository copyRepository, MemberRepository memberRepository, PublicationRepository publicationRepository) {
+        this.publicationRepository = publicationRepository;
         this.loanRepository = loanRepository;
-        this.LoanMapper = LoanMapper;
         this.copyRepository = copyRepository;
         this.memberRepository = memberRepository;
     }
@@ -40,17 +42,17 @@ public class LoanServiceImpl implements LoanService {
 
     @Override
     public LoanDto findLoanById( int id ) {
-        return   LoanMapper.toDto( loanRepository.findLoanById( id ).orElse(null));
+        return   LoanMapper.INSTANCE.toDto( loanRepository.findLoanById( id ).orElse(null));
     }
 
     @Override
     public List<LoanDto> findAll() {
-        return LoanMapper.toDtoList( loanRepository.findAllLoans( LoanStatus.INPROGRESS));
+        return LoanMapper.INSTANCE.toDtoList( loanRepository.findAllLoans( LoanStatus.INPROGRESS));
     }
 
     @Override
     public List<LoanDto> findByMemberId( int memberId ) {
-        return LoanMapper.toDtoList( loanRepository.findByMemberId( memberId, LoanStatus.INPROGRESS) );
+        return LoanMapper.INSTANCE.toDtoList( loanRepository.findByMemberId( memberId, LoanStatus.INPROGRESS) );
     }
 
     /**
@@ -71,6 +73,9 @@ public class LoanServiceImpl implements LoanService {
         Optional <Copy> copy = copyRepository.findCopyById( copyId );
         boolean available = copy.get().isAvailable();
 
+        // Retrieve publication id from copy to update publication av nbOfAvailableCopies attribute.
+        int publicationId = copy.get().getPublication().getId();
+
         /*
          * Member has right to borrow only 5 publications
          * To register or create a Loan of a copy, this one should be available.
@@ -82,28 +87,38 @@ public class LoanServiceImpl implements LoanService {
             copyRepository.updateCopyAvailability( false, copyId );
             copyRepository.updateCopyReturnDateById( today.plusDays( 28 ),copyId );
             memberRepository.updateNbOfCurrentsLoans( memberId, 1);
+            publicationRepository.updateNbOfAvailableCopies( publicationId, -1 );
 
 
-            //Set attributes to the created Loan.
+            //Set attributes to the created loan.
 
-            LoanDto LoanDto = new LoanDto();
+            LoanDto loanDto = new LoanDto();
 
-            LoanDto.setCopy( copy.get() );
-            LoanDto.setMember( member.get() );
-            LoanDto.setReturnDate( today.plusDays( 28 ) );
-            LoanDto.setLoanDate( today );
-            LoanDto.setExtented( false );
-            LoanDto.setLoanStatus( "INPROGRESS" );
-            LoanDto.setReminderNb( 0 );
+            loanDto.setCopy( copy.get() );
+            loanDto.setMember( member.get() );
+            loanDto.setReturnDate( today.plusDays( 28 ) );
+            loanDto.setLoanDate( today );
+            loanDto.setExtented( false );
+            loanDto.setLoanStatus( "INPROGRESS" );
+            loanDto.setReminderNb( 0 );
 
-            Optional.of( LoanMapper.INSTANCE.toEntity( LoanDto ) ).ifPresent( Loan -> loanRepository.save( Loan ));
-            return LoanDto;
+            Optional.of( LoanMapper.INSTANCE.toEntity( loanDto ) ).ifPresent( loan -> loanRepository.save( loan ));
+            return loanDto;
+
+        } else if( currentsLoans > 5 ) {
+
+            logger.info("L'utilisateur a 5 livres à son actif:\n"
+                    + "User id: " + member.get().getId() + "\n"
+                    + "Nb of loans : " + currentsLoans + "\n");
+
+            throw new BadRequestException("User has already 5 loans.");
         }
-
-        logger.info(" L'exemplaire sélectionné n'est pas disponible et/ou l'utilisateur a 5 livres à son actif:\n"
-                        + "Id utilisateur: " + member.get().getId() + "\n"
-                        + "Nombre de livres empruntés: " + currentsLoans + "\n"
-                        + "Publication disponible?: " + available + "\n");
+        else if( available == false ) {
+            logger.info("Copy isn't available :\n"
+                    + "Id copy: " + copy.get().getId() + "\n"
+                    + "Copy disponible? : " + false + "\n");
+            throw new BadRequestException("This copy isn't available.");
+        }
 
         return null;
     }
@@ -112,7 +127,7 @@ public class LoanServiceImpl implements LoanService {
     public void extendLoanReturnDateById( int LoanId ) {
 
        //Retrieve a Loan by its id
-        LoanDto LoanDto = LoanMapper.toDto( loanRepository.findLoanById( LoanId ).orElse(null));
+        LoanDto LoanDto = LoanMapper.INSTANCE.toDto( loanRepository.findLoanById( LoanId ).orElse(null));
 
         //Retrieve the return date of this Loan
         LocalDate returnDate = LoanDto.getReturnDate();
