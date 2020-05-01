@@ -5,14 +5,10 @@ import com.mimi.mlibrary.model.dto.publication.PublicationDto;
 import com.mimi.mlibrary.model.entity.publication.SubCategory;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.mapstruct.Qualifier;
 import org.mapstruct.factory.Mappers;
 
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
 import java.util.List;
 
-//@Mapper(uses = {SubCategoryMapper.class})
 @Mapper
 public interface PublicationMapper {
 
@@ -27,7 +23,7 @@ public interface PublicationMapper {
     Publication toEntity( PublicationDto publicationDto );
     List<Publication> toListEntity( List<PublicationDto> publicationDtos );
 
-    //private String subCategoryStr;
+    //Custom mapper to retrieve subcategory value and not anymore subcategoy name
     @SubCategoryMapper
     static String toSubStr( SubCategory subCategory ) {
         return subCategory.getFrName();

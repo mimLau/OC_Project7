@@ -1,8 +1,6 @@
 package com.mimi.mlibrary.service.contract;
 
 import com.mimi.mlibrary.model.dto.publication.*;
-import com.mimi.mlibrary.model.entity.publication.Category;
-import com.mimi.mlibrary.model.entity.publication.Criteria;
 
 import java.time.LocalDate;
 import java.util.List;
