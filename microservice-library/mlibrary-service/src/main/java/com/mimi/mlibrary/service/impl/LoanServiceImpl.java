@@ -1,17 +1,20 @@
 package com.mimi.mlibrary.service.impl;
 
+import com.mimi.mlibrary.mapper.account.MemberMapper;
 import com.mimi.mlibrary.mapper.loan.LoanMapper;
+import com.mimi.mlibrary.mapper.publication.CopyMapper;
+import com.mimi.mlibrary.model.dto.account.MemberDto;
 import com.mimi.mlibrary.model.dto.loan.LoanDto;
-import com.mimi.mlibrary.model.entity.account.Member;
+import com.mimi.mlibrary.model.dto.publication.CopyDto;
 import com.mimi.mlibrary.model.entity.loan.Loan;
 import com.mimi.mlibrary.model.entity.loan.LoanStatus;
-import com.mimi.mlibrary.model.entity.publication.Copy;
 import com.mimi.mlibrary.repository.account.MemberRepository;
 import com.mimi.mlibrary.repository.loan.LoanRepository;
 import com.mimi.mlibrary.repository.publication.CopyRepository;
 import com.mimi.mlibrary.repository.publication.PublicationRepository;
 import com.mimi.mlibrary.service.contract.LoanService;
 import com.mimi.mlibrary.service.exceptions.BadRequestException;
+import com.mimi.mlibrary.service.exceptions.ResourceNotFoundException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
@@ -24,8 +27,6 @@ import java.util.Optional;
 
 @Service
 public class LoanServiceImpl implements LoanService {
-
-    final static Logger logger  = LogManager.getLogger(Loan.class);
 
     private LoanRepository loanRepository;
     private CopyRepository copyRepository;
@@ -65,16 +66,29 @@ public class LoanServiceImpl implements LoanService {
     @Override
     public LoanDto save( int memberId, int copyId ) {
 
-        // Member research
-        Optional<Member> member = memberRepository.getMemberById( memberId );
-        int currentsLoans = member.get().getNbOfCurrentsLoans();
+        int currentsLoans;
+        boolean available;
+        int publicationId;
 
         // Copy research
-        Optional <Copy> copy = copyRepository.findCopyById( copyId );
-        boolean available = copy.get().isAvailable();
+        CopyDto copyDto = CopyMapper.INSTANCE.toDto( copyRepository.findCopyById( copyId ).orElse(null));
+        // Member research
+        MemberDto memberDto = MemberMapper.INSTANCE.toDto( memberRepository.getMemberById( memberId ).orElse(null));
 
-        // Retrieve publication id from copy to update publication av nbOfAvailableCopies attribute.
-        int publicationId = copy.get().getPublication().getId();
+
+        if( copyDto == null && memberDto == null )
+            throw new ResourceNotFoundException("L'utilisateur et la copie demandés n'existent pas.");
+        else if( copyDto == null )
+            throw new ResourceNotFoundException("La copie demandée n'existe pas.");
+        else if( memberDto == null )
+            throw new ResourceNotFoundException("L'utilisateur demandé n'existe pas.");
+        else {
+
+            currentsLoans = memberDto.getNbOfCurrentsLoans();
+            available = copyDto.isAvailable();
+            // Retrieve publication id from copy to update publication av nbOfAvailableCopies attribute.
+            publicationId = copyDto.getPublication().getId();
+        }
 
         /*
          * Member has right to borrow only 5 publications
@@ -94,8 +108,8 @@ public class LoanServiceImpl implements LoanService {
 
             LoanDto loanDto = new LoanDto();
 
-            loanDto.setCopy( copy.get() );
-            loanDto.setMember( member.get() );
+            loanDto.setCopy( CopyMapper.INSTANCE.toEntity( copyDto ));
+            loanDto.setMember( MemberMapper.INSTANCE.toEntity( memberDto ));
             loanDto.setReturnDate( today.plusDays( 28 ) );
             loanDto.setLoanDate( today );
             loanDto.setExtented( false );
@@ -105,19 +119,14 @@ public class LoanServiceImpl implements LoanService {
             Optional.of( LoanMapper.INSTANCE.toEntity( loanDto ) ).ifPresent( loan -> loanRepository.save( loan ));
             return loanDto;
 
-        } else if( currentsLoans > 5 ) {
+        } else if( currentsLoans == 5 && available == false) {
+            throw new BadRequestException("User has already 5 loans and copie isn't available.");
 
-            logger.info("L'utilisateur a 5 livres à son actif:\n"
-                    + "User id: " + member.get().getId() + "\n"
-                    + "Nb of loans : " + currentsLoans + "\n");
-
+        } else if( currentsLoans == 5 ) {
             throw new BadRequestException("User has already 5 loans.");
         }
         else if( available == false ) {
-            logger.info("Copy isn't available :\n"
-                    + "Id copy: " + copy.get().getId() + "\n"
-                    + "Copy disponible? : " + false + "\n");
-            throw new BadRequestException("This copy isn't available.");
+             throw new BadRequestException("This copy isn't available.");
         }
 
         return null;
