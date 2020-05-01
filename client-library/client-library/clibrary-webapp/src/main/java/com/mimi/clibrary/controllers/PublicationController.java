@@ -1,6 +1,7 @@
 package com.mimi.clibrary.controllers;
 
 
+import feign.FeignException;
 import org.mimi.clibrary.Beans.publication.CopyBean;
 import org.mimi.clibrary.Beans.publication.PublicationBean;
 import org.mimi.clibrary.proxies.FeignProxy;
@@ -22,9 +23,14 @@ public class PublicationController {
 
     @GetMapping("/Publication")
     public String publication( Model model, @RequestParam int id ) {
-
+        List<CopyBean> copies;
         PublicationBean publication = proxy.getPublicationsById( id );
-        List<CopyBean> copies = proxy.getAvailableCopiesByLibrary( id );//TODO A VERIFIER
+        try {
+
+           copies  = proxy.getAvailableCopiesByLibrary( id );
+        } catch ( FeignException feign ) {
+            copies = null;
+        }
 
         model.addAttribute( "publication", publication );
         model.addAttribute( "copies", copies );
