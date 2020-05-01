@@ -18,7 +18,7 @@ public  class PublicationBean {
     private int nbTotalOfcopies;
     private LocalDate publicationDate;
     private String category;
-    private String subCategory;
+    private String subCategoryStr;
     private List<CopyBean> copies;
     private EditorBean editor;
     private AuthorBean author;

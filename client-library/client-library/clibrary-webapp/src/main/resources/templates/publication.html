@@ -32,7 +32,7 @@
                                     <div class="tab-content mt-3">
 
                                         <div class="tab-pane active" id="description" role="tabpanel">
-                                            Catégorie: <span  th:text="${ publication.subCategory }"></span><br/>
+                                            Catégorie: <span  th:text="${ publication.subCategoryStr }"></span><br/>
                                             <span th:if="${ publication.category == 'BOOK' }">
                                             Edition: <span th:if="${ publication.editor != null }"><span th:text="${ publication.editor.name }"/></span>
                                             </span>

@@ -1,15 +1,17 @@
 package com.mimi.mlibrary.model.dto.publication;
 
 import com.mimi.mlibrary.model.entity.publication.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
 
 import java.util.List;
 
-@Getter
-@Setter
+@Getter @Setter
+@Data
+@ToString
+@AllArgsConstructor
+@NoArgsConstructor
 public class PublicationDto {
 
     private Integer id;
@@ -20,11 +22,10 @@ public class PublicationDto {
     private String identificationNb;
     private LocalDate publicationDate;
     private String category;
-    private String subCategory;
+    private String subCategoryStr;
     private Editor editor;
     private Author author;
 
 
-    public PublicationDto() {
-    }
+
 }
