@@ -133,22 +133,30 @@ public class LoanServiceImpl implements LoanService {
     }
 
     @Override
-    public void extendLoanReturnDateById( int LoanId ) {
+    public void extendLoanReturnDateById( int loanId ) {
+
+        LocalDate returnDate = null;
+        boolean extension = false;
 
        //Retrieve a Loan by its id
-        LoanDto LoanDto = LoanMapper.INSTANCE.toDto( loanRepository.findLoanById( LoanId ).orElse(null));
+        LoanDto loanDto = LoanMapper.INSTANCE.toDto( loanRepository.findLoanById( loanId ).orElse(null));
+        if( loanDto  == null )
+            throw new ResourceNotFoundException("Le prêt recherché n'existe pas.");
 
-        //Retrieve the return date of this Loan
-        LocalDate returnDate = LoanDto.getReturnDate();
+        if( loanDto != null ) {
 
-       boolean extension = LoanDto.isExtented();
+            //Retrieve the return date of this Loan
+             returnDate = loanDto.getReturnDate();
+             extension = loanDto.isExtented();
+        }
+
        if( extension != true ) {
            //Extend the return date by 4 weeks
            returnDate = returnDate.plusDays( 28 );
-           loanRepository.updateLoanReturnDateById( returnDate, LoanId );
-           loanRepository.updateExtensionById( LoanId );
+           loanRepository.updateLoanReturnDateById( returnDate, loanId );
+           loanRepository.updateExtensionById( loanId );
 
-           int copyId = LoanDto.getCopy().getId();
+           int copyId = loanDto.getCopy().getId();
            copyRepository.updateCopyReturnDateById( returnDate, copyId );
        }
         //TODO MESSAGE TO SIGNAL THAT THE USER HAS ALREADY EXTENDED ITS Loan.
@@ -157,15 +165,28 @@ public class LoanServiceImpl implements LoanService {
     @Override
     public void updateLoanStatus( int loanId ) {
 
-        Optional<Loan> loan = loanRepository.findById( loanId );
-        int copyId = loan.get().getCopy().getId();
-        int memberId = loan.get().getMember().getId();
+        int copyId;
+        int memberId;
+        int publicationId;
 
-        copyRepository.updateCopyAvailability( true, copyId );
-        copyRepository.updateCopyReturnDateById( null, copyId );
-        memberRepository.updateNbOfCurrentsLoans( memberId, -1 );
+        //Retrieve a Loan by its id
+        LoanDto loanDto = LoanMapper.INSTANCE.toDto( loanRepository.findLoanById( loanId ).orElse(null));
 
-        loanRepository.updateLoanStatus( loanId, LoanStatus.FINISHED );
+        if( loanDto  == null )
+            throw new ResourceNotFoundException("Le prêt recherché n'existe pas.");
+
+        if( loanDto != null ) {
+             copyId = loanDto.getCopy().getId();
+             memberId = loanDto.getMember().getId();
+             publicationId = loanDto.getCopy().getPublication().getId();
+
+            copyRepository.updateCopyAvailability( true, copyId );
+            copyRepository.updateCopyReturnDateById( null, copyId );
+            memberRepository.updateNbOfCurrentsLoans( memberId, -1 );
+            publicationRepository.updateNbOfAvailableCopies( publicationId, 1 );
+
+            loanRepository.updateLoanStatus( loanId, LoanStatus.FINISHED );
+        }
     }
 
 

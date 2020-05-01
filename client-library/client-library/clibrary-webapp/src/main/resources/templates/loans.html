@@ -7,9 +7,10 @@
     <body>
         <div th:insert="fragments/fragments.html :: nav"></div>
 
-        <section class="container-fluid">
-            <section class="row justify-content-center">
+        <div class="container-fluid">
+            <div class="row justify-content-center">
                 <div class="responsive-table-line" style="margin:0px auto;max-width:1500px;"><br/><br/>
+                    <p class="text-center">Liste des prêts enregistrés </p><br/>
                     <table class="table table-hover" style="border: 1px solid #DDD;">
                         <thead>
                         <tr>
@@ -20,19 +21,23 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:each=" loan : ${loans}">
-                            <td th:text="${loan.copy.publication.title}"></td>
-                            <td th:text="${#temporals.format(loan.loanDate, 'dd-MM-yyyy')}"></td>
-                            <td>
-                                <span th:if="${loan.returnDate > toDay}"></span><span th:text="${#temporals.format(loan.returnDate, 'dd-MM-yyyy')}" style="color: red"></span>
-                                <span th:unless="${loan.returnDate > toDay}"></span><span th:text="${#temporals.format(loan.returnDate, 'dd-MM-yyyy')}"></span></td>
-                            <td if th:if="${loan.extented}" style="font-size: large"> Effectuée</td>
+                            <tr th:each=" loan : ${loans}">
+                                <td th:text="${loan.copy.publication.title}"></td>
+                                <td th:text="${#temporals.format(loan.loanDate, 'dd-MM-yyyy')}"></td>
+                                <td>
+                                    <span th:if="${loan.returnDate > toDay}"><span th:text="${#temporals.format(loan.returnDate, 'dd-MM-yyyy')}" ></span></span>
+                                    <span th:unless="${loan.returnDate > toDay}"><span th:text="${#temporals.format(loan.returnDate, 'dd-MM-yyyy')}" style="color: red"></span></span>
+                                </td>
+                                <td >
+                                    <span if th:if="${loan.extented}">Effectuée</span>
+                                    <span  th:unless="${loan.extented}"></span>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-            </section>
-        </section>
+            </div>
+        </div>
 
 
         <div th:insert="fragments/fragments.html :: footer" class="footer"></div>
