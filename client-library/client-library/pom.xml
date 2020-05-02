@@ -26,9 +26,6 @@
         <version>1.0-SNAPSHOT</version>
         <packaging>pom</packaging>
 
-        <!-- General information -->
-        <name>client-library</name>
-        <description></description>
 
 
         <!-- =============================================================== -->
