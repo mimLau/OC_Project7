@@ -67,11 +67,5 @@ public class LoanController {
        return loanService.findByDelay();
     }
 
-    @GetMapping( "/delay/email" )
-    public Map<String, LocalDate> getOutdatedLoansAndEmailMember() {
-        return  loanService.findOutdatedLoansEmailMember();
-    }
-
-
 }
 

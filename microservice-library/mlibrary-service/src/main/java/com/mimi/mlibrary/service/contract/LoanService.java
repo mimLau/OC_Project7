@@ -16,6 +16,5 @@ public interface LoanService {
     void  updateLoanStatus( int loanId );
     void updateReminderNbById( int loanId);
     List<LoanDto> findByDelay();
-    Map<String, LocalDate> findOutdatedLoansEmailMember();
 
 }

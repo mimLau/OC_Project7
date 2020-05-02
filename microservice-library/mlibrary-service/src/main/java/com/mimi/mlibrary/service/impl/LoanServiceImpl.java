@@ -204,16 +204,4 @@ public class LoanServiceImpl implements LoanService {
         return  LoanMapper.INSTANCE.toDtoList( loanRepository.findByDelay( currentDate , LoanStatus.INPROGRESS ) );
 
     }
-
-    @Override
-    public Map<String, LocalDate> findOutdatedLoansEmailMember() {
-
-        List <LoanDto>  loanDtos = this.findByDelay();
-        Map<String, LocalDate> emailsAndReturnDates = new HashMap<>();
-
-        for( LoanDto loan : loanDtos )
-            emailsAndReturnDates.put(loan.getMember().getAccountOwnerEmail(), loan.getReturnDate() );
-
-        return emailsAndReturnDates;
-    }
 }
