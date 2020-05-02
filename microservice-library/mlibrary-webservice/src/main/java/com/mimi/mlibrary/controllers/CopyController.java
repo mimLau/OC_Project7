@@ -16,7 +16,6 @@ import java.util.List;
 @RestController
 public class CopyController {
 
-    final static Logger logger  = LogManager.getLogger(PublicationController.class);
     private PublicationService publicationService;
 
     public CopyController(PublicationService publicationService) {
@@ -26,7 +25,6 @@ public class CopyController {
     @GetMapping( value = "/Copies/{id}" )
     public ResponseEntity<CopyDto> getCoyById( @PathVariable int id ) {
 
-        logger.info(" Recherche de l'exemplaire avec l'id: " + id );
         CopyDto copyDto =  publicationService.findCopyById( id ) ;
 
         if( copyDto == null )

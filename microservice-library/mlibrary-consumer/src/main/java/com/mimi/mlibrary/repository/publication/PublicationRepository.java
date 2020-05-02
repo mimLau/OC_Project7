@@ -16,10 +16,6 @@ import java.util.Optional;
 @Repository
 public interface PublicationRepository extends JpaRepository<Publication, Integer>, JpaSpecificationExecutor<Publication> {
 
-
-    /*@Query("SELECT b FROM Book b")
-    Page<Book> findAllBooks( Pageable pageable );*/
-
     @Query("SELECT p FROM Publication p WHERE p.id= :id")
     Optional<Publication> findPublicationById(@Param("id") int id );
 

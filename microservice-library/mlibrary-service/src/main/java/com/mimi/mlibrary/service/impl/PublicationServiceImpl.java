@@ -36,9 +36,28 @@ public class PublicationServiceImpl implements PublicationService {
     }
 
 
+    /*************
+     * Libraries *
+     * ***********/
+
     @Override
     public List<LibraryDto> findAllLibraries() {
         return LibraryMapper.INSTANCE.toDtoList( libraryRepository.findAllLibraries() );
+    }
+
+
+    /****************
+     * Publications *
+     * **************/
+
+    @Override
+    public PublicationDto findPublicationById( int id ) {
+        return PublicationMapper.INSTANCE.toDto( publicationRepository.findPublicationById( id ).orElse( null ));
+    }
+
+    @Override
+    public List<PublicationDto> findAllPublications() {
+        return  PublicationMapper.INSTANCE.toDtoList( publicationRepository.findAllPublications());
     }
 
     @Override
@@ -71,33 +90,6 @@ public class PublicationServiceImpl implements PublicationService {
 
     }
 
-    /*********
-     * Books *
-     * *******/
-
-    /*@Override
-    public List<BookDto> findAllBooks(  ) {
-        //Pageable bb = PageRequest.of(0, 4, Sort.by("title"));
-        return  BookMapper.INSTANCE.toDtoList(publicationRepository.findAllBooks( ));
-
-    }*/
-
-
-    /****************
-     * Publications *
-     * **************/
-
-
-    @Override
-    public PublicationDto findPublicationById( int id ) {
-        return PublicationMapper.INSTANCE.toDto( publicationRepository.findPublicationById( id ).orElse( null ));
-    }
-
-    @Override
-    public List<PublicationDto> findAllPublications() {
-        return  PublicationMapper.INSTANCE.toDtoList( publicationRepository.findAllPublications());
-    }
-
 
     /***********
      * Authors *
@@ -121,7 +113,6 @@ public class PublicationServiceImpl implements PublicationService {
     }
 
 
-
     /**********
      * Copies *
      * ********/
@@ -142,12 +133,8 @@ public class PublicationServiceImpl implements PublicationService {
         return CopyMapper.INSTANCE.toDto( copyRepository.findCopyById( id ).orElse(null) );
     }
 
-
     @Override
     public List<CopyDto>  findAvailableCopiesByLibrary( int libId ) {
         return CopyMapper.INSTANCE.toDtoList( copyRepository.countAllCopyByPublicationIdAndDistinctLib( libId) );
     }
-
-
-
 }

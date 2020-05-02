@@ -20,14 +20,8 @@ public interface MemberRepository extends JpaRepository<Member, Integer> {
     @Query( "SELECT m FROM Member m WHERE m.id= :id" )
     Optional<Member> getMemberById( @Param("id") Integer id);
 
-    /*@Query( "SELECT m FROM Member m WHERE m.accountOwnerEmail= :email" )
-    Optional<Member> getMemberByEmail( @Param("email") String email );*/
-
     @Query( "SELECT m FROM Member m WHERE m.accountOwnerUsername= :username" )
     Optional<Member> getMemberByUsername( @Param("username") String username );
-
-    /*@Query( "SELECT m FROM Member m WHERE m.accountOwnerFirstname= :firstname AND m.accountOwnerLastname= :lastname")
-    Optional<Member> getMemberByNames( @Param("firstname") String firstname, @Param("lastname") String lastname );*/
 
     @Query( "SELECT m FROM Member m JOIN m.loans b WHERE b.returnDate < :current_date AND b.loanStatus= :status" )
     List<Member> getMembersByOutdatedLoan( @Param("current_date") LocalDate currentDate, @Param("status") LoanStatus status );
