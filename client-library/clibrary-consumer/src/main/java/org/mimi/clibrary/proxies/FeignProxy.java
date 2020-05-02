@@ -83,7 +83,7 @@ public interface FeignProxy {
     @GetMapping( "/Loans/Members/{id}" )
     List<LoanBean> findAllLoansByMemberId( @PathVariable int id, @RequestHeader("Authorization") Object accessToken );
 
-    @PutMapping( "/Loans/return/{LoanId}" )
+    @PutMapping( "/Loans/returnDate/{LoanId}" )
     void extendLoanReturnDate( @PathVariable int LoanId, @RequestHeader("Authorization") Object accessToken  );
 
     @GetMapping( "/Loans" )
