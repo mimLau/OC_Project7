@@ -23,8 +23,7 @@
     <packaging>pom</packaging>
     <description>Mircoservice that handles data from a library</description>
 
-    <!-- ===== Generals information ==== -->
-    <name>microservice-library</name>
+
 
 
     <!-- =============================================================== -->
