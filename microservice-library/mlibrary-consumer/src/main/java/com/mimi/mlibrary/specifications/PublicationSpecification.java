@@ -7,7 +7,8 @@ import org.springframework.data.jpa.domain.Specification;
 import javax.persistence.criteria.*;
 
 /**
- *
+ * Use Specification interface for Publication in order to do
+ * a research according several criteria.
  */
 public class PublicationSpecification implements Specification<Publication> {
 
@@ -31,24 +32,20 @@ public class PublicationSpecification implements Specification<Publication> {
         }
 
         if( criteria.getAuthorName() != null ) {
-            predicate.getExpressions().add( cBuilder.equal( root.get("author").get("firstname"), criteria.getAuthorName() ) );
-
+            predicate.getExpressions().add( cBuilder.or(
+                    cBuilder.equal( root.get("author").get("firstname"), criteria.getAuthorName()),
+                    cBuilder.equal( root.get("author").get("lastname"), criteria.getAuthorName()),
+                    cBuilder.equal( root.get("author").get("alias"), criteria.getAuthorName())
+            ));
         }
 
         if( criteria.getTitle() != null ) {
-            predicate.getExpressions().add( cBuilder.equal( root.get("title"), criteria.getTitle() ) );
+            predicate.getExpressions().add( cBuilder.like( root.get("title"), "%" + criteria.getTitle() + "%") );
         }
-
 
         if( criteria.getCategory() != null ) {
             predicate.getExpressions().add( cBuilder.equal( root.get("category"), criteria.getCategory() ) );
         }
-
-
-        /*if( criteria.getTitle() != null && criteria.getAuthorName() != null ) {
-            predicate.getExpressions().add( cBuilder.and( cBuilder.equal( root.get("title"), criteria.getTitle() ),
-                    cBuilder.equal( root.get("author").get("firstname"), criteria.getAuthorName() )));
-        }*/
 
         if( criteria.getPubDate() != null ) {
             predicate.getExpressions().add( cBuilder.equal( root.get("publicationDate"), criteria.getPubDate() ) );
