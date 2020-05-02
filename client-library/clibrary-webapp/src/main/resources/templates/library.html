@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:insert="fragments/fragments.html :: headerfiles">
+        <meta charset="UTF-8">
+        <title>Ouvrages</title>
+    </head>
+    <body>
+        <div th:insert="fragments/fragments.html :: nav"></div>
+
+        <section class="container-fluid">
+            <section class="row justify-content-center">
+                <div class="responsive-table-line" style="margin:0px auto;max-width:1500px;"><br/><br/>
+                    <p class="text-center">Liste des librairies du groupe BMS </p><br/>
+                    <table class="table table-hover" style="border: 1px solid #DDD;">
+                        <thead>
+                        <tr>
+                            <th scope="col">Nom</th>
+                            <th scope="col">Adresse</th>
+                        </tr>
+                        </thead>
+                    <tbody>
+                        <tr th:each=" library : ${libraries}">
+                            <td th:text="${library.name}"></td>
+                            <td th:text="${library.address}"></td>
+                        </tr>
+                    </tbody>
+                    </table>
+                </div>
+            </section>
+        </section>
+
+        <div th:insert="fragments/fragments.html :: footer" class="footer"></div>
+        <div th:insert="fragments/fragments.html :: script"></div>
+    </body>
+</html>
