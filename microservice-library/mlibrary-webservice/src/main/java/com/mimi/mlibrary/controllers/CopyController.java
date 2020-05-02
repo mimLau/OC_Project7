@@ -23,23 +23,6 @@ public class CopyController {
         this.publicationService = publicationService;
     }
 
-    /*@GetMapping( value = "/Copies")
-    public List<CopyDto> getAllCopies() {
-        List<CopyDto> copyDtos =  publicationService.findAllCopy();
-        if( copyDtos.isEmpty() ) throw new ResourceNotFoundException(  "Il n'y a aucun exemplaire dans la base de données." );
-
-        return copyDtos;
-    }*/
-
-   /*@GetMapping( value = "/Copies", params = "id")
-    public CopyDto getCoyById( @RequestParam int id ) {
-        CopyDto copyDto =  publicationService.findCopyById( id ) ;
-        if( copyDto == null )
-            throw new ResourceNotFoundException(  "Aucun exemplaire ne correspond à cet id." );
-
-        return copyDto;
-    }*/
-
     @GetMapping( value = "/Copies/{id}" )
     public ResponseEntity<CopyDto> getCoyById( @PathVariable int id ) {
 

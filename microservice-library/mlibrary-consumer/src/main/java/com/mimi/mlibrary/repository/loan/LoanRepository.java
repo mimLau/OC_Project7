@@ -36,8 +36,8 @@ public interface LoanRepository extends JpaRepository<Loan, Integer> {
 
     @Transactional
     @Modifying
-    @Query("Update Loan l SET l.extented= true WHERE l.id= :id")
-    void  updateExtensionById( @Param("id") int id );
+    @Query("Update Loan l SET l.extented= :extVal WHERE l.id= :id")
+    void  updateExtensionById( @Param("id") int id, @Param("extVal") Boolean extVal);
 
     @Transactional
     @Modifying

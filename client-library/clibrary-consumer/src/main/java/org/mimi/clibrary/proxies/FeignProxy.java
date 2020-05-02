@@ -72,7 +72,7 @@ public interface FeignProxy {
     CopyBean findCopyById( @PathVariable int id, @RequestHeader("Authorization") Object accessToken );
 
     @GetMapping( value = "/Copies/publication", params = "pubId")
-    List<CopyBean> getAvailableCopiesByLibrary( @RequestParam int pubId  ); //TODO A VERIFIER
+    List<CopyBean> getAvailableCopiesByLibrary( @RequestParam int pubId );
 
 
 

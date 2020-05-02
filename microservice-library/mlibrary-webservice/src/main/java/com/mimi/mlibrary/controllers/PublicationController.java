@@ -23,15 +23,13 @@ public class PublicationController {
     }
 
 
-    /****************
-     * Publications
-     * **************/
-
     @GetMapping( value = "/criterias" )
-    public List<PublicationDto> getPublicationByCriteria( @RequestParam(required = false) String author, @RequestParam(required = false) String title , @RequestParam(required = false) String category,
-                                                      @RequestParam(required = false) String editor, @RequestParam(required = false, defaultValue = "0") int libId ) {
+    public List<PublicationDto> getPublicationByCriteria( @RequestParam(required = false) String author,
+                                                          @RequestParam(required = false) String title ,
+                                                          @RequestParam(required = false) String category,
+                                                          @RequestParam(required = false) String editor,
+                                                          @RequestParam(required = false) int libId ) {
 
-        logger.error("editor: " + editor  );
 
         List<PublicationDto> publicationDtos = publicationService.findAllByCriteria( author,  title, category, editor, libId );
         if( publicationDtos.isEmpty() ) throw new ResourceNotFoundException( "Cet ouvrage n'existe pas dans notre base de données." );
@@ -54,30 +52,5 @@ public class PublicationController {
 
         return publicationDtos ;
     }
-
-    /*@GetMapping( params = "title")
-    public List<PublicationDto> getAllPublicationsByTitle( @RequestParam String title ) {
-        List<PublicationDto> publicationDtos = publicationService.findAllByTitle( title );
-        if( publicationDtos.isEmpty() ) throw new ResourceNotFoundException( "Il n'y a pas d'ouvrage qui correspond à ce titre." );
-
-        return publicationDtos;
-    }*/
-
-   /* @GetMapping( params = "author" )
-    public List<PublicationDto> getAllByAuthor( @RequestParam String author ) {
-        List<PublicationDto> publicationDtos =  publicationService.findAllByAuthor( author );
-        if( publicationDtos.isEmpty() ) throw new ResourceNotFoundException( "Il n'y a pas de livre qui corresponde à cet auteur." );
-
-        return publicationDtos;
-    }*/
-
-    @GetMapping( value = "/author/{id}")
-    public List<PublicationDto> getAllByAuthorId( @PathVariable int id ) {
-        List<PublicationDto> publicationDtos =  publicationService.findAllByAuthorId( id );
-        if( publicationDtos.isEmpty() ) throw new ResourceNotFoundException(  "Il n'y a pas de livre qui corresponde à cet auteur." );
-
-        return publicationDtos;
-    }
-
 }
 

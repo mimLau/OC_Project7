@@ -135,31 +135,35 @@ public class LoanServiceImpl implements LoanService {
     @Override
     public void extendLoanReturnDateById( int loanId ) {
 
-        LocalDate returnDate = null;
-        boolean extension = false;
+        LocalDate returnDate;
+        boolean extension;
 
-       //Retrieve a Loan by its id
-        LoanDto loanDto = LoanMapper.INSTANCE.toDto( loanRepository.findLoanById( loanId ).orElse(null));
-        if( loanDto  == null )
+        //Retrieve a Loan by its id
+        LoanDto loanDto = LoanMapper.INSTANCE.toDto(loanRepository.findLoanById(loanId).orElse(null));
+        if (loanDto == null) {
             throw new ResourceNotFoundException("Le prêt recherché n'existe pas.");
 
-        if( loanDto != null ) {
+        } else {
 
             //Retrieve the return date of this Loan
              returnDate = loanDto.getReturnDate();
              extension = loanDto.isExtented();
+
         }
 
-       if( extension != true ) {
+       if( extension == false ) {
+
            //Extend the return date by 4 weeks
            returnDate = returnDate.plusDays( 28 );
            loanRepository.updateLoanReturnDateById( returnDate, loanId );
-           loanRepository.updateExtensionById( loanId );
+           loanRepository.updateExtensionById( loanId, true );
 
            int copyId = loanDto.getCopy().getId();
+           // As copy entity has alsa an returnDate, so we update it too.
            copyRepository.updateCopyReturnDateById( returnDate, copyId );
-       }
-        //TODO MESSAGE TO SIGNAL THAT THE USER HAS ALREADY EXTENDED ITS Loan.
+
+       } else
+           throw new BadRequestException("L'utilisatuer a déjà effectué une prolongation pour ce prêt.");
     }
 
     @Override
@@ -172,10 +176,10 @@ public class LoanServiceImpl implements LoanService {
         //Retrieve a Loan by its id
         LoanDto loanDto = LoanMapper.INSTANCE.toDto( loanRepository.findLoanById( loanId ).orElse(null));
 
-        if( loanDto  == null )
+        if( loanDto  == null ) {
             throw new ResourceNotFoundException("Le prêt recherché n'existe pas.");
 
-        if( loanDto != null ) {
+        } else {
              copyId = loanDto.getCopy().getId();
              memberId = loanDto.getMember().getId();
              publicationId = loanDto.getCopy().getPublication().getId();
@@ -184,7 +188,6 @@ public class LoanServiceImpl implements LoanService {
             copyRepository.updateCopyReturnDateById( null, copyId );
             memberRepository.updateNbOfCurrentsLoans( memberId, -1 );
             publicationRepository.updateNbOfAvailableCopies( publicationId, 1 );
-
             loanRepository.updateLoanStatus( loanId, LoanStatus.FINISHED );
         }
     }

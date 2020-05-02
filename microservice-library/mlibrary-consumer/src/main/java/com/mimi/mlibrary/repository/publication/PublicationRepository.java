@@ -26,30 +26,6 @@ public interface PublicationRepository extends JpaRepository<Publication, Intege
     @Query("SELECT p FROM Publication p")
     List<Publication> findAllPublications();
 
-    @Query("SELECT p FROM Publication p JOIN FETCH p.author a INNER JOIN p.copies c WHERE a.firstname= :name OR a.lastname= :name or a.alias= :name and ( :libId is null OR c.library.id= :libId )")
-    List<Publication> findAllByAuthor( @Param("name") String name, @Param("libId") int libId );
-
-    @Query("SELECT p FROM Publication p JOIN FETCH p.author a WHERE a.firstname= :name OR a.lastname= :name or a.alias= :name")
-    List<Publication> findAllByAuthor( @Param("name") String name);
-
-    @Query("SELECT p FROM Publication p INNER JOIN p.copies c WHERE ( :libId is null OR c.library.id= :libId ) AND p.title= :title")
-    List<Publication> findAllByExactTitle( @Param("title") String title, @Param("libId") int libId );
-
-    @Query("SELECT p FROM Publication p WHERE p.title= :title")
-    List<Publication> findAllByExactTitle( @Param("title") String title);
-
-    @Query("SELECT p FROM Publication p INNER JOIN p.copies c WHERE ( :libId is null OR c.library.id= :libId ) AND p.title LIKE %:title%")
-    List<Publication> findAllByTitle( @Param("title") String title, @Param("libId") int libId  );
-
-    @Query("SELECT p FROM Publication p WHERE p.title LIKE %:title%")
-    List<Publication> findAllByTitle( @Param("title") String title );
-
-    @Query("SELECT p FROM Publication p JOIN FETCH p.author a WHERE a.id= :id")
-    List<Publication> findAllByAuthorId( @Param("id") int id );
-
-    @Query("SELECT p FROM Publication p WHERE p.identificationNb= :idNb")
-    Optional <Publication> findAllByIsbn( @Param("idNb") String idNb );
-
     @Modifying
     @Transactional
     @Query ("UPDATE Publication p SET p.nbOfAvailableCopies = p.nbOfAvailableCopies + :nbIncr WHERE p.id= :id")

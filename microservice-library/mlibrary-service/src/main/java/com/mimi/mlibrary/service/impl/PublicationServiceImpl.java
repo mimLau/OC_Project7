@@ -16,17 +16,11 @@ import java.time.LocalDate;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class PublicationServiceImpl implements PublicationService {
-
-    private static final String TITLE_ATT = "Titre";
-    private static final String EXACT_TITLE_ATT = "Titre exact";
-    private static final String AUTHOR_ATT = "Auteur";
 
     private PublicationRepository publicationRepository;
     private AuthorRepository authorRepository;
@@ -77,9 +71,9 @@ public class PublicationServiceImpl implements PublicationService {
 
     }
 
-    /****************
-     * Books
-     * **************/
+    /*********
+     * Books *
+     * *******/
 
     /*@Override
     public List<BookDto> findAllBooks(  ) {
@@ -90,7 +84,7 @@ public class PublicationServiceImpl implements PublicationService {
 
 
     /****************
-     * Publications
+     * Publications *
      * **************/
 
 
@@ -104,71 +98,10 @@ public class PublicationServiceImpl implements PublicationService {
         return  PublicationMapper.INSTANCE.toDtoList( publicationRepository.findAllPublications());
     }
 
-    @Override
-    public List<PublicationDto> findAllByTitle( String title, int libId ) {
-       return  PublicationMapper.INSTANCE.toDtoList( publicationRepository.findAllByTitle( title, libId ));
-    }
 
-    @Override
-    public List<PublicationDto> findAllByExactTitle( String title, int libId ) {
-        return  PublicationMapper.INSTANCE.toDtoList( publicationRepository.findAllByExactTitle( title, libId ));
-    }
-
-    @Override
-    public List<PublicationDto> findAllByAuthor( String authorName, int libId ) {
-        List <String> names = Arrays.stream( authorName.split(" ")).map(String:: new).collect(Collectors.toList() );
-        List<PublicationDto> publicationDtos = null;
-
-        if( names.size() > 1) {
-            for(String name : names ){
-                publicationDtos = PublicationMapper.INSTANCE.toDtoList( publicationRepository.findAllByAuthor( name, libId ));
-
-                if(publicationDtos.isEmpty())
-                    return publicationDtos;
-            }
-
-        } else
-            publicationDtos = PublicationMapper.INSTANCE.toDtoList( publicationRepository.findAllByAuthor( names.get(0), libId ));
-
-
-        return publicationDtos;
-    }
-
-    @Override
-    public List<PublicationDto> findAllByAuthor( String authorName ) {
-        List <String> names = Arrays.stream( authorName.split(" ")).map(String:: new).collect(Collectors.toList() );
-        List<PublicationDto> publicationDtos = null;
-
-        if( names.size() > 1) {
-            for(String name : names ){
-                publicationDtos = PublicationMapper.INSTANCE.toDtoList( publicationRepository.findAllByAuthor( name ));
-
-                if(publicationDtos.isEmpty())
-                    return publicationDtos;
-            }
-
-        } else
-            publicationDtos = PublicationMapper.INSTANCE.toDtoList( publicationRepository.findAllByAuthor( names.get(0) ));
-
-
-        return publicationDtos;
-    }
-
-    @Override
-    public List<PublicationDto> findAllByAuthorId( int id ) {
-        return PublicationMapper.INSTANCE.toDtoList( publicationRepository.findAllByAuthorId( id ) );
-    }
-
-    @Override
-    public PublicationDto findByIsbn( String idNb ) {
-        return PublicationMapper.INSTANCE.toDto( publicationRepository.findAllByIsbn( idNb).orElse( null ));
-    }
-
-
-
-    /****************
-     * Authors
-     * **************/
+    /***********
+     * Authors *
+     * *********/
 
    @Override
     public List<AuthorDto> findAllAuthor() {
@@ -179,7 +112,6 @@ public class PublicationServiceImpl implements PublicationService {
     public AuthorDto saveAuthor( AuthorDto authorDto ) {
 
        Optional.of( AuthorMapper.INSTANCE.toEntity( authorDto ) ).ifPresent( author -> authorRepository.save( author ) );
-       //authorDao.save( AuthorMapper.INSTANCE.dtoToAuth( authorDto ));
        return authorDto;
     }
 
@@ -190,14 +122,9 @@ public class PublicationServiceImpl implements PublicationService {
 
 
 
-    /****************
-     * Copies
-     * **************/
-
-    @Override
-    public List<CopyDto> findAllCopy() {
-        return CopyMapper.INSTANCE.toDtoList( copyRepository.findAll() );
-    }
+    /**********
+     * Copies *
+     * ********/
 
     @Override
     public List<CopyDto> findAllCopyByPublicationId( int publicationId ) {
@@ -208,11 +135,6 @@ public class PublicationServiceImpl implements PublicationService {
     public List<CopyDto> findAllCopyByDelay( ) {
         LocalDate localDate = LocalDate.now();
         return CopyMapper.INSTANCE.toDtoList( copyRepository.findAllByDelay( localDate ) );
-    }
-
-    @Override
-    public void updateCopyReturnDateById( LocalDate newDate, int id) {
-        copyRepository.updateCopyReturnDateById( newDate, id );
     }
 
     @Override
