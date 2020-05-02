@@ -3,7 +3,7 @@ package com.mimi.mlibrary.service.impl;
 import com.mimi.mlibrary.model.entity.publication.Category;
 import com.mimi.mlibrary.model.entity.publication.Criteria;
 import com.mimi.mlibrary.model.entity.publication.Publication;
-import com.mimi.mlibrary.model.entity.publication.PublicationSpecification;
+import com.mimi.mlibrary.specifications.PublicationSpecification;
 import com.mimi.mlibrary.repository.publication.AuthorRepository;
 import com.mimi.mlibrary.repository.publication.CopyRepository;
 import com.mimi.mlibrary.repository.publication.LibraryRepository;
@@ -16,7 +16,6 @@ import java.time.LocalDate;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;

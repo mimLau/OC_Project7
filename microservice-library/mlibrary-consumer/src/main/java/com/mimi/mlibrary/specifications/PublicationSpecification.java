@@ -1,9 +1,14 @@
-package com.mimi.mlibrary.model.entity.publication;
+package com.mimi.mlibrary.specifications;
 
+import com.mimi.mlibrary.model.entity.publication.Criteria;
+import com.mimi.mlibrary.model.entity.publication.Publication;
 import org.springframework.data.jpa.domain.Specification;
 
 import javax.persistence.criteria.*;
 
+/**
+ *
+ */
 public class PublicationSpecification implements Specification<Publication> {
 
     private Criteria criteria;
@@ -20,13 +25,7 @@ public class PublicationSpecification implements Specification<Publication> {
         //Predicate predicate = cBuilder.disjunction();
         Predicate predicate = cBuilder.conjunction();
 
-        //final Join<Publication, Library> pub = root.join("library",  JoinType.LEFT);
-
-
-                                                            //and (c.available= true) group by c.library
         if( criteria.getLibId() != 0 ) {
-
-
             predicate.getExpressions().add( cBuilder.equal( root.join("copies",  JoinType.LEFT).get("library").get("id"),  criteria.getLibId() ) );
 
         }
