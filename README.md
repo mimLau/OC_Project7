@@ -47,13 +47,20 @@ Le projet présente 2 schémas db_auth_lib et db_library.
 
 ### Schéma db_auth_lib
 
-Contient la table user avec les identifiants et les mots de passe ainsi que les rôles et les permissions des utilisateurs. Cette table est utilisée par le serveur d'authentification **authentication-library**.
+Contient la table user avec les identifiants et les mots de passe ainsi que les rôles et les permissions des utilisateurs. Cette table est utilisée par le serveur d'authentification. Un jeu de données est fourni dans le fichier **db_auth_lib_20.sql**.
 
 ### Schéma db_library
 
-Contient toutes les tables permetant la gestion des bibliothèqes ainsi que des ouvrages. Ces tables seront consommées par une application Rest nommée **microservice-library**
+Contient toutes les tables permetant la gestion des bibliothèqes ainsi que des ouvrages. Ces tables seront consommées par le webService. Un jeu de données est fourni dans le fichier **db_lib_20.sql**.
 
 
 ## Déploiement de l'application : 
+
+Lancer les jar dans l'ordre suivant:
+
+- microsrvice-library.jar
+- authentication-library.jar
+- client-library.jar
+- batch-library.jar
 
 
