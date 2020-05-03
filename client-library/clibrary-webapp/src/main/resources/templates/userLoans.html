@@ -29,7 +29,7 @@
                                 <td class="aTooltip">
                                         <span th:if="${loan.returnDate < toDay}">
                                             <span  th:text="${#temporals.format(loan.returnDate, 'dd-MM-yyyy')}" style="color: red"></span>
-                                            <span class="aTooltiptext text-danger" style="top: 47vh; right:82vh;"><small>Veuillez retourner vos emprunts en retard dans les plus brefs délais</small></span>
+                                            <span class="aTooltiptext text-danger" style=""><small>Veuillez retourner vos emprunts en retard dans les plus brefs délais</small></span>
                                         </span>
 
                                     <span th:unless="${loan.returnDate < toDay}"><span th:text="${#temporals.format(loan.returnDate, 'dd-MM-yyyy')}"></span></span>
