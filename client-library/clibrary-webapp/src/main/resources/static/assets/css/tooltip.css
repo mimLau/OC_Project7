@@ -1,20 +1,16 @@
-/* Tooltip container */
-/*.aTooltip {
-    position: relative;
-    display: inline-block;
-    border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
-/*}*/
-
 /* Tooltip text */
 .aTooltip .aTooltiptext {
     float:right;
     visibility: hidden;
-    width: 300px;
+    width: 250px;
     background-color: #FBFCFC;
-    border-color: black;
-    /*text-align: center;*/
-    padding: 5px 0;
-    border-radius: 0px;
+    border-style:  dotted;
+    border-color: #808B96;
+    border-width: 1px;
+    padding: 5px 5px 5px 20px;
+    border-radius: 2px;
+    position: absolute;
+    z-index: 1;
 
 }
 

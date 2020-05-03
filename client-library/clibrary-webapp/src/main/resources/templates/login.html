@@ -8,9 +8,9 @@
 
         <section class="container-fluid bg">
             <section class="row justify-content-center">
-                <section class="col-12 col-sm-6 col-md-3">
+                <section class="col-md-4 col-sm4 col-xs-12">
                     <form class="form-container form-login" action="#" th:action="@{/Login}" th:object="${user}" method="post">
-                        <h1>Se connecter</h1>
+                        <h2>Se connecter</h2><br/>
                         <div class="form-group">
                             <label for="identifiant">Identifiant:</label>
                            <input id="identifiant" class="form-control" type="text" th:field="*{username}" name="user_name" placeholder="Identifiant"/>
@@ -25,7 +25,8 @@
                         <!--/div-->
 
                         <!--span class="error" th:if="${errorMessage}" th:utext="${errorMessage}"></span-->
-                    </form>
+                        <br/><a  class="text-white" th:href="@{~/}"><small>Page d'accueil</small></a>
+                    </form><br/>
                 </section>
             </section>
         </section>
