@@ -10,15 +10,18 @@
             <section class="row justify-content-center">
                 <section class="col-12 col-sm-6 col-md-3">
                     <form class="form-container form-login" action="#" th:action="@{/Login}" th:object="${user}" method="post">
+                        <h1>Se connecter</h1>
                         <div class="form-group">
-                           <input class="form-control" type="text" th:field="*{username}" name="user_name" placeholder="Identifiant"/>
+                            <label for="identifiant">Identifiant:</label>
+                           <input id="identifiant" class="form-control" type="text" th:field="*{username}" name="user_name" placeholder="Identifiant"/>
                            <!--span class="error" th:if="${#fields.hasErrors('accountOwnerEmail')}" th:errors="*{accountOwnerEmail}">name error</span-->
                         </div>
                         <div class="form-group">
-                           <input class="form-control" type="password" th:field="*{password}" name="password" placeholder="Mot de passe" />
+                            <label for="pass">Mot de passe:</label>
+                           <input id="pass" class="form-control" type="password" th:field="*{password}" name="password" placeholder="Mot de passe" />
                         </div>
                         <!--div class="form-group"-->
-                            <button type="submit" class="btn btn-primary btn-block">Se connecter</button>
+                            <button type="submit" class="btn btn-success btn-block">Se connecter</button>
                         <!--/div-->
 
                         <!--span class="error" th:if="${errorMessage}" th:utext="${errorMessage}"></span-->

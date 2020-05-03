@@ -6,7 +6,7 @@
     </head>
     <body>
         <div th:insert="fragments/fragments.html :: nav"></div>
-        <section class="col-sm-8 bd-content" style="margin:0 auto;min-height: 70vh;">
+        <section class="col-sm-8 bd-content" style="margin:0 auto;min-height: 90vh;">
             <div th:object="${session.user}">
                 <p>Bonjour <span th:text="*{accountOwnerFirstname}"></span>!</p>
                 <p>Bienvenue dans votre espace personnel!</p>
