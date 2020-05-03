@@ -16,7 +16,7 @@ Bibliothèques municipales de Strasbourg
 
 ### Description  
 
-Système de gestion centralisée des bibliothèques d'une ville. Mise en place d'une interface utilisateur qui permet la recherche d'ouvrages dans les différentes bibliothèques de la ville. Les utilisateurs membres pourront consulter et prolnger leur prêt.
+Système de gestion centralisée des bibliothèques d'une ville. Mise en place d'une interface utilisateur qui permet la recherche d'ouvrages dans les différentes bibliothèques de la ville. Les utilisateurs membre pourront consulter et prolonger leur prêt.
 
 
 Le projet est constitué :
@@ -25,11 +25,12 @@ Le projet est constitué :
 
 - d'une application web: **client-library**, présentant une interface utilisateur. Elle communique avec le web service pour récupérer les ressources nécessaires à l'affichage des données.
 
-- d'un serveur d'authentification: **authentication-library**, qui permet de s'assurer de l'intégrité de l'utilisateur qui se connecte. Elle l'autorise ou non à accéder certaines données. Il communique avec le client web ainsi que le webservice.
+- d'un serveur d'authentification: **authentication-library**, qui permet de s'assurer de l'intégrité de l'utilisateur qui se connecte. Il l'autorise ou non à accéder certaines données. Il communique avec le client web ainsi que le webservice ainsi qu'avec la base de données **db_auth_lib**.
 
-- d'un batch: **batch-library**, pour gérer l'envoie automatique d'emails aux utilisateurs ayant des prêts en retard.
+- d'un batch: **batch-library**, pour gérer l'envoie automatique d'emails aux utilisateurs ayant des prêts en retard. Il communique avec le serveur d'authentification pour pouvoir s'authentifier et récupérer les données (email des utilisateurs) depuis le webservice **microservice-library**.
 
  Ces 4 modules communiquent entre eux par le biais du webservice.
+
 
 ## Technologies utilisées : 
 
@@ -48,7 +49,7 @@ Le projet est constitué :
 * Identifiant : root 
 * Mot de passe : root 
 
-Le projet présente 2 schémas db_auth_lib et db_library.
+Le projet présente les schémas suivant : 
 
 ### Schéma db_auth_lib
 
@@ -56,12 +57,12 @@ Contient la table user avec les identifiants et les mots de passe ainsi que les 
 
 ### Schéma db_library
 
-Contient toutes les tables permetant la gestion des bibliothèqes ainsi que des ouvrages. Ces tables seront consommées par le webService. Un jeu de données est fourni dans le fichier **db_lib_20.sql**.
+Contient toutes les tables permetant la gestion des bibliothèqes ainsi que leurs ouvrages. Ces tables seront consommées par le webService. Un jeu de données est fourni dans le fichier **db_lib_20.sql**.
 
 
 ## Déploiement de l'application : 
 
-Lancer les jar ou les modules dans l'ordre suivant:
+Lancer les jar ou les modules dans l'ordre suivant :
 
 - microsrvice-library
 - authentication-library
