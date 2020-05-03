@@ -6,31 +6,40 @@
     </head>
     <body>
         <div th:insert="fragments/fragments.html :: nav"></div>
+        <div class="container-fluid">
+            <div class="row">
 
-        <section class="container-fluid">
-            <section class="row justify-content-center">
-                <div class="responsive-table-line" style="margin:0px auto;max-width:1500px;"><br/><br/>
-                    <table class="table table-hover table-bordered">
-                        <thead>
-                            <tr>
-                                <th scope="col">Titre</th>
-                                <th scope="col">Editeur</th>
-                                <th scope="col">Date de parution / publication </th>
-                                <th scope="col">Copies disponibles</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr th:each=" publication : ${session.publications}">
-                                <td ><a style="text-decoration: none" th:href="@{~/Publication(id=${publication.id})}" th:text="${publication.title}"></a></td>
-                                <td th:text= "${publication.editor} ? ${publication.editor.name} : ' ' "></td>
-                                <td th:text="${#temporals.format(publication.publicationDate, 'dd-MM-yyyy')}"></td>
-                                <td th:text="${publication.nbOfAvailableCopies}"></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </section>
-        </section>
+                <main class="col-sm-8 bd-content" style="margin:0 auto;">
+                    <br/><br/><p class="text-center"> <b>Résultat de la recherche :</b> </p><br/>
+                    <div  th:each=" publication : ${session.publications}">
+
+                        <ul class="list-group">
+                            <li class="list-group-item" style="border-width: 0px 0px 1px 0px;border-radius:0;">
+                                <a style="text-decoration: none" th:href="@{~/Publication(id=${publication.id})}" th:text="${publication.title}"></a>
+                                <div class="aTooltip">
+                                    <span th:if="${publication.nbOfAvailableCopies} > 0"> <img th:src="@{/img/green.png}" style="float:right" class="aTooltip" /><br/> </span>
+                                    <span th:unless="${publication.nbOfAvailableCopies} > 0"> <img th:src="@{/img/red.png}" style="float:right" class="aTooltip" /><br/> </span>
+                                    <span class="aTooltiptext">
+                                        <small><span th:text=" ${publication.nbOfAvailableCopies} "></span> exemplaire(s) disponible(s)</small>
+                                        <div th:each="copy : ${publication.copies} ">
+                                            <span th:if="${copy.isAvailable()}">
+                                            <small>-<span th:text=" ${copy.library.name}"></span></small></span>
+                                        </div>
+                                    </span>
+                                </div>
+                                <span th:if="${publication.author}"><small th:text="${publication.author.firstname}"></small><small th:text="${publication.author.lastname}"></small><br/></span>
+                                <span th:if="${publication.editor}"><small th:text="${publication.editor.name}"></small><br/></span>
+                                <span th:if="${publication.category == 'BOOK'}"><small>Date de publication :</small></span>
+                                <span th:unless="${publication.category == 'BOOK'}"><small>Date de parution :</small></span>
+                                <span><small  th:text="${#temporals.format(publication.publicationDate, 'dd-MM-yyyy')}"></small></span><br/>
+                            </li>
+                        </ul>
+
+                    </div>
+                </main>
+
+            </div>
+        </div>
 
         <div th:insert="fragments/fragments.html :: footer" class="footer"></div>
         <div th:insert="fragments/fragments.html :: script"></div>
