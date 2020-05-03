@@ -28,13 +28,11 @@ public class LoginLogoutClientController {
     private AuthFeignProxy authProxy;
 
     private static final String USER_ATT = "user";
-    private static final String MEMBER_MAIL = "mail";
-    private static final String MEMBER_PASS = "PASS";
-    private static final String ERROR_MESS = "* Combinaison Email/mot de passe incorrecte.";
 
     private static final String LOGIN_VIEW = "login";
     private static final String LOGIN_PAGE = "redirect:/Login";
     private static final String USER_HOME_PAGE = "redirect:/User/home";
+    private static final String ERROR_LOGIN = "Utilisateur n'existe pas";
 
     public LoginLogoutClientController(FeignProxy proxy, AuthFeignProxy authProxy) {
         this.proxy = proxy;
@@ -57,7 +55,7 @@ public class LoginLogoutClientController {
     }
 
     @PostMapping("/Login")
-    public String login(@ModelAttribute( USER_ATT ) UserBean user, BindingResult result, Model model, HttpSession session ) {
+    public String login(@ModelAttribute( USER_ATT ) UserBean user, HttpSession session ) {
 
         String stringToken = authProxy.login( user );
         Object token = stringToken;
@@ -66,48 +64,25 @@ public class LoginLogoutClientController {
         LOGGER.info( " Token: " +  token );
         if ( token == null ) {
 
+            session.setAttribute("errorLogin", ERROR_LOGIN);
             return LOGIN_VIEW;
         }
         else
         {
             try {
-                //MemberBean member = proxy.getMemberByMailAndPass( user.getUsername(), user.getPassword(), token );
                 MemberBean member = proxy.getMemberByUsername( user.getUsername(), token );
                 session.setAttribute("user", member );
                 return USER_HOME_PAGE;
             }
-          catch(FeignException f) {
-                //EmployeeBean employee = proxy.getEmployeeByMailAndPass( user.getUsername(), user.getPassword(), token );
+          catch( FeignException f) {
               EmployeeBean employee = proxy.getEmployeeByUsername( user.getUsername(), token );
                 session.setAttribute("user", employee );
                 return USER_HOME_PAGE;
             }
 
 
-            //getEmployeeByMailAndPass
-
-
         }
 
     }
 
-
-    /*@PostMapping("/login")
-    public String checkMemberCred(@ModelAttribute( MEMBER_ATT ) MemberBean member, BindingResult result, Model model ) {
-
-        try {
-
-            MemberBean memberB = proxy.getMemberByMailAndPass( member.getAccountOwnerEmail(), member.getAccountOwnerPass() );
-            //model.addAttribute( "memberSession", memberB );
-
-            return  USER_HOME_VIEW;
-        }
-        catch ( FeignException feign ) {
-
-            //result.addError( new FieldError( MEMBER_ATT, MEMBER_MAIL, ERROR_MESS ));
-            model.addAttribute("errorMessage", ERROR_MESS);
-            return LOGIN_VIEW;
-        }
-
-    }*/
 }

@@ -11,6 +11,8 @@
                 <section class="col-md-4 col-sm4 col-xs-12">
                     <form class="form-container form-login" action="#" th:action="@{/Login}" th:object="${user}" method="post">
                         <h2>Se connecter</h2><br/>
+                        <span class="error" th:if="${session.errorLogin}" th:text="${session.errorLogin}"></span><br/>
+
                         <div class="form-group">
                             <label for="identifiant">Identifiant:</label>
                            <input id="identifiant" class="form-control" type="text" th:field="*{username}" name="user_name" placeholder="Identifiant"/>

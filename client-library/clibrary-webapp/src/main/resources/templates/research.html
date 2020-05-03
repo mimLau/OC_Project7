@@ -13,9 +13,9 @@
                 <div class="col-md-6 order-md-1">
 
                     <form class="form-container"  th:action="@{/Research}" th:object="${researchFormCommand}" method="post">
-                        <br/><br/><br/><h6 class="mb-3"><b>Recherche dans le catalogue des librairies</b></h6><br/>
+                        <br/><br/><br/><h6 class="mb-3"><b>Recherche dans le catalogue des librairies</b></h6>
 
-                        <span class="error" th:if="${errorMessage}" th:text="${errorMessage}"></span>
+                        <span class="error" th:if="${session.errorResearch}" th:text="${session.errorResearch}"></span><br/><br/>
 
                         <div class="mb-3">
                             <label for="author">Auteur</label>

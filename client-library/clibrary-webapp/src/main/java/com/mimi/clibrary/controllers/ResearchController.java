@@ -25,8 +25,7 @@ public class ResearchController {
     private static final String RESEARCH_PAGE = "redirect:/Research";
     private static final String PUBLICATION_RESULT_PAGE = "redirect:/Publication/result";
     private static final String FORMCOMMAND_ATT = "researchFormCommand";
-    private static final String ERROR_MESS = "Aucun résultat ne correspond à votre recherche.";
-    final static Logger LOGGER  = LogManager.getLogger(ResearchController.class);
+    private static final String ERROR_SEARCH = "Aucun résultat ne correspond à votre recherche.";
 
     public ResearchController(FeignProxy feignProxy ) {
         this.feignProxy = feignProxy;
@@ -54,7 +53,6 @@ public class ResearchController {
         List<LibraryBean> libraries = feignProxy.getAllLibraries();
         model.addAttribute( "libraries", libraries );
         model.addAttribute( FORMCOMMAND_ATT, new ResearchFormCommand() );
-
         return RESEARCH_VIEW;
     }
 
@@ -101,7 +99,7 @@ public class ResearchController {
 
         } catch ( FeignException feign ) {
 
-            model.addAttribute("errorMessage", ERROR_MESS);
+            session.setAttribute("errorResearch", ERROR_SEARCH);
             return RESEARCH_PAGE;
         }
 
