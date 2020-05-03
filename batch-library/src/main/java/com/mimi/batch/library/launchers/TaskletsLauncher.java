@@ -30,6 +30,12 @@ public class TaskletsLauncher {
     @Qualifier("taskletsJob")
     private Job job;
 
+    /*
+        Scheduled every day at 01:00 am
+        @Scheduled(cron="0 0 1 * * ?")
+    */
+
+    //Scheduled every 1 minute
     @Scheduled(cron = "0 */1 * * * ?")
     public void launchJob() throws Exception {
         Date date = new Date();

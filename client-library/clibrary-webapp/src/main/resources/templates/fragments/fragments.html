@@ -32,12 +32,7 @@
                         <li class="nav-item">
                             <div>
                                 <span th:if="${ session.user }">
-                                    <span th:if="${ session.user.role == 'USER' }">
-                                        <a class="nav-link"  th:href="@{~/User/home}"><i class="fa fa-home"></i>Accueil</a>
-                                    </span>
-                                    <span th:if="${ session.user.role == 'ADMIN' }">
-                                        <a class="nav-link"  th:href="@{~/Admin/home}"><i class="fa fa-home"></i>Accueil</a>
-                                    </span>
+                                        <a class="nav-link"  th:href="@{~/User/home}"><i class="fa fa-home"></i>Accueil</a>                                    </span>
                                 </span>
                                 <span th:unless="${ session.user }">
                                       <a class="nav-link"  th:href="@{~/}"><i class="fa fa-home"></i>Accueil</a>

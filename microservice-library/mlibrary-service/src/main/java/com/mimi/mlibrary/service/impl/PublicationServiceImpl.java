@@ -13,6 +13,8 @@ import com.mimi.mlibrary.model.dto.publication.*;
 import com.mimi.mlibrary.service.contract.PublicationService;
 import java.time.LocalDate;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +23,8 @@ import java.util.Optional;
 
 @Service
 public class PublicationServiceImpl implements PublicationService {
+
+    final static Logger LOGGER  = LogManager.getLogger(PublicationServiceImpl.class);
 
     private PublicationRepository publicationRepository;
     private AuthorRepository authorRepository;
@@ -86,7 +90,13 @@ public class PublicationServiceImpl implements PublicationService {
         criteria.setLibId( libId );
         Specification<Publication> pubSpec = new PublicationSpecification(  criteria );
 
-        return PublicationMapper.INSTANCE.toDtoList( publicationRepository.findAll( pubSpec ) );
+        List<PublicationDto> publicationDtos = PublicationMapper.INSTANCE.toDtoList( publicationRepository.findAll( pubSpec ) );
+
+        LOGGER.error("List publication");
+        for(PublicationDto p : publicationDtos )
+            LOGGER.error("List publication: " + p.getTitle() + " id: " + p.getId() + " lib: " + p.getCopies().get(0).getId());
+
+        return publicationDtos;
 
     }
 

@@ -34,7 +34,7 @@
                                         </span>
                                     </span>
                                 </div>
-                                <span th:if="${publication.author}"><small th:text="${publication.author.firstname}"></small><small th:text="${publication.author.lastname}"></small><br/></span>
+                                <span th:if="${publication.author}"><small th:text="${publication.author.firstname}"></small> <small th:text="${publication.author.lastname}"></small><br/></span>
                                 <span th:if="${publication.editor}"><small th:text="${publication.editor.name}"></small><br/></span>
                                 <span th:if="${publication.category == 'BOOK'}"><small>Date de publication :</small></span>
                                 <span th:unless="${publication.category == 'BOOK'}"><small>Date de parution :</small></span>

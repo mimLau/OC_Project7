@@ -39,25 +39,6 @@ public class AccountController {
         return memberDto;
     }
 
-    /*@GetMapping( value = "/Members",  params = { "mail", "pass"} )
-    public MemberDto getMemberByMailAndPass(@RequestParam("mail") String mail, @RequestParam("pass") String pass) {
-        MemberDto memberDto = accountService.findMemberByMailAndPass( mail, pass );
-        if( memberDto == null ) throw new ResourceNotFoundException( "Combinaison mot de passe/email incorrecte." );
-
-        return memberDto;
-    }
-
-    @GetMapping( value = "/Members",   params = "email" )
-    public MemberDto getMemberByEmail ( @RequestParam("email") String email ) {
-        return accountService.getMemberByEmail(email);
-    }
-
-
-    @GetMapping( value = "/Members",   params = {"firstname", "lastname"} )
-    public MemberDto getMemberByName (@RequestParam("firstname") String firstname, @RequestParam("lastname") String lastname ) {
-        return accountService.getMemberByNames( firstname, lastname );
-    }*/
-
     @GetMapping( value = "/Members/delay" )
     public List<MemberDto> findMembersByOutdatedLoan() {
         return accountService.getMembersByOutdatedLoan();
@@ -78,14 +59,6 @@ public class AccountController {
         accountService.updateNbOfCurrentsLoans( id );
     }
 
-
-   /* @GetMapping( value = "/Employees",   params = { "mail", "pass"} )
-    public EmployeeDto getEmployeeByMailAndPass(@RequestParam("mail") String mail, @RequestParam("pass") String pass) {
-        EmployeeDto employeeDto = accountService.findEmployeeByMailAndPass( mail, pass );
-        if( employeeDto == null ) throw new ResourceNotFoundException( "Combinaison mot de passe/email incorrecte." );
-
-        return employeeDto;
-    }*/
 
     @GetMapping( value = "/Employees", params = {"username"}  )
     public EmployeeDto getEmployeeUsername( @RequestParam("username") String username ) {

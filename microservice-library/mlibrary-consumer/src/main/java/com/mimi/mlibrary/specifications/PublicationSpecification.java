@@ -27,7 +27,7 @@ public class PublicationSpecification implements Specification<Publication> {
         Predicate predicate = cBuilder.conjunction();
 
         if( criteria.getLibId() != 0 ) {
-            predicate.getExpressions().add( cBuilder.equal( root.join("copies",  JoinType.LEFT).get("library").get("id"),  criteria.getLibId() ) );
+            predicate.getExpressions().add( cBuilder.equal( root.join("copies",  JoinType.INNER).get("library").get("id"),  criteria.getLibId() ) );
 
         }
 

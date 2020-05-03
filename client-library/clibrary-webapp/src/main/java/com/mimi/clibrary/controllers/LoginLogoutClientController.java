@@ -51,6 +51,7 @@ public class LoginLogoutClientController {
 
         session.removeAttribute("token");
         session.removeAttribute("user");
+        session.removeAttribute("errorLogin");
         return LOGIN_PAGE;
     }
 

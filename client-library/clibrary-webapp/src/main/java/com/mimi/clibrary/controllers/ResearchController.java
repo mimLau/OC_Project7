@@ -94,7 +94,7 @@ public class ResearchController {
             List<PublicationBean> publications = feignProxy.getPublicationByCriteria( (String) criteriaMap.get("author"), (String) criteriaMap.get("title"), (String) criteriaMap.get("cat"), (String) criteriaMap.get("editor"), (Integer) criteriaMap.get("libId") );
 
             session.setAttribute("publications", publications);
-
+            session.removeAttribute("errorResearch");
             return PUBLICATION_RESULT_PAGE;
 
         } catch ( FeignException feign ) {
