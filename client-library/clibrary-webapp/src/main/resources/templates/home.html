@@ -5,11 +5,13 @@
         <title>Accueil</title>
     </head>
     <body>
-        <div th:insert="fragments/fragments.html :: nav"></div>
+        <header th:insert="fragments/fragments.html :: nav"></header>
 
-        <p>Bienvenue dans l'espace des bibliotheques municipaux de Strasbourg.</p>
+        <section class="col-sm-8 bd-content text-center" style="margin:0 auto;min-height: 70vh;">
+            <p>Bienvenue dans l'espace des bibliothèques municipales de Strasbourg.</p>
+        </section>
 
-        <div th:insert="fragments/fragments.html :: footer" class="footer"></div>
+        <footer th:replace="fragments/footer.html :: footer" class="footer"></footer>
         <div th:insert="fragments/fragments.html :: script"></div>
 
     </body>

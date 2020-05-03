@@ -13,7 +13,7 @@
                 <div class="col-md-6 order-md-1">
 
                     <form class="form-container"  th:action="@{/Research}" th:object="${researchFormCommand}" method="post">
-                        <h6 class="mb-3">Recherche dans le catalogue des librairies</h6><br/>
+                        <br/><h6 class="mb-3">Recherche dans le catalogue des librairies</h6><br/>
 
                         <span class="error" th:if="${errorMessage}" th:text="${errorMessage}"></span>
 
@@ -70,92 +70,9 @@
             </section>
         </section>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        <!--section class="container-fluid">
-            <section class="row justify-content-center">
-                <section class="col-6">
-                    <form class="form-container"  th:action="@{/Research}" th:object="${researchFormCommand}" method="post">
-
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="col-6">
-                                    <select class="form-control" th:field="*{dropdownSelectedValue}" >
-                                           <option th:each="value : ${criteria}" th:text="${value}" th:value="${value}"></option>
-                                    </select>
-                                </div>
-                                <div class="col-6">
-                                    <input class="form-control" type="text" th:field="*{textField}" required/>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-primary btn-block">Rechercher</button>
-                        </div>
-
-                        <span class="error" th:if="${errorMessage}" th:text="${errorMessage}"></span>
-
-
-                        <br/><p>Limiter ma recherche par Médiathèque(s)</p>
-
-                        <div>
-                            <label class="containerBox" th:each=" library : ${libraries}">
-                                <input type="checkbox"
-                                       th:text="${library.name}"
-                                       th:value="${library.id}"
-                                       th:field="*{checkboxSelectedValue}">
-                                <span class="checkmark"></span>
-                            </label>
-                        </div>
-                        <br/>
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-primary btn-block">Rechercher</button>
-                        </div>
-                    </form>
-                </section>
-            </section>
-        </section-->
-
-        <!--footer class="my-5 pt-5 text-muted text-center text-small">
-            <p class="mb-1">© 2017-2018 Company Name</p>
-            <ul class="list-inline">
-                <li class="list-inline-item"><a href="#">Privacy</a></li>
-                <li class="list-inline-item"><a href="#">Terms</a></li>
-                <li class="list-inline-item"><a href="#">Support</a></li>
-            </ul>
-        </footer-->
-
-
-
-
-        <div th:insert="fragments/fragments.html :: footer" class="footer"></div>
+        <footer th:replace="fragments/footer.html :: footer" class="footer"></footer>
         <div th:insert="fragments/fragments.html :: script"></div>
+
         <script>
             $(document).ready(function(){
                 $('input:checkbox').click(function() {

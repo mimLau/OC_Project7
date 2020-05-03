@@ -3,8 +3,6 @@ package com.mimi.mlibrary.controllers;
 import com.mimi.mlibrary.exceptions.ResourceNotFoundException;
 import com.mimi.mlibrary.model.dto.publication.CopyDto;
 import com.mimi.mlibrary.service.contract.PublicationService;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

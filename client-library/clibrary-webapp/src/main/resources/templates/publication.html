@@ -6,50 +6,49 @@
     </head>
     <body>
         <div th:insert="fragments/fragments.html :: nav"></div>
-        <section class="container-fluid">
-            <section class="row justify-content-center">
+        <div class="container-fluid">
+            <div class="row justify-content-center">
 
-                        <div class="col-6" style="top: 15vh;">
+                <section class="col-sm-8" style="margin:0 auto;min-height: 70vh;">
+                    <div class="col-9" style="top: 15vh;margin:0 auto;">
+                        <div class="card">
 
-                            <div class="card">
-                                <div class="card-header">
-                                    <ul class="nav nav-tabs card-header-tabs" id="bologna-list" role="tablist">
-                                        <li class="nav-item">
-                                            <a class="nav-link active" href="#description" role="tab" aria-controls="description" aria-selected="true">Descritpion</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link"  href="#history" role="tab" aria-controls="history" aria-selected="false">Résumé</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="#deals" role="tab" aria-controls="deals" aria-selected="false">Disponibilité</a>
-                                        </li>
-                                    </ul>
-                                </div>
+                            <div class="card-header">
+                                <ul class="nav nav-tabs card-header-tabs" id="bologna-list" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" href="#description" role="tab" aria-controls="description" aria-selected="true">Descritpion</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link"  href="#history" role="tab" aria-controls="history" aria-selected="false">Résumé</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#deals" role="tab" aria-controls="deals" aria-selected="false">Disponibilité</a>
+                                    </li>
+                                </ul>
+                            </div>
 
-                                <div class="card-body">
-                                    <h6 class="card-title"><span  th:text="${ publication.title }"/>  <span th:if="${ publication.author != null }"> / <span th:text="${ publication.author.firstname }"/> <span th:text="${ publication.author.lastname }"/></span></h6>
+                            <div class="card-body" style="min-height: 30vh;">
+                                <h6 class="card-title"><span  th:text="${ publication.title }"/>  <span th:if="${ publication.author != null }"> / <span th:text="${ publication.author.firstname }"/> <span th:text="${ publication.author.lastname }"/></span></h6>
 
-                                    <div class="tab-content mt-3">
+                                <div class="tab-content mt-3">
 
-                                        <div class="tab-pane active" id="description" role="tabpanel">
-                                            Catégorie: <span  th:text="${ publication.subCategoryStr }"></span><br/>
-                                            <span th:if="${ publication.category == 'BOOK' }">
-                                            Edition: <span th:if="${ publication.editor != null }"><span th:text="${ publication.editor.name }"/></span>
-                                            </span>
-                                        </div>
+                                    <div class="tab-pane active" id="description" role="tabpanel">
+                                        Catégorie: <span  th:text="${ publication.subCategoryStr }"></span><br/>
+                                        <span th:if="${ publication.category == 'BOOK' }">
+                                        Edition: <span th:if="${ publication.editor != null }"><span th:text="${ publication.editor.name }"/></span>
+                                        </span>
+                                    </div>
 
-                                        <div class="tab-pane" id="history" role="tabpanel" aria-labelledby="history-tab">
-                                        </div>
+                                    <div class="tab-pane" id="history" role="tabpanel" aria-labelledby="history-tab">
+                                    </div>
 
-                                        <div class="tab-pane" id="deals" role="tabpanel" aria-labelledby="deals-tab">
-                                            <span th:if="${ copies != null }">
-                                                <div th:each=" copie : ${ copies }">
-                                                    Librairie: <span th:text="${ copie.library.name }"></span>
-                                                </div>
-                                            </span>
-                                            <span th:unless="${ copies != null }"><div style="color: red">Pas d'exemplaire de disponible.</div></span>
-                                        </div>
-
+                                    <div class="tab-pane" id="deals" role="tabpanel" aria-labelledby="deals-tab">
+                                        <span th:if="${ copies != null }">
+                                            <div th:each=" copie : ${ copies }">
+                                                Librairie: <span th:text="${ copie.library.name }"></span>
+                                            </div>
+                                        </span>
+                                        <span th:unless="${ copies != null }"><div style="color: red">Pas d'exemplaire de disponible.</div></span>
                                     </div>
 
                                 </div>
@@ -57,19 +56,21 @@
                             </div>
 
                         </div>
+                    </div>
+                </section>
 
-            </section>
-        </section>
+            </div>
+        </div>
 
-
-
-        <div th:insert="fragments/fragments.html :: footer" class="footer"></div>
+        <footer th:replace="fragments/footer.html :: footer" class="footer"></footer>
         <div th:insert="fragments/fragments.html :: script"></div>
-    <script>
-        $('#bologna-list a').on('click', function (e) {
-            e.preventDefault()
-            $(this).tab('show')
-        })
-    </script>
+
+        <script>
+            $('#bologna-list a').on('click', function (e) {
+                e.preventDefault()
+                $(this).tab('show')
+            })
+        </script>
+
     </body>
 </html>
