@@ -70,10 +70,10 @@ Cloner le projet vers un repertoire de votre choix à l'aide de la commande suiv
 **git clone https://github.com/mimLau/OC_Library_app.git**
 
 Dans votre IDE, choisissez dans un premier temps le jdk qui sera utilisé pour lancer le projet. Dans notre cas, il s'agira du jdk 13.0.1.
-Importer ensuite le projet cloné à partir d'une source existante et en cliquant bien sur Mavan.
+Importer ensuite le projet cloné à partir d'une source existante et en cliquant bien sur Maven.
 Ensuite, se rendre dans **project structure** puis **module** et à l'aide du **+** importer les modules suivant un à un (choisir Maven comme source externe).
 
-- microsrvice-library
+- microservice-library
 - authentication-library 
 - client-library
 - batch-library
@@ -83,7 +83,7 @@ Ensuite, se rendre dans **project structure** puis **module** et à l'aide du **
 
 Pour lancer le projet, excécuter les modules dans l'ordre suivant sur leur port respectif:
 
-- microsrvice-library: port 8080
+- microservice-library: port 8080
 - authentication-library: port 9090
 - client-library: port 8081
 - batch-library: port 8082
@@ -91,29 +91,32 @@ Pour lancer le projet, excécuter les modules dans l'ordre suivant sur leur port
 
 Spring boot contenant un serveur Tomcat embarqué, il ne sera pas necessaire de configurer un serveur lors du déploiement des différents modules.
 
-Dans chacun des modules, se trouve un fichier applications.properties dans lequel sont stockées toutes les donées de configuration. Vous pouvez modifier les différents ports s'ils ne sont pas libres.
+Dans chacun des modules, se trouve un fichier **applications.properties** dans lequel sont stockées toutes les donées de configuration. Vous pouvez modifier les différents ports s'ils ne sont pas libres.
 
 
 #### Webservice Rest :
 
 Il récupère toutes les ressources de la BDD **db_library** et les envoie à ses differents clients qui sont:
 
-
 - le serveur d'authentification
 - l'application web
 - le batch
+
+Chaque requête envoyé par les clients contient un token. En fonction des roles ou permissions qui se trouvent dans le token, la requête sera acceptée ou non par le webservice.
+
+On peut y accéder via l'url suivante: **localhost:8080/**
 
 
 #### Serveur auhtentification :
 
 Celui ci est configuré sur le port 9090, et récupère les crédentials des utilisateurs à partir de la BDD **db_auth_library**.
 
-L'application web envoie au serveur d'authentification les identifiants de l'utilisateur qui souhaite se connecter, ce dernier va vérifier dans sa BDD, les identifiants de l'utilisateur. Si l'utilisateur existe, le serveur envoie un token à l'application web avec le rôle et les permissions de ce dernier.
+L'application web envoie au serveur d'authentification les identifiants de l'utilisateur qui souhaite se connecter, ce dernier va vérifier dans sa BDD les identifiants de l'utilisateur. Si l'utilisateur existe, le serveur envoie un token à l'application web avec le rôle et les permissions de ce dernier.
 
 
 #### Application web :
 
-On accède à l'application web avec l'url suivante : **localhost:8081/**
+On accède à l'application web avec l'url suivante : **localhost:8081/**. 
 Les identifiants des utilisateurs sont les suivants :
 
 - maryam maryam
