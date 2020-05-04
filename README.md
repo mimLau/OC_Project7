@@ -29,11 +29,12 @@ Le projet est constitué :
 
 - d'un batch: **batch-library**, pour gérer l'envoie automatique d'emails aux utilisateurs ayant des prêts en retard. Il communique avec le serveur d'authentification pour pouvoir s'authentifier et récupérer les données (email des utilisateurs) depuis le webservice **microservice-library**.
 
- Ces 4 modules communiquent entre eux par le biais du webservice.
+ Ces 4 modules communiquent entre eux par le biais du webservice Rest.
 
 
-## Technologies utilisées : 
+## Développement : 
 
+* Ide: IntelliJ
 * Java 13.0.1.  
 * Maven 4.0.0 
 * Springboot 2.2.5.RELEASE 
@@ -53,23 +54,74 @@ Le projet présente les schémas suivant :
 
 ### Schéma db_auth_lib
 
-Contient la table user avec les identifiants et les mots de passe ainsi que les rôles et les permissions des utilisateurs. Cette table est utilisée par le serveur d'authentification. Un jeu de données est fourni dans le fichier **db_auth_lib_20.sql**.
+Contient la table user avec les identifiants et les mots de passe ainsi que les rôles et les permissions des utilisateurs. Cette table est utilisée par le serveur d'authentification. Un jeu de données est fourni dans le fichier **db_auth_lib_20.sql**. (https://github.com/mimLau/OC_Library_app/blob/master/db_auth_lib_20.sql)
 
 ### Schéma db_library
 
-Contient toutes les tables permetant la gestion des bibliothèqes ainsi que leurs ouvrages. Ces tables seront consommées par le webService. Un jeu de données est fourni dans le fichier **db_lib_20.sql**.
+Contient toutes les tables permetant la gestion des bibliothèqes ainsi que leurs ouvrages. Ces tables seront consommées par le webService. Un jeu de données est fourni dans le fichier **db_lib_20.sql**. (https://github.com/mimLau/OC_Library_app/blob/master/db_lib_20.sql)
 
 
 ## Déploiement de l'application : 
 
-Lancer les jar ou les modules dans l'ordre suivant :
+
+### Récupération et import du projet :
+
+Cloner le projet vers un repertoire de votre choix à l'aide de la commande suivante :
+**git clone https://github.com/mimLau/OC_Library_app.git**
+
+Dans votre IDE, choisissez dans un premier temps le jdk qui sera utilisé pour lancer le projet. Dans notre cas, il s'agira du jdk 13.0.1.
+Importer ensuite le projet cloné à partir d'une source existante et en cliquant bien sur Mavan.
+Ensuite, se rendre dans **project structure** puis **module** et à l'aide du **+** importer les modules suivant un à un (choisir Maven comme source externe).
 
 - microsrvice-library
-- authentication-library
+- authentication-library 
 - client-library
 - batch-library
 
-Spring boot contenant un serveur Tomcat embarqué, il ne sera pas necessaire d'avoir un serveur lors du déploiement des différents modules.
 
-Dans chacun des modules, se trouve un fichier applications.properties dans lequel sont stockées toutes les donées de configuration.
+### Lancement du projet :
+
+Pour lancer le projet, excécuter les modules dans l'ordre suivant sur leur port respectif:
+
+- microsrvice-library: port 8080
+- authentication-library: port 9090
+- client-library: port 8081
+- batch-library: port 8082
+
+
+Spring boot contenant un serveur Tomcat embarqué, il ne sera pas necessaire de configurer un serveur lors du déploiement des différents modules.
+
+Dans chacun des modules, se trouve un fichier applications.properties dans lequel sont stockées toutes les donées de configuration. Vous pouvez modifier les différents ports s'ils ne sont pas libres.
+
+
+#### Webservice Rest :
+
+Il récupère toutes les ressources de la BDD **db_library** et les envoie à ses differents clients qui sont:
+
+
+- le serveur d'authentification
+- l'application web
+- le batch
+
+
+#### Serveur auhtentification :
+
+Celui ci est configuré sur le port 9090, et récupère les crédentials des utilisateurs à partir de la BDD **db_auth_library**.
+
+L'application web envoie au serveur d'authentification les identifiants de l'utilisateur qui souhaite se connecter, ce dernier va vérifier dans sa BDD, les identifiants de l'utilisateur. Si l'utilisateur existe, le serveur envoie un token à l'application web avec le rôle et les permissions de ce dernier.
+
+
+#### Application web :
+
+On accède à l'application web avec l'url suivante : **localhost:8081/**
+Les identifiants des utilisateurs sont les suivants :
+
+- maryam maryam
+- sophie sophie
+- admin admin
+
+
+#### Batch :
+
+Il est programmé pour lancer automatiquement des emails tous les jours aux utilisateurs ayant du retard dans leur prêt. Pour cela, il communique avec le serveur d'authentification pour pouvoir se connecter au webservice et récupérer les emails des utilisateurs.
 
