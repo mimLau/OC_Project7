@@ -118,7 +118,7 @@ L'application web envoie au serveur d'authentification les identifiants de l'uti
 #### Application web :
 
 On accède à l'application web avec l'url suivante : **localhost:8081/**. 
-Les identifiants des utilisateurs sont les suivants :
+Les identifiants et des mots de passe des utilisateurs sont les suivants :
 
 - maryam maryam
 - sophie sophie
