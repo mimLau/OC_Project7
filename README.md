@@ -67,6 +67,7 @@ Contient toutes les tables permetant la gestion des bibliothèqes ainsi que leur
 ### Récupération et import du projet :
 
 Cloner le projet vers un repertoire de votre choix à l'aide de la commande suivante :
+
 **git clone https://github.com/mimLau/OC_Library_app.git**
 
 Dans votre IDE, choisissez dans un premier temps le jdk qui sera utilisé pour lancer le projet. Dans notre cas, il s'agira du jdk 13.0.1.
