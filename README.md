@@ -103,7 +103,7 @@ Il récupère toutes les ressources de la BDD **db_library** et les envoie à se
 - l'application web
 - le batch
 
-Chaque requête envoyé par les clients contient un token. En fonction des roles ou permissions qui se trouvent dans le token, la requête sera acceptée ou non par le webservice.
+Chaque requête envoyée par les clients contient un token. En fonction des rôles ou permissions qui se trouvent dans le token, la requête sera acceptée ou non par le webservice.
 
 On peut y accéder via l'url suivante: **localhost:8080/**
 
